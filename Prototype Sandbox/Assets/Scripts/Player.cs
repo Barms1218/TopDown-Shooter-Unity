@@ -8,20 +8,14 @@ public class Player : MonoBehaviour
     #region Fields
 
     Rigidbody2D rb2d;
+    CapsuleCollider2D capsuleCollider;
 
     // laser 
     LineRenderer lineRenderer;
     [SerializeField] Transform laserPoint;
     [SerializeField] float defaultRayDistance = 100f;
     Transform targetTransform;
-    SwapEvent swapEvent = new SwapEvent();
     bool facingRight = true;
-
-    // movement
-    [SerializeField] float m_Speed = 50f;
-    [SerializeField] float v_Force = 15f;
-    [SerializeField] float m_Dampening = 10f;
-    Vector2 moveVector;
 
     #endregion
 
@@ -32,7 +26,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
         lineRenderer = GetComponent<LineRenderer>();
     }
 
@@ -40,21 +33,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        //float verticalInput = Input.GetAxis("Jump");
-
-        if (horizontalInput != 0)
-        {
-            moveVector.x = m_Speed * horizontalInput;
-        }
         AimLaser();
     }
-
-    void FixedUpdate()
-    {
-        rb2d.velocity = new Vector2(moveVector.x, -v_Force);
-    }
-
 
     #endregion
 
@@ -79,8 +59,8 @@ public class Player : MonoBehaviour
     {
         lineRenderer.enabled = true;
 
-        var mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePos - laserPoint.position;
 
 
         if (mousePos.x < transform.position.x && facingRight)
@@ -93,9 +73,9 @@ public class Player : MonoBehaviour
         }
 
 
-        if (Physics2D.Raycast(laserPoint.position, mousePos))
+        if (Physics2D.Raycast(laserPoint.position, direction))
         {
-            RaycastHit2D hit = Physics2D.Raycast(laserPoint.position, mousePos);
+            RaycastHit2D hit = Physics2D.Raycast(laserPoint.position, direction);
             SetLinePositions(laserPoint.position, hit.point);
 
             if (hit.collider.gameObject.tag == "Target")
@@ -104,7 +84,6 @@ public class Player : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    swapEvent.Invoke();
                     Vector2 tempPosition = transform.position;
                     transform.position = targetTransform.position;
                     hit.collider.transform.position = tempPosition;
@@ -114,7 +93,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            SetLinePositions(laserPoint.position, mousePos * defaultRayDistance);
+            SetLinePositions(laserPoint.position, direction * defaultRayDistance);
         }
     }
 
@@ -129,21 +108,6 @@ public class Player : MonoBehaviour
         facingRight = !facingRight;
 
         gameObject.transform.localScale = newScale; 
-    }
-
-    /// <summary>
-    /// Teleport to target transform, and reset value to null
-    /// so player can't teleport without aiming at a valid target
-    /// </summary>
-    void Swap()
-    {
-        if (targetTransform != null)
-        {
-            swapEvent.Invoke();
-            Vector2 tempPosition = transform.position;
-            transform.position = targetTransform.position;
-            targetTransform = null;
-        }
     }
 
     #endregion
