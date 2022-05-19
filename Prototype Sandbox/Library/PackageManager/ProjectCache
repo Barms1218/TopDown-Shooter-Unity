@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637882416768671968
-    m_Hash: 2707012829
+      ticks: 637885182362301030
+    m_Hash: 885608628
   m_LockFileStatus:
     m_FilePath: C:/Unity Projects/Prototypes/Prototype_Repository/Prototype Sandbox/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637882416768762051
-    m_Hash: 759358561
+      ticks: 637885182362301030
+    m_Hash: 1188802423
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
