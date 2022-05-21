@@ -47,6 +47,7 @@ public class Jump : MonoBehaviour
 
         if (desiredJump)
         {
+            Debug.Log("Trying to jump");
             desiredJump = false;
             JumpAction();
         }

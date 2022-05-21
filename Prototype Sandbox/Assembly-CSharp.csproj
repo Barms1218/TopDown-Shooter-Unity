@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\DeathTrap.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Capabilities\AimLaser.cs" />
     <Compile Include="Assets\Scripts\Capabilities\Jump.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\Scripts\AIController.cs" />
@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Capabilities\Move.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
+    <Compile Include="Assets\Scripts\Capabilities\LevitateObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : MonoBehaviour
+public class AimLaser : MonoBehaviour
 {
     #region Fields
-
-    Rigidbody2D rb2d;
-    CapsuleCollider2D capsuleCollider;
 
     // laser 
     LineRenderer lineRenderer;
@@ -33,7 +30,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AimLaser();
+        Aim();
     }
 
     #endregion
@@ -55,7 +52,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Enable line renderer and aim it at a raycast2d hit point
     /// </summary>
-    void AimLaser()
+    void Aim()
     {
         lineRenderer.enabled = true;
 

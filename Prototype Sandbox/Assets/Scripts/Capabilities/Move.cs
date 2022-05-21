@@ -31,7 +31,8 @@ public class Move : MonoBehaviour
     void Update()
     {
         direction.x = input.RetrieveMoveInput();
-        desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - ground.GetFriction(), 0f);
+        desiredVelocity = new Vector2(direction.x, 0f) * 
+            Mathf.Max(maxSpeed - ground.GetFriction(), 0f);
     }
 
     private void FixedUpdate()
@@ -40,6 +41,7 @@ public class Move : MonoBehaviour
         velocity = body.velocity;
 
         acceleration = onGround ? maxAcceleration : maxAcceleration;
+
         maxSpeedChange = acceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
