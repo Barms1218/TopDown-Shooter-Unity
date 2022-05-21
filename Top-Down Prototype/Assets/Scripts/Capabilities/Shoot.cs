@@ -32,6 +32,6 @@ public class Shoot : MonoBehaviour
 
         Projectile projectileScript = projectile.GetComponent<Projectile>();
 
-        projectileScript.MoveToTarget(direction);
+        projectileScript.MoveToTarget(direction.normalized);
     }
 }
