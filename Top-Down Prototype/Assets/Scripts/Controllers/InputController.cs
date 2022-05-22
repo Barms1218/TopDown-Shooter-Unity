@@ -8,4 +8,6 @@ public abstract class InputController : ScriptableObject
     public abstract float RetrieveVerticalInput();
 
     public abstract bool RetrieveMouseButtonZero();
+
+    public abstract bool RetrieveReloadInput();
 }
