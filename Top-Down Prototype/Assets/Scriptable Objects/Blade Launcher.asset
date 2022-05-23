@@ -18,5 +18,5 @@ MonoBehaviour:
   fireRate: 3
   currentAmmo: 0
   maxAmmo: 2
-  reloadSpeed: 3.5
+  reloadSpeed: 3.4759767
   reloading: 0

@@ -3,29 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerShoot : Entity
 {
-    [SerializeField] InputController input = null;
-    public static UnityAction shootInput;
-    public static UnityAction reloadInput;
+    #region Fields
+
+
+
+
+
+    #endregion
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        if (input.RetrieveMouseButtonZero())
-        {
-            shootInput?.Invoke();
-        }
-
-        if (input.RetrieveReloadInput())
-        {
-            reloadInput?.Invoke();
-        }
+        base.Update();
     }
 }

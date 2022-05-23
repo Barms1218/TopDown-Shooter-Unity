@@ -4,52 +4,35 @@ using UnityEngine;
 
 public class SawBlade : Weapon
 {
-    [SerializeField] GunData gunData;
-    float timeSinceLastShot;
-    new void Start()
-    {
 
+    protected override void Start()
+    {
+        base.Start();
     }
 
     public override void Shoot()
     {
-        if (gunData.currentAmmo > 0)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("Shot Weapon");
-                gunData.currentAmmo--;
-            }
-        }
+        base.Shoot();
     }
+
 
     public override void Reload()
     {
-        if (!gunData.reloading)
-        {
-            ReloadWeapon();
-            Debug.Log("Reloading");
-        }
+        base.Reload();
     }
 
-    IEnumerator ReloadWeapon()
+    public override void SpecialAttack()
     {
-        gunData.reloading = true;
-        yield return new WaitForSeconds(gunData.reloadSpeed);
-        gunData.currentAmmo = gunData.maxAmmo;
-        Debug.Log("Weapon Reloaded");
-
-        gunData.reloading = false;
+        throw new System.NotImplementedException();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        PlayerShoot.shootInput += Shoot;
-        PlayerShoot.reloadInput += Reload;
+        base.OnEnable();
     }
-    private void OnDisable()
+
+    protected override void OnDisable()
     {
-        PlayerShoot.shootInput -= Shoot;
-        PlayerShoot.reloadInput -= Reload;
+        base.OnDisable();
     }
 }

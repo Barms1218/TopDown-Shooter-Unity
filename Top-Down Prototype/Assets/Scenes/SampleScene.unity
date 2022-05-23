@@ -275,7 +275,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4d754e77b2b79459775e2df30586c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 11400000, guid: b88386dac5c18194ca255ebb934b45bf, type: 2}
+  currentAmmo: 2
+  maxAmmo: 2
+  weaponDamage: 25
+  timeBetweenShots: 1.5
+  reloadSpeed: 3.5
+  reloading: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
