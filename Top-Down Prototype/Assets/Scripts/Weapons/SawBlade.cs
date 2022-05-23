@@ -5,34 +5,28 @@ using UnityEngine;
 public class SawBlade : Weapon
 {
 
-    protected override void Start()
+    protected override void ShootWeapon()
     {
-        base.Start();
+        if (Physics2D.Raycast(transform.position, transform.right, maxRange))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward, maxRange);
+
+            if (hit.collider.GetComponent<Entity>() != null)
+            {
+                hit.collider.GetComponent<Entity>().TakeDamage(weaponDamage);
+                Debug.Log("Enemy took " + weaponDamage + " damage");
+            }
+        }
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        var projectileScript = projectile.GetComponent<ProjectileScript>();
+
+        projectileScript?.MoveToTarget(Vector2.right);
+
     }
 
-    public override void Shoot()
-    {
-        base.Shoot();
-    }
-
-
-    public override void Reload()
-    {
-        base.Reload();
-    }
-
-    public override void SpecialAttack()
+    protected override void SpecialAttack()
     {
         throw new System.NotImplementedException();
-    }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
     }
 }

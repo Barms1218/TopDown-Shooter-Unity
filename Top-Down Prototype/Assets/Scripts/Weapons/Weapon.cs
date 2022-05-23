@@ -15,11 +15,15 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField]
     protected int weaponDamage;
     [SerializeField]
-    protected float timeBetweenShots;
-    [SerializeField]
     protected float reloadSpeed;
     [SerializeField]
+    protected float timeBetweenShots;
+    [SerializeField]
+    protected float maxRange;
+    [SerializeField]
     protected bool reloading = false;
+    [SerializeField]
+    protected GameObject projectilePrefab;
 
     protected Coroutine fireCoroutine;
 
@@ -27,17 +31,17 @@ public abstract class Weapon : MonoBehaviour
 
     #region Properties
 
-    public int CurrentAmmo
+    protected int CurrentAmmo
     {
         get => currentAmmo;
         set => currentAmmo = value;
     }
 
-    public int MaxAmmo => maxAmmo;
-    public int WeaponDamage => weaponDamage;
-    public float TimeBetweenShots => timeBetweenShots;
-    public float ReloadSpeed => reloadSpeed;
-    public bool Reloading => reloading;
+    protected int MaxAmmo => maxAmmo;
+    protected int WeaponDamage => weaponDamage;
+    protected float ReloadSpeed => reloadSpeed;
+    protected float TimeBetweenShots => timeBetweenShots;
+    protected bool Reloading => reloading;
 
     #endregion
 
@@ -47,43 +51,26 @@ public abstract class Weapon : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
-    public virtual void Shoot()
+    protected virtual void Fire()
     {
-        if (currentAmmo > 0)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                fireCoroutine = StartCoroutine(FireCoroutine());
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                StopCoroutine(FireCoroutine());
-            }
-        }
-    }
-
-
-    IEnumerator FireCoroutine()
-    {
-        while (true)
+        if (currentAmmo > 0 && !reloading)
         {
             Debug.Log("Shot Weapon");
-            currentAmmo--;
-
-            yield return new WaitForSeconds(TimeBetweenShots);
+            ShootWeapon();
+            currentAmmo -= 1;
         }
-
     }
+    protected abstract void ShootWeapon();
 
-    public virtual void Reload()
+    protected virtual void Reload()
     {
         if (!reloading)
         {
-            StartCoroutine(ReloadDelay());
+            StartCoroutine(StartReload());
         }
     }
 
-    IEnumerator ReloadDelay()
+    protected virtual IEnumerator StartReload()
     {
         reloading = true;
         Debug.Log("Reloading");
@@ -95,17 +82,16 @@ public abstract class Weapon : MonoBehaviour
         reloading = false;
     }
 
-    public abstract void SpecialAttack();
-
+    protected abstract void SpecialAttack();
 
     protected virtual void OnEnable()
     {
-        PlayerShoot.OnShoot += Shoot;
-        PlayerShoot.OnReload += Reload;
+        Player.OnShoot += Fire;
+        Player.OnReload += Reload;
     }
     protected virtual void OnDisable()
     {
-        PlayerShoot.OnShoot -= Shoot;
-        PlayerShoot.OnReload -= Reload;
+        Player.OnShoot -= Fire;
+        Player.OnReload -= Reload;
     }
 }

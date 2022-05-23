@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerController", menuName = "InputController/PlayerController")]
-public class PlayerController : InputController
+[CreateAssetMenu(fileName = "AIController", menuName = "InputController/AIController")]
+public class AIController : InputController
 {
     public override float RetrieveHorizontalInput()
     {
-        return Input.GetAxis("Horizontal");
+        return 1f;
     }
 
     public override float RetrieveVerticalInput()
     {
-        return Input.GetAxis("Vertical");
+        return 1f;
     }
 
     public override bool RetrieveShootInput()
     {
-        return Input.GetMouseButton(0);
+        return true; ;
     }
 
     public override bool RetrieveReloadInput()
     {
-        return Input.GetKeyDown(KeyCode.R);
+        return true;
     }
+
 }
