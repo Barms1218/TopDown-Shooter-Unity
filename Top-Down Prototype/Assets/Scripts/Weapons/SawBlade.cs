@@ -5,6 +5,7 @@ using UnityEngine;
 public class SawBlade : Weapon
 {
     float specialAttackDelay = 2f;
+    float timeToSpecialAttack;
 
     protected override void Fire()
     {
@@ -27,13 +28,15 @@ public class SawBlade : Weapon
 
     protected override void SpecialAttack()
     {
+        timeToSpecialAttack = specialAttackDelay;
+
         if (currentAmmo == maxAmmo)
         {
-            specialAttackDelay -= Time.deltaTime;
+            timeToSpecialAttack -= Time.deltaTime;
 
             if (specialAttackDelay <= 0)
             {
-                specialAttackDelay = 2f;
+                timeToSpecialAttack = specialAttackDelay;
                 ShootWeapon();
             }
         }
