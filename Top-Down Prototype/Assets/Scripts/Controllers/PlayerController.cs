@@ -17,9 +17,12 @@ public class PlayerController : InputController
 
     public override bool RetrieveShootInput()
     {
-        return Input.GetMouseButton(0);
+        return Input.GetMouseButtonDown(0);
     }
-
+    public override bool MouseHeldDown()
+    {
+        return Input.GetMouseButton(1);
+    }
     public override bool RetrieveReloadInput()
     {
         return Input.GetKeyDown(KeyCode.R);

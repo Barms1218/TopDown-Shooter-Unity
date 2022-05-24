@@ -10,6 +10,8 @@ public class Player : Entity
     // Events
     public delegate void AttackInput();
     public static event AttackInput OnShoot;
+    public delegate void SpecialInput();
+    public static event SpecialInput OnSpecial;
     public delegate void ReloadInput();
     public static event ReloadInput OnReload;
 
@@ -44,6 +46,10 @@ public class Player : Entity
         if (input.RetrieveShootInput())
         {
             OnShoot?.Invoke();
+        }
+        if (input.MouseHeldDown())
+        {
+            OnSpecial?.Invoke();
         }
         if (input.RetrieveReloadInput())
         {

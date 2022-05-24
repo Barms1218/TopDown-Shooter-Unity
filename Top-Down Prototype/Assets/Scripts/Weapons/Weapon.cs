@@ -51,15 +51,9 @@ public abstract class Weapon : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
-    protected virtual void Fire()
-    {
-        if (currentAmmo > 0 && !reloading)
-        {
-            Debug.Log("Shot Weapon");
-            ShootWeapon();
-            currentAmmo -= 1;
-        }
-    }
+    protected abstract void Fire();
+
+
     protected abstract void ShootWeapon();
 
     protected virtual void Reload()
@@ -87,11 +81,13 @@ public abstract class Weapon : MonoBehaviour
     protected virtual void OnEnable()
     {
         Player.OnShoot += Fire;
+        Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
     }
     protected virtual void OnDisable()
     {
         Player.OnShoot -= Fire;
+        Player.OnSpecial -= SpecialAttack;
         Player.OnReload -= Reload;
     }
 }

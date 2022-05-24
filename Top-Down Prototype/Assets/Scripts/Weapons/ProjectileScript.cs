@@ -18,6 +18,8 @@ public class ProjectileScript : MonoBehaviour
 
     public void MoveToTarget(Vector2 force)
     {
-        
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+
+        body.AddForce(force, ForceMode2D.Impulse);
     }
 }

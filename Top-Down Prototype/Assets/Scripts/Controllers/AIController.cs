@@ -25,4 +25,8 @@ public class AIController : InputController
         return true;
     }
 
+    public override bool MouseHeldDown()
+    {
+        return Input.GetMouseButtonDown(0);
+    }
 }
