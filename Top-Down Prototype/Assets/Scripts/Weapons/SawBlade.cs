@@ -6,39 +6,47 @@ public class SawBlade : Weapon
 {
     float specialAttackDelay = 2f;
     float timeToSpecialAttack;
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
     protected override void Fire()
     {
-        if (currentAmmo > 0 && !reloading)
-        {
-            Debug.Log("Shot Weapon");
-            ShootWeapon();
-            currentAmmo--;
-        }
+        base.Fire();
+        currentAmmo--;
     }
+    /// <summary>
+    /// 
+    /// </summary>
     protected override void ShootWeapon()
     {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
-        var projectileScript = projectile.GetComponent<ProjectileScript>();
+        var projectileScript = projectile.GetComponent<SawProjectile>();
 
         projectileScript?.MoveToTarget(Vector2.right);
 
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     protected override void SpecialAttack()
     {
-        timeToSpecialAttack = specialAttackDelay;
-
-        if (currentAmmo == maxAmmo)
+        if (currentAmmo == maxAmmo
+            && !reloading)
         {
-            timeToSpecialAttack -= Time.deltaTime;
-
-            if (specialAttackDelay <= 0)
-            {
-                timeToSpecialAttack = specialAttackDelay;
-                ShootWeapon();
-            }
+            StartCoroutine(SpecialAttackDelay());
         }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator SpecialAttackDelay()
+    {
+        yield return new WaitForSeconds(specialAttackDelay);  
+        weaponDamage *= maxAmmo;
+        currentAmmo = 0;
+        ShootWeapon();
     }
 }

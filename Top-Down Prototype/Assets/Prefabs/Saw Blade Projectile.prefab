@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 7482584863542726403}
   - component: {fileID: -6242476132766637065}
   m_Layer: 0
-  m_Name: Basic Projectile
-  m_TagString: Untagged
+  m_Name: Saw Blade Projectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,3 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba93cc1e5691d074ca79b7f0a9b7b426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToLive: 5
+  forceMagnitude: 5

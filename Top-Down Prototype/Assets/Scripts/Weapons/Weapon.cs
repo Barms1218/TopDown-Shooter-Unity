@@ -24,7 +24,8 @@ public abstract class Weapon : MonoBehaviour
     protected bool reloading = false;
     [SerializeField]
     protected GameObject projectilePrefab;
-
+    [SerializeField]
+    protected bool canSpecialAttack;
     protected Coroutine fireCoroutine;
 
     #endregion
@@ -51,11 +52,30 @@ public abstract class Weapon : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
-    protected abstract void Fire();
+    protected virtual void Update()
+    {
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        float deltaX = mousePos.x - transform.position.x;
+        float deltaY = mousePos.y - transform.position.y;
+
+        float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
+
+        Quaternion target = Quaternion.Euler(0, 0, angle);
+
+        transform.rotation = target;
+    }
+
+    protected virtual void Fire()
+    {
+        if (currentAmmo > 0 && !reloading)
+        {
+            ShootWeapon();
+        }
+    }
 
     protected abstract void ShootWeapon();
-
+    protected abstract void SpecialAttack();
     protected virtual void Reload()
     {
         if (!reloading)
@@ -67,18 +87,12 @@ public abstract class Weapon : MonoBehaviour
     protected virtual IEnumerator StartReload()
     {
         reloading = true;
-        Debug.Log("Reloading");
         yield return new WaitForSeconds(reloadSpeed);
 
         currentAmmo = maxAmmo;
-        Debug.Log("Weapon Reloaded");
-
         reloading = false;
     }
-
-    protected abstract void SpecialAttack();
-
-    protected virtual void OnEnable()
+     protected virtual void OnEnable()
     {
         Player.OnShoot += Fire;
         Player.OnSpecial += SpecialAttack;

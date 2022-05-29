@@ -21,7 +21,7 @@ public class PlayerController : InputController
     }
     public override bool MouseHeldDown()
     {
-        return Input.GetMouseButton(1);
+        return Input.GetMouseButtonDown(1);
     }
     public override bool RetrieveReloadInput()
     {
