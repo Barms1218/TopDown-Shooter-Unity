@@ -270,9 +270,9 @@ MonoBehaviour:
   reloadSpeed: 3.5
   timeBetweenShots: 1.5
   maxRange: 25
+  ammoPerShot: 0
   reloading: 0
   projectilePrefab: {fileID: 7482584863542726400, guid: b7d36785a198ae140a7b30c3b000424a, type: 3}
-  canSpecialAttack: 0
 --- !u!114 &510933949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,9 +291,9 @@ MonoBehaviour:
   reloadSpeed: 1.2
   timeBetweenShots: 0.3
   maxRange: 12
+  ammoPerShot: 0
   reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
-  canSpecialAttack: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 894942179}
   - component: {fileID: 894942178}
   - component: {fileID: 894942177}
+  - component: {fileID: 894942181}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -755,6 +756,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &894942181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894942176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8f5cbcc23bbe6469f094ad42624718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoCountText: {fileID: 1658080767}
 --- !u!1 &995185619 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4628181910703103066, guid: 90b5e51cfe975ad47962680b5500131e, type: 3}
@@ -769,7 +783,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4628181910703103044, guid: 90b5e51cfe975ad47962680b5500131e, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4628181910703103044, guid: 90b5e51cfe975ad47962680b5500131e, type: 3}
       propertyPath: m_SortingLayerID
@@ -829,7 +843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4628181910703103047, guid: 90b5e51cfe975ad47962680b5500131e, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628181910703103047, guid: 90b5e51cfe975ad47962680b5500131e, type: 3}
+      propertyPath: ammoPerShot
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4628181910703103066, guid: 90b5e51cfe975ad47962680b5500131e, type: 3}
       propertyPath: m_Name
@@ -948,7 +966,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995185619}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
@@ -959,9 +977,9 @@ MonoBehaviour:
   reloadSpeed: 1.2
   timeBetweenShots: 0.3
   maxRange: 12
+  ammoPerShot: 1
   reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
-  canSpecialAttack: 0
 --- !u!1 &1310377946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,9 +1164,9 @@ RectTransform:
   m_Father: {fileID: 894942180}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 405, y: -184}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 43}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658080767

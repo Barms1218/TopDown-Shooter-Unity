@@ -21,12 +21,15 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField]
     protected float maxRange;
     [SerializeField]
+    protected int ammoPerShot;
+    [SerializeField]
     protected bool reloading = false;
     [SerializeField]
     protected GameObject projectilePrefab;
-    [SerializeField]
-    protected bool canSpecialAttack;
-    protected Coroutine fireCoroutine;
+
+
+
+    protected HUD hud;
 
     #endregion
 
@@ -38,10 +41,12 @@ public abstract class Weapon : MonoBehaviour
         set => currentAmmo = value;
     }
 
-    protected int MaxAmmo => maxAmmo;
+    public int MaxAmmo => maxAmmo;
     protected int WeaponDamage => weaponDamage;
     protected float ReloadSpeed => reloadSpeed;
     protected float TimeBetweenShots => timeBetweenShots;
+    protected float MaxRange => maxRange;
+    protected int AmmoPerShot => ammoPerShot;
     protected bool Reloading => reloading;
 
     #endregion
@@ -49,7 +54,9 @@ public abstract class Weapon : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        hud = FindObjectOfType<HUD>();
         body = GetComponent<Rigidbody2D>();
+        hud.SetMaxAmmoCount(MaxAmmo);
     }
 
     protected virtual void Update()
@@ -71,6 +78,7 @@ public abstract class Weapon : MonoBehaviour
         if (currentAmmo > 0 && !reloading)
         {
             ShootWeapon();
+            hud.ReduceAmmoCount(ammoPerShot);
         }
     }
 
@@ -88,16 +96,16 @@ public abstract class Weapon : MonoBehaviour
     {
         reloading = true;
         yield return new WaitForSeconds(reloadSpeed);
-
+        hud.SetMaxAmmoCount(maxAmmo);
         currentAmmo = maxAmmo;
         reloading = false;
     }
      protected virtual void OnEnable()
-    {
+     {
         Player.OnShoot += Fire;
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
-    }
+     }
     protected virtual void OnDisable()
     {
         Player.OnShoot -= Fire;
