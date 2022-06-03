@@ -20,6 +20,7 @@ public class Skeleton : Entity
         throw new System.NotImplementedException();
     }
 
+
     protected override void Die()
     {
         throw new System.NotImplementedException();

@@ -44,8 +44,7 @@ public class SawBlade : Weapon
     /// <returns></returns>
     IEnumerator SpecialAttackDelay()
     {
-        yield return new WaitForSeconds(specialAttackDelay);  
-        weaponDamage *= maxAmmo;
+        yield return new WaitForSeconds(specialAttackDelay);
         hud.ReduceAmmoCount(2);
         ShootWeapon();
     }

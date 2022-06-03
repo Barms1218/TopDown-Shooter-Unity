@@ -9,7 +9,7 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected InputController input = null;
     [SerializeField]
-    protected int _health = 100;
+    protected float _health = 100;
 
 
     // Movement
@@ -42,12 +42,15 @@ public abstract class Entity : MonoBehaviour
 
     protected abstract void GetInput();
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
-
+        if (collider.gameObject.tag == "Projectile")
+        {
+            TakeDamage(collider.gameObject.GetComponent<Projectile>().WeaponDamage);
+        }
     }
 
-     public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         _health -= damage;
 

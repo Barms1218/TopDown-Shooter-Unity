@@ -13,8 +13,6 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField]
     protected int maxAmmo;
     [SerializeField]
-    protected int weaponDamage;
-    [SerializeField]
     protected float reloadSpeed;
     [SerializeField]
     protected float timeBetweenShots;
@@ -42,7 +40,6 @@ public abstract class Weapon : MonoBehaviour
     }
 
     public int MaxAmmo => maxAmmo;
-    protected int WeaponDamage => weaponDamage;
     protected float ReloadSpeed => reloadSpeed;
     protected float TimeBetweenShots => timeBetweenShots;
     protected float MaxRange => maxRange;

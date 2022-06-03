@@ -136,5 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba93cc1e5691d074ca79b7f0a9b7b426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToLive: 5
+  damage: 20
   forceMagnitude: 5
+  timeToLive: 5

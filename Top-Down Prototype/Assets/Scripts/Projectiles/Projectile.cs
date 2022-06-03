@@ -4,10 +4,22 @@ using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
 {
+    #region Fields
+
+    [SerializeField]
+    public float damage;
     [SerializeField]
     protected float forceMagnitude = 10f;
     [SerializeField]
     protected float timeToLive = 5f;
+
+    #endregion
+
+    #region Properties
+
+    public float WeaponDamage => damage;
+
+    #endregion
 
     protected virtual void Update()
     {
