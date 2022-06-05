@@ -30,6 +30,17 @@ public class Player : Entity
         _velocity.y = Mathf.MoveTowards(_velocity.y, desiredVelocity.y, 5f);
 
         _body.velocity = _velocity;
+
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (mousePos.x < transform.position.x && facingRight)
+        {
+            Flip();
+        }
+        else if (mousePos.x > transform.position.x && !facingRight)
+        {
+            Flip();
+        }
     }
 
     void FixedUpdate()
@@ -56,6 +67,8 @@ public class Player : Entity
             OnReload?.Invoke();
         }
     }
+
+
     protected override void Die()
     {
         throw new System.NotImplementedException();

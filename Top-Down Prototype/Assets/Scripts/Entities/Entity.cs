@@ -20,6 +20,8 @@ public abstract class Entity : MonoBehaviour
     [SerializeField, Range(0f, 100f)]
     protected float maxSpeed = 4f;
 
+    protected bool facingRight = true;
+
     #endregion
 
     #region Properties  
@@ -32,6 +34,15 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Start()
     {
         _body = GetComponent<Rigidbody2D>();
+
+        if (transform.position.x > 0.01)
+        {
+            facingRight = true;
+        }
+        else if (transform.position.x < -.001)
+        {
+            facingRight = false;
+        }
     }
 
     // Update is called once per frame
@@ -60,5 +71,15 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+
+    protected virtual void Flip()
+    {
+        Vector3 newScale = gameObject.transform.localScale;
+        newScale.x *= -1f;
+
+        facingRight = !facingRight;
+
+        gameObject.transform.localScale = newScale;
+    }
     protected abstract void Die();
 }

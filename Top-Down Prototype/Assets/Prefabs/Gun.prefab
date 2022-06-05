@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -4029819251187114856, guid: 2b892f1a8255d4b92bc26cf703a01a74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,9 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAmmo: 2
   maxAmmo: 2
-  weaponDamage: 25
   reloadSpeed: 3.5
   timeBetweenShots: 1.5
   maxRange: 25
+  ammoPerShot: 0
   reloading: 0
   projectilePrefab: {fileID: 7482584863542726400, guid: b7d36785a198ae140a7b30c3b000424a, type: 3}
