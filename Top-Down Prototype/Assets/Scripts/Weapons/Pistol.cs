@@ -10,6 +10,16 @@ public class Pistol : Weapon
     {
         base.Fire();
         currentAmmo--;
+
+        if (currentAmmo >= 1 && !reloading)
+        {
+            AudioManager.Play(AudioClipName.PistolShot);
+        }
+
+        if (currentAmmo <= 0 && !reloading)
+        {
+            AudioManager.Play(AudioClipName.PistolEmpty);
+        }
     }
 
     protected override void Update()
@@ -38,8 +48,18 @@ public class Pistol : Weapon
         }
     }
 
-    void SetLinePositions(Vector2 startPos, Vector2 endPos)
+    protected override void Reload()
     {
+        base.Reload();
+        AudioManager.Play(AudioClipName.PistolStartReload);
 
+    }
+
+
+    IEnumerator ReloadSound()
+    {
+        yield return new WaitForSeconds(reloadSpeed);
+
+        AudioManager.Play(AudioClipName.PistolStopReload);
     }
 }

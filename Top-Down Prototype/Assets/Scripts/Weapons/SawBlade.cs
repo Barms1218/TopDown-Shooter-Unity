@@ -5,7 +5,6 @@ using UnityEngine;
 public class SawBlade : Weapon
 {
     float specialAttackDelay = 2f;
-    float timeToSpecialAttack;
     
     /// <summary>
     /// 

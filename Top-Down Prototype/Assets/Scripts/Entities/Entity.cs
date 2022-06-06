@@ -10,6 +10,7 @@ public abstract class Entity : MonoBehaviour
     protected InputController input = null;
     [SerializeField]
     protected float _health = 100;
+    protected Animator _animator;
 
 
     // Movement
@@ -22,7 +23,17 @@ public abstract class Entity : MonoBehaviour
 
     protected bool facingRight = true;
 
+    protected State state;
+
     #endregion
+
+    protected enum State
+    {
+        STATE_IDLE,
+        STATE_MOVE,
+        STATE_DYING,
+        STATE_DEAD,
+    }
 
     #region Properties  
 
@@ -34,6 +45,8 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Start()
     {
         _body = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        state = State.STATE_IDLE;
 
         if (transform.position.x > 0.01)
         {
@@ -51,13 +64,38 @@ public abstract class Entity : MonoBehaviour
 
     }
 
-    protected abstract void GetInput();
+    protected virtual void GetInput()
+    {
+        switch (state)
+        {
+            case State.STATE_IDLE:
+                if (_body.velocity.x != 0)
+                {
+                    state = State.STATE_MOVE;
+                    _animator.SetBool("Running", false);
+                }
+                break;
+                case State.STATE_MOVE:
+                _animator.SetBool("Running", true);
+                if (_body.velocity.x == 0)
+                {
+                    state = State.STATE_IDLE;
+                }
+                break;
+        }
+    }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="collider"></param>
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Projectile")
+        if (collider.gameObject.tag == "Projectile"
+            && _health > 0)
         {
             TakeDamage(collider.gameObject.GetComponent<Projectile>().WeaponDamage);
+            Destroy(collider.gameObject);
         }
     }
 

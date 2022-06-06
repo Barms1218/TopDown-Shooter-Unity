@@ -10,12 +10,6 @@ public class Enemy : Entity
     AIPath path;
 
 
-    protected enum States
-    {
-        Chasing,
-        Attacking,
-        Dead,
-    }
     protected override void Start()
     {
         base.Start();
@@ -28,6 +22,7 @@ public class Enemy : Entity
     protected override void Update()
     {
         path.destination = player.transform.position; // Send object at player
+        
 
         // Use boolean to logically decide if flipping is necessary
         if (player.transform.position.x > transform.position.x
@@ -44,7 +39,13 @@ public class Enemy : Entity
 
     protected override void GetInput()
     {
-        throw new System.NotImplementedException();
+        
+        base.GetInput();
+        if (path.velocity.x != 0)
+        {
+            Debug.Log("Moving");
+            state = State.STATE_MOVE;
+        }
     }
 
     /// <summary>
@@ -68,8 +69,7 @@ public class Enemy : Entity
     /// <param name="spriteRenderer"></param>
     /// <param name="duration"></param>
     /// <returns></returns>
-    IEnumerator FadeOut(SpriteRenderer spriteRenderer,
-        float duration)
+    IEnumerator FadeOut(SpriteRenderer spriteRenderer, float duration)
     {
         float count = 0;
 

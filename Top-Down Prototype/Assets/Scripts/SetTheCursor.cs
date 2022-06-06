@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class SetTheCursor : MonoBehaviour
 {
-    [SerializeField] Texture2D cursor;
+    Vector3 mousePos;
+    
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z *= -1;
+
+        transform.position = mousePos;
     }
 }

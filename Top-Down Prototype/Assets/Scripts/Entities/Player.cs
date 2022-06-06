@@ -7,6 +7,7 @@ public class Player : Entity
     [SerializeField]
     GameObject currentWeapon;
 
+
     // Events
     public delegate void AttackInput();
     public static event AttackInput OnShoot;
@@ -41,6 +42,8 @@ public class Player : Entity
         {
             Flip();
         }
+
+        
     }
 
     void FixedUpdate()
@@ -54,6 +57,7 @@ public class Player : Entity
 
     protected override void GetInput()
     {
+        base.GetInput();
         if (input.RetrieveShootInput())
         {
             OnShoot?.Invoke();
