@@ -11,7 +11,7 @@ public class SawBlade : Weapon
     /// </summary>
     protected override void Fire()
     {
-        base.Fire();
+       
         currentAmmo--;
     }
     /// <summary>

@@ -17,17 +17,15 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField]
     protected float timeBetweenShots;
     [SerializeField]
-    protected float maxRange;
-    [SerializeField]
     protected int ammoPerShot;
     [SerializeField]
     protected bool reloading = false;
     [SerializeField]
     protected GameObject projectilePrefab;
 
-
-
     protected HUD hud;
+    protected Vector2 direction;
+    protected bool facingRight;
 
     #endregion
 
@@ -42,7 +40,6 @@ public abstract class Weapon : MonoBehaviour
     public int MaxAmmo => maxAmmo;
     protected float ReloadSpeed => reloadSpeed;
     protected float TimeBetweenShots => timeBetweenShots;
-    protected float MaxRange => maxRange;
     protected int AmmoPerShot => ammoPerShot;
     protected bool Reloading => reloading;
 
@@ -59,6 +56,7 @@ public abstract class Weapon : MonoBehaviour
     protected virtual void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        direction = mousePos - transform.position;
 
         float deltaX = mousePos.x - transform.position.x;
         float deltaY = mousePos.y - transform.position.y;
@@ -70,16 +68,8 @@ public abstract class Weapon : MonoBehaviour
         transform.rotation = target;
     }
 
-    protected virtual void Fire()
-    {
-        if (currentAmmo > 0 && !reloading)
-        {
-            ShootWeapon();
-            hud.ReduceAmmoCount(ammoPerShot);
-        }
-    }
-
-    protected abstract void ShootWeapon();
+    protected abstract void Fire();
+     protected abstract void ShootWeapon();
     protected abstract void SpecialAttack();
     protected virtual void Reload()
     {
@@ -97,6 +87,7 @@ public abstract class Weapon : MonoBehaviour
         currentAmmo = maxAmmo;
         reloading = false;
     }
+
      protected virtual void OnEnable()
      {
         Player.OnShoot += Fire;

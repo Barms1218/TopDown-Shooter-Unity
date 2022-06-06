@@ -64,6 +64,9 @@ public abstract class Entity : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     protected virtual void GetInput()
     {
         switch (state)
@@ -72,14 +75,15 @@ public abstract class Entity : MonoBehaviour
                 if (_body.velocity.x != 0)
                 {
                     state = State.STATE_MOVE;
-                    _animator.SetBool("Running", false);
+                    _animator.SetBool("Running", true);
                 }
                 break;
                 case State.STATE_MOVE:
-                _animator.SetBool("Running", true);
+
                 if (_body.velocity.x == 0)
                 {
                     state = State.STATE_IDLE;
+                    _animator.SetBool("Running", false);
                 }
                 break;
         }
@@ -88,17 +92,7 @@ public abstract class Entity : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="collider"></param>
-    protected virtual void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Projectile"
-            && _health > 0)
-        {
-            TakeDamage(collider.gameObject.GetComponent<Projectile>().WeaponDamage);
-            Destroy(collider.gameObject);
-        }
-    }
-
+    /// <param name="damage"></param>
     public virtual void TakeDamage(float damage)
     {
         _health -= damage;
@@ -109,7 +103,9 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
     protected virtual void Flip()
     {
         Vector3 newScale = gameObject.transform.localScale;
@@ -119,5 +115,8 @@ public abstract class Entity : MonoBehaviour
 
         gameObject.transform.localScale = newScale;
     }
+    /// <summary>
+    /// 
+    /// </summary>
     protected abstract void Die();
 }

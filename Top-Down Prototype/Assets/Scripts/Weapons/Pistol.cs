@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-    Vector2 direction;
 
     protected override void Fire()
     {
-        base.Fire();
-        currentAmmo--;
+        if (currentAmmo > 0 && !reloading)
+        {
+            currentAmmo--;
+            ShootWeapon();
+            hud.ReduceAmmoCount(ammoPerShot);
+        }
 
         if (currentAmmo >= 1 && !reloading)
         {
@@ -25,9 +28,6 @@ public class Pistol : Weapon
     protected override void Update()
     {
         base.Update();
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        direction = mousePos - transform.position;
     }
     protected override void ShootWeapon()
     {
@@ -58,7 +58,7 @@ public class Pistol : Weapon
 
     IEnumerator ReloadSound()
     {
-        yield return new WaitForSeconds(reloadSpeed);
+        yield return new WaitForSeconds(1f);
 
         AudioManager.Play(AudioClipName.PistolStopReload);
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : Entity
 {
     [SerializeField]
-    GameObject currentWeapon;
+    GameObject gun;
 
 
     // Events
@@ -43,7 +43,9 @@ public class Player : Entity
             Flip();
         }
 
-        
+        RaycastHit2D hit;
+
+        hit = Physics2D.Raycast(transform.position, _direction, 1f);
     }
 
     void FixedUpdate()
@@ -53,6 +55,14 @@ public class Player : Entity
         desiredVelocity = new Vector2(_direction.x, _direction.y)
             * Mathf.Max(maxSpeed, 0f);
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Weapon>() != null)
+        {
+            gun = collision.gameObject;
+        }
     }
 
     protected override void GetInput()

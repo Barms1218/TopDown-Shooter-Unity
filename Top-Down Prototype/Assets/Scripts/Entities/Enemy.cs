@@ -41,10 +41,10 @@ public class Enemy : Entity
     {
         
         base.GetInput();
-        if (path.velocity.x != 0)
+        if (!path.reachedDestination)
         {
-            Debug.Log("Moving");
             state = State.STATE_MOVE;
+            //_animator.SetBool("Running", true);
         }
     }
 
