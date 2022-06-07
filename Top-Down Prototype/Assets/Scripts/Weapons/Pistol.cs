@@ -8,29 +8,25 @@ public class Pistol : Weapon
     protected override void Fire()
     {
         base.Fire();
-        //if (currentAmmo > 0 && !reloading)
-        //{
-        //    currentAmmo--;
-        //    ShootWeapon();
-        //    hud.ReduceAmmoCount(ammoPerShot);
-        //}
-
-
-
-        //if (currentAmmo <= 0 && !reloading)
-        //{
-        //    AudioManager.Play(AudioClipName.PistolEmpty);
-        //}
+        if (currentAmmo <= 0)
+        {
+            AudioManager.Play(AudioClipName.PistolEmpty);
+        }
     }
 
     protected override IEnumerator ContinuousFire()
     {
         while (true)
         {
-            ShootWeapon();
-            hud.ReduceAmmoCount(ammoPerShot);
-            currentAmmo -= ammoPerShot;
-            AudioManager.Play(AudioClipName.PistolShot);
+            if (currentAmmo >= 1 && !reloading)
+            {
+                ShootWeapon();
+                hud.ReduceAmmoCount(ammoPerShot);
+                currentAmmo -= ammoPerShot;
+                AudioManager.Play(AudioClipName.PistolShot);
+
+            }
+
             yield return new WaitForSeconds(timeBetweenShots);
         }
     }

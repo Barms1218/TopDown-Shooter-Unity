@@ -14,11 +14,15 @@ public class AutomaticRifle : Weapon
     {
         while (true)
         {
-            ShootWeapon();
-            hud.ReduceAmmoCount(ammoPerShot);
-            currentAmmo -= ammoPerShot;
-            AudioManager.Play(AudioClipName.AR_Fire);
-            yield return new WaitForSeconds(timeBetweenShots);
+            if (currentAmmo >= 1 && !reloading)
+            {
+                ShootWeapon();
+                hud.ReduceAmmoCount(ammoPerShot);
+                currentAmmo -= ammoPerShot;
+                AudioManager.Play(AudioClipName.AR_Fire);
+                yield return new WaitForSeconds(timeBetweenShots);
+            }
+
         }
     }
     /// <summary>
