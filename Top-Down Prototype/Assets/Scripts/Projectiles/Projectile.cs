@@ -2,27 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     #region Fields
-
+    float timeToLive;
     [SerializeField]
-    protected float damage;
-    [SerializeField]
-    protected float forceMagnitude = 10f;
-    [SerializeField]
-    protected float timeToLive = 5f;
+    ProjectileData projectileData;
 
     #endregion
 
     #region Properties
 
-    public float WeaponDamage => damage;
+    public float WeaponDamage => projectileData.Damage;
 
     #endregion
 
-    protected virtual void Update()
+    void Start()
     {
+        timeToLive = projectileData.TimeToLive;
+    }
+    void Update()
+    {
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        float deltaX = mousePos.x - transform.position.x;
+        float deltaY = mousePos.y - transform.position.y;
+
+        float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
+
+        Quaternion target = Quaternion.Euler(0, 0, angle);
+
+        transform.rotation = target;
+
         timeToLive -= Time.deltaTime;
 
         if (timeToLive <= 0)
@@ -39,19 +50,21 @@ public abstract class Projectile : MonoBehaviour
     {
         if (collision.GetComponent<Entity>() != null)
         {
-            collision.gameObject.GetComponent<Entity>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Entity>().TakeDamage(projectileData.Damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="force"></param>
-    public virtual void MoveToTarget(Vector2 force)
+    public void MoveToTarget(Vector2 force)
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
 
-        body.AddForce(force.normalized * forceMagnitude, ForceMode2D.Impulse);
+        body.AddForce(force.normalized * 
+            projectileData.AmountOfForce, ForceMode2D.Impulse);
     }
 }

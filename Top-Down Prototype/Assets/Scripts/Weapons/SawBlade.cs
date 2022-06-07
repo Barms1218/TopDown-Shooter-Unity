@@ -14,6 +14,11 @@ public class SawBlade : Weapon
        
         currentAmmo--;
     }
+
+    protected override IEnumerator ContinuousFire()
+    {
+        throw new System.NotImplementedException();
+    }
     /// <summary>
     /// 
     /// </summary>
@@ -21,7 +26,7 @@ public class SawBlade : Weapon
     {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
-        var projectileScript = projectile.GetComponent<SawProjectile>();
+        var projectileScript = projectile.GetComponent<Projectile>();
 
         projectileScript?.MoveToTarget(Vector2.right);
 

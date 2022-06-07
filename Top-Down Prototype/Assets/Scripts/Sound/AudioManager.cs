@@ -18,6 +18,8 @@ public static class AudioManager
     public static void Initialize(AudioSource source)
     {
         audioSource = source;
+        audioClips.Add(AudioClipName.AR_Fire,
+            Resources.Load<AudioClip>("AR_Fire"));
         audioClips.Add(AudioClipName.PistolEmpty, 
             Resources.Load<AudioClip>("pistol empty"));
         audioClips.Add(AudioClipName.PlayerDeath,

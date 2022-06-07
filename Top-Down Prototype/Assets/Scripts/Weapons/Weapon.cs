@@ -22,10 +22,14 @@ public abstract class Weapon : MonoBehaviour
     protected bool reloading = false;
     [SerializeField]
     protected GameObject projectilePrefab;
+    [SerializeField]
+    protected Transform muzzleTransform;
 
     protected HUD hud;
     protected Vector2 direction;
     protected bool facingRight;
+
+    Coroutine continousFire;
 
     #endregion
 
@@ -66,10 +70,24 @@ public abstract class Weapon : MonoBehaviour
         Quaternion target = Quaternion.Euler(0, 0, angle);
 
         transform.rotation = target;
+
+        Fire();
     }
 
-    protected abstract void Fire();
-     protected abstract void ShootWeapon();
+    protected virtual void Fire()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            continousFire = StartCoroutine(ContinuousFire());
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            StopCoroutine(continousFire);
+        }
+    }
+
+    protected abstract IEnumerator ContinuousFire();
+    protected abstract void ShootWeapon();
     protected abstract void SpecialAttack();
     protected virtual void Reload()
     {
@@ -90,13 +108,11 @@ public abstract class Weapon : MonoBehaviour
 
      protected virtual void OnEnable()
      {
-        Player.OnShoot += Fire;
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
      }
     protected virtual void OnDisable()
     {
-        Player.OnShoot -= Fire;
         Player.OnSpecial -= SpecialAttack;
         Player.OnReload -= Reload;
     }

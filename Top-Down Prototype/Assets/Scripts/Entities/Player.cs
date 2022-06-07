@@ -6,11 +6,11 @@ public class Player : Entity
 {
     [SerializeField]
     GameObject gun;
+    [SerializeField]
+    Transform gunTransform;
 
-
+    Weapon weapon;
     // Events
-    public delegate void AttackInput();
-    public static event AttackInput OnShoot;
     public delegate void SpecialInput();
     public static event SpecialInput OnSpecial;
     public delegate void ReloadInput();
@@ -20,6 +20,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        weapon = GetComponent<Weapon>();
     }
     protected override void Update()
     {
@@ -42,10 +43,6 @@ public class Player : Entity
         {
             Flip();
         }
-
-        RaycastHit2D hit;
-
-        hit = Physics2D.Raycast(transform.position, _direction, 1f);
     }
 
     void FixedUpdate()
@@ -61,22 +58,24 @@ public class Player : Entity
     {
         if (collision.GetComponent<Weapon>() != null)
         {
+            gun.SetActive(false);
+            collision.gameObject.transform.SetParent(gameObject.transform);
             gun = collision.gameObject;
+            gun.transform.position = gunTransform.position;
+            gun.SetActive(true);
+            collision.GetComponent<Weapon>().enabled = true;
+            collision.GetComponent<CapsuleCollider2D>().enabled = false;
         }
     }
 
     protected override void GetInput()
     {
         base.GetInput();
-        if (input.RetrieveShootInput())
-        {
-            OnShoot?.Invoke();
-        }
-        if (input.MouseHeldDown())
+        if (Input.GetKeyDown(KeyCode.F))
         {
             OnSpecial?.Invoke();
         }
-        if (input.RetrieveReloadInput())
+        if (Input.GetKeyDown(KeyCode.R))
         {
             OnReload?.Invoke();
         }

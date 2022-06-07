@@ -14,17 +14,4 @@ public class PlayerController : InputController
     {
         return Input.GetAxis("Vertical");
     }
-
-    public override bool RetrieveShootInput()
-    {
-        return Input.GetMouseButtonDown(0);
-    }
-    public override bool MouseHeldDown()
-    {
-        return Input.GetMouseButtonDown(1);
-    }
-    public override bool RetrieveReloadInput()
-    {
-        return Input.GetKeyDown(KeyCode.R);
-    }
 }

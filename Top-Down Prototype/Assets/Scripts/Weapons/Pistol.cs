@@ -7,21 +7,31 @@ public class Pistol : Weapon
 
     protected override void Fire()
     {
-        if (currentAmmo > 0 && !reloading)
+        base.Fire();
+        //if (currentAmmo > 0 && !reloading)
+        //{
+        //    currentAmmo--;
+        //    ShootWeapon();
+        //    hud.ReduceAmmoCount(ammoPerShot);
+        //}
+
+
+
+        //if (currentAmmo <= 0 && !reloading)
+        //{
+        //    AudioManager.Play(AudioClipName.PistolEmpty);
+        //}
+    }
+
+    protected override IEnumerator ContinuousFire()
+    {
+        while (true)
         {
-            currentAmmo--;
             ShootWeapon();
             hud.ReduceAmmoCount(ammoPerShot);
-        }
-
-        if (currentAmmo >= 1 && !reloading)
-        {
+            currentAmmo -= ammoPerShot;
             AudioManager.Play(AudioClipName.PistolShot);
-        }
-
-        if (currentAmmo <= 0 && !reloading)
-        {
-            AudioManager.Play(AudioClipName.PistolEmpty);
+            yield return new WaitForSeconds(timeBetweenShots);
         }
     }
 
@@ -31,10 +41,10 @@ public class Pistol : Weapon
     }
     protected override void ShootWeapon()
     {
-        var projectile = Instantiate(projectilePrefab, transform.position,
+        var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
             Quaternion.identity);
 
-        var bulletScript = projectile.GetComponent<PistolProjectile>();
+        var bulletScript = projectile.GetComponent<Projectile>();
 
         bulletScript.MoveToTarget(direction);
     }
@@ -51,6 +61,7 @@ public class Pistol : Weapon
     protected override void Reload()
     {
         base.Reload();
+        StartCoroutine(ReloadSound());
         AudioManager.Play(AudioClipName.PistolStartReload);
 
     }
@@ -58,7 +69,7 @@ public class Pistol : Weapon
 
     IEnumerator ReloadSound()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(reloadSpeed);
 
         AudioManager.Play(AudioClipName.PistolStopReload);
     }

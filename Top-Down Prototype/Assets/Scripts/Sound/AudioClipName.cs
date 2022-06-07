@@ -3,6 +3,7 @@
 /// </summary>
 public enum AudioClipName
 {
+    AR_Fire,
     PistolEmpty,
     PlayerDeath,
     PistolShot,

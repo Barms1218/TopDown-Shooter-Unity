@@ -6,9 +6,4 @@ public abstract class InputController : ScriptableObject
 {
     public abstract float RetrieveHorizontalInput();
     public abstract float RetrieveVerticalInput();
-
-    public abstract bool RetrieveShootInput();
-    public abstract bool MouseHeldDown();
-
-    public abstract bool RetrieveReloadInput();
 }

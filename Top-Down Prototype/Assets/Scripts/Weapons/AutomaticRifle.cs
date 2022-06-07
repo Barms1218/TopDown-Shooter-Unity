@@ -5,46 +5,39 @@ using UnityEngine;
 public class AutomaticRifle : Weapon
 {
 
-
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        
-    }
-
     protected override void Fire()
     {
-        if (currentAmmo > 0 && !reloading)
-        {
-            StartCoroutine(ContinuousFire());
+        base.Fire();
+    }
 
+    protected override IEnumerator ContinuousFire()
+    {
+        while (true)
+        {
+            ShootWeapon();
+            hud.ReduceAmmoCount(ammoPerShot);
+            currentAmmo -= ammoPerShot;
+            AudioManager.Play(AudioClipName.AR_Fire);
+            yield return new WaitForSeconds(timeBetweenShots);
         }
     }
-
-    IEnumerator ContinuousFire()
-    {
-        yield return null;
-
-        ShootWeapon();
-        hud.ReduceAmmoCount(ammoPerShot);
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
     protected override void ShootWeapon()
     {
-        var projectile = Instantiate(projectilePrefab, transform.position,
+        var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
             Quaternion.identity);
 
-        var bulletScript = projectile.GetComponent<PistolProjectile>();
+        var bulletScript = projectile.GetComponent<Projectile>();
 
         bulletScript.MoveToTarget(direction);
     }
 
+    /// <summary>
+    /// When implemented, launch a grenade 
+    /// </summary>
+    /// <exception cref="System.NotImplementedException"></exception>
     protected override void SpecialAttack()
     {
         throw new System.NotImplementedException();
