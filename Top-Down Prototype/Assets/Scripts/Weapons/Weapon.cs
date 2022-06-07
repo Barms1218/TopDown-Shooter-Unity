@@ -72,8 +72,23 @@ public abstract class Weapon : MonoBehaviour
         transform.rotation = target;
 
         Fire();
+
+        if (mousePos.x > transform.position.x && 
+            facingRight)
+        {
+            Flip();
+        }
+        else if (mousePos.x < transform.position.x &&
+            !facingRight)
+        {
+            Flip();
+        }
     }
 
+    /// <summary>
+    /// Allow for semi-automatic fire or automatic fire depending
+    /// on the weapon's time between shots.
+    /// </summary>
     protected virtual void Fire()
     {
         if (Input.GetMouseButtonDown(0))
@@ -97,6 +112,10 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Put gun into reloading state with boolean
+    /// </summary>
+    /// <returns></returns>
     protected virtual IEnumerator StartReload()
     {
         reloading = true;
@@ -106,7 +125,21 @@ public abstract class Weapon : MonoBehaviour
         reloading = false;
     }
 
-     protected virtual void OnEnable()
+    /// <summary>
+    /// Change the weapon's local scale to face direction of the mouse
+    /// </summary>
+    protected virtual void Flip()
+    {
+        Vector3 newScale = gameObject.transform.localScale;
+        newScale.x *= -1f;
+        newScale.y *= -1f;
+
+        facingRight = !facingRight;
+
+        gameObject.transform.localScale = newScale;
+    }
+
+    protected virtual void OnEnable()
      {
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
