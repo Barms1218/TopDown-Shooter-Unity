@@ -6,8 +6,6 @@ using UnityEngine;
 public class ProjectileData : ScriptableObject
 {
     [SerializeField]
-    new string name;
-    [SerializeField]
     float damage;
     [SerializeField]
     float timeToLive;

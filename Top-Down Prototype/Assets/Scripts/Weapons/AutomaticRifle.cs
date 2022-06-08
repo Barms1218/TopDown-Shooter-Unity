@@ -5,11 +5,6 @@ using UnityEngine;
 public class AutomaticRifle : Weapon
 {
 
-    protected override void Fire()
-    {
-        base.Fire();
-    }
-
     protected override IEnumerator ContinuousFire()
     {
         while (true)
@@ -22,7 +17,6 @@ public class AutomaticRifle : Weapon
                 AudioManager.Play(AudioClipName.AR_Fire);
                 yield return new WaitForSeconds(timeBetweenShots);
             }
-
         }
     }
     /// <summary>

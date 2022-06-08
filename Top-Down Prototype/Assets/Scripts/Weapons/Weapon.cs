@@ -26,7 +26,7 @@ public abstract class Weapon : MonoBehaviour
     protected Transform muzzleTransform;
 
     protected HUD hud;
-    protected Vector2 direction;
+    protected Vector3 direction;
     protected bool facingRight;
 
     Coroutine continousFire;
@@ -60,6 +60,7 @@ public abstract class Weapon : MonoBehaviour
     protected virtual void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = -Camera.main.transform.position.z;
         direction = mousePos - transform.position;
 
         float deltaX = mousePos.x - transform.position.x;

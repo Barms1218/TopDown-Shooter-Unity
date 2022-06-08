@@ -64,7 +64,7 @@ public class Player : Entity
             gun.transform.position = gunTransform.position;
             gun.SetActive(true);
             collision.GetComponent<Weapon>().enabled = true;
-            collision.GetComponent<CapsuleCollider2D>().enabled = false;
+            collision.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 

@@ -1,35 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class PelletProjectile : MonoBehaviour
 {
-    #region Fields
-    float timeToLive;
     [SerializeField]
     ProjectileData projectileData;
-
-    #endregion
-
-    #region Properties
-
-    public float WeaponDamage => projectileData.Damage;
-
-    #endregion
+    float timeToLive;
 
     void Start()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        float deltaX = mousePos.x - transform.position.x;
-        float deltaY = mousePos.y - transform.position.y;
-
-        float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
-
-        Quaternion target = Quaternion.Euler(0, 0, angle);
-
-        transform.rotation = target;
-
         timeToLive = projectileData.TimeToLive;
     }
     void Update()
@@ -63,7 +43,7 @@ public class Projectile : MonoBehaviour
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
 
-        body.AddRelativeForce(force.normalized * 
+        body.AddForce(force.normalized * 
             projectileData.AmountOfForce, ForceMode2D.Impulse);
     }
 }
