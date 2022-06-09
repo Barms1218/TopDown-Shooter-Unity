@@ -2,23 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutomaticRifle : Weapon
+public class AutomaticRifle : Weapon, IFlippable
 {
 
-    protected override IEnumerator ContinuousFire()
-    {
-        while (true)
-        {
-            if (currentAmmo >= 1 && !reloading)
-            {
-                ShootWeapon();
-                hud.ReduceAmmoCount(ammoPerShot);
-                currentAmmo -= ammoPerShot;
-                AudioManager.Play(AudioClipName.AR_Fire);
-                yield return new WaitForSeconds(timeBetweenShots);
-            }
-        }
-    }
     /// <summary>
     /// 
     /// </summary>
@@ -30,6 +16,7 @@ public class AutomaticRifle : Weapon
         var bulletScript = projectile.GetComponent<Projectile>();
 
         bulletScript.MoveToTarget(direction);
+        AudioManager.Play(AudioClipName.AR_Fire);
     }
 
     /// <summary>

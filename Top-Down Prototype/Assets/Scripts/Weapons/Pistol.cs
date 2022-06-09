@@ -2,39 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Weapon
+public class Pistol : Weapon, IFlippable
 {
 
     protected override void Fire()
     {
         base.Fire();
-        if (currentAmmo <= 0)
+        
+         if (currentAmmo <= 0)
         {
             AudioManager.Play(AudioClipName.PistolEmpty);
         }
     }
-
-    protected override IEnumerator ContinuousFire()
-    {
-        while (true)
-        {
-            if (currentAmmo >= 1 && !reloading)
-            {
-                ShootWeapon();
-                hud.ReduceAmmoCount(ammoPerShot);
-                currentAmmo -= ammoPerShot;
-                AudioManager.Play(AudioClipName.PistolShot);
-
-            }
-
-            yield return new WaitForSeconds(timeBetweenShots);
-        }
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
+    
     protected override void ShootWeapon()
     {
         var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
@@ -43,6 +23,7 @@ public class Pistol : Weapon
         var bulletScript = projectile.GetComponent<Projectile>();
 
         bulletScript.MoveToTarget(direction);
+        AudioManager.Play(AudioClipName.PistolShot);
     }
 
     protected override void SpecialAttack()
@@ -62,7 +43,10 @@ public class Pistol : Weapon
 
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ReloadSound()
     {
         yield return new WaitForSeconds(reloadSpeed);

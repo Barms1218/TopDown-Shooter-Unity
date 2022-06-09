@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Weapon
   - Projectile
+  - Shotgun
+  - Assault Rifle
   layers:
   - Default
   - TransparentFX
@@ -12,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Terrain
+  - 
   - 
   - 
   - 
@@ -40,14 +43,14 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Background
-    uniqueID: 142343915
+    uniqueID: 4214180129
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player Customization
-    uniqueID: 885483589
-    locked: 0
   - name: Weapons
-    uniqueID: 3680249161
+    uniqueID: 974349783
+    locked: 0
+  - name: Environment
+    uniqueID: 3555265715
     locked: 0

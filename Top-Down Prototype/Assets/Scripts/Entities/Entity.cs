@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IFlippable
 {
     #region Fields
 
@@ -61,7 +61,7 @@ public abstract class Entity : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-
+        GetInput();
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public abstract class Entity : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    protected virtual void Flip()
+    public virtual void Flip()
     {
         Vector3 newScale = gameObject.transform.localScale;
         newScale.x *= -1f;

@@ -15,10 +15,6 @@ public class SawBlade : Weapon
         currentAmmo--;
     }
 
-    protected override IEnumerator ContinuousFire()
-    {
-        throw new System.NotImplementedException();
-    }
     /// <summary>
     /// 
     /// </summary>

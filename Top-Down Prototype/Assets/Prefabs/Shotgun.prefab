@@ -41,11 +41,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5416292742939780391}
   - component: {fileID: 5416292742939780390}
-  - component: {fileID: 5416292742939780385}
   - component: {fileID: 5416292742939780384}
   m_Layer: 0
   m_Name: Shotgun
-  m_TagString: Untagged
+  m_TagString: Shotgun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5416292742939780387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.97295403, y: -1.9420118, z: 0}
+  m_LocalPosition: {x: 1.7075547, y: -2.6764674, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -104,8 +103,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 974349783
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -4029819251187114856, guid: 2b892f1a8255d4b92bc26cf703a01a74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -118,32 +117,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5416292742939780385
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5416292742939780387}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.10231224, y: -0.0102312565}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.31111586, y: 0.5350786}
-    oldSize: {x: 0.5416667, y: 0.29166666}
-    newSize: {x: 0.5416667, y: 0.29166666}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5416667, y: 0.29166666}
-  m_EdgeRadius: 0
 --- !u!114 &5416292742939780384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,3 +137,4 @@ MonoBehaviour:
   reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
   muzzleTransform: {fileID: 5416292742926382952}
+  pelletSpread: 30

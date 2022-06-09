@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, IFlippable
 {
     #region Fields
 
@@ -27,8 +27,10 @@ public abstract class Weapon : MonoBehaviour
 
     protected HUD hud;
     protected Vector3 direction;
+    Vector3 mousePos;
     protected bool facingRight;
 
+    protected float nextFire;
     Coroutine continousFire;
 
     #endregion
@@ -59,22 +61,11 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Update()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = -Camera.main.transform.position.z;
-        direction = mousePos - transform.position;
-
-        float deltaX = mousePos.x - transform.position.x;
-        float deltaY = mousePos.y - transform.position.y;
-
-        float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
-
-        Quaternion target = Quaternion.Euler(0, 0, angle);
-
-        transform.rotation = target;
+        Aim();
 
         Fire();
 
-        if (mousePos.x > transform.position.x && 
+        if (mousePos.x > transform.position.x &&
             facingRight)
         {
             Flip();
@@ -87,22 +78,39 @@ public abstract class Weapon : MonoBehaviour
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    void Aim()
+    {
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = -Camera.main.transform.position.z;
+        direction = mousePos - transform.position;
+
+        float deltaX = mousePos.x - transform.position.x;
+        float deltaY = mousePos.y - transform.position.y;
+
+        float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
+
+        Quaternion target = Quaternion.Euler(0, 0, angle);
+
+        transform.rotation = target;
+    }
+
+    /// <summary>
     /// Allow for semi-automatic fire or automatic fire depending
     /// on the weapon's time between shots.
     /// </summary>
     protected virtual void Fire()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0) && Time.time >= nextFire)
         {
-            continousFire = StartCoroutine(ContinuousFire());
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            StopCoroutine(continousFire);
+            hud.ReduceAmmoCount(ammoPerShot);
+            currentAmmo -= ammoPerShot;
+            nextFire = Time.time + timeBetweenShots;
+            ShootWeapon();
         }
     }
 
-    protected abstract IEnumerator ContinuousFire();
     protected abstract void ShootWeapon();
     protected abstract void SpecialAttack();
     protected virtual void Reload()
@@ -129,7 +137,7 @@ public abstract class Weapon : MonoBehaviour
     /// <summary>
     /// Change the weapon's local scale to face direction of the mouse
     /// </summary>
-    protected virtual void Flip()
+    public virtual void Flip()
     {
         Vector3 newScale = gameObject.transform.localScale;
         newScale.x *= -1f;
