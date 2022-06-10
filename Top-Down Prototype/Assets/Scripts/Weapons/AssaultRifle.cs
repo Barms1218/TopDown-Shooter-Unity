@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutomaticRifle : Weapon, IFlippable
+public class AssaultRifle : Weapon, IFlippable
 {
 
     /// <summary>
@@ -26,5 +26,11 @@ public class AutomaticRifle : Weapon, IFlippable
     protected override void SpecialAttack()
     {
         throw new System.NotImplementedException();
+    }
+
+    protected override IEnumerator StartReload()
+    {
+        yield return base.StartReload();
+        AudioManager.Play(AudioClipName.AR_Finish_Reload);
     }
 }

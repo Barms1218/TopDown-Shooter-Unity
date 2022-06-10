@@ -38,7 +38,6 @@ public class Pistol : Weapon, IFlippable
     protected override void Reload()
     {
         base.Reload();
-        StartCoroutine(ReloadSound());
         AudioManager.Play(AudioClipName.PistolStartReload);
 
     }
@@ -47,10 +46,9 @@ public class Pistol : Weapon, IFlippable
     /// 
     /// </summary>
     /// <returns></returns>
-    IEnumerator ReloadSound()
+    protected override IEnumerator StartReload()
     {
-        yield return new WaitForSeconds(reloadSpeed);
-
+        yield return base.StartReload();
         AudioManager.Play(AudioClipName.PistolStopReload);
     }
 }

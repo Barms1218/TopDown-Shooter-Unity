@@ -4,6 +4,7 @@
 public enum AudioClipName
 {
     AR_Fire,
+    AR_Finish_Reload,
     EnemyDeath,
     PistolEmpty,
     PlayerDeath,

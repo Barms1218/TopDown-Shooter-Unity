@@ -42,13 +42,13 @@ GameObject:
   - component: {fileID: 5416292742939780391}
   - component: {fileID: 5416292742939780390}
   - component: {fileID: 5416292742939780384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shotgun
   m_TagString: Shotgun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5416292742939780391
 Transform:
   m_ObjectHideFlags: 0
@@ -129,12 +129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9542651282bd8f40b8c441cc3fa061d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 8
-  maxAmmo: 8
-  reloadSpeed: 2
+  currentAmmo: 5
+  maxAmmo: 5
+  reloadSpeed: 1
   timeBetweenShots: 1
   ammoPerShot: 1
   reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
   muzzleTransform: {fileID: 5416292742926382952}
-  pelletSpread: 30
+  pelletSpread: 0.71

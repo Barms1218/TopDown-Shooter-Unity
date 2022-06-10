@@ -14,6 +14,8 @@ public class Player : Entity
     private bool hasAssaultRifle;
     private bool hasShotGun;
 
+    LayerMask weaponLayer;
+
     // Events
     public delegate void SpecialInput();
     public static event SpecialInput OnSpecial;
@@ -24,6 +26,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        weaponLayer = LayerMask.GetMask("Weapons");
     }
     protected override void Update()
     {
@@ -48,6 +51,7 @@ public class Player : Entity
         }
 
         WeaponSwap();
+        PickUp();
     }
 
     void FixedUpdate()
@@ -84,6 +88,25 @@ public class Player : Entity
             weapons[gunIndex].SetActive(true);
             Destroy(collision.gameObject);
         }
+    }
+
+    void PickUp()
+    {
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePos - transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, weaponLayer);
+        Color lineColor;
+        if (hit.collider != null)
+        {
+            lineColor = Color.green;
+            Debug.Log("Press E to pick up");
+        }
+        else
+        {
+            lineColor = Color.red;
+        }
+        
+        Debug.DrawRay(transform.position, direction, lineColor);
     }
 
     void WeaponSwap()
