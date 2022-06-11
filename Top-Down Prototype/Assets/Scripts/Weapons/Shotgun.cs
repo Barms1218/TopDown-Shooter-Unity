@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : Weapon, IFlippable
+public class Shotgun : Weapon
 {
     int numProjectiles = 5;
     [SerializeField]

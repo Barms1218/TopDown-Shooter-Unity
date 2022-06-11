@@ -47,15 +47,6 @@ public abstract class Entity : MonoBehaviour, IFlippable
         _body = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         state = State.STATE_IDLE;
-
-        if (transform.position.x > 0.01)
-        {
-            facingRight = true;
-        }
-        else if (transform.position.x < -.001)
-        {
-            facingRight = false;
-        }
     }
 
     // Update is called once per frame

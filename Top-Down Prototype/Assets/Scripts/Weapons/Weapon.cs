@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour, IFlippable
+public abstract class Weapon : MonoBehaviour
 {
     #region Fields
 
@@ -29,7 +29,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable
     protected Vector3 direction;
     Vector3 mousePos;
     protected bool facingRight;
-
+    protected bool flipped;
     protected float nextFire;
     Coroutine continousFire;
 
@@ -51,12 +51,20 @@ public abstract class Weapon : MonoBehaviour, IFlippable
 
     #endregion
 
-    // Start is called before the first frame update
-    protected virtual void Start()
+    
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    protected virtual void Awake()
     {
         hud = FindObjectOfType<HUD>();
         body = GetComponent<Rigidbody2D>();
-        hud.SetMaxAmmoCount(MaxAmmo);
+    }
+
+    // Start is called before the first frame update
+    protected virtual void Start()
+    {
+        //hud.SetMaxAmmoCount(maxAmmo);
     }
 
     protected virtual void Update()
@@ -64,17 +72,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable
         Aim();
 
         Fire();
-
-        if (mousePos.x > transform.position.x &&
-            facingRight)
-        {
-            Flip();
-        }
-        else if (mousePos.x < transform.position.x &&
-            !facingRight)
-        {
-            Flip();
-        }
     }
 
     /// <summary>
@@ -86,14 +83,22 @@ public abstract class Weapon : MonoBehaviour, IFlippable
         mousePos.z = -Camera.main.transform.position.z;
         direction = mousePos - transform.position;
 
-        float deltaX = mousePos.x - transform.position.x;
-        float deltaY = mousePos.y - transform.position.y;
+        float deltaX = direction.x;
+        float deltaY = direction.y;
 
         float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
 
-        Quaternion target = Quaternion.Euler(0, 0, angle);
+        if (mousePos.x < transform.position.x && !facingRight)
+        {
+            Flip();
+        }
+        else if (mousePos.x > transform.position.x && facingRight)
+        {
+            Flip();
+        }
 
-        transform.rotation = target;
+        // transform.rotation = target;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     /// <summary>
@@ -134,22 +139,21 @@ public abstract class Weapon : MonoBehaviour, IFlippable
         reloading = false;
     }
 
-    /// <summary>
-    /// Change the weapon's local scale to face direction of the mouse
-    /// </summary>
-    public virtual void Flip()
+    protected virtual void Flip()
     {
-        Vector3 newScale = gameObject.transform.localScale;
-        newScale.x *= -1f;
-        newScale.y *= -1f;
-
         facingRight = !facingRight;
-
-        gameObject.transform.localScale = newScale;
+        Vector3 newScale = transform.localScale;
+        newScale.y *= -1;
+        newScale.x *= -1;
+        transform.localScale = newScale;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     protected virtual void OnEnable()
      {
+        hud.SetMaxAmmoCount(maxAmmo);
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
      }

@@ -9,17 +9,6 @@ public class HUD : MonoBehaviour
     int currentAmmo;
     int maxAmmo;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SetMaxAmmoCount(int ammoCount)
     {
         maxAmmo = ammoCount;

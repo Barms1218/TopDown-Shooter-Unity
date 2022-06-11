@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7a096138463f24d9dbffca2e491b6a, type: 3}
   m_Name: Pistol Bullet
   m_EditorClassIdentifier: 
-  name: Pistol Bullet
   damage: 5
   timeToLive: 1
   amountOfForce: 40

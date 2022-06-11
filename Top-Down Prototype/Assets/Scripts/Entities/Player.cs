@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity
+public class Player : Entity, IFlippable
 {
     [SerializeField]
     GameObject gun;
@@ -27,6 +27,7 @@ public class Player : Entity
     {
         base.Start();
         weaponLayer = LayerMask.GetMask("Weapons");
+        weapons.Add(gun);
     }
     protected override void Update()
     {
@@ -40,7 +41,7 @@ public class Player : Entity
         _body.velocity = _velocity;
 
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        var direction = mousePos - transform.position;
         if (mousePos.x < transform.position.x && facingRight)
         {
             Flip();
@@ -62,33 +63,6 @@ public class Player : Entity
             * Mathf.Max(maxSpeed, 0f);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Pick up new weapon, add it to the list and equip it
-        if (collision.gameObject.tag == "Assault Rifle")
-        {
-            hasAssaultRifle = true;
-            gunIndex++;
-            gun.SetActive(false);
-            //collision.gameObject.transform.SetParent(gameObject.transform);
-            //weapons.Add(collision.gameObject);
-            gun = weapons[gunIndex];
-            //weapons[gunIndex].transform.position = gunTransform.position;
-            //weapons[gunIndex].GetComponent<Weapon>().enabled = true;
-            //weapons[gunIndex].GetComponent<BoxCollider2D>().enabled = false;
-            weapons[gunIndex].SetActive(true);
-            Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.tag == "Shotgun")
-        {
-            hasShotGun = true;
-            gunIndex++;
-            gun.SetActive(false);
-            gun = weapons[gunIndex];
-            weapons[gunIndex].SetActive(true);
-            Destroy(collision.gameObject);
-        }
-    }
 
     void PickUp()
     {
@@ -96,53 +70,85 @@ public class Player : Entity
         Vector3 direction = mousePos - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, weaponLayer);
         Color lineColor;
+        
+        lineColor = Color.green;
         if (hit.collider != null)
         {
-            lineColor = Color.green;
             Debug.Log("Press E to pick up");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                gunIndex++;
+                weapons.Add(hit.collider.gameObject);
+                weapons[gunIndex].transform.SetParent(gameObject.transform);
+                weapons[gunIndex].transform.position = gunTransform.position;
+
+                gun.SetActive(false);
+                gun = weapons[gunIndex];
+                if (gun.transform.position.x < transform.position.x)
+                {
+                    Vector3 newScale = gun.transform.localScale;
+                    newScale.x *= -1;
+                    gun.transform.localScale = newScale;
+                }
+                weapons[gunIndex].GetComponent<Weapon>().enabled = true;
+                hit.collider.enabled = false;
+            }
+            else
+            {
+                lineColor = Color.red;
+            }
+
+            
         }
-        else
-        {
-            lineColor = Color.red;
-        }
-        
         Debug.DrawRay(transform.position, direction, lineColor);
     }
 
     void WeaponSwap()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            try
+            Vector3 newScale = gun.transform.localScale;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                gun.SetActive(false);
-                gun = weapons[0];
-                weapons[0].SetActive(true);
+                try
+                {
+                    gun.SetActive(false);
+                    gun = weapons[0];
+                    weapons[0].SetActive(true);
+                    // newScale = transform.localScale;
+                    // gun.transform.localScale = newScale;
+                }
+                catch (System.Exception exception)
+                {
+                    Debug.Log(exception);
+                }
             }
-            catch(System.Exception exception)
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Debug.Log(exception);
+
+                try
+                {
+                    gun.SetActive(false);
+                    gun = weapons[1];
+                    weapons[1].SetActive(true);
+                }
+                catch(System.Exception exception)
+                {
+                    gun.SetActive(true);
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                try
+                {
+                    gun.SetActive(false);
+                    gun = weapons[2];
+                    weapons[2].SetActive(true);
+                }
+                catch(System.Exception exception)
+                {
+                    gun.SetActive(true);
+                }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (hasAssaultRifle)
-            {
-                gun.SetActive(false);
-                gun = weapons[1];
-                weapons[1].SetActive(true);
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (hasShotGun)
-            {
-                gun.SetActive(false);
-                gun = weapons[2];
-                weapons[2].SetActive(true);
-            }
-        }
-    }
 
     protected override void GetInput()
     {
@@ -156,7 +162,6 @@ public class Player : Entity
             OnReload?.Invoke();
         }
     }
-
 
     protected override void Die()
     {
