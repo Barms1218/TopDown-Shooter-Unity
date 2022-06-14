@@ -64,7 +64,7 @@ public abstract class Weapon : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        //hud.SetMaxAmmoCount(maxAmmo);
+        
     }
 
     protected virtual void Update()
@@ -83,10 +83,7 @@ public abstract class Weapon : MonoBehaviour
         mousePos.z = -Camera.main.transform.position.z;
         direction = mousePos - transform.position;
 
-        float deltaX = direction.x;
-        float deltaY = direction.y;
-
-        float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         if (mousePos.x < transform.position.x && !facingRight)
         {
@@ -97,8 +94,9 @@ public abstract class Weapon : MonoBehaviour
             Flip();
         }
 
-        // transform.rotation = target;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = rotation;
     }
 
     /// <summary>
@@ -109,12 +107,16 @@ public abstract class Weapon : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && Time.time >= nextFire)
         {
-            hud.ReduceAmmoCount(ammoPerShot);
-            currentAmmo -= ammoPerShot;
-            nextFire = Time.time + timeBetweenShots;
-            ShootWeapon();
+            if (currentAmmo > 0)
+            {
+                hud.ReduceAmmoCount(ammoPerShot);
+                currentAmmo -= ammoPerShot;
+                nextFire = Time.time + timeBetweenShots;
+                ShootWeapon();
+            }
         }
     }
+
 
     protected abstract void ShootWeapon();
     protected abstract void SpecialAttack();

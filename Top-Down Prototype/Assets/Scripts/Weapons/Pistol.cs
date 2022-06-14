@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-
-    protected override void Fire()
-    {
-        base.Fire();
-        
-         if (currentAmmo <= 0)
-        {
-            AudioManager.Play(AudioClipName.PistolEmpty);
-        }
-    }
     
     protected override void ShootWeapon()
     {

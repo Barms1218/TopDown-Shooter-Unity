@@ -13,7 +13,6 @@ public class Player : Entity, IFlippable
     int gunIndex = 0;
     private bool hasAssaultRifle;
     private bool hasShotGun;
-
     LayerMask weaponLayer;
 
     // Events
@@ -113,8 +112,6 @@ public class Player : Entity, IFlippable
                     gun.SetActive(false);
                     gun = weapons[0];
                     weapons[0].SetActive(true);
-                    // newScale = transform.localScale;
-                    // gun.transform.localScale = newScale;
                 }
                 catch (System.Exception exception)
                 {
@@ -165,6 +162,13 @@ public class Player : Entity, IFlippable
 
     protected override void Die()
     {
-        throw new System.NotImplementedException();
+        state = State.STATE_DYING;
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(1f);
+        state = State.STATE_DEAD;
+        gameObject.SetActive(false);
     }
 }

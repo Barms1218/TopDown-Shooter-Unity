@@ -12,7 +12,6 @@ public class Shotgun : Weapon
     {
         for (int i = 0; i < numProjectiles; i++)
         {
-            //Quaternion pelletRotation = Quaternion.Euler(0f, 0f, direction.z);
             var pellet = Instantiate(projectilePrefab, muzzleTransform.position, 
                 Quaternion.identity);
 
@@ -21,6 +20,11 @@ public class Shotgun : Weapon
             pelletScript.MoveToTarget(direction);
         }
         AudioManager.Play(AudioClipName.ShotgunBlast);
+
+        if (currentAmmo <= 0)
+        {
+            AudioManager.Play(AudioClipName.PistolEmpty);
+        }
     }
 
     protected override void Reload()

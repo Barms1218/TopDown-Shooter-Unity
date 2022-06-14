@@ -31,6 +31,7 @@ public abstract class Entity : MonoBehaviour, IFlippable
     {
         STATE_IDLE,
         STATE_MOVE,
+        STATE_HURT,
         STATE_DYING,
         STATE_DEAD,
     }
@@ -63,19 +64,24 @@ public abstract class Entity : MonoBehaviour, IFlippable
         switch (state)
         {
             case State.STATE_IDLE:
+                _animator.SetBool("Running", false);
                 if (_body.velocity.x != 0)
                 {
                     state = State.STATE_MOVE;
-                    _animator.SetBool("Running", true);
                 }
                 break;
                 case State.STATE_MOVE:
-
-                if (_body.velocity.x == 0)
+                _animator.SetBool("Running", true);
+                if (_body.velocity == Vector2.zero)
                 {
                     state = State.STATE_IDLE;
-                    _animator.SetBool("Running", false);
                 }
+                break;
+                case State.STATE_DYING:
+                _animator.SetTrigger("Dying");
+                break;
+                case State.STATE_HURT:
+                _animator.SetTrigger("Hurt");
                 break;
         }
     }
@@ -87,7 +93,7 @@ public abstract class Entity : MonoBehaviour, IFlippable
     public virtual void TakeDamage(float damage)
     {
         _health -= damage;
-
+        state = State.STATE_HURT;
         if (_health <= 0)
         {
             Die();

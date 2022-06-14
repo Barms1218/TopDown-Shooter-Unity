@@ -22,8 +22,8 @@ public class Enemy : Entity
     protected override void Update()
     {
         path.destination = player.transform.position; // Send object at player
-        
 
+        GetInput();
         // Use boolean to logically decide if flipping is necessary
         if (player.transform.position.x > transform.position.x
             && !facingRight)
@@ -39,12 +39,10 @@ public class Enemy : Entity
 
     protected override void GetInput()
     {
-        
         base.GetInput();
-        if (!path.reachedDestination)
+        if (path.velocity != Vector3.zero)
         {
             state = State.STATE_MOVE;
-            //_animator.SetBool("Running", true);
         }
     }
 
@@ -58,8 +56,8 @@ public class Enemy : Entity
         SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
 
         StartCoroutine(FadeOut(spriteRenderer, 1.5f));
-
-        Destroy(gameObject, 1.5f);
+        state = State.STATE_DYING;
+        //Destroy(gameObject, 1.5f);
     }
 
     /// <summary>
