@@ -4,29 +4,36 @@ using UnityEngine;
 
 public class Player : Entity, IFlippable
 {
+    #region Fields
+    
     [SerializeField]
     GameObject gun;
     [SerializeField]
     Transform gunTransform;
     [SerializeField]
+    protected InputController input = null;
     List<GameObject> weapons = new List<GameObject>();
     int gunIndex = 0;
     private bool hasAssaultRifle;
     private bool hasShotGun;
     LayerMask weaponLayer;
 
+    PistolPanel pistolPanel;
     // Events
     public delegate void SpecialInput();
     public static event SpecialInput OnSpecial;
     public delegate void ReloadInput();
     public static event ReloadInput OnReload;
 
+    #endregion
 
     protected override void Start()
     {
         base.Start();
         weaponLayer = LayerMask.GetMask("Weapons");
         weapons.Add(gun);
+        pistolPanel = FindObjectOfType<PistolPanel>();
+        pistolPanel.ActivateWeaponColor("active");
     }
     protected override void Update()
     {
@@ -70,7 +77,7 @@ public class Player : Entity, IFlippable
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, weaponLayer);
         Color lineColor;
         
-        lineColor = Color.green;
+        lineColor = Color.red;
         if (hit.collider != null)
         {
             Debug.Log("Press E to pick up");
@@ -94,7 +101,7 @@ public class Player : Entity, IFlippable
             }
             else
             {
-                lineColor = Color.red;
+                lineColor = Color.green;
             }
 
             
@@ -112,6 +119,7 @@ public class Player : Entity, IFlippable
                     gun.SetActive(false);
                     gun = weapons[0];
                     weapons[0].SetActive(true);
+                    pistolPanel.ActivateWeaponColor("active");
                 }
                 catch (System.Exception exception)
                 {
@@ -126,6 +134,7 @@ public class Player : Entity, IFlippable
                     gun.SetActive(false);
                     gun = weapons[1];
                     weapons[1].SetActive(true);
+                    pistolPanel.ActivateWeaponColor("inactive");
                 }
                 catch(System.Exception exception)
                 {

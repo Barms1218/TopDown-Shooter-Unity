@@ -30,7 +30,7 @@ public class PelletProjectile : MonoBehaviour
     {
         if (collision.GetComponent<Entity>() != null)
         {
-            collision.gameObject.GetComponent<Entity>().TakeDamage(projectileData.Damage);
+            collision.gameObject.GetComponent<Health>().TakeDamage(projectileData.Damage);
             Destroy(gameObject);
         }
     }

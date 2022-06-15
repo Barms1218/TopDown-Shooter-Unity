@@ -104,7 +104,7 @@ MonoBehaviour:
   timeBetweenShots: 0.15
   ammoPerShot: 1
   reloading: 0
-  projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
+  projectilePrefab: {fileID: 5114801586880999095, guid: 37f550a7fbf876c489cc368cd4b40680, type: 3}
   muzzleTransform: {fileID: 462724276005966884}
 --- !u!1 &3660060279596217372
 GameObject:

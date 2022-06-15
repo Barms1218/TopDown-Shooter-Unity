@@ -32,6 +32,7 @@ public abstract class Weapon : MonoBehaviour
     protected bool flipped;
     protected float nextFire;
     Coroutine continousFire;
+    private bool empty;
 
     #endregion
 
@@ -61,12 +62,6 @@ public abstract class Weapon : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-        
-    }
-
     protected virtual void Update()
     {
         Aim();
@@ -94,7 +89,6 @@ public abstract class Weapon : MonoBehaviour
             Flip();
         }
 
-
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = rotation;
     }
@@ -111,8 +105,8 @@ public abstract class Weapon : MonoBehaviour
             {
                 hud.ReduceAmmoCount(ammoPerShot);
                 currentAmmo -= ammoPerShot;
-                nextFire = Time.time + timeBetweenShots;
                 ShootWeapon();
+                nextFire = Time.time + timeBetweenShots;
             }
         }
     }
@@ -120,6 +114,10 @@ public abstract class Weapon : MonoBehaviour
 
     protected abstract void ShootWeapon();
     protected abstract void SpecialAttack();
+
+    /// <summary>
+    /// 
+    /// </summary>
     protected virtual void Reload()
     {
         if (!reloading)
@@ -141,6 +139,9 @@ public abstract class Weapon : MonoBehaviour
         reloading = false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     protected virtual void Flip()
     {
         facingRight = !facingRight;
@@ -159,6 +160,10 @@ public abstract class Weapon : MonoBehaviour
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
      }
+
+     /// <summary>
+     /// 
+     /// </summary>
     protected virtual void OnDisable()
     {
         Player.OnSpecial -= SpecialAttack;

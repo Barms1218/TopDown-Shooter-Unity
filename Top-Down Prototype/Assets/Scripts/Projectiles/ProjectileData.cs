@@ -6,13 +6,13 @@ using UnityEngine;
 public class ProjectileData : ScriptableObject
 {
     [SerializeField]
-    float damage;
+    int damage;
     [SerializeField]
     float timeToLive;
     [SerializeField]
     float amountOfForce;
 
-    public float Damage => damage;
+    public int Damage => damage;
     public float TimeToLive => timeToLive;
     public string Name => name;
     public float AmountOfForce => amountOfForce;

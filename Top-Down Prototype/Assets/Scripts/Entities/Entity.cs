@@ -6,10 +6,6 @@ public abstract class Entity : MonoBehaviour, IFlippable
 {
     #region Fields
 
-    [SerializeField]
-    protected InputController input = null;
-    [SerializeField]
-    protected float _health = 100;
     protected Animator _animator;
 
 
@@ -83,20 +79,6 @@ public abstract class Entity : MonoBehaviour, IFlippable
                 case State.STATE_HURT:
                 _animator.SetTrigger("Hurt");
                 break;
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="damage"></param>
-    public virtual void TakeDamage(float damage)
-    {
-        _health -= damage;
-        state = State.STATE_HURT;
-        if (_health <= 0)
-        {
-            Die();
         }
     }
 

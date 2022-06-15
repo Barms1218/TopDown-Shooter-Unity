@@ -9,6 +9,18 @@ public class Enemy : Entity
     GameObject player;
     AIPath path;
 
+    int points;
+
+
+    int Points
+    {
+        set
+        {
+            points = value;
+        }
+        get => points;
+    }
+
 
     protected override void Start()
     {
@@ -57,7 +69,7 @@ public class Enemy : Entity
 
         StartCoroutine(FadeOut(spriteRenderer, 1.5f));
         state = State.STATE_DYING;
-        //Destroy(gameObject, 1.5f);
+        Destroy(gameObject, 1.5f);
     }
 
     /// <summary>
