@@ -48,15 +48,12 @@ public class Projectile : MonoBehaviour
     /// <param name="collision"></param>
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Entity>() != null)
-        {
-            collision.gameObject.GetComponent<Health>().TakeDamage(projectileData.Damage);
-            Destroy(gameObject);
-        }
+        collision.gameObject.GetComponent<Health>()?.TakeDamage(projectileData.Damage);
+        Destroy(gameObject);
     }
 
     /// <summary>
-    /// 
+    /// Take in a vector 2 and apply a force in that direction
     /// </summary>
     /// <param name="force"></param>
     public void MoveToTarget(Vector2 force)

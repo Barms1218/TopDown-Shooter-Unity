@@ -30,7 +30,7 @@ public class HUD : MonoBehaviour
     /// </summary>
     void Update()
     {
-        float timer = Mathf.Round(timeLeft - Time.deltaTime);
+        var timer = Mathf.Round(timeLeft - Time.deltaTime);
         timerText.text = ("Time Left: " + timer.ToString());
     }
     public void SetMaxAmmoCount(int ammoCount)

@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using Pathfinding;
 
-public class Enemy : Entity
+public class Enemy : MonoBehaviour, IFlippable
 {
     GameObject player;
     AIPath path;
+    bool facingRight = true;
+    StateMachine stateMachine;
 
     int points;
 
@@ -22,20 +24,17 @@ public class Enemy : Entity
     }
 
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
         path = GetComponent<AIPath>();
         player = GameObject.FindGameObjectWithTag("Player");
-
-
+        stateMachine = GetComponent<StateMachine>();
     }
 
-    protected override void Update()
+    void Update()
     {
         path.destination = player.transform.position; // Send object at player
 
-        GetInput();
         // Use boolean to logically decide if flipping is necessary
         if (player.transform.position.x > transform.position.x
             && !facingRight)
@@ -47,28 +46,35 @@ public class Enemy : Entity
         {
             Flip();
         }
+
     }
 
-    protected override void GetInput()
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void Flip()
     {
-        base.GetInput();
-        if (path.velocity != Vector3.zero)
-        {
-            state = State.STATE_MOVE;
-        }
+        Vector3 newScale = gameObject.transform.localScale;
+        newScale.x *= -1f;
+
+        facingRight = !facingRight;
+
+        gameObject.transform.localScale = newScale;
     }
 
     /// <summary>
     /// Stop following player, begin fading out, and destroy 
     /// </summary>
-    protected override void Die()
+    void Die()
     {
         path.enabled = false;
 
         SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
 
         StartCoroutine(FadeOut(spriteRenderer, 1.5f));
-        state = State.STATE_DYING;
+        //state = State.STATE_DYING;
+
         Destroy(gameObject, 1.5f);
     }
 

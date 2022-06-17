@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, IFlippable
+public class Player : MonoBehaviour, IFlippable
 {
     #region Fields
     
@@ -11,14 +11,19 @@ public class Player : Entity, IFlippable
     [SerializeField]
     Transform gunTransform;
     [SerializeField]
-    protected InputController input = null;
     List<GameObject> weapons = new List<GameObject>();
     int gunIndex = 0;
-    private bool hasAssaultRifle;
-    private bool hasShotGun;
     LayerMask weaponLayer;
 
-    PistolPanel pistolPanel;
+    // Movement
+    Rigidbody2D _body;
+    Vector2 _direction;
+    Vector2 _velocity;
+    Vector2 desiredVelocity;
+    [SerializeField, Range(0f, 100f)]
+    float maxSpeed = 4f;
+    bool facingRight = true;
+
     // Events
     public delegate void SpecialInput();
     public static event SpecialInput OnSpecial;
@@ -27,15 +32,13 @@ public class Player : Entity, IFlippable
 
     #endregion
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+        _body = GetComponent<Rigidbody2D>();
         weaponLayer = LayerMask.GetMask("Weapons");
         weapons.Add(gun);
-        pistolPanel = FindObjectOfType<PistolPanel>();
-        pistolPanel.ActivateWeaponColor("active");
     }
-    protected override void Update()
+    void Update()
     {
         GetInput();
 
@@ -63,8 +66,8 @@ public class Player : Entity, IFlippable
 
     void FixedUpdate()
     {
-        _direction.x = input.RetrieveHorizontalInput();
-        _direction.y = input.RetrieveVerticalInput();
+        _direction.x = Input.GetAxis("Horizontal");
+        _direction.y = Input.GetAxis("Vertical");
         desiredVelocity = new Vector2(_direction.x, _direction.y)
             * Mathf.Max(maxSpeed, 0f);
     }
@@ -119,7 +122,6 @@ public class Player : Entity, IFlippable
                     gun.SetActive(false);
                     gun = weapons[0];
                     weapons[0].SetActive(true);
-                    pistolPanel.ActivateWeaponColor("active");
                 }
                 catch (System.Exception exception)
                 {
@@ -134,7 +136,6 @@ public class Player : Entity, IFlippable
                     gun.SetActive(false);
                     gun = weapons[1];
                     weapons[1].SetActive(true);
-                    pistolPanel.ActivateWeaponColor("inactive");
                 }
                 catch(System.Exception exception)
                 {
@@ -156,9 +157,8 @@ public class Player : Entity, IFlippable
             }
         }
 
-    protected override void GetInput()
+    void GetInput()
     {
-        base.GetInput();
         if (Input.GetKeyDown(KeyCode.F))
         {
             OnSpecial?.Invoke();
@@ -169,15 +169,28 @@ public class Player : Entity, IFlippable
         }
     }
 
-    protected override void Die()
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void Flip()
     {
-        state = State.STATE_DYING;
+        Vector3 newScale = gameObject.transform.localScale;
+        newScale.x *= -1f;
+
+        facingRight = !facingRight;
+
+        gameObject.transform.localScale = newScale;
+    }
+
+    void Die()
+    {
+        //state = State.STATE_DYING;
     }
 
     IEnumerator Death()
     {
         yield return new WaitForSeconds(1f);
-        state = State.STATE_DEAD;
+        //state = State.STATE_DEAD;
         gameObject.SetActive(false);
     }
 }

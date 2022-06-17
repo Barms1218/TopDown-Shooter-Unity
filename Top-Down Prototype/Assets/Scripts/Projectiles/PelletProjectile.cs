@@ -28,11 +28,8 @@ public class PelletProjectile : MonoBehaviour
     /// <param name="collision"></param>
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Entity>() != null)
-        {
-            collision.gameObject.GetComponent<Health>().TakeDamage(projectileData.Damage);
-            Destroy(gameObject);
-        }
+        collision.gameObject.GetComponent<Health>()?.TakeDamage(projectileData.Damage);
+        Destroy(gameObject);
     }
 
     /// <summary>

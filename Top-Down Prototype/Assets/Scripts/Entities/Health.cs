@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     protected int maxHealth = 100;
 
     int _health;
+    StateMachine stateMachine;
 
     public UnityAction OnDied;
     // Start is called before the first frame update
@@ -18,6 +19,7 @@ public class Health : MonoBehaviour
     void Awake()
     {
         _health = maxHealth;
+        stateMachine = GetComponent<StateMachine>();
     }
     /// <summary>
     /// 
