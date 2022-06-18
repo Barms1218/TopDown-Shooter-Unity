@@ -6,15 +6,15 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour, IFlippable
 {
-    GameObject player;
-    AIPath path;
-    bool facingRight = true;
-    StateMachine stateMachine;
+    protected GameObject player;
+    protected AIPath path;
+    protected bool facingRight = true;
+    protected StateMachine stateMachine;
 
-    int points;
+    protected int points;
 
 
-    int Points
+    protected int Points
     {
         set
         {
@@ -24,14 +24,14 @@ public class Enemy : MonoBehaviour, IFlippable
     }
 
 
-    void Start()
+    protected virtual void Start()
     {
         path = GetComponent<AIPath>();
         player = GameObject.FindGameObjectWithTag("Player");
         stateMachine = GetComponent<StateMachine>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         path.destination = player.transform.position; // Send object at player
 
@@ -66,14 +66,13 @@ public class Enemy : MonoBehaviour, IFlippable
     /// <summary>
     /// Stop following player, begin fading out, and destroy 
     /// </summary>
-    void Die()
+    public void Die()
     {
         path.enabled = false;
 
         SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
 
         StartCoroutine(FadeOut(spriteRenderer, 1.5f));
-        //state = State.STATE_DYING;
 
         Destroy(gameObject, 1.5f);
     }

@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
     StateMachine stateMachine;
 
     public UnityAction OnDied;
+
     // Start is called before the first frame update
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -21,6 +22,7 @@ public class Health : MonoBehaviour
         _health = maxHealth;
         stateMachine = GetComponent<StateMachine>();
     }
+
     /// <summary>
     /// 
     /// </summary>
@@ -30,7 +32,8 @@ public class Health : MonoBehaviour
         this._health -= damage;
         if (_health <= 0)
         {
-            Die();
+            this.gameObject.GetComponent<Enemy>()?.Die();
+            this.gameObject.GetComponent<Player>()?.Die();
         }
     }
 
@@ -39,11 +42,8 @@ public class Health : MonoBehaviour
     /// </summary>
     void Die()
     {
-        //OnDied?.Invoke();
         SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
-
-        StartCoroutine(FadeOut(spriteRenderer, 1.5f));
-        Destroy(gameObject, 1.5f);
+        
     }
 
     /// <summary>

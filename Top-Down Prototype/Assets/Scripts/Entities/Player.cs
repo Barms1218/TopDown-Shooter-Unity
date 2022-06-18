@@ -182,9 +182,9 @@ public class Player : MonoBehaviour, IFlippable
         gameObject.transform.localScale = newScale;
     }
 
-    void Die()
+    public void Die()
     {
-        //state = State.STATE_DYING;
+        Destroy(gameObject);
     }
 
     IEnumerator Death()

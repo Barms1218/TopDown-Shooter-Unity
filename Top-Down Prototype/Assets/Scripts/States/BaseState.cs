@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseState
+public abstract class BaseState
 {
     public string name;
     protected StateMachine stateMachine;
@@ -12,9 +12,8 @@ public class BaseState
         this.name = name;
         this.stateMachine = stateMachine;
     }
-
-    public virtual void Enter() { }
-    public virtual void UpdateLogic() { }
-    public virtual void UpdatePhysics() { }
-    public virtual void Exit() { }
+    public abstract void Enter();
+    public abstract void UpdateLogic();
+    public abstract void UpdatePhysics();
+    public abstract void Exit();
 }

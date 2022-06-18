@@ -11,11 +11,13 @@ GameObject:
   - component: {fileID: 2579200449049318825}
   - component: {fileID: 2579200449049318826}
   - component: {fileID: 2579200449049318830}
-  - component: {fileID: 5231144656008345335}
+  - component: {fileID: 704103961706769379}
+  - component: {fileID: 1940308881241626032}
   - component: {fileID: 8774389759331695210}
   - component: {fileID: 2579200449049318816}
   - component: {fileID: 2579200449049318831}
   - component: {fileID: 2579200449049318817}
+  - component: {fileID: 3988585833929824487}
   m_Layer: 0
   m_Name: Zombie Inmate
   m_TagString: Untagged
@@ -111,7 +113,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5231144656008345335
+--- !u!114 &704103961706769379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,10 +122,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2579200449049318824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a0c2409aaf34743a50df961b04328e, type: 3}
+  m_Script: {fileID: 11500000, guid: 798705e42a1385b4eb5c842c57181c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 4
+--- !u!114 &1940308881241626032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9369b2594fde5438a37bed48983b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: 2579200449049318830}
+  speed: 0
+  _animator: {fileID: 3988585833929824487}
 --- !u!114 &8774389759331695210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +239,23 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.22500001}
   m_Size: {x: 0.375, y: 0.5625}
   m_Direction: 0
+--- !u!95 &3988585833929824487
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 237d851863301a74d904ae543287460d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

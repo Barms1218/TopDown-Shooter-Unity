@@ -5,8 +5,7 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     BaseState currentState;
-    Animator _animator;
-    Rigidbody2D _body;
+
 
     enum State
     {
@@ -24,9 +23,6 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        _animator = GetComponent<Animator>();
-        _body = GetComponent<Rigidbody2D>();
-
         currentState = GetInitialState();
         currentState?.Enter();
     }
