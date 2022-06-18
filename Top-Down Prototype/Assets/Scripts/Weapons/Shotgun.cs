@@ -20,11 +20,6 @@ public class Shotgun : Weapon
             pelletScript.MoveToTarget(direction);
         }
         AudioManager.Play(AudioClipName.ShotgunBlast);
-
-        if (currentAmmo <= 0)
-        {
-            AudioManager.Play(AudioClipName.PistolEmpty);
-        }
     }
 
     protected override void Reload()

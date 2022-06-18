@@ -18,7 +18,7 @@ public class ChaseState : BaseState
 
     public override void UpdateLogic()
     {
-        if (enemySM.enemy.path.reachedDestination)
+        if (enemySM.enemy.path.remainingDistance <= 5)
         {
             enemySM.ChangeState(enemySM.attackState);
         }
