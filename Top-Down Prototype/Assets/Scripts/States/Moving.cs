@@ -15,7 +15,7 @@ public class Moving : BaseState
         _sm = stateMachine;
     }
 
-        public override void Enter()
+    public override void Enter()
     {
         // horizontalInput = 0f;
         // verticalInput = 0f;
@@ -35,11 +35,13 @@ public class Moving : BaseState
         }
     }
 
-    // public override void UpdatePhysics()
-    // {
-    //     Vector2 _velocity = _sm.rb2d.velocity;
-    //     _velocity.x = horizontalInput * _sm.speed;
-    //     _velocity.y = verticalInput * _sm.speed;
-    //     _sm.rb2d.velocity = _velocity.normalized;
-    // }
+    public override void UpdatePhysics()
+    {
+
+    }
+
+    public override void Exit()
+    {
+        
+    }
 }

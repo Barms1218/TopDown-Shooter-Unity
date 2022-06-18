@@ -5,6 +5,7 @@ using UnityEngine;
 public class Idle : BaseState
 {
     private MovementSM _sm;
+    
     private float horizontalInput;
     private float verticalInput;
     private Animator _animator;
@@ -12,6 +13,7 @@ public class Idle : BaseState
     {
         _sm = stateMachine;
     }
+
 
     public override void Enter()
     {
@@ -28,5 +30,15 @@ public class Idle : BaseState
         {
             stateMachine.ChangeState(_sm.moveState);
         }
+    }
+
+    public override void UpdatePhysics()
+    {
+       
+    }
+
+    public override void Exit()
+    {
+        
     }
 }

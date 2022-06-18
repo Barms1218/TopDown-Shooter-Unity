@@ -907,7 +907,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.777533, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6224,6 +6224,10 @@ PrefabInstance:
       propertyPath: endReachedDistance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6551200736291813083, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 2579200449655979800}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
 --- !u!1 &2579200449655979785 stripped
@@ -6256,16 +6260,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2579200449049318825, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
   m_PrefabInstance: {fileID: 2579200449655979784}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2579200449655979794
+--- !u!114 &2579200449655979800 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 704103961706769379, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
+  m_PrefabInstance: {fileID: 2579200449655979784}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2579200449655979785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39102c2cc521bb54a9a5aaa2b5477e96, type: 3}
+  m_Script: {fileID: 11500000, guid: 798705e42a1385b4eb5c842c57181c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7490895233339170572

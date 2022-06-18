@@ -7,7 +7,7 @@ using Pathfinding;
 public class Enemy : MonoBehaviour, IFlippable
 {
     protected GameObject player;
-    protected AIPath path;
+    public AIPath path;
     protected bool facingRight = true;
     protected StateMachine stateMachine;
 

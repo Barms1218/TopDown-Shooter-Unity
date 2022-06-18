@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : BaseState
+public class EnemyIdle : BaseState
 {
     private EnemySM enemySM;
 
-    public ChaseState(EnemySM enemyMachine) : base("Chase", enemyMachine)
+    public EnemyIdle(EnemySM enemyMachine) : base("Enemy Idle", enemyMachine)
     {
         enemySM = enemyMachine;
     }
 
     public override void Enter()
     {
-        enemySM._animator.SetBool("Running", true);
+        
     }
 
     public override void UpdateLogic()
     {
-        if (enemySM.enemy.path.reachedDestination)
+        if (!enemySM.enemy.path.reachedDestination)
         {
-            enemySM.ChangeState(enemySM.attackState);
+            enemySM.ChangeState(enemySM.chaseState);
         }
     }
 
@@ -28,9 +28,8 @@ public class ChaseState : BaseState
     {
         
     }
-
     public override void Exit()
     {
-        
+
     }
 }

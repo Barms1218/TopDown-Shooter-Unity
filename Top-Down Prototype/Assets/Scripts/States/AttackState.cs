@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class AttackState : BaseState
 {
-    public AttackState(StateMachine stateMachine) : base("Attack", stateMachine)
-    {
+    private EnemySM enemySM;
 
+    public AttackState(EnemySM stateMachine) : base("Attack", stateMachine)
+    {
+        enemySM = stateMachine;
     }
 
     public override void Enter()
@@ -22,5 +24,9 @@ public class AttackState : BaseState
     public override void UpdatePhysics()
     {
         
+    }
+    public override void Exit()
+    {
+        throw new System.NotImplementedException();
     }
 }
