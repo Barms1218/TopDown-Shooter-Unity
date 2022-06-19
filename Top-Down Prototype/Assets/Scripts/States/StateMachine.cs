@@ -29,29 +29,6 @@ public class StateMachine : MonoBehaviour
     void Update()
     {
         currentState?.UpdateLogic();
-        // switch (state)
-        // {
-        //     case State.STATE_IDLE:
-        //         _animator.SetBool("Running", false);
-        //         if (_body.velocity.x != 0)
-        //         {
-        //             state = State.STATE_MOVE;
-        //         }
-        //         break;
-        //         case State.STATE_MOVE:
-        //         _animator.SetBool("Running", true);
-        //         if (_body.velocity == Vector2.zero)
-        //         {
-        //             state = State.STATE_IDLE;
-        //         }
-        //         break;
-        //         case State.STATE_DYING:
-        //         _animator.SetTrigger("Dying");
-        //         break;
-        //         case State.STATE_HURT:
-        //         _animator.SetTrigger("Hurt");
-        //         break;
-        // }
     }
 
     /// <summary>

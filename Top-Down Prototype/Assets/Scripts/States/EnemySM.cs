@@ -15,8 +15,6 @@ public class EnemySM : StateMachine
     public Rigidbody2D rb2d;
     public Animator _animator;
 
-    public Enemy enemy;
-
     private void Awake()
     {
         chaseState = new ChaseState(this);

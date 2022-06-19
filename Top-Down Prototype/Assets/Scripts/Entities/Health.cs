@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
             this.gameObject.GetComponent<Enemy>()?.Die();
             this.gameObject.GetComponent<Player>()?.Die();
         }
-    }
+    } 
 
     /// <summary>
     /// Stop following player, begin fading out, and destroy 

@@ -7,10 +7,10 @@ using Pathfinding;
 public class Enemy : MonoBehaviour, IFlippable
 {
     protected GameObject player;
-    public AIPath path;
+    AIPath path;
     protected bool facingRight = true;
     protected StateMachine stateMachine;
-
+    
     protected int points;
 
 
@@ -28,13 +28,12 @@ public class Enemy : MonoBehaviour, IFlippable
     {
         path = GetComponent<AIPath>();
         player = GameObject.FindGameObjectWithTag("Player");
-        stateMachine = GetComponent<StateMachine>();
     }
 
     protected virtual void Update()
     {
-        path.destination = player.transform.position; // Send object at player
-
+        //path.destination = player.transform.position; // Send object at player
+ 
         // Use boolean to logically decide if flipping is necessary
         if (player.transform.position.x > transform.position.x
             && !facingRight)
@@ -46,7 +45,6 @@ public class Enemy : MonoBehaviour, IFlippable
         {
             Flip();
         }
-
     }
 
 

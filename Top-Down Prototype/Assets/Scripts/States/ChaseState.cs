@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChaseState : BaseState
 {
     private EnemySM enemySM;
+    Transform target;
 
     public ChaseState(EnemySM enemyMachine) : base("Chase", enemyMachine)
     {
@@ -13,15 +14,14 @@ public class ChaseState : BaseState
 
     public override void Enter()
     {
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         enemySM._animator.SetBool("Running", true);
     }
 
     public override void UpdateLogic()
     {
-        if (enemySM.enemy.path.remainingDistance <= 5)
-        {
-            enemySM.ChangeState(enemySM.attackState);
-        }
+        enemySM.transform.position = Vector2.MoveTowards(
+            enemySM.transform.position, target.position, Time.deltaTime * 3.5f);
     }
 
     public override void UpdatePhysics()

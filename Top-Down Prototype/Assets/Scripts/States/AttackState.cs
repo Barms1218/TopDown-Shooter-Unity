@@ -13,12 +13,12 @@ public class AttackState : BaseState
 
     public override void Enter()
     {
-        
+        Debug.Log("Attacking now");
     }
 
     public override void UpdateLogic()
     {
-        
+
     }
 
     public override void UpdatePhysics()
@@ -27,6 +27,6 @@ public class AttackState : BaseState
     }
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
