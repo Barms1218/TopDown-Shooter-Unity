@@ -15,6 +15,18 @@ public class HUD : MonoBehaviour
     int maxAmmo;
     float timeLeft;
 
+    public int CurrentAmmo
+    {
+        set { currentAmmo = value; }
+        get => currentAmmo;
+    }
+
+    public int MaxAmmo
+    {
+        set { maxAmmo = value; }
+        get => maxAmmo;
+    }
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -32,12 +44,13 @@ public class HUD : MonoBehaviour
     {
         var timer = Mathf.Round(timeLeft - Time.deltaTime);
         timerText.text = ("Time Left: " + timer.ToString());
-        
-    }
-    public void DisplayAmmo(int currentAmmo, int maxAmmo)
-    {
         ammoCountText.text = currentAmmo.ToString() + "/" +
-            maxAmmo.ToString();
+            maxAmmo.ToString();        
+    }
+    public void DisplayAmmo(int newAmmo, int maxAmmo)
+    {
+        currentAmmo = newAmmo;
+
     }
 
     public void ReduceAmmoCount(int reduceAmmount)

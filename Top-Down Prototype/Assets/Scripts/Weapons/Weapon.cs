@@ -76,15 +76,7 @@ public abstract class Weapon : MonoBehaviour
     /// Put gun into reloading state with boolean
     /// </summary>
     /// <returns></returns>
-    protected virtual IEnumerator StartReload()
-    {
-        reloading = true;
-        yield return new WaitForSeconds(data.ReloadSpeed);
-
-        currentAmmo = data.MaxAmmo;
-        hud.DisplayAmmo(currentAmmo, data.MaxAmmo);        
-        reloading = false;
-    }
+    protected abstract IEnumerator StartReload();
 
     /// <summary>
     /// 
@@ -107,7 +99,8 @@ public abstract class Weapon : MonoBehaviour
     /// </summary>
     protected virtual void OnEnable()
      {
-        hud.DisplayAmmo(currentAmmo, data.MaxAmmo);
+        hud.CurrentAmmo = currentAmmo;
+        hud.MaxAmmo = data.MaxAmmo;
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
      }

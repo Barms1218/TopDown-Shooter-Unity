@@ -7,8 +7,9 @@ public class Pistol : Weapon
 
     public override void Fire(Vector2 direction)
     {
-        hud.ReduceAmmoCount(data.AmmoPerShot);
         currentAmmo -= data.AmmoPerShot;
+        hud.CurrentAmmo = currentAmmo;
+
         var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
             Quaternion.identity);
 
@@ -40,7 +41,12 @@ public class Pistol : Weapon
     /// <returns></returns>
     protected override IEnumerator StartReload()
     {
-        yield return base.StartReload();
+        reloading = true;
+        yield return new WaitForSeconds(data.ReloadSpeed);
+
+        currentAmmo = data.MaxAmmo;
+        hud.DisplayAmmo(currentAmmo, data.MaxAmmo);        
+        reloading = false;
         AudioManager.Play(AudioClipName.PistolStopReload);
     }
 }

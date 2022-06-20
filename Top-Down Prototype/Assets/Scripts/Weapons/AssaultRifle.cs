@@ -32,7 +32,12 @@ public class AssaultRifle : Weapon
 
     protected override IEnumerator StartReload()
     {
-        yield return base.StartReload();
+        reloading = true;
+        yield return new WaitForSeconds(data.ReloadSpeed);
+
+        currentAmmo = data.MaxAmmo;
+        hud.DisplayAmmo(currentAmmo, data.MaxAmmo);        
+        reloading = false;
         AudioManager.Play(AudioClipName.AR_Finish_Reload);
     }
 }
