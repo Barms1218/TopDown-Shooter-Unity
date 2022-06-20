@@ -10,7 +10,6 @@ public class Enemy : MonoBehaviour, IFlippable
     AIPath path;
     protected bool facingRight = true;
     protected StateMachine stateMachine;
-    
     protected int points;
 
 
@@ -26,7 +25,6 @@ public class Enemy : MonoBehaviour, IFlippable
 
     protected virtual void Start()
     {
-        path = GetComponent<AIPath>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -61,43 +59,5 @@ public class Enemy : MonoBehaviour, IFlippable
         gameObject.transform.localScale = newScale;
     }
 
-    /// <summary>
-    /// Stop following player, begin fading out, and destroy 
-    /// </summary>
-    public void Die()
-    {
-        path.enabled = false;
-
-        SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
-
-        StartCoroutine(FadeOut(spriteRenderer, 1.5f));
-
-        Destroy(gameObject, 1.5f);
-    }
-
-    /// <summary>
-    /// Reduce object's alpha to 0 over duration passed into
-    /// paramater by comparing the duration with an incrementing value
-    /// </summary>
-    /// <param name="spriteRenderer"></param>
-    /// <param name="duration"></param>
-    /// <returns></returns>
-    IEnumerator FadeOut(SpriteRenderer spriteRenderer, float duration)
-    {
-        float count = 0;
-
-        Color color = spriteRenderer.material.color;
-
-        while (count < duration)
-        {
-            count += Time.deltaTime;
-
-            float alpha = Mathf.Lerp(1, 0, count / duration);
-
-            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
-
-            yield return null;
-        }
-    }
 
 }

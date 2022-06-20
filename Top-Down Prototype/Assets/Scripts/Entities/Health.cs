@@ -6,10 +6,9 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    protected int maxHealth = 100;
+    private int maxHealth = 100;
 
     int _health;
-    StateMachine stateMachine;
 
     public UnityAction OnDied;
 
@@ -20,7 +19,6 @@ public class Health : MonoBehaviour
     void Awake()
     {
         _health = maxHealth;
-        stateMachine = GetComponent<StateMachine>();
     }
 
     /// <summary>
@@ -32,18 +30,20 @@ public class Health : MonoBehaviour
         this._health -= damage;
         if (_health <= 0)
         {
-            this.gameObject.GetComponent<Enemy>()?.Die();
-            this.gameObject.GetComponent<Player>()?.Die();
+            Die();
         }
     } 
 
     /// <summary>
     /// Stop following player, begin fading out, and destroy 
     /// </summary>
-    void Die()
+    public void Die()
     {
         SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
-        
+
+        StartCoroutine(FadeOut(spriteRenderer, 1.5f));
+
+        Destroy(gameObject, 1.0f);
     }
 
     /// <summary>

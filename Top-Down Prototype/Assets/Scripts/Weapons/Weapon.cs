@@ -7,52 +7,20 @@ public abstract class Weapon : MonoBehaviour
     #region Fields
 
     Rigidbody2D body;
-
-    [SerializeField]
+    [SerializeField] protected GunData data;
     protected int currentAmmo;
-    [SerializeField]
-    protected int maxAmmo;
-    [SerializeField]
-    protected float reloadSpeed;
-    [SerializeField]
-    protected float timeBetweenShots;
-    [SerializeField]
-    protected int ammoPerShot;
-    [SerializeField]
+    [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected Transform muzzleTransform;
+    [SerializeField] InputController input;
     protected bool reloading = false;
-    [SerializeField]
-    protected GameObject projectilePrefab;
-    [SerializeField]
-    protected Transform muzzleTransform;
-
     protected HUD hud;
     protected Vector3 direction;
     Vector3 mousePos;
     protected bool facingRight;
-    protected bool flipped;
     protected float nextFire;
-    Coroutine continousFire;
-    private bool empty;
 
     #endregion
 
-    #region Properties
-
-    protected int CurrentAmmo
-    {
-        get => currentAmmo;
-        set => currentAmmo = value;
-    }
-
-    public int MaxAmmo => maxAmmo;
-    protected float ReloadSpeed => reloadSpeed;
-    protected float TimeBetweenShots => timeBetweenShots;
-    protected int AmmoPerShot => ammoPerShot;
-    protected bool Reloading => reloading;
-
-    #endregion
-
-    
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -60,19 +28,22 @@ public abstract class Weapon : MonoBehaviour
     {
         hud = FindObjectOfType<HUD>();
         body = GetComponent<Rigidbody2D>();
+        currentAmmo = data.MaxAmmo;
     }
 
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
     protected virtual void Update()
     {
-        Aim();
 
-        Fire();
+        Aim();
     }
 
     /// <summary>
     /// 
     /// </summary>
-    void Aim()
+    protected virtual void Aim()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = -Camera.main.transform.position.z;
@@ -97,17 +68,18 @@ public abstract class Weapon : MonoBehaviour
     /// Allow for semi-automatic fire or automatic fire depending
     /// on the weapon's time between shots.
     /// </summary>
-    protected virtual void Fire()
+    public virtual void Fire()
     {
-        if (Input.GetMouseButton(0) && Time.time >= nextFire)
+        if (Time.time >= nextFire && currentAmmo > 0)
         {
-            if (currentAmmo > 0)
-            {
-                hud.ReduceAmmoCount(ammoPerShot);
-                currentAmmo -= ammoPerShot;
-                ShootWeapon();
-                nextFire = Time.time + timeBetweenShots;
-            }
+            hud.ReduceAmmoCount(data.AmmoPerShot);
+            currentAmmo -= data.AmmoPerShot;
+            ShootWeapon();
+            nextFire = Time.time + data.FireRate;
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -133,9 +105,9 @@ public abstract class Weapon : MonoBehaviour
     protected virtual IEnumerator StartReload()
     {
         reloading = true;
-        yield return new WaitForSeconds(reloadSpeed);
-        hud.SetMaxAmmoCount(maxAmmo);
-        currentAmmo = maxAmmo;
+        yield return new WaitForSeconds(data.ReloadSpeed);
+        hud.SetMaxAmmoCount(data.MaxAmmo);
+        currentAmmo = data.MaxAmmo;
         reloading = false;
     }
 
@@ -156,7 +128,7 @@ public abstract class Weapon : MonoBehaviour
     /// </summary>
     protected virtual void OnEnable()
      {
-        hud.SetMaxAmmoCount(maxAmmo);
+        hud.SetMaxAmmoCount(data.MaxAmmo);
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
      }

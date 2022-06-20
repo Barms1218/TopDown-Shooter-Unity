@@ -6,15 +6,14 @@ using UnityEngine;
 public class GunData : ScriptableObject
 {
     [Header("Info")]
-    public new string name;
-    [Header("Shoot Data")]
-    public float damage;
-    public float range;
-    public float fireRate;
-    [Header("Reload Data")]
-    public int currentAmmo;
-    public int maxAmmo;
-    public float reloadSpeed;
-    public bool reloading;
+    [SerializeField] float fireRate;
+    [SerializeField] int maxAmmo;
+    [SerializeField] int ammoPerShot;
+    [SerializeField] float reloadSpeed;
+
+    public float FireRate => fireRate;
+    public int MaxAmmo => maxAmmo;
+    public float ReloadSpeed => reloadSpeed;
+    public int AmmoPerShot => ammoPerShot;
 
 }

@@ -31,12 +31,12 @@ public class Shotgun : Weapon
     {
         reloading = true;
 
-        while (currentAmmo < maxAmmo)
+        while (currentAmmo < data.MaxAmmo)
         {
             currentAmmo++;
             hud.AddToAmmoCount(1);
             AudioManager.Play(AudioClipName.ShotgunReload);
-            yield return new WaitForSeconds(reloadSpeed);
+            yield return new WaitForSeconds(data.ReloadSpeed);
             reloading = false;
         }
     }

@@ -5,13 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AIController", menuName = "InputController/AIController")]
 public class AIController : InputController
 {
-    public override float RetrieveHorizontalInput()
+    public override bool RetrieveShootInput()
     {
-        return 1f;
+        return Input.GetMouseButtonDown(0);
     }
 
-    public override float RetrieveVerticalInput()
+    public override bool RetrieveReloadInput()
     {
-        return 1f;
+        return Input.GetKeyDown(KeyCode.R);
     }
 }

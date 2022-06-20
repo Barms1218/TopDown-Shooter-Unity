@@ -38,6 +38,10 @@ public class Player : MonoBehaviour, IFlippable
         weaponLayer = LayerMask.GetMask("Weapons");
         weapons.Add(gun);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     void Update()
     {
         GetInput();
@@ -72,7 +76,9 @@ public class Player : MonoBehaviour, IFlippable
             * Mathf.Max(maxSpeed, 0f);
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
     void PickUp()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -156,9 +162,13 @@ public class Player : MonoBehaviour, IFlippable
                 }
             }
         }
-
+    
     void GetInput()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            gun.GetComponent<Weapon>().Fire();
+        }
         if (Input.GetKeyDown(KeyCode.F))
         {
             OnSpecial?.Invoke();
@@ -180,17 +190,5 @@ public class Player : MonoBehaviour, IFlippable
         facingRight = !facingRight;
 
         gameObject.transform.localScale = newScale;
-    }
-
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
-    IEnumerator Death()
-    {
-        yield return new WaitForSeconds(1f);
-        //state = State.STATE_DEAD;
-        gameObject.SetActive(false);
     }
 }

@@ -6,14 +6,6 @@ public class SawBlade : Weapon
 {
     float specialAttackDelay = 2f;
     
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void Fire()
-    {
-       
-        currentAmmo--;
-    }
 
     /// <summary>
     /// 
@@ -32,7 +24,7 @@ public class SawBlade : Weapon
     /// </summary>
     protected override void SpecialAttack()
     {
-        if (currentAmmo == maxAmmo
+        if (currentAmmo == data.MaxAmmo
             && !reloading)
         {
             StartCoroutine(SpecialAttackDelay());

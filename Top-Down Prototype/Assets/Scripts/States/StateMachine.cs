@@ -6,17 +6,6 @@ public class StateMachine : MonoBehaviour
 {
     BaseState currentState;
 
-
-    enum State
-    {
-        STATE_IDLE,
-        STATE_MOVE,
-        STATE_HURT,
-        STATE_DYING,
-        STATE_DEAD,
-    }
-    State state;
-
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -49,5 +38,11 @@ public class StateMachine : MonoBehaviour
     protected virtual BaseState GetInitialState()
     {
         return null;
+    }
+
+    private void OnGUI()
+    {
+        string content = currentState != null ? currentState.name : "(no current state)";
+        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
     }
 }

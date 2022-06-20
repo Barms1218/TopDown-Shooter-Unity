@@ -229,11 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 15
-  maxAmmo: 15
-  reloadSpeed: 1.2
-  timeBetweenShots: 0.5
-  ammoPerShot: 1
+  data: {fileID: 11400000, guid: 8fe1a738ac8acd3449e009d30fc5642d, type: 2}
   reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
   muzzleTransform: {fileID: 3785646919390945951}
+  input: {fileID: 0}

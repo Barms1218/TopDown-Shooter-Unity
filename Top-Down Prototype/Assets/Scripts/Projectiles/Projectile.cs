@@ -6,8 +6,7 @@ public class Projectile : MonoBehaviour
 {
     #region Fields
     float timeToLive;
-    [SerializeField]
-    ProjectileData projectileData;
+    [SerializeField] ProjectileData projectileData;
 
     #endregion
 

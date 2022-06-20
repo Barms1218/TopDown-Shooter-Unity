@@ -5,13 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerController", menuName = "InputController/PlayerController")]
 public class PlayerController : InputController
 {
-    public override float RetrieveHorizontalInput()
+     public override bool RetrieveReloadInput()
     {
-        return Input.GetAxis("Horizontal");
+        return Input.GetKeyDown(KeyCode.R);
     }
-
-    public override float RetrieveVerticalInput()
+    public override bool RetrieveShootInput()
     {
-        return Input.GetAxis("Vertical");
+        return Input.GetMouseButtonDown(0);
     }
 }

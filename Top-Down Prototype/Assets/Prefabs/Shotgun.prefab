@@ -130,14 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9542651282bd8f40b8c441cc3fa061d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 5
-  maxAmmo: 5
-  reloadSpeed: 1
-  timeBetweenShots: 1
-  ammoPerShot: 1
+  data: {fileID: 11400000, guid: 9c454d31b4b5e824db76a1428226807c, type: 2}
   reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
   muzzleTransform: {fileID: 5416292742926382952}
+  input: {fileID: 0}
   pelletSpread: 0.71
 --- !u!61 &7957779073280548603
 BoxCollider2D:
