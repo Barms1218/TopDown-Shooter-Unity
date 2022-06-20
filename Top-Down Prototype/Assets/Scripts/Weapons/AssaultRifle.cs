@@ -8,8 +8,10 @@ public class AssaultRifle : Weapon
     /// <summary>
     /// 
     /// </summary>
-    protected override void ShootWeapon()
+    public override void Fire(Vector2 direction)
     {
+        hud.ReduceAmmoCount(data.AmmoPerShot);
+        currentAmmo -= data.AmmoPerShot;
         var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
             Quaternion.identity);
 

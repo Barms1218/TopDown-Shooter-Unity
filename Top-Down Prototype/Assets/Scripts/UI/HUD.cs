@@ -32,13 +32,12 @@ public class HUD : MonoBehaviour
     {
         var timer = Mathf.Round(timeLeft - Time.deltaTime);
         timerText.text = ("Time Left: " + timer.ToString());
+        
     }
-    public void SetMaxAmmoCount(int ammoCount)
+    public void DisplayAmmo(int currentAmmo, int maxAmmo)
     {
-        maxAmmo = ammoCount;
-        currentAmmo = maxAmmo;
-        ammoCountText.text = ammoCount.ToString() + "/" +
-            ammoCount.ToString();
+        ammoCountText.text = currentAmmo.ToString() + "/" +
+            maxAmmo.ToString();
     }
 
     public void ReduceAmmoCount(int reduceAmmount)

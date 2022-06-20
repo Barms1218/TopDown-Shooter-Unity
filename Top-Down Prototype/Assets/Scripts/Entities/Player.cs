@@ -6,23 +6,21 @@ public class Player : MonoBehaviour, IFlippable
 {
     #region Fields
     
-    [SerializeField]
-    GameObject gun;
-    [SerializeField]
-    Transform gunTransform;
-    [SerializeField]
-    List<GameObject> weapons = new List<GameObject>();
+    [SerializeField] GameObject gun;
+    [SerializeField] Transform gunTransform;
+    List<GameObject> weaponList = new List<GameObject>();
     int gunIndex = 0;
     LayerMask weaponLayer;
-
+    float timeToTriggerPull;
+    Vector2 direction;
     // Movement
     Rigidbody2D _body;
     Vector2 _direction;
     Vector2 _velocity;
     Vector2 desiredVelocity;
-    [SerializeField, Range(0f, 100f)]
-    float maxSpeed = 4f;
+    [SerializeField, Range(0f, 100f)] float maxSpeed = 4f;
     bool facingRight = true;
+    Weapon currentWeapon;
 
     // Events
     public delegate void SpecialInput();
@@ -36,7 +34,8 @@ public class Player : MonoBehaviour, IFlippable
     {
         _body = GetComponent<Rigidbody2D>();
         weaponLayer = LayerMask.GetMask("Weapons");
-        weapons.Add(gun);
+        weaponList.Add(gun);
+        currentWeapon = gun.GetComponent<Weapon>();
     }
 
     /// <summary>
@@ -54,7 +53,7 @@ public class Player : MonoBehaviour, IFlippable
         _body.velocity = _velocity;
 
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var direction = mousePos - transform.position;
+        direction = mousePos - transform.position;
         if (mousePos.x < transform.position.x && facingRight)
         {
             Flip();
@@ -63,9 +62,11 @@ public class Player : MonoBehaviour, IFlippable
         {
             Flip();
         }
-
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         WeaponSwap();
-        PickUp();
+        PickUpGun();
+        
+        currentWeapon.Aim(angle);
     }
 
     void FixedUpdate()
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour, IFlippable
     /// <summary>
     /// 
     /// </summary>
-    void PickUp()
+    void PickUpGun()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
@@ -93,19 +94,20 @@ public class Player : MonoBehaviour, IFlippable
             if (Input.GetKeyDown(KeyCode.E))
             {
                 gunIndex++;
-                weapons.Add(hit.collider.gameObject);
-                weapons[gunIndex].transform.SetParent(gameObject.transform);
-                weapons[gunIndex].transform.position = gunTransform.position;
+                weaponList.Add(hit.collider.gameObject);
+                weaponList[gunIndex].transform.SetParent(gameObject.transform);
+                weaponList[gunIndex].transform.position = gunTransform.position;
 
                 gun.SetActive(false);
-                gun = weapons[gunIndex];
+                gun = weaponList[gunIndex];
                 if (gun.transform.position.x < transform.position.x)
                 {
                     Vector3 newScale = gun.transform.localScale;
                     newScale.x *= -1;
                     gun.transform.localScale = newScale;
                 }
-                weapons[gunIndex].GetComponent<Weapon>().enabled = true;
+                weaponList[gunIndex].GetComponent<Weapon>().enabled = true;
+                currentWeapon = weaponList[gunIndex].GetComponent<Weapon>();
                 hit.collider.enabled = false;
             }
             else
@@ -126,25 +128,28 @@ public class Player : MonoBehaviour, IFlippable
                 try
                 {
                     gun.SetActive(false);
-                    gun = weapons[0];
-                    weapons[0].SetActive(true);
+                    gun = weaponList[0];
+                    weaponList[0].SetActive(true);
+                    currentWeapon = weaponList[0].GetComponent<Weapon>();
                 }
                 catch (System.Exception exception)
                 {
                     Debug.Log(exception);
+                    gun.SetActive(true);
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-
                 try
                 {
                     gun.SetActive(false);
-                    gun = weapons[1];
-                    weapons[1].SetActive(true);
+                    gun = weaponList[1];
+                    weaponList[1].SetActive(true);
+                    currentWeapon = weaponList[1].GetComponent<Weapon>();
                 }
                 catch(System.Exception exception)
                 {
+                    Debug.Log(exception);
                     gun.SetActive(true);
                 }
             }
@@ -153,11 +158,13 @@ public class Player : MonoBehaviour, IFlippable
                 try
                 {
                     gun.SetActive(false);
-                    gun = weapons[2];
-                    weapons[2].SetActive(true);
+                    gun = weaponList[2];
+                    weaponList[2].SetActive(true);
+                    currentWeapon = weaponList[2].GetComponent<Weapon>();
                 }
                 catch(System.Exception exception)
                 {
+                    Debug.Log(exception);
                     gun.SetActive(true);
                 }
             }
@@ -165,9 +172,12 @@ public class Player : MonoBehaviour, IFlippable
     
     void GetInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0) && currentWeapon.CurrentAmmo > 0
+        && Time.time >= timeToTriggerPull)
         {
-            gun.GetComponent<Weapon>().Fire();
+            currentWeapon.Fire(direction);
+            timeToTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
+            Debug.Log(currentWeapon.CurrentAmmo);
         }
         if (Input.GetKeyDown(KeyCode.F))
         {

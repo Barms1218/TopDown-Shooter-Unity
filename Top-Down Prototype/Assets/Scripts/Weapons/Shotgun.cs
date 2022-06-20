@@ -8,8 +8,11 @@ public class Shotgun : Weapon
     [SerializeField]
     float pelletSpread = 0.5f;
 
-    protected override void ShootWeapon()
+
+    public override void Fire(Vector2 direction)
     {
+        hud.ReduceAmmoCount(data.AmmoPerShot);
+        currentAmmo -= data.AmmoPerShot;
         for (int i = 0; i < numProjectiles; i++)
         {
             var pellet = Instantiate(projectilePrefab, muzzleTransform.position, 

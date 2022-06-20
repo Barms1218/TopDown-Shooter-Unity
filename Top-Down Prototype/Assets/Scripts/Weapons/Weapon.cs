@@ -11,15 +11,17 @@ public abstract class Weapon : MonoBehaviour
     protected int currentAmmo;
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Transform muzzleTransform;
-    [SerializeField] InputController input;
     protected bool reloading = false;
     protected HUD hud;
-    protected Vector3 direction;
     Vector3 mousePos;
     protected bool facingRight;
     protected float nextFire;
 
     #endregion
+
+    public int MaxAmmo => data.MaxAmmo;
+    public float TimeBetweenShots => data.FireRate;
+    public int CurrentAmmo => currentAmmo;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -32,24 +34,11 @@ public abstract class Weapon : MonoBehaviour
     }
 
     /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    protected virtual void Update()
-    {
-
-        Aim();
-    }
-
-    /// <summary>
     /// 
     /// </summary>
-    protected virtual void Aim()
+    public virtual void Aim(float angle)
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = -Camera.main.transform.position.z;
-        direction = mousePos - transform.position;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         if (mousePos.x < transform.position.x && !facingRight)
         {
@@ -68,23 +57,8 @@ public abstract class Weapon : MonoBehaviour
     /// Allow for semi-automatic fire or automatic fire depending
     /// on the weapon's time between shots.
     /// </summary>
-    public virtual void Fire()
-    {
-        if (Time.time >= nextFire && currentAmmo > 0)
-        {
-            hud.ReduceAmmoCount(data.AmmoPerShot);
-            currentAmmo -= data.AmmoPerShot;
-            ShootWeapon();
-            nextFire = Time.time + data.FireRate;
-        }
-        else
-        {
-            return;
-        }
-    }
+    public abstract void Fire(Vector2 direction);
 
-
-    protected abstract void ShootWeapon();
     protected abstract void SpecialAttack();
 
     /// <summary>
@@ -106,8 +80,9 @@ public abstract class Weapon : MonoBehaviour
     {
         reloading = true;
         yield return new WaitForSeconds(data.ReloadSpeed);
-        hud.SetMaxAmmoCount(data.MaxAmmo);
+
         currentAmmo = data.MaxAmmo;
+        hud.DisplayAmmo(currentAmmo, data.MaxAmmo);        
         reloading = false;
     }
 
@@ -123,12 +98,16 @@ public abstract class Weapon : MonoBehaviour
         transform.localScale = newScale;
     }
 
+    protected virtual void OnEquip(int remainingAmmo)
+    {
+        
+    }
     /// <summary>
     /// 
     /// </summary>
     protected virtual void OnEnable()
      {
-        hud.SetMaxAmmoCount(data.MaxAmmo);
+        hud.DisplayAmmo(currentAmmo, data.MaxAmmo);
         Player.OnSpecial += SpecialAttack;
         Player.OnReload += Reload;
      }
