@@ -8,6 +8,8 @@ TagManager:
   - Projectile
   - Shotgun
   - Assault Rifle
+  - Cursor
+  - Enemy
   layers:
   - Default
   - TransparentFX

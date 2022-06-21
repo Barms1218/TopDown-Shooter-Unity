@@ -10,24 +10,34 @@ public class AssaultRifle : Weapon
     /// </summary>
     public override void Fire(Vector2 direction)
     {
-        hud.ReduceAmmoCount(data.AmmoPerShot);
-        currentAmmo -= data.AmmoPerShot;
-        var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
-            Quaternion.identity);
+        if (!reloading)
+        {
+            base.Fire(direction);
+            var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
+                Quaternion.identity);
 
-        var bulletScript = projectile.GetComponent<Projectile>();
+            var bulletScript = projectile.GetComponent<Projectile>();
 
-        bulletScript.MoveToTarget(direction);
-        AudioManager.Play(AudioClipName.AR_Fire);
+            bulletScript.MoveToTarget(direction);
+            AudioManager.Play(AudioClipName.PistolShot);
+        }
     }
 
     /// <summary>
     /// When implemented, launch a grenade 
     /// </summary>
     /// <exception cref="System.NotImplementedException"></exception>
-    protected override void SpecialAttack()
+    public override void SpecialAttack()
     {
-        throw new System.NotImplementedException();
+        return;
+    }
+
+    public override void Reload()
+    {
+        if (!reloading)
+        {
+            StartCoroutine(StartReload());
+        }
     }
 
     protected override IEnumerator StartReload()
@@ -36,7 +46,7 @@ public class AssaultRifle : Weapon
         yield return new WaitForSeconds(data.ReloadSpeed);
 
         currentAmmo = data.MaxAmmo;
-        hud.DisplayAmmo(currentAmmo, data.MaxAmmo);        
+        hud.CurrentAmmo = currentAmmo;       
         reloading = false;
         AudioManager.Play(AudioClipName.AR_Finish_Reload);
     }

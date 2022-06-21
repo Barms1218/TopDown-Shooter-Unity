@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IFlippable
+public class Player : MonoBehaviour
 {
     #region Fields
     
@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IFlippable
     LayerMask weaponLayer;
     float timeToTriggerPull;
     Vector2 direction;
+
     // Movement
     Rigidbody2D _body;
     Vector2 _direction;
@@ -21,12 +22,6 @@ public class Player : MonoBehaviour, IFlippable
     [SerializeField, Range(0f, 100f)] float maxSpeed = 4f;
     bool facingRight = true;
     Weapon currentWeapon;
-
-    // Events
-    public delegate void SpecialInput();
-    public static event SpecialInput OnSpecial;
-    public delegate void ReloadInput();
-    public static event ReloadInput OnReload;
 
     #endregion
 
@@ -84,7 +79,7 @@ public class Player : MonoBehaviour, IFlippable
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, weaponLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1.5f, weaponLayer);
         Color lineColor;
         
         lineColor = Color.red;
@@ -177,20 +172,20 @@ public class Player : MonoBehaviour, IFlippable
         {
             currentWeapon.Fire(direction);
             timeToTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
-            Debug.Log(currentWeapon.CurrentAmmo);
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            OnSpecial?.Invoke();
+            currentWeapon.SpecialAttack();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            OnReload?.Invoke();
+            currentWeapon.Reload();
         }
     }
 
     /// <summary>
-    /// 
+    /// Have player character face the direction of the
+    /// mouse cursor
     /// </summary>
     public virtual void Flip()
     {

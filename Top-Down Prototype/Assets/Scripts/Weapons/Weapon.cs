@@ -6,7 +6,6 @@ public abstract class Weapon : MonoBehaviour
 {
     #region Fields
 
-    Rigidbody2D body;
     [SerializeField] protected GunData data;
     protected int currentAmmo;
     [SerializeField] protected GameObject projectilePrefab;
@@ -15,6 +14,7 @@ public abstract class Weapon : MonoBehaviour
     protected HUD hud;
     Vector3 mousePos;
     protected bool facingRight;
+    protected bool firing = false;
     protected float nextFire;
 
     #endregion
@@ -29,13 +29,10 @@ public abstract class Weapon : MonoBehaviour
     protected virtual void Awake()
     {
         hud = FindObjectOfType<HUD>();
-        body = GetComponent<Rigidbody2D>();
         currentAmmo = data.MaxAmmo;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+    // Takes an angle from the player so it can be aimed
     public virtual void Aim(float angle)
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -53,29 +50,17 @@ public abstract class Weapon : MonoBehaviour
         transform.rotation = rotation;
     }
 
-    /// <summary>
-    /// Allow for semi-automatic fire or automatic fire depending
-    /// on the weapon's time between shots.
-    /// </summary>
-    public abstract void Fire(Vector2 direction);
-
-    protected abstract void SpecialAttack();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    protected virtual void Reload()
+    // Virtual because all guns expend ammo the same way
+    public virtual void Fire(Vector2 direction)
     {
-        if (!reloading)
-        {
-            StartCoroutine(StartReload());
-        }
+        currentAmmo -= data.AmmoPerShot;
+        hud.CurrentAmmo = currentAmmo;
     }
 
-    /// <summary>
-    /// Put gun into reloading state with boolean
-    /// </summary>
-    /// <returns></returns>
+    public abstract void SpecialAttack();
+
+    public abstract void Reload();
+
     protected abstract IEnumerator StartReload();
 
     /// <summary>
@@ -90,10 +75,6 @@ public abstract class Weapon : MonoBehaviour
         transform.localScale = newScale;
     }
 
-    protected virtual void OnEquip(int remainingAmmo)
-    {
-        
-    }
     /// <summary>
     /// 
     /// </summary>
@@ -101,16 +82,5 @@ public abstract class Weapon : MonoBehaviour
      {
         hud.CurrentAmmo = currentAmmo;
         hud.MaxAmmo = data.MaxAmmo;
-        Player.OnSpecial += SpecialAttack;
-        Player.OnReload += Reload;
      }
-
-     /// <summary>
-     /// 
-     /// </summary>
-    protected virtual void OnDisable()
-    {
-        Player.OnSpecial -= SpecialAttack;
-        Player.OnReload -= Reload;
-    }
 }

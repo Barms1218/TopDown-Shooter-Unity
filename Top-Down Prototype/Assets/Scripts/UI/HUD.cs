@@ -47,23 +47,5 @@ public class HUD : MonoBehaviour
         ammoCountText.text = currentAmmo.ToString() + "/" +
             maxAmmo.ToString();        
     }
-    public void DisplayAmmo(int newAmmo, int maxAmmo)
-    {
-        currentAmmo = newAmmo;
 
-    }
-
-    public void ReduceAmmoCount(int reduceAmmount)
-    {
-        currentAmmo -= reduceAmmount;
-        ammoCountText.text = currentAmmo.ToString() + "/" +
-            maxAmmo.ToString();
-    }
-    
-    public void AddToAmmoCount(int ammoToAdd)
-    {
-        currentAmmo += ammoToAdd;
-        ammoCountText.text = currentAmmo.ToString() + "/" +
-            maxAmmo.ToString();
-    }
 }

@@ -20,10 +20,7 @@ public class AttackState : BaseState
 
     public override void UpdateLogic()
     {
-        if (Vector2.Distance(target.position, enemySM.transform.position) > enemySM.enemySettings.AttackRange)
-        {
-            enemySM.ChangeState(enemySM.chaseState);
-        }
+
     }
 
     public override void UpdatePhysics()

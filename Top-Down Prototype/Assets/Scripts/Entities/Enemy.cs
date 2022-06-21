@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using Pathfinding;
 
-public class Enemy : MonoBehaviour, IFlippable
+public abstract class Enemy : MonoBehaviour
 {
     protected GameObject player;
     AIPath path;
     protected bool facingRight = true;
     protected StateMachine stateMachine;
     protected int points;
-
+    [SerializeField] protected EnemySettings enemySettings;
 
     protected int Points
     {
@@ -30,8 +30,11 @@ public class Enemy : MonoBehaviour, IFlippable
 
     protected virtual void Update()
     {
-        //path.destination = player.transform.position; // Send object at player
- 
+        if (Vector2.Distance(player.transform.position, transform.position) < enemySettings.AttackRange)
+        {
+            Attack();
+        }
+        
         // Use boolean to logically decide if flipping is necessary
         if (player.transform.position.x > transform.position.x
             && !facingRight)
@@ -59,5 +62,5 @@ public class Enemy : MonoBehaviour, IFlippable
         gameObject.transform.localScale = newScale;
     }
 
-
+    protected abstract void Attack();
 }

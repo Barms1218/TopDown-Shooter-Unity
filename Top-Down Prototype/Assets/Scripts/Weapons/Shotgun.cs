@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
-    int numProjectiles = 5;
-    [SerializeField]
-    float pelletSpread = 0.5f;
+    [SerializeField] int numProjectiles = 5;
+    [SerializeField] float pelletSpread = 0.5f;
 
 
     public override void Fire(Vector2 direction)
     {
-        hud.ReduceAmmoCount(data.AmmoPerShot);
-        currentAmmo -= data.AmmoPerShot;
+        base.Fire(direction);
         for (int i = 0; i < numProjectiles; i++)
         {
             var pellet = Instantiate(projectilePrefab, muzzleTransform.position, 
@@ -23,10 +21,12 @@ public class Shotgun : Weapon
             pelletScript.MoveToTarget(direction);
         }
         AudioManager.Play(AudioClipName.ShotgunBlast);
+        firing = true;
     }
 
-    protected override void Reload()
+    public override void Reload()
     {
+        firing = false;
         StartCoroutine(StartReload());
     }
 
@@ -34,17 +34,17 @@ public class Shotgun : Weapon
     {
         reloading = true;
 
-        while (currentAmmo < data.MaxAmmo)
+        while (currentAmmo < data.MaxAmmo && !firing)
         {
             currentAmmo++;
-            hud.AddToAmmoCount(1);
+            hud.CurrentAmmo++;
             AudioManager.Play(AudioClipName.ShotgunReload);
             yield return new WaitForSeconds(data.ReloadSpeed);
             reloading = false;
         }
     }
 
-    protected override void SpecialAttack()
+    public override void SpecialAttack()
     {
 
     }
