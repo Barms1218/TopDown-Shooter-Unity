@@ -30,10 +30,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) < enemySettings.AttackRange)
-        {
-            Attack();
-        }
+        // if (Vector2.Distance(player.transform.position, transform.position) < enemySettings.AttackRange)
+        // {
+        //     Attack();
+        // }
         
         // Use boolean to logically decide if flipping is necessary
         if (player.transform.position.x > transform.position.x

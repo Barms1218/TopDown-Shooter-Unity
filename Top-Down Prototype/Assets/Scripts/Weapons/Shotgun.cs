@@ -6,7 +6,7 @@ public class Shotgun : Weapon
 {
     [SerializeField] int numProjectiles = 5;
     [SerializeField] float pelletSpread = 0.5f;
-
+    private bool firing;
 
     public override void Fire(Vector2 direction)
     {

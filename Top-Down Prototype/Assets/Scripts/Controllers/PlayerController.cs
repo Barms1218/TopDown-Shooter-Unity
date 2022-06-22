@@ -13,4 +13,8 @@ public class PlayerController : InputController
     {
         return Input.GetMouseButtonDown(0);
     }
+    public bool InteractInput()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
 }

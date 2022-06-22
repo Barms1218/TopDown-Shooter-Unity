@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IHaveHealth
 {
     [SerializeField]
     private int maxHealth = 100;
@@ -11,6 +11,14 @@ public class Health : MonoBehaviour
     int _health;
 
     public UnityAction OnDied;
+
+    float IHaveHealth.Health 
+    { 
+        get => _health; 
+        set => _health = (int)value; 
+    }
+
+    public int MaxHealth => maxHealth;
 
     // Start is called before the first frame update
     /// <summary>
@@ -25,15 +33,18 @@ public class Health : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        this._health -= damage;
+        _health -= damage;
         if (_health <= 0)
         {
             Die();
         }
     } 
+    public void RestoreHealth(int amount)
+    {
 
+    }
     /// <summary>
     /// Stop following player, begin fading out, and destroy 
     /// </summary>
@@ -70,4 +81,5 @@ public class Health : MonoBehaviour
             yield return null;
         }
     }
+
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, IFlippable
 {
     #region Fields
 
@@ -14,14 +14,16 @@ public abstract class Weapon : MonoBehaviour
     protected HUD hud;
     Vector3 mousePos;
     protected bool facingRight;
-    protected bool firing = false;
-    protected float nextFire;
 
     #endregion
+
+    #region Properties
 
     public int MaxAmmo => data.MaxAmmo;
     public float TimeBetweenShots => data.FireRate;
     public int CurrentAmmo => currentAmmo;
+
+    #endregion
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
