@@ -8,11 +8,11 @@ public class AssaultRifle : Weapon
     /// <summary>
     /// 
     /// </summary>
-    public override void Fire(Vector2 direction)
+    public override void Fire(Vector2 direction, Weapon weapon)
     {
         if (!reloading)
         {
-            base.Fire(direction);
+            base.Fire(direction, weapon);
             var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
                 Quaternion.identity);
 

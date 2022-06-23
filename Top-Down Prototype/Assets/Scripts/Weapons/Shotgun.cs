@@ -8,9 +8,9 @@ public class Shotgun : Weapon
     [SerializeField] float pelletSpread = 0.5f;
     private bool firing;
 
-    public override void Fire(Vector2 direction)
+    public override void Fire(Vector2 direction, Weapon weapon)
     {
-        base.Fire(direction);
+        base.Fire(direction, weapon);
         for (int i = 0; i < numProjectiles; i++)
         {
             var pellet = Instantiate(projectilePrefab, muzzleTransform.position, 

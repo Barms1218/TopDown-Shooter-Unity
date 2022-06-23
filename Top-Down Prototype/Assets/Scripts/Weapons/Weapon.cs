@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour, IFlippable
+public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 {
     #region Fields
 
@@ -14,7 +14,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable
     protected HUD hud;
     Vector3 mousePos;
     protected bool facingRight;
-
+    PlayerWeaponHandler weaponHandler;
     #endregion
 
     #region Properties
@@ -22,19 +22,18 @@ public abstract class Weapon : MonoBehaviour, IFlippable
     public int MaxAmmo => data.MaxAmmo;
     public float TimeBetweenShots => data.FireRate;
     public int CurrentAmmo => currentAmmo;
+    public float AimAngle { get; set; }
 
     #endregion
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
     protected virtual void Awake()
     {
         hud = FindObjectOfType<HUD>();
+        weaponHandler = FindObjectOfType<PlayerWeaponHandler>();
         currentAmmo = data.MaxAmmo;
     }
 
-    // Takes an angle from the player so it can be aimed
+
     public virtual void Aim(float angle)
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -53,7 +52,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable
     }
 
     // Virtual because all guns expend ammo the same way
-    public virtual void Fire(Vector2 direction)
+    public virtual void Fire(Vector2 direction, Weapon weapon)
     {
         currentAmmo -= data.AmmoPerShot;
         hud.CurrentAmmo = currentAmmo;
@@ -65,9 +64,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable
 
     protected abstract IEnumerator StartReload();
 
-    /// <summary>
-    /// 
-    /// </summary>
     protected virtual void Flip()
     {
         facingRight = !facingRight;
@@ -77,9 +73,11 @@ public abstract class Weapon : MonoBehaviour, IFlippable
         transform.localScale = newScale;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+    protected virtual void Interact(GameObject gameObject)
+    {
+
+    }
+
     protected virtual void OnEnable()
      {
         hud.CurrentAmmo = currentAmmo;

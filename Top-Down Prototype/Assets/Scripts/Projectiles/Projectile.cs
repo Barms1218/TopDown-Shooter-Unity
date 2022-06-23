@@ -5,8 +5,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     #region Fields
-    float timeToLive;
-    [SerializeField] ProjectileData projectileData;
+    private float timeToLive;
+    private Weapon weapon;
+    [SerializeField] private ProjectileData projectileData;
 
     #endregion
 
@@ -18,13 +19,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        float deltaX = mousePos.x - transform.position.x;
-        float deltaY = mousePos.y - transform.position.y;
-
-        float angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
-
+        float angle = weapon.AimAngle;
         Quaternion target = Quaternion.Euler(0, 0, angle);
 
         transform.rotation = target;
@@ -41,20 +36,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="collision"></param>
     void OnTriggerEnter2D(Collider2D collision)
     {
         collision.gameObject.GetComponent<Health>()?.TakeDamage(projectileData.Damage);
         Destroy(gameObject);
     }
 
-    /// <summary>
-    /// Take in a vector 2 and apply a force in that direction
-    /// </summary>
-    /// <param name="force"></param>
     public void MoveToTarget(Vector2 force)
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
