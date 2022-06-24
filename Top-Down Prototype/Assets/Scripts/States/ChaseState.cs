@@ -16,14 +16,13 @@ public class ChaseState : BaseState
 
     public override void Enter()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        
         enemySM._animator.SetBool("Running", true);
     }
 
     public override void UpdateLogic()
     {
-        enemySM.transform.position = Vector2.MoveTowards(
-            enemySM.transform.position, target.position, Time.deltaTime * enemySM.enemySettings.Speed);
+
     }
 
     public override void UpdatePhysics()

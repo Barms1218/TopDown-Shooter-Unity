@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssaultRifle : Weapon
+public class AssaultRifle : Weapon, IInteractable
 {
 
     /// <summary>
@@ -19,14 +19,10 @@ public class AssaultRifle : Weapon
             var bulletScript = projectile.GetComponent<Projectile>();
 
             bulletScript.MoveToTarget(direction);
-            AudioManager.Play(AudioClipName.PistolShot);
+            AudioManager.Play(AudioClipName.AR_Fire);
         }
     }
 
-    /// <summary>
-    /// When implemented, launch a grenade 
-    /// </summary>
-    /// <exception cref="System.NotImplementedException"></exception>
     public override void SpecialAttack()
     {
         return;

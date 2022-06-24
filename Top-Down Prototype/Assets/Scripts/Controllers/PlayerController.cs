@@ -5,16 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerController", menuName = "InputController/PlayerController")]
 public class PlayerController : InputController
 {
-     public override bool RetrieveReloadInput()
-    {
-        return Input.GetKeyDown(KeyCode.R);
-    }
-    public override bool RetrieveShootInput()
-    {
-        return Input.GetMouseButtonDown(0);
-    }
-    public bool InteractInput()
-    {
-        return Input.GetKeyDown(KeyCode.E);
-    }
+    public override bool Reload() => Input.GetKeyDown(KeyCode.R);
+    public override bool Fire() => Input.GetMouseButton(0);
+    public override bool Interact() => Input.GetKeyDown(KeyCode.E);
+    public override bool SpecialAttack() => Input.GetKeyDown(KeyCode.F);
+    public override float HorizontalInput() => Input.GetAxis("Horizontal");
+    public override float VerticalInput() => Input.GetAxis("Vertical");
 }

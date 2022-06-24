@@ -19,11 +19,6 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        float angle = weapon.AimAngle;
-        Quaternion target = Quaternion.Euler(0, 0, angle);
-
-        transform.rotation = target;
-
         timeToLive = projectileData.TimeToLive;
     }
     void Update()
@@ -45,7 +40,10 @@ public class Projectile : MonoBehaviour
     public void MoveToTarget(Vector2 force)
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
+        float angle = Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg;
+        Quaternion target = Quaternion.Euler(0, 0, angle);
 
+        transform.rotation = target;
         body.AddRelativeForce(force.normalized * 
             projectileData.AmountOfForce, ForceMode2D.Impulse);
     }

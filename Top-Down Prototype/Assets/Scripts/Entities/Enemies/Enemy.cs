@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Pathfinding;
+using System;
 
 public abstract class Enemy : MonoBehaviour
 {
     protected GameObject player;
-    AIPath path;
     protected bool facingRight = true;
-    protected StateMachine stateMachine;
     protected int points;
-    [SerializeField] protected EnemySettings enemySettings;
+    
+    protected float nextAttack;
+    [SerializeField] protected EnemySettings settings;
 
-    protected int Points
+    protected virtual int Points
     {
         set
         {
@@ -22,19 +23,19 @@ public abstract class Enemy : MonoBehaviour
         get => points;
     }
 
-
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected virtual void Update()
     {
-        // if (Vector2.Distance(player.transform.position, transform.position) < enemySettings.AttackRange)
-        // {
-        //     Attack();
-        // }
-        
+        MoveToPlayer();
+
+        if (Vector2.Distance(player.transform.position, transform.position) < 2)
+        {
+            Attack();
+        }
         // Use boolean to logically decide if flipping is necessary
         if (player.transform.position.x > transform.position.x
             && !facingRight)
@@ -48,10 +49,12 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    protected virtual void MoveToPlayer()
+    {
+        var target = player.transform;
+        transform.position = Vector2.MoveTowards(transform.position, target.position, Time.deltaTime * settings.Speed);        
+    }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public virtual void Flip()
     {
         Vector3 newScale = gameObject.transform.localScale;
@@ -63,4 +66,6 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected abstract void Attack();
+
+    protected bool CanAttack => Time.time >= nextAttack;
 }

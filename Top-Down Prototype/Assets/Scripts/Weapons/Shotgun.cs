@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : Weapon
+public class Shotgun : Weapon, IInteractable
 {
     [SerializeField] int numProjectiles = 5;
     [SerializeField] float pelletSpread = 0.5f;

@@ -21,6 +21,7 @@ public class EnemyIdle : BaseState
     {
         if (Vector2.Distance(enemySM.transform.position, target.position) > 2f)
         {
+            Exit();
             enemySM.ChangeState(enemySM.chaseState);
         }
     }

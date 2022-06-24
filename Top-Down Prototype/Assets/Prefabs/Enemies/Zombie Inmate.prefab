@@ -60,7 +60,6 @@ GameObject:
   - component: {fileID: 2579200449049318826}
   - component: {fileID: 2579200449049318830}
   - component: {fileID: 704103961706769379}
-  - component: {fileID: 6551200736291813083}
   - component: {fileID: 8774389759331695210}
   - component: {fileID: 2579200449049318817}
   - component: {fileID: 2579200449655979786}
@@ -172,21 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798705e42a1385b4eb5c842c57181c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySettings: {fileID: 11400000, guid: 692fdf5158e7a0c498067f112fac82da, type: 2}
---- !u!114 &6551200736291813083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b92bbce29ff6b74f95d9f2ab9ceafb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb2d: {fileID: 2579200449049318830}
-  _animator: {fileID: 2579200449655979786}
   enemySettings: {fileID: 11400000, guid: 692fdf5158e7a0c498067f112fac82da, type: 2}
 --- !u!114 &8774389759331695210
 MonoBehaviour:

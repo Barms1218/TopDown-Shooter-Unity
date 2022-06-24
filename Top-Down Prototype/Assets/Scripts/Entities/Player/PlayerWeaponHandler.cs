@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//[RequireComponent(typeof(InputController))]
 public class PlayerWeaponHandler : MonoBehaviour
 {
+    #region Fields
+
     [SerializeField] private GameObject gun;
     private List<GameObject> weaponList = new List<GameObject>();
     private float timeToTriggerPull;
     private Weapon currentWeapon;
     private Vector2 aimDirection;
 
+    #endregion
 
     #region Properties
 
@@ -26,21 +30,16 @@ public class PlayerWeaponHandler : MonoBehaviour
     }
 
     #endregion
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
+
     private void Awake()
     {
         weaponList.Add(gun);
-        currentWeapon = gun.GetComponent<Weapon>();        
-        PlayerInput.OnReload += Reload;
-        PlayerInput.OnFire += Fire;
-        PlayerInput.OnSpecialAttack += SpecialAttack;
+        currentWeapon = gun.GetComponent<Weapon>();
+        EntityInput.OnReload += Reload;
+        EntityInput.OnSpecialAttack += SpecialAttack;
+        EntityInput.OnFire += Fire;
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
     private void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -50,6 +49,8 @@ public class PlayerWeaponHandler : MonoBehaviour
         currentWeapon.AimAngle = angle;
     }
 
+    #region Event Methods
+
     private void Reload()
     {
         currentWeapon.Reload();
@@ -57,6 +58,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     private void Fire()
     {
+
         if (currentWeapon.CurrentAmmo > 0 && CanFire())
         {
             currentWeapon.Fire(aimDirection, currentWeapon);
@@ -68,6 +70,8 @@ public class PlayerWeaponHandler : MonoBehaviour
     {
         currentWeapon.SpecialAttack();
     }
+
+    #endregion
 
     private bool CanFire() => Time.time >= timeToTriggerPull;
 }

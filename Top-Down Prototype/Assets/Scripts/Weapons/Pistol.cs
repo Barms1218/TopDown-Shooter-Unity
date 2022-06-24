@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Weapon
+public class Pistol : Weapon, IInteractable
 {
 
     public override void Fire(Vector2 direction, Weapon weapon)

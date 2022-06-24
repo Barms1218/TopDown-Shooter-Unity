@@ -5,12 +5,10 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] 
-    TextMeshProUGUI ammoCountText;
-    [SerializeField] 
-    TextMeshProUGUI timerText;
-    [SerializeField] 
-    TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI ammoCountText;
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI interactText;
     int currentAmmo;
     int maxAmmo;
     float timeLeft;
@@ -33,6 +31,7 @@ public class HUD : MonoBehaviour
     /// </summary>
     void Start()
     {
+        interactText.enabled = false;
         timeLeft = 30f;
         timerText.text = ("Time Left: " + timeLeft.ToString());
     }
@@ -48,4 +47,9 @@ public class HUD : MonoBehaviour
             maxAmmo.ToString();        
     }
 
+    public void SetInteractTextState(bool isActive)
+    {
+        Debug.Log(isActive);
+        interactText.enabled = isActive;
+    }
 }

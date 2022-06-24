@@ -8,16 +8,19 @@ public class MeleeZombie : Enemy
     private CircleCollider2D attackCircle;
     private float attackRadius;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
-        Points = 15;
-        //attackCircle = GetComponent<CircleCollider2D>();
-        //attackRadius = attackCircle.radius;
+        base.Awake();
+        this.Points = 15;
     }
 
     protected override void Attack()
     {
-        player.GetComponent<Health>().TakeDamage(10);
+        if (CanAttack)
+        {
+            player.GetComponent<IDamageable>().TakeDamage(settings.Damage);
+            Debug.Log(settings.Damage);
+            nextAttack = Time.time + 1f;
+        }
     }
 }

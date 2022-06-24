@@ -14,7 +14,8 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     protected HUD hud;
     Vector3 mousePos;
     protected bool facingRight;
-    PlayerWeaponHandler weaponHandler;
+    protected PlayerWeaponHandler weaponHandler;
+
     #endregion
 
     #region Properties
@@ -73,9 +74,24 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         transform.localScale = newScale;
     }
 
-    protected virtual void Interact(GameObject gameObject)
+    protected virtual void Interact()
     {
-
+        weaponHandler.Gun.SetActive(false);        
+        weaponHandler.WeaponList.Add(this.gameObject);
+        transform.SetParent(weaponHandler.transform);
+        transform.position = weaponHandler.Gun.transform.position;
+        weaponHandler.Gun = this.gameObject;      
+        GetComponent<Weapon>().enabled = true;
+        
+        // Flip the weapon to proper scale to match player's
+        if (weaponHandler.Gun.transform.position.x < weaponHandler.transform.position.x)
+        {
+            Vector3 newScale = weaponHandler.Gun.transform.localScale;
+            newScale.x *= -1;
+            weaponHandler.Gun.transform.localScale = newScale;
+        }          
+        weaponHandler.CurrentWeapon = GetComponent<Weapon>();
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     protected virtual void OnEnable()

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour, IHaveHealth
+public class Health : MonoBehaviour, IDamageable
 {
-    [SerializeField]
-    private int maxHealth = 100;
+    [SerializeField] private int maxHealth = 100;
 
     int _health;
 
-    public UnityAction OnDied;
+    public static UnityAction OnDied;
 
-    float IHaveHealth.Health 
+    float IDamageable.Health 
     { 
         get => _health; 
         set => _health = (int)value; 
@@ -20,22 +19,15 @@ public class Health : MonoBehaviour, IHaveHealth
 
     public int MaxHealth => maxHealth;
 
-    // Start is called before the first frame update
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
     void Awake()
     {
         _health = maxHealth;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
         _health -= damage;
+        GetComponent<Animator>().SetTrigger("Hurt");
         if (_health <= 0)
         {
             Die();
@@ -45,9 +37,7 @@ public class Health : MonoBehaviour, IHaveHealth
     {
 
     }
-    /// <summary>
-    /// Stop following player, begin fading out, and destroy 
-    /// </summary>
+
     public void Die()
     {
         SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
@@ -57,13 +47,6 @@ public class Health : MonoBehaviour, IHaveHealth
         Destroy(gameObject, 1.0f);
     }
 
-    /// <summary>
-    /// Reduce object's alpha to 0 over duration passed into
-    /// paramater by comparing the duration with an incrementing value
-    /// </summary>
-    /// <param name="spriteRenderer"></param>
-    /// <param name="duration"></param>
-    /// <returns></returns>
     IEnumerator FadeOut(SpriteRenderer spriteRenderer, float duration)
     {
         float count = 0;

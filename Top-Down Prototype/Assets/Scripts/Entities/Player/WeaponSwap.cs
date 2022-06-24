@@ -2,31 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerWeaponHandler))]
 public class WeaponSwap : MonoBehaviour
 {
     PlayerWeaponHandler weaponHandler;
 
     void Awake() => weaponHandler = GetComponent<PlayerWeaponHandler>();
 
-    private void Update() => Swap();
-
-    public void Swap()
+    private void Update()
+    {
+        Vector3 newScale = weaponHandler.Gun.transform.localScale;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Vector3 newScale = weaponHandler.Gun.transform.localScale;
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            try
             {
-                try
-                {
-                    weaponHandler.Gun.SetActive(false);
-                    weaponHandler.Gun = weaponHandler.WeaponList[0];
-                    weaponHandler.WeaponList[0].SetActive(true);
-                    weaponHandler.CurrentWeapon = weaponHandler.WeaponList[0].GetComponent<Weapon>();
-                }
-                catch (System.Exception exception)
-                {
-                    Debug.Log(exception);
-                    weaponHandler.Gun.SetActive(true);
-                }
+                weaponHandler.Gun.SetActive(false);
+                weaponHandler.Gun = weaponHandler.WeaponList[0];
+                weaponHandler.WeaponList[0].SetActive(true);
+                weaponHandler.CurrentWeapon = weaponHandler.WeaponList[0].GetComponent<Weapon>();
+            }
+            catch (System.Exception exception)
+            {
+                Debug.Log(exception);
+                weaponHandler.Gun.SetActive(true);                }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -57,6 +55,6 @@ public class WeaponSwap : MonoBehaviour
                     Debug.Log(exception);
                     weaponHandler.Gun.SetActive(true);
                 }
-            }
-        }
+            }        
+    }
 }
