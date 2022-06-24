@@ -49,7 +49,6 @@ public class HUD : MonoBehaviour
 
     public void SetInteractTextState(bool isActive)
     {
-        Debug.Log(isActive);
         interactText.enabled = isActive;
     }
 }

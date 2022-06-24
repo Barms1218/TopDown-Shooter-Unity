@@ -32,6 +32,8 @@ public class PlayerMove : MonoBehaviour
     {
         _direction.x = Input.GetAxis("Horizontal");
         _direction.y = Input.GetAxis("Vertical");
+        var speed = Mathf.Abs(_direction.x + _direction.y);
+        GetComponent<Animator>().SetFloat("Speed", speed);
         desiredVelocity = new Vector2(_direction.x, _direction.y)
             * Mathf.Max(maxSpeed, 0f);        
     }

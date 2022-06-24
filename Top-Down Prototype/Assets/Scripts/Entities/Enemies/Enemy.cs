@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     protected GameObject player;
     protected bool facingRight = true;
     protected int points;
-    
+    protected Transform target;
     protected float nextAttack;
     [SerializeField] protected EnemySettings settings;
 
@@ -26,17 +26,18 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        target = player.transform;
     }
 
     protected virtual void Update()
     {
         MoveToPlayer();
 
-        if (Vector2.Distance(player.transform.position, transform.position) < 2)
+        if (Vector2.Distance(target.position, transform.position) < settings.AttackRange)
         {
             Attack();
         }
-        // Use boolean to logically decide if flipping is necessary
+
         if (player.transform.position.x > transform.position.x
             && !facingRight)
         {
@@ -51,8 +52,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void MoveToPlayer()
     {
-        var target = player.transform;
-        transform.position = Vector2.MoveTowards(transform.position, target.position, Time.deltaTime * settings.Speed);        
+        transform.position = Vector2.MoveTowards(transform.position, 
+        target.position, Time.deltaTime * settings.Speed);        
     }
 
     public virtual void Flip()

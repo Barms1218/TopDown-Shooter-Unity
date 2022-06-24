@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     #region Fields
+    
     private float timeToLive;
     private Weapon weapon;
     [SerializeField] private ProjectileData projectileData;
@@ -33,7 +34,7 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Health>()?.TakeDamage(projectileData.Damage);
+        collision.gameObject.GetComponent<Health>()?.TakeDamage(projectileData.Damage, this.gameObject);
         Destroy(gameObject);
     }
 

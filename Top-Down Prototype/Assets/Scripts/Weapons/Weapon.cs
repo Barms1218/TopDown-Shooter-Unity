@@ -84,13 +84,14 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         GetComponent<Weapon>().enabled = true;
         
         // Flip the weapon to proper scale to match player's
-        if (weaponHandler.Gun.transform.position.x < weaponHandler.transform.position.x)
+        if (this.gameObject.transform.position.x < weaponHandler.transform.position.x)
         {
             Vector3 newScale = weaponHandler.Gun.transform.localScale;
             newScale.x *= -1;
             weaponHandler.Gun.transform.localScale = newScale;
         }          
         weaponHandler.CurrentWeapon = GetComponent<Weapon>();
+        weaponHandler.Gun.SetActive(true);
         GetComponent<BoxCollider2D>().enabled = false;
     }
 

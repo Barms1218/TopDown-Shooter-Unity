@@ -31,7 +31,7 @@ public class PelletProjectile : MonoBehaviour
         Health health = collision.gameObject.GetComponent<Health>();
         if (health != null)
         {
-            health.TakeDamage(projectileData.Damage);
+            health.TakeDamage(projectileData.Damage, this.gameObject);
             Destroy(gameObject);
         }
 

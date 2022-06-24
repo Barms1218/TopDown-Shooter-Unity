@@ -8,7 +8,7 @@ public class Pickup : MonoBehaviour
     private PlayerWeaponHandler weaponHandler;
     private Weapon weapon;
     private HUD hud;
-    private LayerMask weaponLayer;
+    private LayerMask interactLayer;
     private RaycastHit2D hit;
     private int gunIndex = 0;
         
@@ -16,9 +16,8 @@ public class Pickup : MonoBehaviour
     {
         weaponHandler = GetComponent<PlayerWeaponHandler>();
         weapon = GetComponent<Weapon>();
-        weaponLayer = LayerMask.GetMask("Weapons");
+        interactLayer = LayerMask.GetMask("Interactables");
         hud = FindObjectOfType<HUD>();
-        EntityInput.OnInteract += InteractWithObject;
     }
 
     private void FixedUpdate()
@@ -30,20 +29,28 @@ public class Pickup : MonoBehaviour
         
         lineColor = Color.red;
         if (Physics2D.Raycast(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
-        direction, 1.5f, weaponLayer))
+        direction, 1.5f, interactLayer))
         {
             hit = Physics2D.Raycast(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
-                direction, 1.5f, weaponLayer);
+                direction, 1.5f, interactLayer);
+                if (hit.collider.gameObject.GetComponent<IInteractable>() != null)
+                {
+                    EntityInput.OnInteract += InteractWithObject;
+                }
             hud.SetInteractTextState(true);
             lineColor = Color.green;
-        }      
+        } 
+        else
+        {
+            EntityInput.OnInteract -= InteractWithObject;
+            hud.SetInteractTextState(false);
+        }     
         Debug.DrawRay(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
         direction, lineColor);
     }
 
     private void InteractWithObject()
     {
-        hit.collider.gameObject.GetComponent<IInteractable>()?.Interact();
-        hud.SetInteractTextState(false);
+        hit.collider.gameObject.GetComponent<IInteractable>().Interact();
     }
 }
