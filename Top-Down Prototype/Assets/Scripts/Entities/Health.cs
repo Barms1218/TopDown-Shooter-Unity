@@ -24,12 +24,11 @@ public class Health : MonoBehaviour, IDamageable
         _health = maxHealth;
     }
 
-    public void TakeDamage(int damage, GameObject damageSource)
+    public void TakeDamage(int damage, GameObject damageSource, float attackStrength)
     {
         _health -= damage;
         var pushDirection = gameObject.transform.position - damageSource.transform.position;
-        Debug.Log(pushDirection * 20);
-        GetComponent<Rigidbody2D>().AddForce(pushDirection.normalized * 100, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
         GetComponent<Animator>().SetTrigger("Hurt");
         if (_health <= 0)
         {

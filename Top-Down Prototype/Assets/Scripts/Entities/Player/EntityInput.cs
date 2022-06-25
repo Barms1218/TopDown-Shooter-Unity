@@ -5,8 +5,7 @@ using UnityEngine.Events;
 
 public class EntityInput : MonoBehaviour
 {
-    [SerializeField] InputController input;    
-    public bool Interact { get; private set; }
+    [SerializeField] InputController input; 
     public bool Reload { get; private set; }
     public bool Fire { get; private set; }
     public bool SpecialAttack { get; private set; }
@@ -26,14 +25,9 @@ public class EntityInput : MonoBehaviour
         Reload = input.Reload();
         SpecialAttack = input.SpecialAttack();
         Fire = input.Fire();
-        Interact = input.Interact();
         if (Fire)
         {
             OnFire?.Invoke();
-        }
-        if (Interact)
-        {
-            OnInteract?.Invoke();
         }
         if (Reload)
         {

@@ -15,3 +15,4 @@ MonoBehaviour:
   damage: 5
   timeToLive: 1
   amountOfForce: 40
+  projectileForce: 0

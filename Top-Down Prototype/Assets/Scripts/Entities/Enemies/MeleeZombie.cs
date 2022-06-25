@@ -22,7 +22,8 @@ public class MeleeZombie : Enemy
             var _direction = target.transform.position - transform.position;
             if (player.GetComponent<IDamageable>() != null)
             {
-                player.GetComponent<IDamageable>().TakeDamage(settings.Damage, this.gameObject);
+                player.GetComponent<IDamageable>().TakeDamage(
+                    settings.Damage, this.gameObject, settings.AttackStrength);
             }
             nextAttack = Time.time + 1f;
         }      

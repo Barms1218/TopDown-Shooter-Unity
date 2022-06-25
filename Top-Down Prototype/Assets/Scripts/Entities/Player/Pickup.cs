@@ -33,24 +33,19 @@ public class Pickup : MonoBehaviour
         {
             hit = Physics2D.Raycast(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
                 direction, 1.5f, interactLayer);
-                if (hit.collider.gameObject.GetComponent<IInteractable>() != null)
-                {
-                    EntityInput.OnInteract += InteractWithObject;
-                }
+            var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+            if (Input.GetKeyDown(KeyCode.E) && interactable != null)
+            {
+                hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+            }
             hud.SetInteractTextState(true);
             lineColor = Color.green;
         } 
         else
         {
-            EntityInput.OnInteract -= InteractWithObject;
             hud.SetInteractTextState(false);
         }     
         Debug.DrawRay(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
         direction, lineColor);
-    }
-
-    private void InteractWithObject()
-    {
-        hit.collider.gameObject.GetComponent<IInteractable>().Interact();
     }
 }

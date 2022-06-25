@@ -8,7 +8,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     #region Fields
 
     [SerializeField] private GameObject gun;
-    private List<GameObject> weaponList = new List<GameObject>();
+    [SerializeField] private List<GameObject> weaponList = new List<GameObject>();
     private float timeToTriggerPull;
     private Weapon currentWeapon;
     private Vector2 aimDirection;
