@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
         Health health = collision.gameObject.GetComponent<Health>();
         if (health != null)
         {
-            collision.gameObject.GetComponent<Health>()?.TakeDamage(
+            collision.gameObject.GetComponent<Health>().TakeDamage(
                 projectileData.Damage, this.gameObject, projectileData.ProjectileForce);
         }
         Destroy(gameObject);

@@ -14,7 +14,7 @@ public class EnemySM : StateMachine
     // cached components
     public Rigidbody2D rb2d;
     public Animator _animator;
-    public EnemySettings enemySettings;
+    public Enemy enemySettings;
 
     private void Awake()
     {

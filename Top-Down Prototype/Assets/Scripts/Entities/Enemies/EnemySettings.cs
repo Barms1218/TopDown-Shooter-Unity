@@ -10,12 +10,10 @@ public class EnemySettings : ScriptableObject
     [SerializeField] private int damage = 5;
     [SerializeField] private float coolDown = 1f;
     [SerializeField] private float attackStrength = 60f;
-    [SerializeField] private GameObject target;
 
     public float Speed => speed;
     public float AttackRange => attackRange;
     public int Damage => damage;
     public float CoolDown => coolDown;
     public float AttackStrength => attackStrength;
-    public GameObject Attacktarget => target;
 }

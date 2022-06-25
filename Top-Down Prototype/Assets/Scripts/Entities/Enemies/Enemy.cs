@@ -8,9 +8,9 @@ using System;
 public class Enemy : MonoBehaviour
 {
     private int points;
-    [SerializeField] protected EnemySettings settings;
+    [SerializeField] private EnemySettings settings;
 
-    protected virtual int Points
+    private int Points
     {
         set
         {

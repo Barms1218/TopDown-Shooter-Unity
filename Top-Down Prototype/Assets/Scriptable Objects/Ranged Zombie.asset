@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Ranged Zombie
   m_EditorClassIdentifier: 
   speed: 3
-  attackRange: 6
+  attackRange: 5
   damage: 5
+  coolDown: 1
+  attackStrength: 0

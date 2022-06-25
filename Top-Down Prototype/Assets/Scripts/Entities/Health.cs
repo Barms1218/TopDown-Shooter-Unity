@@ -7,8 +7,9 @@ public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private int maxHealth = 100;
 
-    int _health;
-
+    private int _health;
+    private Animator _animator;
+    private Rigidbody2D _body2d;
     public static UnityAction OnDied;
 
     float IDamageable.Health 
@@ -21,50 +22,32 @@ public class Health : MonoBehaviour, IDamageable
 
     void Awake()
     {
+        _animator = GetComponent<Animator>();
         _health = maxHealth;
+        _body2d = GetComponent<Rigidbody2D>();
     }
 
     public void TakeDamage(int damage, GameObject damageSource, float attackStrength)
     {
         _health -= damage;
         var pushDirection = gameObject.transform.position - damageSource.transform.position;
-        GetComponent<Rigidbody2D>().AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
-        GetComponent<Animator>().SetTrigger("Hurt");
+        _body2d.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
+        _animator.SetTrigger("Hurt");
         if (_health <= 0)
         {
-            Die();
+            OnDied?.Invoke();
         }
     } 
     public void RestoreHealth(int amount)
     {
-
-    }
-
-    public void Die()
-    {
-        SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
-
-        StartCoroutine(FadeOut(spriteRenderer, 1.5f));
-
-        Destroy(gameObject, 1.0f);
-    }
-
-    IEnumerator FadeOut(SpriteRenderer spriteRenderer, float duration)
-    {
-        float count = 0;
-
-        Color color = spriteRenderer.material.color;
-
-        while (count < duration)
+        if (_health < maxHealth)
         {
-            count += Time.deltaTime;
-
-            float alpha = Mathf.Lerp(1, 0, count / duration);
-
-            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
-
-            yield return null;
+            _health += amount;
+            if (_health > maxHealth)
+            {
+                _health = maxHealth;
+            }
         }
-    }
 
+    }
 }
