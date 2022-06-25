@@ -4,18 +4,41 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    EntityInput entityInput;
+    private Enemy enemy;
+    private GameObject player;
+    private bool facingRight = true;    
     // Start is called before the first frame update
     private void Awake()
     {
-        entityInput = GetComponent<EntityInput>();
+        enemy = GetComponent<Enemy>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        var player = GameObject.FindGameObjectWithTag("Player");
-        transform.position = new Vector2(entityInput.HorizontalInput * player.transform.position.x,
-        entityInput.VerticalInput * player.transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, 
+        player.transform.position, Time.deltaTime * enemy.Speed);
+
+        if (player.transform.position.x > transform.position.x
+            && !facingRight)
+        {
+            Flip();
+        }
+        else if (player.transform.position.x < transform.position.x
+            && facingRight)
+        {
+            Flip();
+        }           
     }
+
+    private void Flip()
+    {
+        Vector3 newScale = gameObject.transform.localScale;
+        newScale.x *= -1f;
+
+        facingRight = !facingRight;
+
+        gameObject.transform.localScale = newScale;
+    }    
 }
