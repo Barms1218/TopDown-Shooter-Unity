@@ -21,6 +21,11 @@ public class EnemyMove : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, 
             player.transform.position, Time.deltaTime * enemy.Speed);
+            GetComponent<Animator>().SetBool("Running", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("Running", false);
         }
 
         if (player.transform.position.x > transform.position.x

@@ -40,4 +40,12 @@ public class EnemyDeath : MonoBehaviour
             yield return null;
         }
     }
+
+    /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
+    /// </summary>
+    private void OnDestroy()
+    {
+        Health.OnDied -= HandleDeath;
+    }
 }
