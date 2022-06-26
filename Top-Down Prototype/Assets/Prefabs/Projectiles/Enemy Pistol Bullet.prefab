@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 588973802105384558}
   - component: {fileID: 811826883169508780}
   - component: {fileID: 748987354230509530}
+  - component: {fileID: -7289052403578439756}
   - component: {fileID: 3363994205910854498}
-  - component: {fileID: -5744950589920894807}
-  m_Layer: 8
-  m_Name: Shotgun Pellet
+  m_Layer: 9
+  m_Name: Enemy Pistol Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 9061488664235975576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18.454527, y: -0.42225188, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 641757711363318294, guid: 2b892f1a8255d4b92bc26cf703a01a74, type: 3}
+  m_Sprite: {fileID: -4107469028111699786, guid: 2b892f1a8255d4b92bc26cf703a01a74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,6 +108,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7289052403578439756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061488664235975576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d9cf3503be13348947e76c1bf00c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileData: {fileID: 11400000, guid: fe7bcdc91be84d4409a8de1eb76a0076, type: 2}
 --- !u!61 &3363994205910854498
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,7 +138,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.125, y: 0.083333336}
+    oldSize: {x: 0.29166666, y: 0.16666667}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -134,16 +147,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.125, y: 0.083333336}
   m_EdgeRadius: 0
---- !u!114 &-5744950589920894807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9061488664235975576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84d5148a90c33f4e9951d62172e4501, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileData: {fileID: 11400000, guid: 1c3877703be0fb04a8b0350efac004cc, type: 2}

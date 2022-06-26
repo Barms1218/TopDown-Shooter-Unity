@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //[RequireComponent(typeof(InputController))]
-public class PlayerWeaponHandler : MonoBehaviour
+public class PlayerWeaponHandler : WeaponHandler
 {
     #region Fields
 
-    [SerializeField] private GameObject gun;
-    [SerializeField] private List<GameObject> weaponList = new List<GameObject>();
-    private float timeToTriggerPull;
-    private Weapon currentWeapon;
-    private Vector2 aimDirection;
+    private List<GameObject> weaponList = new List<GameObject>();
 
     #endregion
 
@@ -45,33 +41,26 @@ public class PlayerWeaponHandler : MonoBehaviour
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         aimDirection = mousePos - transform.position;
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;        
-        currentWeapon.Aim(angle);
-        currentWeapon.AimAngle = angle;
+        currentWeapon.Aim(angle, GameObject.FindGameObjectWithTag("Cursor").transform);
     }
 
     #region Event Methods
 
-    private void Reload()
+    protected override void Reload()
     {
-        currentWeapon.Reload();
+        base.Reload();
     }
 
-    private void Fire()
+    protected override void Fire()
     {
-
-        if (currentWeapon.CurrentAmmo > 0 && CanFire())
-        {
-            currentWeapon.Fire(aimDirection, currentWeapon);
-            timeToTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
-        }
+        base.Fire();
     }
 
-    private void SpecialAttack()
+    protected override void SpecialAttack()
     {
         currentWeapon.SpecialAttack();
     }
 
     #endregion
 
-    private bool CanFire() => Time.time >= timeToTriggerPull;
 }

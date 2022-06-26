@@ -35,15 +35,15 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     }
 
 
-    public virtual void Aim(float angle)
+    public virtual void Aim(float angle, Transform target)
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (mousePos.x < transform.position.x && !facingRight)
+        if (target.position.x < transform.position.x && !facingRight)
         {
             Flip();
         }
-        else if (mousePos.x > transform.position.x && facingRight)
+        else if (target.position.x > transform.position.x && facingRight)
         {
             Flip();
         }

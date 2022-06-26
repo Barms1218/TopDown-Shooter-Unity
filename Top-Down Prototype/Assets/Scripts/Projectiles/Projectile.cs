@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     private float timeToLive;
     private Weapon weapon;
     [SerializeField] private ProjectileData projectileData;
-
+    private GameObject intendedTarget;
     #endregion
 
     #region Properties
@@ -31,16 +31,22 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 
-    void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// Sent when an incoming collider makes contact with this object's
+    /// collider (2D physics only).
+    /// </summary>
+    /// <param name="other">The Collision2D data associated with this collision.</param>
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Health health = collision.gameObject.GetComponent<Health>();
-        if (health != null)
+        IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
+        if (damageable != null)
         {
-            collision.gameObject.GetComponent<Health>().TakeDamage(
-                projectileData.Damage, this.gameObject, projectileData.ProjectileForce);
+            damageable.TakeDamage(projectileData.Damage, this.gameObject, 
+            projectileData.ProjectileForce);
         }
-        Destroy(gameObject);
+        Destroy(gameObject);        
     }
 
     public void MoveToTarget(Vector2 force)

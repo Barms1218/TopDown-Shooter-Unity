@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5114801586880999091}
   - component: {fileID: -2603206477184613473}
   - component: {fileID: 4224721485798129384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AR Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
