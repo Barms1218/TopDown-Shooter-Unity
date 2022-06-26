@@ -3822,6 +3822,10 @@ PrefabInstance:
       value: Assault Rifle Zombie
       objectReference: {fileID: 0}
     - target: {fileID: 3543103714409048337, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543103714409048337, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -3962,7 +3966,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2868682374913035499, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 3223275096147143168, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
       propertyPath: input
