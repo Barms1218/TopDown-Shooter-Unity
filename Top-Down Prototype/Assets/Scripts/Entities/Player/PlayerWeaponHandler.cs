@@ -8,6 +8,7 @@ public class PlayerWeaponHandler : WeaponHandler
     #region Fields
 
     private List<GameObject> weaponList = new List<GameObject>();
+    private HUD hud;
 
     #endregion
 
@@ -31,6 +32,9 @@ public class PlayerWeaponHandler : WeaponHandler
     {
         weaponList.Add(gun);
         currentWeapon = gun.GetComponent<Weapon>();
+        hud = GameObject.FindObjectOfType<HUD>();
+        hud.CurrentAmmo = currentWeapon.CurrentAmmo;
+        hud.MaxAmmo = currentWeapon.MaxAmmo;
         EntityInput.OnReload += Reload;
         EntityInput.OnSpecialAttack += SpecialAttack;
         EntityInput.OnFire += Fire;
@@ -53,7 +57,13 @@ public class PlayerWeaponHandler : WeaponHandler
 
     protected override void Fire()
     {
-        base.Fire();
+        if (currentWeapon.CurrentAmmo > 0 && CanFire)
+        {
+            currentWeapon.Fire(aimDirection);
+            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
+        }        
+    
+        hud.CurrentAmmo = currentWeapon.CurrentAmmo;
     }
 
     protected override void SpecialAttack()

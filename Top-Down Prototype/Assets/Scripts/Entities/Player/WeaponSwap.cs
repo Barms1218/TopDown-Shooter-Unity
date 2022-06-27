@@ -6,8 +6,13 @@ using UnityEngine;
 public class WeaponSwap : MonoBehaviour
 {
     PlayerWeaponHandler weaponHandler;
+    HUD hud;
 
-    void Awake() => weaponHandler = GetComponent<PlayerWeaponHandler>();
+    private void Awake()
+    {
+        weaponHandler = GetComponent<PlayerWeaponHandler>();
+        hud = GameObject.FindObjectOfType<HUD>();
+    } 
 
     private void Update()
     {
@@ -20,41 +25,51 @@ public class WeaponSwap : MonoBehaviour
                 weaponHandler.Gun = weaponHandler.WeaponList[0];
                 weaponHandler.WeaponList[0].SetActive(true);
                 weaponHandler.CurrentWeapon = weaponHandler.WeaponList[0].GetComponent<Weapon>();
+                SetHudAmmo();
             }
             catch (System.Exception exception)
             {
                 Debug.Log(exception);
-                weaponHandler.Gun.SetActive(true);                }
+                weaponHandler.Gun.SetActive(true);                
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            try
             {
-                try
-                {
-                    weaponHandler.Gun.SetActive(false);
-                    weaponHandler.Gun = weaponHandler.WeaponList[1];
-                    weaponHandler.WeaponList[1].SetActive(true);
-                    weaponHandler.CurrentWeapon = weaponHandler.WeaponList[1].GetComponent<Weapon>();
-                }
-                catch(System.Exception exception)
-                {
-                    Debug.Log(exception);
-                    weaponHandler.Gun.SetActive(true);
-                }
+                weaponHandler.Gun.SetActive(false);
+                weaponHandler.Gun = weaponHandler.WeaponList[1];
+                weaponHandler.WeaponList[1].SetActive(true);
+                weaponHandler.CurrentWeapon = weaponHandler.WeaponList[1].GetComponent<Weapon>();
+                SetHudAmmo();
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            catch(System.Exception exception)
             {
-                try
-                {
-                    weaponHandler.Gun.SetActive(false);
-                    weaponHandler.Gun = weaponHandler.WeaponList[2];
-                    weaponHandler.WeaponList[2].SetActive(true);
-                    weaponHandler.CurrentWeapon = weaponHandler.WeaponList[2].GetComponent<Weapon>();
-                }
-                catch(System.Exception exception)
-                {
-                    Debug.Log(exception);
-                    weaponHandler.Gun.SetActive(true);
-                }
-            }        
+                Debug.Log(exception);
+                weaponHandler.Gun.SetActive(true);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            try
+            {
+                weaponHandler.Gun.SetActive(false);
+                weaponHandler.Gun = weaponHandler.WeaponList[2];
+                weaponHandler.WeaponList[2].SetActive(true);
+                weaponHandler.CurrentWeapon = weaponHandler.WeaponList[2].GetComponent<Weapon>();
+                SetHudAmmo();
+            }
+            catch(System.Exception exception)
+            {
+                Debug.Log(exception);
+                weaponHandler.Gun.SetActive(true);
+            }
+        }        
+    }
+
+    void SetHudAmmo()
+    {
+        hud.CurrentAmmo = weaponHandler.CurrentWeapon.CurrentAmmo;
+        hud.MaxAmmo = weaponHandler.CurrentWeapon.MaxAmmo;
     }
 }

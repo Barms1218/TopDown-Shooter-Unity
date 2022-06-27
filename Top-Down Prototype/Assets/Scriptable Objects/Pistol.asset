@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12604e66c8f86df42986309dcde512db, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  damage: 5
   fireRate: 0.5
   maxAmmo: 15
   ammoPerShot: 1
-  reloadSpeed: 1.2
+  reloadSpeed: 2

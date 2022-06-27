@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5416292742926382955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.61, y: 0, z: 0}
+  m_LocalPosition: {x: 0.62, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,10 +131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9c454d31b4b5e824db76a1428226807c, type: 2}
-  reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
   muzzleTransform: {fileID: 5416292742926382952}
-  input: {fileID: 0}
+  numProjectiles: 5
   pelletSpread: 0.71
 --- !u!61 &7957779073280548603
 BoxCollider2D:

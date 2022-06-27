@@ -22,20 +22,17 @@ public class PelletProjectile : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="collision"></param>
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        Health health = collision.gameObject.GetComponent<Health>();
-        if (health != null)
-        {
-            health.TakeDamage(projectileData.Damage, this.gameObject, projectileData.ProjectileForce);
-            Destroy(gameObject);
-        }
 
+private void OnTriggerEnter2D(Collider2D other)
+{
+    IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
+    if (damageable != null)
+    {
+        damageable.TakeDamage(projectileData.Damage, this.gameObject, 
+        projectileData.ProjectileForce);
     }
+    Destroy(gameObject);       
+}
 
     /// <summary>
     /// 

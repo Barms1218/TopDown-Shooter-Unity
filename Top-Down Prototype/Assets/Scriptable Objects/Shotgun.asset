@@ -15,4 +15,4 @@ MonoBehaviour:
   fireRate: 1
   maxAmmo: 5
   ammoPerShot: 1
-  reloadSpeed: 1
+  reloadSpeed: 1.25

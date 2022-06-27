@@ -5,12 +5,11 @@ using UnityEngine;
 public class Shotgun : Weapon, IInteractable
 {
     [SerializeField] int numProjectiles = 5;
-    [SerializeField] float pelletSpread = 0.5f;
+    [SerializeField,Range(0, 2f)] float pelletSpread = 0.5f;
     private bool firing;
 
-    public override void Fire(Vector2 direction, Weapon weapon)
+    public override void Fire(Vector2 direction)
     {
-        base.Fire(direction, weapon);
         for (int i = 0; i < numProjectiles; i++)
         {
             var pellet = Instantiate(projectilePrefab, muzzleTransform.position, 
@@ -20,6 +19,7 @@ public class Shotgun : Weapon, IInteractable
             direction.y -= Random.Range(-pelletSpread, pelletSpread);
             pelletScript.MoveToTarget(direction);
         }
+        currentAmmo -= AmmoPerShot;
         AudioManager.Play(AudioClipName.ShotgunBlast);
         firing = true;
     }

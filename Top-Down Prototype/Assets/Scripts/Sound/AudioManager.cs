@@ -33,7 +33,7 @@ public static class AudioManager
         audioClips.Add(AudioClipName.PistolStopReload,
             Resources.Load<AudioClip>("Pistol_Finish_Reload"));
         audioClips.Add(AudioClipName.ShotgunBlast,
-            Resources.Load<AudioClip>("Pump Action Shot"));
+            Resources.Load<AudioClip>("Shotgun_Two"));
         audioClips.Add(AudioClipName.ShotgunReload,
             Resources.Load<AudioClip>("Shotgun_Reload"));
     }

@@ -8,16 +8,15 @@ public class AssaultRifle : Weapon, IInteractable
     /// <summary>
     /// 
     /// </summary>
-    public override void Fire(Vector2 direction, Weapon weapon)
+    public override void Fire(Vector2 direction)
     {
         if (!reloading)
         {
-            base.Fire(direction, weapon);
             var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
                 Quaternion.identity);
 
             var bulletScript = projectile.GetComponent<Projectile>();
-
+            currentAmmo -= AmmoPerShot;
             bulletScript.MoveToTarget(direction);
             AudioManager.Play(AudioClipName.AR_Fire);
         }

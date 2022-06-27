@@ -12,7 +12,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     [SerializeField] protected Transform muzzleTransform;
     protected bool reloading = false;
     protected HUD hud;
-    Vector3 mousePos;
     protected bool facingRight;
     protected PlayerWeaponHandler weaponHandler;
 
@@ -23,7 +22,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     public int MaxAmmo => data.MaxAmmo;
     public float TimeBetweenShots => data.FireRate;
     public int CurrentAmmo => currentAmmo;
-    public float AimAngle { get; set; }
+    public int AmmoPerShot => data.AmmoPerShot;
 
     #endregion
 
@@ -37,8 +36,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
     public virtual void Aim(float angle, Transform target)
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         if (target.position.x < transform.position.x && !facingRight)
         {
             Flip();
@@ -53,11 +50,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     }
 
     // Virtual because all guns expend ammo the same way
-    public virtual void Fire(Vector2 direction, Weapon weapon)
-    {
-        currentAmmo -= data.AmmoPerShot;
-        hud.CurrentAmmo = currentAmmo;
-    }
+    public abstract void Fire(Vector2 direction);
 
     public abstract void SpecialAttack();
 
@@ -93,11 +86,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         weaponHandler.CurrentWeapon = GetComponent<Weapon>();
         weaponHandler.Gun.SetActive(true);
         GetComponent<BoxCollider2D>().enabled = false;
+        hud.MaxAmmo = weaponHandler.CurrentWeapon.MaxAmmo;
+        hud.CurrentAmmo = weaponHandler.CurrentWeapon.currentAmmo;
     }
-
-    protected virtual void OnEnable()
-     {
-        hud.CurrentAmmo = currentAmmo;
-        hud.MaxAmmo = data.MaxAmmo;
-     }
 }

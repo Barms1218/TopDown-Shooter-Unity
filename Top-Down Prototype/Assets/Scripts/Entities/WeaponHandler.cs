@@ -12,14 +12,8 @@ public abstract class WeaponHandler : MonoBehaviour
     {
         currentWeapon.Reload();
     }
-    protected virtual void Fire()
-    {
-        if (currentWeapon.CurrentAmmo > 0 && CanFire)
-        {
-            currentWeapon.Fire(aimDirection, currentWeapon);
-            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
-        }        
-    }
+    protected abstract void Fire();
+
     protected abstract void SpecialAttack();
     protected virtual bool CanFire => Time.time >= nextTriggerPull;
 

@@ -30,13 +30,16 @@ public class EnemyWeaponHandler : WeaponHandler
                 Fire();
             }
         }
-
-        if (currentWeapon.CurrentAmmo <= 0)
-        {
-            base.Reload();
-        }
     }
 
+    protected override void Fire()
+    {
+        if (CanFire)
+        {
+            currentWeapon.Fire(aimDirection);
+            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
+        }   
+    }
     protected override void SpecialAttack()
     {
         return;
