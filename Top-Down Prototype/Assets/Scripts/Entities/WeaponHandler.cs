@@ -14,7 +14,11 @@ public abstract class WeaponHandler : MonoBehaviour
     }
     protected abstract void Fire();
 
-    protected abstract void SpecialAttack();
+    protected virtual void SpecialAttack()
+    {
+        currentWeapon.SpecialAttack();
+    }
+
     protected virtual bool CanFire => Time.time >= nextTriggerPull;
 
 }

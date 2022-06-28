@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 //[RequireComponent(typeof(InputController))]
 public class PlayerWeaponHandler : WeaponHandler
 {
     #region Fields
 
-    private List<GameObject> weaponList = new List<GameObject>();
-    private HUD hud;
+    [SerializeField] private List<GameObject> weaponList = new List<GameObject>();
+    public static UnityAction<int, int> ReduceAmmo;
+    public static UnityAction<int, int> SetAmmoCount;
 
     #endregion
 
@@ -32,12 +34,15 @@ public class PlayerWeaponHandler : WeaponHandler
     {
         weaponList.Add(gun);
         currentWeapon = gun.GetComponent<Weapon>();
-        hud = GameObject.FindObjectOfType<HUD>();
-        hud.CurrentAmmo = currentWeapon.CurrentAmmo;
-        hud.MaxAmmo = currentWeapon.MaxAmmo;
+        WeaponSwap.OnWeaponSwap += ChangeWeapon;
+    }
+
+    private void Start()
+    {
+        SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         EntityInput.OnReload += Reload;
         EntityInput.OnSpecialAttack += SpecialAttack;
-        EntityInput.OnFire += Fire;
+        EntityInput.OnFire += Fire;        
     }
 
     private void Update()
@@ -50,27 +55,34 @@ public class PlayerWeaponHandler : WeaponHandler
 
     #region Event Methods
 
-    protected override void Reload()
-    {
-        base.Reload();
-    }
-
     protected override void Fire()
     {
         if (currentWeapon.CurrentAmmo > 0 && CanFire)
         {
             currentWeapon.Fire(aimDirection);
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
-        }        
-    
-        hud.CurrentAmmo = currentWeapon.CurrentAmmo;
-    }
-
-    protected override void SpecialAttack()
-    {
-        currentWeapon.SpecialAttack();
+        }
+        ReduceAmmo?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
     #endregion
 
+    private void ChangeWeapon(int weaponIndex)
+    {
+        if (weaponList[weaponIndex] != null)
+        {
+            gun.SetActive(false);
+            gun = weaponList[weaponIndex];
+            weaponList[weaponIndex].SetActive(true);
+            currentWeapon = gun.GetComponent<Weapon>();
+
+            SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+        }
+       
+    }
+
+    private void GetNewWeapon()
+    {
+
+    }
 }

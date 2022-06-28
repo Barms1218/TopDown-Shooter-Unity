@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 {
     #region Fields
 
     [SerializeField] protected GunData data;
-    protected int currentAmmo;
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Transform muzzleTransform;
+    protected int currentAmmo;
     protected bool reloading = false;
-    protected HUD hud;
     protected bool facingRight;
     protected PlayerWeaponHandler weaponHandler;
+    public static UnityAction OnReload;
+    public static UnityAction<GameObject> OnPickUp;
 
     #endregion
 
@@ -28,7 +30,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
     protected virtual void Awake()
     {
-        hud = FindObjectOfType<HUD>();
         weaponHandler = FindObjectOfType<PlayerWeaponHandler>();
         currentAmmo = data.MaxAmmo;
     }
@@ -77,7 +78,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         GetComponent<Weapon>().enabled = true;
         
         // Flip the weapon to proper scale to match player's
-        if (this.gameObject.transform.position.x < weaponHandler.transform.position.x)
+        if (gameObject.transform.position.x < weaponHandler.transform.position.x)
         {
             Vector3 newScale = weaponHandler.Gun.transform.localScale;
             newScale.x *= -1;
@@ -86,7 +87,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         weaponHandler.CurrentWeapon = GetComponent<Weapon>();
         weaponHandler.Gun.SetActive(true);
         GetComponent<BoxCollider2D>().enabled = false;
-        hud.MaxAmmo = weaponHandler.CurrentWeapon.MaxAmmo;
-        hud.CurrentAmmo = weaponHandler.CurrentWeapon.currentAmmo;
+        PlayerWeaponHandler.SetAmmoCount?.Invoke(weaponHandler.CurrentWeapon.currentAmmo,
+        weaponHandler.CurrentWeapon.currentAmmo);
     }
 }

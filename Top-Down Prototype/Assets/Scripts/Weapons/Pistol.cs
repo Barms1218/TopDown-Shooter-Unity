@@ -47,7 +47,7 @@ public class Pistol : Weapon, IInteractable
         yield return new WaitForSeconds(data.ReloadSpeed);
 
         currentAmmo = data.MaxAmmo;
-        hud.CurrentAmmo = currentAmmo;
+        PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, MaxAmmo);
         reloading = false;
         //AudioManager.Play(AudioClipName.PistolStopReload);
     }

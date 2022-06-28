@@ -2,23 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Pickup : MonoBehaviour
 {
-    private PlayerWeaponHandler weaponHandler;
-    private Weapon weapon;
-    private HUD hud;
     private LayerMask interactLayer;
-    private RaycastHit2D hit;
-    private int gunIndex = 0;
-        
-    private void Awake()
-    {
-        weaponHandler = GetComponent<PlayerWeaponHandler>();
-        weapon = GetComponent<Weapon>();
-        interactLayer = LayerMask.GetMask("Interactables");
-        hud = FindObjectOfType<HUD>();
-    }
+    public static UnityAction<bool> OnRayCast;
+
+    private void Awake() => interactLayer = LayerMask.GetMask("Interactables");
 
     private void FixedUpdate()
     {
@@ -28,24 +19,24 @@ public class Pickup : MonoBehaviour
         Color lineColor;
         
         lineColor = Color.red;
-        if (Physics2D.Raycast(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
+        if (Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, 
         direction, 1.5f, interactLayer))
         {
-            hit = Physics2D.Raycast(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
-                direction, 1.5f, interactLayer);
+            RaycastHit2D hit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, 
+                direction, 2.5f, interactLayer);
             var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
             if (Input.GetKeyDown(KeyCode.E) && interactable != null)
             {
                 hit.collider.gameObject.GetComponent<IInteractable>().Interact();
             }
-            hud.SetInteractTextState(true);
+            OnRayCast?.Invoke(true);
             lineColor = Color.green;
         } 
         else
         {
-            hud.SetInteractTextState(false);
+            OnRayCast?.Invoke(false);
         }     
-        Debug.DrawRay(weaponHandler.GetComponent<CapsuleCollider2D>().bounds.center, 
+        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.center, 
         direction, lineColor);
     }
 }

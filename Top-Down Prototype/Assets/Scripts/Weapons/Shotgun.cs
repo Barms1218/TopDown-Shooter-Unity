@@ -37,7 +37,7 @@ public class Shotgun : Weapon, IInteractable
         while (currentAmmo < data.MaxAmmo && !firing)
         {
             currentAmmo++;
-            hud.CurrentAmmo++;
+            PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, MaxAmmo);
             AudioManager.Play(AudioClipName.ShotgunReload);
             yield return new WaitForSeconds(data.ReloadSpeed);
             reloading = false;
