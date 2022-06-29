@@ -4,10 +4,9 @@ using UnityEngine;
 
 public abstract class InputController : ScriptableObject
 {
-    public abstract bool Fire();
-    public abstract bool Reload();
-    public abstract bool SpecialAttack();
-    public abstract bool Interact();
-    public abstract float HorizontalInput();
-    public abstract float VerticalInput();
+    public abstract bool FireInput();
+    public abstract bool ReloadInput();
+    public abstract bool SpecialAttackInput();
+    public abstract bool InteractInput();
+    public abstract bool DashInput();
 }

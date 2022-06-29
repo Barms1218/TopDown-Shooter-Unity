@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using Pathfinding;
 using System;
 
 public class Enemy : MonoBehaviour

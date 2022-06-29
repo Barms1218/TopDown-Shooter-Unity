@@ -59,14 +59,13 @@ GameObject:
   - component: {fileID: 2579200449049318825}
   - component: {fileID: 2579200449049318826}
   - component: {fileID: 2579200449049318830}
-  - component: {fileID: 3454780445289835518}
+  - component: {fileID: 5142457985080246888}
   - component: {fileID: 8774389759331695210}
   - component: {fileID: 945709865741816382}
   - component: {fileID: 2262175345093553424}
   - component: {fileID: 4103801259516615155}
-  - component: {fileID: 2579200449049318817}
   - component: {fileID: 2579200449655979786}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Zombie Inmate
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -162,7 +161,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3454780445289835518
+--- !u!114 &5142457985080246888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,22 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84a3d5a8527c7341a1dd821232d5bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &2579200449049318817
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.01205492, y: 0.48417813}
-  m_Size: {x: 0.59198666, y: 1.0808562}
-  m_Direction: 0
 --- !u!95 &2579200449655979786
 Animator:
   serializedVersion: 4

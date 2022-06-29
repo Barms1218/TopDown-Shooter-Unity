@@ -10,9 +10,6 @@ public class OrientPlayer : MonoBehaviour, IFlippable
 
     #endregion
 
-    /// <summary>
-    /// 
-    /// </summary>
     void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -27,10 +24,6 @@ public class OrientPlayer : MonoBehaviour, IFlippable
         }
     }
 
-    /// <summary>
-    /// Have player character face the direction of the
-    /// mouse cursor
-    /// </summary>
     public virtual void Flip()
     {
         Vector3 newScale = gameObject.transform.localScale;

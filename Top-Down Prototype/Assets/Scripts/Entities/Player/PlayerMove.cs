@@ -14,7 +14,6 @@ public class PlayerMove : MonoBehaviour
     
     void Awake() => _body = GetComponent<Rigidbody2D>();
 
-    // Update is called once per frame
     void Update()
     {
         _velocity = _body.velocity;
@@ -25,9 +24,6 @@ public class PlayerMove : MonoBehaviour
         _body.velocity = _velocity;        
     }
 
-    /// <summary>
-    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-    /// </summary>
     private void FixedUpdate()
     {
         _direction.x = Input.GetAxis("Horizontal");

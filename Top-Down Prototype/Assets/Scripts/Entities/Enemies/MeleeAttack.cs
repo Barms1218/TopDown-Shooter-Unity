@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MeleeAttack : MonoBehaviour
 {
     private float nextAttack;
     private float recoverTime;
     private Enemy settings;
-    GameObject player;
+    private GameObject player;
+    public static UnityAction<bool> OnMelee;
 
     // Start is called before the first frame update
     private void Awake()
@@ -48,10 +50,13 @@ public class MeleeAttack : MonoBehaviour
         while (recoverTime < 1)
         {
             recoverTime += Time.deltaTime;
-            GetComponent<EnemyMove>().enabled = false;
+            //GetComponent<EnemyMove>().enabled = false;
+            OnMelee?.Invoke(false);
+            GetComponent<Animator>().SetBool("Running", false);
             yield return null;
         }
-        GetComponent<EnemyMove>().enabled = true;
+        //GetComponent<EnemyMove>().enabled = true;
+        OnMelee?.Invoke(true);
     }
 
     private bool CanAttack() => Time.time >= nextAttack;

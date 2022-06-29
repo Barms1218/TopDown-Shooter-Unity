@@ -8,8 +8,13 @@ public class Pickup : MonoBehaviour
 {
     private LayerMask interactLayer;
     public static UnityAction<bool> OnRayCast;
+    private Collider2D playerCollider;
 
-    private void Awake() => interactLayer = LayerMask.GetMask("Interactables");
+    private void Awake()
+    {
+        interactLayer = LayerMask.GetMask("Interactables");
+        playerCollider = GetComponent<Collider2D>();
+    }
 
     private void FixedUpdate()
     {
@@ -19,11 +24,10 @@ public class Pickup : MonoBehaviour
         Color lineColor;
         
         lineColor = Color.red;
-        if (Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, 
-        direction, 1.5f, interactLayer))
+        if (Physics2D.Raycast(playerCollider.bounds.center, direction, 1.5f, interactLayer))
         {
-            RaycastHit2D hit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, 
-                direction, 2.5f, interactLayer);
+            RaycastHit2D hit = Physics2D.Raycast(
+                playerCollider.bounds.center, direction, 2.5f, interactLayer);
             var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
             if (Input.GetKeyDown(KeyCode.E) && interactable != null)
             {
@@ -36,7 +40,6 @@ public class Pickup : MonoBehaviour
         {
             OnRayCast?.Invoke(false);
         }     
-        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.center, 
-        direction, lineColor);
+        Debug.DrawRay(playerCollider.bounds.center, direction, lineColor);
     }
 }

@@ -35,6 +35,7 @@ public class PlayerWeaponHandler : WeaponHandler
         weaponList.Add(gun);
         currentWeapon = gun.GetComponent<Weapon>();
         WeaponSwap.OnWeaponSwap += ChangeWeapon;
+        Weapon.OnPickUp += GetNewWeapon;
     }
 
     private void Start()
@@ -81,8 +82,26 @@ public class PlayerWeaponHandler : WeaponHandler
        
     }
 
-    private void GetNewWeapon()
+    private void GetNewWeapon(GameObject newGun)
     {
-
+        Gun.SetActive(false);        
+        WeaponList.Add(newGun);
+        newGun.transform.SetParent(transform);
+        newGun.transform.position = Gun.transform.position;
+        Gun = newGun;      
+        Gun.GetComponent<Weapon>().enabled = true;
+        
+        // Flip the weapon to proper scale to match player's
+        if (newGun.transform.position.x < transform.position.x)
+        {
+            Vector3 newScale = Gun.transform.localScale;
+            newScale.x *= -1;
+            Gun.transform.localScale = newScale;
+        }          
+        CurrentWeapon = newGun.GetComponent<Weapon>();
+        Gun.SetActive(true);
+        Gun.GetComponent<Collider2D>().enabled = false;
+        PlayerWeaponHandler.SetAmmoCount?.Invoke(CurrentWeapon.CurrentAmmo,
+        CurrentWeapon.CurrentAmmo);
     }
 }

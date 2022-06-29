@@ -13,7 +13,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     protected int currentAmmo;
     protected bool reloading = false;
     protected bool facingRight;
-    protected PlayerWeaponHandler weaponHandler;
     public static UnityAction OnReload;
     public static UnityAction<GameObject> OnPickUp;
 
@@ -28,12 +27,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
     #endregion
 
-    protected virtual void Awake()
-    {
-        weaponHandler = FindObjectOfType<PlayerWeaponHandler>();
-        currentAmmo = data.MaxAmmo;
-    }
-
+    protected virtual void Awake() => currentAmmo = data.MaxAmmo;
 
     public virtual void Aim(float angle, Transform target)
     {
@@ -50,7 +44,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         transform.rotation = rotation;
     }
 
-    // Virtual because all guns expend ammo the same way
     public abstract void Fire(Vector2 direction);
 
     public abstract void SpecialAttack();
@@ -68,26 +61,5 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         transform.localScale = newScale;
     }
 
-    protected virtual void Interact()
-    {
-        weaponHandler.Gun.SetActive(false);        
-        weaponHandler.WeaponList.Add(this.gameObject);
-        transform.SetParent(weaponHandler.transform);
-        transform.position = weaponHandler.Gun.transform.position;
-        weaponHandler.Gun = this.gameObject;      
-        GetComponent<Weapon>().enabled = true;
-        
-        // Flip the weapon to proper scale to match player's
-        if (gameObject.transform.position.x < weaponHandler.transform.position.x)
-        {
-            Vector3 newScale = weaponHandler.Gun.transform.localScale;
-            newScale.x *= -1;
-            weaponHandler.Gun.transform.localScale = newScale;
-        }          
-        weaponHandler.CurrentWeapon = GetComponent<Weapon>();
-        weaponHandler.Gun.SetActive(true);
-        GetComponent<BoxCollider2D>().enabled = false;
-        PlayerWeaponHandler.SetAmmoCount?.Invoke(weaponHandler.CurrentWeapon.currentAmmo,
-        weaponHandler.CurrentWeapon.currentAmmo);
-    }
+    protected virtual void Interact() => OnPickUp?.Invoke(gameObject);
 }

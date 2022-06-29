@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 4042253683196191775}
   - component: {fileID: 4563384947020002784}
   - component: {fileID: 7490895233034298544}
-  - component: {fileID: 7490895233034298545}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -241,22 +240,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!70 &7490895233034298545
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7490895233034298552}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.039423466, y: 0.5391768}
-  m_Size: {x: 0.6035367, y: 1.1345313}
-  m_Direction: 0
 --- !u!1001 &6704132522768850120
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,11 +6,10 @@ public class EnemyWeaponHandler : WeaponHandler
 {
     private GameObject player;
     private bool facingRight;
-    private Enemy settings;    
+    private EnemySettings rangedAttackData;    
 
     private void Awake()
     {
-        settings = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
         currentWeapon = gun.GetComponent<Weapon>();
     }
@@ -25,7 +24,7 @@ public class EnemyWeaponHandler : WeaponHandler
         if (player != null)
         {
             var _distance = Vector2.Distance(player.transform.position, transform.position);
-            if (_distance < settings.AttackRange)
+            if (_distance < rangedAttackData.AttackRange)
             {
                 Fire();
             }
