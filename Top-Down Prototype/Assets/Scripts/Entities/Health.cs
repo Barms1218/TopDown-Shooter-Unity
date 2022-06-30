@@ -10,7 +10,7 @@ public class Health : MonoBehaviour, IDamageable
     private int _health;
     private Animator _animator;
     private Rigidbody2D _body2d;
-    public static UnityAction OnDied;
+    public static UnityAction<GameObject> OnDied;
 
     float IDamageable.Health 
     { 
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour, IDamageable
         _animator.SetTrigger("Hurt");
         if (_health <= 0)
         {
-            OnDied?.Invoke();
+            OnDied?.Invoke(this.gameObject);
         }
     } 
     public void RestoreHealth(int amount)

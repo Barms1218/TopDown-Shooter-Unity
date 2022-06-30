@@ -23,8 +23,7 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(player.transform.position, 
-        transform.position) > enemy.AttackRange && canMove)
+        if (Vector2.Distance(player.transform.position, transform.position) > enemy.AttackRange)
         {
             transform.position = Vector2.MoveTowards(transform.position, 
             player.transform.position, Time.deltaTime * enemy.Speed);
@@ -57,8 +56,9 @@ public class EnemyMove : MonoBehaviour
         gameObject.transform.localScale = newScale;
     }
 
-    private void ChangeMoveState(bool moveBool)
+    private void ChangeMoveState(bool moveBool, MeleeAttack attackingEnemy)
     {
-        canMove = moveBool;
+        var attackingEnemyMovement = attackingEnemy.GetComponent<EnemyMove>();
+        attackingEnemyMovement.enabled = moveBool;
     }    
 }

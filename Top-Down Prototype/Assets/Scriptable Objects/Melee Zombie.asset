@@ -16,4 +16,4 @@ MonoBehaviour:
   attackRange: 0
   damage: 5
   coolDown: 1
-  attackStrength: 60
+  attackStrength: 25

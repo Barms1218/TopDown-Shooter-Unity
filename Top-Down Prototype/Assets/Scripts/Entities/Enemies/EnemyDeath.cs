@@ -6,20 +6,20 @@ public class EnemyDeath : MonoBehaviour
 {
     private void Awake() => Health.OnDied += HandleDeath;
 
-    private void HandleDeath()
+    private void HandleDeath(GameObject dyingObject)
     {
-        if (GetComponent<IDamageable>().Health <= 0)
-        {
-            GetComponent<EnemyMove>().enabled = false;
-            //GetComponent<MeleeAttack>().enabled = false;
-            GetComponent<Animator>().SetTrigger("Dying");
+        var dyingObjectMovement = dyingObject.GetComponent<EnemyMove>();
+        var dyingObjectAnimator = dyingObject.GetComponent<Animator>();
+        var dyingObjectCollider = dyingObject.GetComponent<Collider2D>();
+        dyingObjectMovement.enabled = false;
+        //GetComponent<MeleeAttack>().enabled = false;
+        dyingObjectAnimator.SetTrigger("Dying");
+        Debug.Log(dyingObject.name);
+        //SpriteRenderer spriteRenderer =  dyingObject.GetComponent<SpriteRenderer>();
 
-            SpriteRenderer spriteRenderer =  gameObject.GetComponent<SpriteRenderer>();
-
-            StartCoroutine(FadeOut(spriteRenderer, 1.0f));
-
-            Destroy(gameObject, 1.0f);
-        }
+        //StartCoroutine(FadeOut(spriteRenderer, 1.0f));
+        dyingObjectCollider.enabled = false;
+        Destroy(dyingObject, 1.0f);
 
     }
 

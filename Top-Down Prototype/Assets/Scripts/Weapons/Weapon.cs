@@ -79,7 +79,6 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
         PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);       
         reloading = false;
-        
     }
     protected virtual void Flip()
     {

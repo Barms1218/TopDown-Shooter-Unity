@@ -10,7 +10,7 @@ public class MeleeAttack : MonoBehaviour
     private float recoverTime;
     private Enemy settings;
     private GameObject player;
-    public static UnityAction<bool> OnMelee;
+    public static UnityAction<bool, MeleeAttack> OnMelee;
 
     // Start is called before the first frame update
     private void Awake()
@@ -67,12 +67,12 @@ public class MeleeAttack : MonoBehaviour
         {
             recoverTime += Time.deltaTime;
             //GetComponent<EnemyMove>().enabled = false;
-            OnMelee?.Invoke(false);
+            OnMelee?.Invoke(false, this);
             GetComponent<Animator>().SetBool("Running", false);
             yield return null;
         }
         //GetComponent<EnemyMove>().enabled = true;
-        OnMelee?.Invoke(true);
+        OnMelee?.Invoke(true, this);
     }
 
     private bool CanAttack() => Time.time >= nextAttack;

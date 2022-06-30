@@ -27,11 +27,15 @@ public class Pistol : Weapon, IInteractable
             lineRenderer.enabled = true;
         }
     }
-
     protected override IEnumerator StartReload()
     {
+        reloading = true;
         AudioManager.Play(AudioClipName.PistolStartReload);
-        yield return StartCoroutine(base.StartReload());
+        yield return new WaitForSeconds(data.ReloadSpeed);
+        currentAmmo = magazineSize;
 
+
+        PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);       
+        reloading = false;
     }
 }
