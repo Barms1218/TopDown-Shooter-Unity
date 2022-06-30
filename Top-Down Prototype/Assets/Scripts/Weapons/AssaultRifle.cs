@@ -27,22 +27,9 @@ public class AssaultRifle : Weapon, IInteractable
         return;
     }
 
-    public override void Reload()
-    {
-        if (!reloading)
-        {
-            StartCoroutine(StartReload());
-        }
-    }
-
     protected override IEnumerator StartReload()
     {
-        reloading = true;
-        yield return new WaitForSeconds(data.ReloadSpeed);
-
-        currentAmmo = data.MaxAmmo;
-        PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, MaxAmmo);       
-        reloading = false;
+        yield return StartCoroutine(base.StartReload());
         AudioManager.Play(AudioClipName.AR_Finish_Reload);
     }
 }

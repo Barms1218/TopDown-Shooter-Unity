@@ -28,27 +28,10 @@ public class Pistol : Weapon, IInteractable
         }
     }
 
-    public override void Reload()
-    {
-        if (!reloading)
-        {
-            StartCoroutine(StartReload());
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     protected override IEnumerator StartReload()
     {
-        reloading = true;
         AudioManager.Play(AudioClipName.PistolStartReload);
-        yield return new WaitForSeconds(data.ReloadSpeed);
+        yield return StartCoroutine(base.StartReload());
 
-        currentAmmo = data.MaxAmmo;
-        PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, MaxAmmo);
-        reloading = false;
-        //AudioManager.Play(AudioClipName.PistolStopReload);
     }
 }

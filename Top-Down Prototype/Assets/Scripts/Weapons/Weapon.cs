@@ -11,6 +11,8 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Transform muzzleTransform;
     protected int currentAmmo;
+    protected int maxAmmo;
+    protected int magazineSize;
     protected bool reloading = false;
     protected bool facingRight;
     public static UnityAction OnReload;
@@ -20,14 +22,19 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
     #region Properties
 
-    public int MaxAmmo => data.MaxAmmo;
+    public int MaxAmmo => maxAmmo;
     public float TimeBetweenShots => data.FireRate;
     public int CurrentAmmo => currentAmmo;
     public int AmmoPerShot => data.AmmoPerShot;
 
     #endregion
 
-    protected virtual void Awake() => currentAmmo = data.MaxAmmo;
+    protected virtual void Awake()  
+    {
+        currentAmmo = data.MagazineSize; 
+        maxAmmo = data.MaxAmmo;
+        magazineSize = data.MagazineSize;
+    }
 
     public virtual void Aim(float angle, Transform target)
     {
@@ -48,10 +55,32 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
     public abstract void SpecialAttack();
 
-    public abstract void Reload();
+    public virtual void Reload()
+    {
+        if (!reloading && maxAmmo > 0)
+        {
+            StartCoroutine(StartReload());
+        }
+    }
+    protected virtual IEnumerator StartReload()
+    {
+        reloading = true;
+        yield return new WaitForSeconds(data.ReloadSpeed);
+        if (maxAmmo > magazineSize - currentAmmo)
+        {
+            maxAmmo -= magazineSize - currentAmmo;
+            currentAmmo = magazineSize;
+        }
+        else if (maxAmmo < magazineSize - currentAmmo)
+        {
+            currentAmmo += maxAmmo;
+            maxAmmo -= maxAmmo;
+        }
 
-    protected abstract IEnumerator StartReload();
-
+        PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);       
+        reloading = false;
+        
+    }
     protected virtual void Flip()
     {
         facingRight = !facingRight;

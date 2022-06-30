@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Melee Zombie
   m_EditorClassIdentifier: 
   speed: 3.5
-  attackRange: 0.5
+  attackRange: 0
   damage: 5
   coolDown: 1
   attackStrength: 60

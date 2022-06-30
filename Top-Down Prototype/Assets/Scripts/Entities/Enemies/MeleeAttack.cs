@@ -27,14 +27,30 @@ public class MeleeAttack : MonoBehaviour
             var _distance = Vector2.Distance(player.transform.position, transform.position);
             if (_distance < settings.AttackRange)
             {
-                Attack();
+                //Attack();
             }
         }
     }
 
-    private void Attack()
+    // private void Attack()
+    // {
+    //     var _health = player.GetComponent<IDamageable>();
+    //     if (CanAttack() && _health != null)
+    //     {
+    //         _health.TakeDamage(settings.Damage, this.gameObject, settings.AttackStrength);
+    //         nextAttack = Time.time + settings.Cooldown;
+    //         StartCoroutine(RecoverFromAttack());
+    //     }
+    // }
+
+    /// <summary>
+    /// Sent when an incoming collider makes contact with this object's
+    /// collider (2D physics only).
+    /// </summary>
+    /// <param name="other">The Collision2D data associated with this collision.</param>
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        var _health = player.GetComponent<IDamageable>();
+        var _health = other.gameObject.GetComponent<IDamageable>();
         if (CanAttack() && _health != null)
         {
             _health.TakeDamage(settings.Damage, this.gameObject, settings.AttackStrength);

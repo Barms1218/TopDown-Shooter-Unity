@@ -10,9 +10,11 @@ public class GunData : ScriptableObject
     [SerializeField] int maxAmmo;
     [SerializeField] int ammoPerShot;
     [SerializeField] float reloadSpeed;
+    [SerializeField] int magazineSize;
 
     public float FireRate => fireRate;
     public int MaxAmmo => maxAmmo;
+    public int MagazineSize => magazineSize;
     public float ReloadSpeed => reloadSpeed;
     public int AmmoPerShot => ammoPerShot;
 

@@ -63,7 +63,7 @@ public class PlayerWeaponHandler : WeaponHandler
             currentWeapon.Fire(aimDirection);
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
         }
-        ReduceAmmo?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+        SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
     #endregion
@@ -79,7 +79,6 @@ public class PlayerWeaponHandler : WeaponHandler
 
             SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         }
-       
     }
 
     private void GetNewWeapon(GameObject newGun)

@@ -27,16 +27,17 @@ public class Shotgun : Weapon, IInteractable
     public override void Reload()
     {
         firing = false;
-        StartCoroutine(StartReload());
+        base.Reload();
     }
 
     protected override IEnumerator StartReload()
     {
         reloading = true;
 
-        while (currentAmmo < data.MaxAmmo && !firing)
+        while (currentAmmo < magazineSize && !firing && maxAmmo > 0)
         {
             currentAmmo++;
+            maxAmmo--;
             PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, MaxAmmo);
             AudioManager.Play(AudioClipName.ShotgunReload);
             yield return new WaitForSeconds(data.ReloadSpeed);

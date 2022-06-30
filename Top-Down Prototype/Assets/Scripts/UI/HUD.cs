@@ -9,32 +9,19 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI interactText;
 
-    void Awake()
+    private void Awake()
     {
         interactText.enabled = false;
         Pickup.OnRayCast += SetInteractTextState;
-        PlayerWeaponHandler.ReduceAmmo += ReduceAmmoCount;
-        PlayerWeaponHandler.SetAmmoCount += ChangeWeaponAmmo;
+        PlayerWeaponHandler.SetAmmoCount += UpdateWeaponAmmo;
     }
 
-    // void Update()
-    // {
-    //     ammoCountText.text = currentAmmo.ToString() + "/" +
-    //         maxAmmo.ToString();        
-    // }
-
-    public void SetInteractTextState(bool isActive)
+    private void SetInteractTextState(bool isActive)
     {
         interactText.enabled = isActive;
     }
 
-    private void ReduceAmmoCount(int newAmmo, int currentMaxAmmo)
-    {
-        ammoCountText.text = newAmmo.ToString() + "/" +
-        currentMaxAmmo.ToString(); 
-    }
-
-    private void ChangeWeaponAmmo(int startAmmo, int startMaxAmmo)
+    private void UpdateWeaponAmmo(int startAmmo, int startMaxAmmo)
     {
         ammoCountText.text = startAmmo.ToString() + "/" +
         startMaxAmmo.ToString();         

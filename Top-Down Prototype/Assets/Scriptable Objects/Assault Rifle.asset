@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Assault Rifle
   m_EditorClassIdentifier: 
   fireRate: 0.2
-  maxAmmo: 30
+  maxAmmo: 72
   ammoPerShot: 1
   reloadSpeed: 2
+  magazineSize: 30
