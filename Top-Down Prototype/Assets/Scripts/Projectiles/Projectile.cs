@@ -6,9 +6,10 @@ public class Projectile : MonoBehaviour
 {
     #region Fields
     
+    [SerializeField] private ProjectileData projectileData;    
     private float timeToLive;
     private Weapon weapon;
-    [SerializeField] private ProjectileData projectileData;
+
     private GameObject intendedTarget;
 
     #endregion

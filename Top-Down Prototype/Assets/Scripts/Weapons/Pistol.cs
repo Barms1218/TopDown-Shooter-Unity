@@ -31,7 +31,7 @@ public class Pistol : Weapon, IInteractable
     {
         reloading = true;
         AudioManager.Play(AudioClipName.PistolStartReload);
-        yield return new WaitForSeconds(data.ReloadSpeed);
+        yield return new WaitForSeconds(reloadSpeed);
         currentAmmo = magazineSize;
 
 

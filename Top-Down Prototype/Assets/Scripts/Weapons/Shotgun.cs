@@ -19,7 +19,7 @@ public class Shotgun : Weapon, IInteractable
             direction.y -= Random.Range(-pelletSpread, pelletSpread);
             pelletScript.MoveToTarget(direction);
         }
-        currentAmmo -= AmmoPerShot;
+        currentAmmo -= ammoPerShot;
         AudioManager.Play(AudioClipName.ShotgunBlast);
         firing = true;
     }
@@ -38,9 +38,9 @@ public class Shotgun : Weapon, IInteractable
         {
             currentAmmo++;
             maxAmmo--;
-            PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, MaxAmmo);
+            PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);
             AudioManager.Play(AudioClipName.ShotgunReload);
-            yield return new WaitForSeconds(data.ReloadSpeed);
+            yield return new WaitForSeconds(reloadSpeed);
             reloading = false;
         }
     }

@@ -29,7 +29,21 @@ public class AssaultRifle : Weapon, IInteractable
 
     protected override IEnumerator StartReload()
     {
-        yield return StartCoroutine(base.StartReload());
+        reloading = true;
+        yield return new WaitForSeconds(reloadSpeed);
+        if (maxAmmo > magazineSize - currentAmmo)
+        {
+            maxAmmo -= magazineSize - currentAmmo;
+            currentAmmo = magazineSize;
+        }
+        else if (maxAmmo < magazineSize - currentAmmo)
+        {
+            currentAmmo += maxAmmo;
+            maxAmmo -= maxAmmo;
+        }
+
+        PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);       
+        reloading = false;
         AudioManager.Play(AudioClipName.AR_Finish_Reload);
     }
 }

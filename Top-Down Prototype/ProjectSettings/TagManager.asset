@@ -10,6 +10,7 @@ TagManager:
   - Assault Rifle
   - Cursor
   - Enemy
+  - Pickup
   layers:
   - Default
   - TransparentFX
@@ -21,9 +22,9 @@ TagManager:
   - Interactables
   - Player
   - Enemies
-  - 
-  - 
-  - 
+  - Pickups
+  - Player Projectiles
+  - Enemy Projectles
   - 
   - 
   - 

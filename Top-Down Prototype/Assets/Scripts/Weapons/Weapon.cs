@@ -7,12 +7,14 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 {
     #region Fields
 
-    [SerializeField] protected GunData data;
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Transform muzzleTransform;
-    protected int currentAmmo;
-    protected int maxAmmo;
-    protected int magazineSize;
+    [SerializeField] protected int currentAmmo;
+    [SerializeField] protected int maxAmmo;
+    [SerializeField] protected int magazineSize;
+    [SerializeField] protected float timeBetweenShots;
+    [SerializeField] protected int ammoPerShot;
+    [SerializeField] protected float reloadSpeed;
     protected bool reloading = false;
     protected bool facingRight;
     public static UnityAction OnReload;
@@ -22,18 +24,16 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
     #region Properties
 
-    public int MaxAmmo => maxAmmo;
-    public float TimeBetweenShots => data.FireRate;
+    public int MaxAmmo { get { return maxAmmo; } set { maxAmmo = value; } }
+    public float TimeBetweenShots => timeBetweenShots;
     public int CurrentAmmo => currentAmmo;
-    public int AmmoPerShot => data.AmmoPerShot;
+    public int AmmoPerShot => ammoPerShot;
 
     #endregion
 
     protected virtual void Awake()  
     {
-        currentAmmo = data.MagazineSize; 
-        maxAmmo = data.MaxAmmo;
-        magazineSize = data.MagazineSize;
+
     }
 
     public virtual void Aim(float angle, Transform target)
@@ -62,24 +62,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
             StartCoroutine(StartReload());
         }
     }
-    protected virtual IEnumerator StartReload()
-    {
-        reloading = true;
-        yield return new WaitForSeconds(data.ReloadSpeed);
-        if (maxAmmo > magazineSize - currentAmmo)
-        {
-            maxAmmo -= magazineSize - currentAmmo;
-            currentAmmo = magazineSize;
-        }
-        else if (maxAmmo < magazineSize - currentAmmo)
-        {
-            currentAmmo += maxAmmo;
-            maxAmmo -= maxAmmo;
-        }
-
-        PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);       
-        reloading = false;
-    }
+    protected abstract IEnumerator StartReload();
     protected virtual void Flip()
     {
         facingRight = !facingRight;
@@ -89,5 +72,9 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
         transform.localScale = newScale;
     }
 
+    protected virtual void AddAmmo(int _amount, string weaponName)
+    {
+        
+    }
     protected virtual void Interact() => OnPickUp?.Invoke(gameObject);
 }

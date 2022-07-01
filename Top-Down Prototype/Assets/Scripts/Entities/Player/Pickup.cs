@@ -6,8 +6,10 @@ using UnityEngine.Events;
 
 public class Pickup : MonoBehaviour
 {
+
     private LayerMask interactLayer;
     public static UnityAction<bool> OnRayCast;
+    public static UnityAction<string> AddWeaponName;
     private Collider2D playerCollider;
 
     private void Awake()
@@ -32,6 +34,10 @@ public class Pickup : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && interactable != null)
             {
                 hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+                if (hit.collider.gameObject.tag == "Weapon")
+                {
+                    AddWeaponName?.Invoke(hit.collider.gameObject.name);
+                }
             }
             OnRayCast?.Invoke(true);
             lineColor = Color.green;
@@ -42,4 +48,5 @@ public class Pickup : MonoBehaviour
         }     
         Debug.DrawRay(playerCollider.bounds.center, direction, lineColor);
     }
+
 }

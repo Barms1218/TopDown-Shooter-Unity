@@ -230,7 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8fe1a738ac8acd3449e009d30fc5642d, type: 2}
-  reloading: 0
   projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
   muzzleTransform: {fileID: 3785646919390945951}
-  input: {fileID: 0}
+  currentAmmo: 12
+  maxAmmo: 60
+  magazineSize: 12
+  timeBetweenShots: 0.5
+  ammoPerShot: 1
+  reloadSpeed: 2

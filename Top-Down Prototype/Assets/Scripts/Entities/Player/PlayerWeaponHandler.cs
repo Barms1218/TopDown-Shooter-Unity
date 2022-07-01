@@ -8,7 +8,8 @@ public class PlayerWeaponHandler : WeaponHandler
 {
     #region Fields
 
-    [SerializeField] private List<GameObject> weaponList = new List<GameObject>();
+    [SerializeField] private Dictionary<string, GameObject> weaponDictionary = 
+    new Dictionary<string, GameObject>();
     public static UnityAction<int, int> ReduceAmmo;
     public static UnityAction<int, int> SetAmmoCount;
 
@@ -21,7 +22,7 @@ public class PlayerWeaponHandler : WeaponHandler
         set { gun = value; }
         get => gun;
     }
-    public List<GameObject> WeaponList => weaponList;
+    public Dictionary<string, GameObject> WeaponDictionary => weaponDictionary;
     public Weapon CurrentWeapon
     {
         set { currentWeapon = value; }
@@ -32,10 +33,11 @@ public class PlayerWeaponHandler : WeaponHandler
 
     private void Awake()
     {
-        weaponList.Add(gun);
+        weaponDictionary.Add(gun.name, gun);
         currentWeapon = gun.GetComponent<Weapon>();
         WeaponSwap.OnWeaponSwap += ChangeWeapon;
         Weapon.OnPickUp += GetNewWeapon;
+        AmmoPickup.OnTrigger += AddAmmoToWeapon;
     }
 
     private void Start()
@@ -68,13 +70,13 @@ public class PlayerWeaponHandler : WeaponHandler
 
     #endregion
 
-    private void ChangeWeapon(int weaponIndex)
+    private void ChangeWeapon(string weaponkey)
     {
-        if (weaponList[weaponIndex] != null)
+        if (weaponDictionary.ContainsKey(weaponkey))
         {
             gun.SetActive(false);
-            gun = weaponList[weaponIndex];
-            weaponList[weaponIndex].SetActive(true);
+            gun = weaponDictionary[weaponkey];
+            weaponDictionary[weaponkey].SetActive(true);
             currentWeapon = gun.GetComponent<Weapon>();
 
             SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
@@ -83,24 +85,32 @@ public class PlayerWeaponHandler : WeaponHandler
 
     private void GetNewWeapon(GameObject newGun)
     {
-        Gun.SetActive(false);        
-        WeaponList.Add(newGun);
+        gun.SetActive(false);        
+        weaponDictionary.Add(newGun.name, newGun);
         newGun.transform.SetParent(transform);
-        newGun.transform.position = Gun.transform.position;
-        Gun = newGun;      
-        Gun.GetComponent<Weapon>().enabled = true;
+        newGun.transform.position = gun.transform.position;
+        gun = newGun;      
+        gun.GetComponent<Weapon>().enabled = true;
         
         // Flip the weapon to proper scale to match player's
         if (newGun.transform.position.x < transform.position.x)
         {
-            Vector3 newScale = Gun.transform.localScale;
+            Vector3 newScale = gun.transform.localScale;
             newScale.x *= -1;
-            Gun.transform.localScale = newScale;
+            gun.transform.localScale = newScale;
         }          
-        CurrentWeapon = newGun.GetComponent<Weapon>();
-        Gun.SetActive(true);
-        Gun.GetComponent<Collider2D>().enabled = false;
-        PlayerWeaponHandler.SetAmmoCount?.Invoke(CurrentWeapon.CurrentAmmo,
-        CurrentWeapon.CurrentAmmo);
+        currentWeapon = newGun.GetComponent<Weapon>();
+        gun.SetActive(true);
+        gun.GetComponent<Collider2D>().enabled = false;
+        SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+    }
+
+    private void AddAmmoToWeapon(int amountToAdd, string weaponName)
+    {
+        if (weaponDictionary.ContainsKey(weaponName))
+        {
+            weaponDictionary[weaponName].GetComponent<Weapon>().MaxAmmo += amountToAdd;
+            SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+        }
     }
 }

@@ -18,9 +18,9 @@ GameObject:
   - component: {fileID: 7490895233034298546}
   - component: {fileID: 3057960628780597368}
   - component: {fileID: 4042253683196191775}
-  - component: {fileID: 4563384947020002784}
   - component: {fileID: 7490895233034298544}
-  m_Layer: 0
+  - component: {fileID: 510933966}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &7490895233034298551
 MonoBehaviour:
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347722c73cd25534aa3b4f1b49733173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapons: []
 --- !u!114 &1330105217109831270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2f4949d490c6149bcabebd3d150229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 0}
+  input: {fileID: 11400000, guid: 928407b763fa3ef4187fe4310f735d2b, type: 2}
 --- !u!114 &7490895233034298546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,22 +205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 2868682374913035508}
-  weaponList: []
---- !u!114 &4563384947020002784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7490895233034298552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e9369b2594fde5438a37bed48983b93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb2d: {fileID: 7490895233034298548}
-  speed: 20
-  _animator: {fileID: 7490895233034298544}
 --- !u!95 &7490895233034298544
 Animator:
   serializedVersion: 4
@@ -240,6 +225,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &510933966
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490895233034298552}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.031943083, y: 0.557889}
+  m_Size: {x: 0.7584913, y: 1.246722}
+  m_Direction: 0
 --- !u!1001 &6704132522768850120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -247,6 +248,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7490895233034298555}
     m_Modifications:
+    - target: {fileID: 3785646919390945951, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785646919390945951, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4250514611349930945, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: target
       value: 
@@ -257,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.35000002
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_LocalPosition.y

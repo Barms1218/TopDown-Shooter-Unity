@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RifleAmmoPickup : AmmoPickup
+public class ShotgunAmmoPickup : AmmoPickup
 {
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        gunName = "Assault Rifle";
+        gunName = "Shotgun";
         base.OnTriggerEnter2D(other);
     }
 }

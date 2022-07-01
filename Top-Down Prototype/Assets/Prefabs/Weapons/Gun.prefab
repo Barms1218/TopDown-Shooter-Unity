@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -614718135
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2505125261248690692, guid: 2b892f1a8255d4b92bc26cf703a01a74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -198,12 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 15
-  maxAmmo: 15
-  reloadSpeed: 1.2
-  timeBetweenShots: 0.3
-  ammoPerShot: 1
-  reloading: 0
+  data: {fileID: 0}
   projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
   muzzleTransform: {fileID: 1041894282683477753}
 --- !u!1 &7283325689304226780

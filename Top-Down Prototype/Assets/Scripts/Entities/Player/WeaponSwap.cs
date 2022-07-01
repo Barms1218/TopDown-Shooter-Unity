@@ -6,15 +6,18 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerWeaponHandler))]
 public class WeaponSwap : MonoBehaviour
 {
-    public static UnityAction<int> OnWeaponSwap;
+    [SerializeField] private List<string> weapons = new List<string>();
+    public static UnityAction<string> OnWeaponSwap;
 
+    private void Awake() => Pickup.AddWeaponName += AddWeapon;
     private void Update()
     {
+        // Initial weapon in player's inventory should always be pistol
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             try
             {
-                OnWeaponSwap?.Invoke(0);
+                OnWeaponSwap?.Invoke("Pistol");
             }
             catch (System.Exception exception)
             {
@@ -25,7 +28,7 @@ public class WeaponSwap : MonoBehaviour
         {
             try
             {
-                OnWeaponSwap?.Invoke(1);
+                OnWeaponSwap?.Invoke(weapons[0]);
             }
             catch(System.Exception exception)
             {
@@ -36,12 +39,17 @@ public class WeaponSwap : MonoBehaviour
         {
             try
             {
-                OnWeaponSwap?.Invoke(2);
+                OnWeaponSwap?.Invoke(weapons[1]);
             }
             catch(System.Exception exception)
             {
                 Debug.Log(exception);
             }
         }        
+    }
+
+    private void AddWeapon(string weaponName)
+    {
+        weapons.Add(weaponName);
     }
 }
