@@ -4,41 +4,39 @@ using UnityEngine;
 
 public class EnemyDeath : MonoBehaviour
 {
-    private void Awake() => Health.OnDied += HandleDeath;
+    [SerializeField] GameObject _rifleAmmo;
+    [SerializeField] GameObject _shotgunAmmo;
 
-    private void HandleDeath(GameObject dyingObject)
+    private void Awake()
     {
-        var dyingObjectMovement = dyingObject.GetComponent<EnemyMove>();
-        var dyingObjectAnimator = dyingObject.GetComponent<Animator>();
-        var dyingObjectCollider = dyingObject.GetComponent<Collider2D>();
+        //Health.OnDeath += HandleDeath;
+        //EventManager.AddHealthListener(HandleDeath);
+    }
+
+    private void HandleDeath()
+    {
+        var dyingObjectMovement = GetComponent<EnemyMove>();
+        var dyingObjectAnimator = GetComponent<Animator>();
+        var dyingObjectCollider = GetComponent<Collider2D>();
         dyingObjectMovement.enabled = false;
         //GetComponent<MeleeAttack>().enabled = false;
         dyingObjectAnimator.SetTrigger("Dying");
-        Debug.Log(dyingObject.name);
-        //SpriteRenderer spriteRenderer =  dyingObject.GetComponent<SpriteRenderer>();
+        Debug.Log(gameObject.name);
 
-        //StartCoroutine(FadeOut(spriteRenderer, 1.0f));
-        dyingObjectCollider.enabled = false;
-        Destroy(dyingObject, 1.0f);
-
-    }
-
-    IEnumerator FadeOut(SpriteRenderer spriteRenderer, float duration)
-    {
-        float count = 0;
-
-        Color color = spriteRenderer.material.color;
-
-        while (count < duration)
+        int dropChance = Random.Range(1, 101);
+        if (dropChance >= 0 && dropChance <= 50)
         {
-            count += Time.deltaTime;
-
-            float alpha = Mathf.Lerp(1, 0, count / duration);
-
-            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
-
-            yield return null;
+            var rifleAmmoDrop = Instantiate(_rifleAmmo, transform.position,
+             Quaternion.identity);
         }
+        else if (dropChance >= 51 && dropChance <= 100)
+        {
+            var shotgunAmmoDrop = Instantiate(_shotgunAmmo, transform.position,
+             Quaternion.identity);
+        }
+        dyingObjectCollider.enabled = false;
+        Destroy(gameObject, 1.0f);
+
     }
 
     /// <summary>
@@ -46,6 +44,6 @@ public class EnemyDeath : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        Health.OnDied -= HandleDeath;
+        //Health.OnDeath -= HandleDeath;
     }
 }

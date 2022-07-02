@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class MeleeAttack : MonoBehaviour
 {
+    [SerializeField] private int attackStrength;
+    [SerializeField] private int damage;
+    [SerializeField] private float attackCooldown;
     private float nextAttack;
     private float recoverTime;
     private Enemy settings;
@@ -19,30 +22,6 @@ public class MeleeAttack : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     } 
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (player != null)
-        {
-            var _distance = Vector2.Distance(player.transform.position, transform.position);
-            if (_distance < settings.AttackRange)
-            {
-                //Attack();
-            }
-        }
-    }
-
-    // private void Attack()
-    // {
-    //     var _health = player.GetComponent<IDamageable>();
-    //     if (CanAttack() && _health != null)
-    //     {
-    //         _health.TakeDamage(settings.Damage, this.gameObject, settings.AttackStrength);
-    //         nextAttack = Time.time + settings.Cooldown;
-    //         StartCoroutine(RecoverFromAttack());
-    //     }
-    // }
-
     /// <summary>
     /// Sent when an incoming collider makes contact with this object's
     /// collider (2D physics only).
@@ -50,13 +29,17 @@ public class MeleeAttack : MonoBehaviour
     /// <param name="other">The Collision2D data associated with this collision.</param>
     private void OnCollisionEnter2D(Collision2D other)
     {
-        var _health = other.gameObject.GetComponent<IDamageable>();
-        if (CanAttack() && _health != null)
+        var _health = other.gameObject.GetComponent<IHaveHealth>();
+        if (other.gameObject.tag == "Player")
         {
-            _health.TakeDamage(settings.Damage, this.gameObject, settings.AttackStrength);
-            nextAttack = Time.time + settings.Cooldown;
-            StartCoroutine(RecoverFromAttack());
+            if (CanAttack() && _health != null)
+            {
+                _health.TakeDamage(damage, this.gameObject, attackStrength);
+                nextAttack = Time.time + attackCooldown;
+                StartCoroutine(RecoverFromAttack());
+            }
         }
+
     }
 
     private IEnumerator RecoverFromAttack()
@@ -66,12 +49,10 @@ public class MeleeAttack : MonoBehaviour
         while (recoverTime < 1)
         {
             recoverTime += Time.deltaTime;
-            //GetComponent<EnemyMove>().enabled = false;
             OnMelee?.Invoke(false, this);
             GetComponent<Animator>().SetBool("Running", false);
             yield return null;
         }
-        //GetComponent<EnemyMove>().enabled = true;
         OnMelee?.Invoke(true, this);
     }
 

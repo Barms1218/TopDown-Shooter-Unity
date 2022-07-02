@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 8699948889711129076}
   - component: {fileID: 8699948889711128842}
   - component: {fileID: 8699948889711128841}
-  - component: {fileID: 8699948889711128840}
   - component: {fileID: 8699948889711128843}
   - component: {fileID: 8144528661079044507}
+  - component: {fileID: 1768611672242997327}
   - component: {fileID: 8699948889711128844}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shotgun Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +37,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3717410218972711205}
+  - {fileID: 3449178585966234629}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -150,23 +150,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8699948889711129075}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8699948889711128840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8699948889711129075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f84a3d5a8527c7341a1dd821232d5bb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  chaseDistance: 4
 --- !u!114 &8699948889711128843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +181,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd1b8790a69e6243842520ea63aa1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 3717410218972711201}
+  gun: {fileID: 6296486161934914983, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
+--- !u!114 &1768611672242997327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699948889711129075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625d3c46f13c22c46ab2782b0186e87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rifleAmmo: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
+  _shotgunAmmo: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
 --- !u!95 &8699948889711128844
 Animator:
   serializedVersion: 4
@@ -213,7 +216,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1001 &7275415852693691526
+--- !u!1001 &8699948890397202854
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -238,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6296486161934914979, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.10239796
       objectReference: {fileID: 0}
     - target: {fileID: 6296486161934914979, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
       propertyPath: m_LocalRotation.x
@@ -250,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6296486161934914979, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.9947435
       objectReference: {fileID: 0}
     - target: {fileID: 6296486161934914979, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -266,17 +269,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6296486161934914983, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
       propertyPath: m_Name
-      value: Shotgun
+      value: Shotgun Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
---- !u!1 &3717410218972711201 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6296486161934914983, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
-  m_PrefabInstance: {fileID: 7275415852693691526}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3717410218972711205 stripped
+--- !u!4 &3449178585966234629 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6296486161934914979, guid: f7821e233dce6144fa5a86a9bcbbc0dd, type: 3}
-  m_PrefabInstance: {fileID: 7275415852693691526}
+  m_PrefabInstance: {fileID: 8699948890397202854}
   m_PrefabAsset: {fileID: 0}

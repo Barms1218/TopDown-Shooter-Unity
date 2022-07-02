@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PelletProjectile : MonoBehaviour
 {
-    [SerializeField]
-    ProjectileData projectileData;
+    [SerializeField] ProjectileData projectileData;
     float timeToLive;
 
     void Start()
@@ -23,26 +22,23 @@ public class PelletProjectile : MonoBehaviour
     }
 
 
-private void OnTriggerEnter2D(Collider2D other)
-{
-    IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
-    if (damageable != null)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        damageable.TakeDamage(projectileData.Damage, this.gameObject, 
-        projectileData.ProjectileForce);
+        IHaveHealth damageable = other.gameObject.GetComponent<IHaveHealth>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(projectileData.Damage, this.gameObject, 
+            projectileData.ProjectileForce);
+        }
+        Destroy(gameObject);       
     }
-    Destroy(gameObject);       
-}
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="force"></param>
+
     public void MoveToTarget(Vector2 force)
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
 
-        body.AddForce(force.normalized * 
-            projectileData.AmountOfForce, ForceMode2D.Impulse);
+        body.AddForce(force.normalized * projectileData.AmountOfForce, 
+        ForceMode2D.Impulse);
     }
 }

@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
+        IHaveHealth damageable = other.gameObject.GetComponent<IHaveHealth>();
         if (damageable != null)
         {
             damageable.TakeDamage(projectileData.Damage, this.gameObject, 

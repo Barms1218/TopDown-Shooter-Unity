@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+public interface IHaveHealth
 {
-    float Health { get; set; }
+    int Health { get; set; }
     int MaxHealth{ get; }
     void TakeDamage(int amount, GameObject damageSource, float attackStrength);
     void RestoreHealth(int amount);
+    void HandleDeath();
+    bool IsDying => Health <= 0;
 }
 

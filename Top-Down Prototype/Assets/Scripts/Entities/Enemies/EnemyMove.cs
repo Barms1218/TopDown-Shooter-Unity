@@ -5,28 +5,28 @@ using UnityEngine.Events;
 
 public class EnemyMove : MonoBehaviour
 {
-    private Enemy enemy;
     private GameObject player;
     private bool facingRight = true;
     private bool canMove = true;
-
+    private float moveSpeed;
+    [SerializeField] private float chaseDistance;
     public static UnityAction OnEngage;
     
     // Start is called before the first frame update
     private void Awake()
     {
-        enemy = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
         MeleeAttack.OnMelee += ChangeMoveState;
+        moveSpeed = Random.Range(2.7f, 3.2f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) > enemy.AttackRange)
+        if (Vector2.Distance(player.transform.position, transform.position) > chaseDistance)
         {
             transform.position = Vector2.MoveTowards(transform.position, 
-            player.transform.position, Time.deltaTime * enemy.Speed);
+            player.transform.position, Time.deltaTime * moveSpeed);
             GetComponent<Animator>().SetBool("Running", true);
         }
         else

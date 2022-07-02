@@ -6,10 +6,11 @@ public class EnemyWeaponHandler : WeaponHandler
 {
     private GameObject player;
     private bool facingRight;
-    private EnemySettings rangedAttackData;    
+    private Enemy rangedAttackData;    
 
     private void Awake()
     {
+        rangedAttackData = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
         currentWeapon = gun.GetComponent<Weapon>();
     }
