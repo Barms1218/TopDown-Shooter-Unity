@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class EnemyWeaponHandler : WeaponHandler
 {
-    private GameObject player;
-    private bool facingRight;
-    private Enemy rangedAttackData;    
+    [SerializeField] float attackRange;
+    private GameObject player;   
 
     private void Awake()
     {
-        rangedAttackData = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
         currentWeapon = gun.GetComponent<Weapon>();
     }
@@ -18,14 +16,13 @@ public class EnemyWeaponHandler : WeaponHandler
     // Update is called once per frame
     private void Update()
     {
-        aimDirection = player.transform.position - gun.transform.position;
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        gun.GetComponent<Weapon>().Aim(angle, player.transform);
-
         if (player != null)
         {
+            aimDirection = player.transform.position - gun.transform.position;
+            float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+            currentWeapon.Aim(angle, player.transform);
             var _distance = Vector2.Distance(player.transform.position, transform.position);
-            if (_distance < rangedAttackData.AttackRange)
+            if (_distance < attackRange)
             {
                 Fire();
             }

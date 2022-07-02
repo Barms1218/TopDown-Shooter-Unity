@@ -6,14 +6,15 @@ public class DropPickUp : MonoBehaviour
 {
     [SerializeField] GameObject _rifleAmmo;
     [SerializeField] GameObject _shotgunAmmo;
-    private int minRifleChance = 1;
-    private int maxRifleChance = 12;
-    private int minShotGunChance = 33;
-    private int maxShotGunChance = 40;
+    [SerializeField] private int minRifleChance = 1;
+    [SerializeField] private int maxRifleChance = 12;
+    [SerializeField] private int minShotGunChance = 33;
+    [SerializeField] private int maxShotGunChance = 40;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<EnemyHealth>().OnDied += DropAmmo;
     }
 
     public void DropAmmo()

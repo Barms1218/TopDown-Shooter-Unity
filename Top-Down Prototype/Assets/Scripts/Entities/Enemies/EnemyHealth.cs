@@ -6,11 +6,11 @@ using UnityEngine.Events;
 public class EnemyHealth : MonoBehaviour, IHaveHealth
 {
     [SerializeField] private int maxHealth = 100;
-    OnDiedEvent onDiedEvent = new OnDiedEvent();
     private int _health;
     private Animator _animator;
     private Rigidbody2D _body2d;
-    public static UnityAction<EnemyHealth> OnDied;
+    private Collider2D _collider;
+    public event UnityAction OnDied;
 
     int IHaveHealth.Health 
     { 
@@ -22,6 +22,7 @@ public class EnemyHealth : MonoBehaviour, IHaveHealth
 
     void Awake()
     {
+        _collider = GetComponent<Collider2D>();
         _animator = GetComponent<Animator>();
         _health = maxHealth;
         _body2d = GetComponent<Rigidbody2D>();
@@ -32,9 +33,9 @@ public class EnemyHealth : MonoBehaviour, IHaveHealth
     {
         _health -= damage;
         var pushDirection = gameObject.transform.position - damageSource.transform.position;
-        _body2d.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
+        _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
         _animator.SetTrigger("Hurt");
-        if (_health <= 0)
+        if (isDying)
         {
             HandleDeath();
         }
@@ -42,16 +43,26 @@ public class EnemyHealth : MonoBehaviour, IHaveHealth
 
     public void HandleDeath()
     {
-        var dyingObjectMovement = GetComponent<EnemyMove>();
-        var dyingObjectAnimator = GetComponent<Animator>();
-        var dyingObjectCollider = GetComponent<Collider2D>();
-        dyingObjectMovement.enabled = false;
-        //GetComponent<MeleeAttack>().enabled = false;
-        dyingObjectAnimator.SetTrigger("Dying");
+        var _movement = GetComponent<EnemyMove>();
+        var weaponHandler = GetComponent<EnemyWeaponHandler>();
+        if (weaponHandler != null)
+        {
+            weaponHandler.enabled = false;
+        }
+  
+
+        _animator?.SetTrigger("Dying");
         Debug.Log(gameObject.name);
 
-        GetComponent<DropPickUp>().DropAmmo();
-        dyingObjectCollider.enabled = false;
+        OnDied?.Invoke();
+        if (_movement != null)
+        {
+            _movement.enabled = false;
+        }
+        if (_collider != null)
+        {
+            _collider.enabled = false;
+        }
         Destroy(gameObject, 1.0f);
     }
 
@@ -65,11 +76,6 @@ public class EnemyHealth : MonoBehaviour, IHaveHealth
                 _health = maxHealth;
             }
         }
-    }
-    
-    public void AddOnDiedEventListener(UnityAction listener)
-    {
-        onDiedEvent.AddListener(listener);
     }
 
     private bool isDying => _health <= 0;
