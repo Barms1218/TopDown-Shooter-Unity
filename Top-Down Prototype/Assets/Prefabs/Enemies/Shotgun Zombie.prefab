@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8699948889711129077}
   - component: {fileID: 8699948889711129076}
   - component: {fileID: 8144528661079044507}
+  - component: {fileID: -5816319003111613719}
+  - component: {fileID: -9072447316620631390}
   - component: {fileID: 8699948889711128841}
-  - component: {fileID: 8699948889711128843}
   - component: {fileID: 1768611672242997327}
   - component: {fileID: 8699948889711128844}
   m_Layer: 9
@@ -143,6 +144,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 2078212320146545734}
   attackRange: 4
+--- !u!114 &-5816319003111613719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699948889711129075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e76c62a4223764ab9b9f87c6dde190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+--- !u!114 &-9072447316620631390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699948889711129075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84a3d5a8527c7341a1dd821232d5bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8699948889711128841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,19 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 4
---- !u!114 &8699948889711128843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8699948889711129075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb4fcba7f85c2744818c26812e97962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 40
 --- !u!114 &1768611672242997327
 MonoBehaviour:
   m_ObjectHideFlags: 0

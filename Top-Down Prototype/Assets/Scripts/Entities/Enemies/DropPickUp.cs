@@ -14,7 +14,7 @@ public class DropPickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GetComponent<Health>().OnDied += DropAmmo;
+        GetComponent<Health>().OnDied += DropAmmo;
     }
 
     public void DropAmmo()

@@ -21,17 +21,20 @@ public class Health : MonoBehaviour, IHaveHealth
 
     private void Awake()
     {
+        _health = maxHealth;
         _body2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
     public void TakeDamage(int amount, GameObject damageSource, float attackStrength)
     {
-        _health -= amount;
-        Debug.Log(_health);
-        var pushDirection = gameObject.transform.position - damageSource.transform.position;
-        _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
-        _animator.SetTrigger("Hurt");
-        if (_health <= 0)
+        if (_health > 0)
+        {
+            _health -= amount;
+            var pushDirection = gameObject.transform.position - damageSource.transform.position;
+            _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
+            _animator.SetTrigger("Hurt");
+        }
+        else if (_health <= 0)
         {
             GetComponent<Collider2D>().enabled = false;
             OnDied?.Invoke();
@@ -45,7 +48,14 @@ public class Health : MonoBehaviour, IHaveHealth
 
     public void RestoreHealth(int amount)
     {
-        throw new System.NotImplementedException();
+        if (_health < maxHealth)
+        {
+            _health += amount;
+            if (_health > maxHealth)
+            {
+                _health = maxHealth;
+            }
+        }
     }
 
     private bool IsDying => _health <= 0;
