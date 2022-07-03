@@ -2483,17 +2483,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2262175345093553424, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2579200449049318824, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
       propertyPath: m_Name
       value: Zombie Inmate (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2579200449049318824, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2579200449049318825, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
       propertyPath: m_RootOrder
@@ -2539,14 +2535,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4103801259516615155, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
-      propertyPath: _rifleAmmo
-      value: 
-      objectReference: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
-    - target: {fileID: 4103801259516615155, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
-      propertyPath: _shotgunAmmo
-      value: 
-      objectReference: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
 --- !u!1 &1209121093
@@ -3620,6 +3608,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Assault Rifle Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 3543103714409048337, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3543103714409048341, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -3664,6 +3656,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3543103714409048342, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543103714409048555, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
+      propertyPath: chaseDistance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
 --- !u!1001 &2579200449655979784
@@ -3673,14 +3673,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 820337527391404187, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 820337527391404187, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
-      propertyPath: maxRifleChance
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 2579200449049318824, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
       propertyPath: m_Name
       value: Zombie Inmate
@@ -3738,6 +3730,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 510933966, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490895233034298548, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7490895233034298552, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3786,8 +3786,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7490895233034298546, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
 --- !u!1001 &8699948889507360648
 PrefabInstance:
@@ -3814,7 +3813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8699948889711129075, guid: 439b3c9273670f84a9a35c0f3942b7ae, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8699948889711129079, guid: 439b3c9273670f84a9a35c0f3942b7ae, type: 3}
       propertyPath: m_RootOrder

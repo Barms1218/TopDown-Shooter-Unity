@@ -26,7 +26,6 @@ public class EnemyHealth : MonoBehaviour, IHaveHealth
         _animator = GetComponent<Animator>();
         _health = maxHealth;
         _body2d = GetComponent<Rigidbody2D>();
-        //EventManager.AddOnDiedEventInvoker(this);
     }
 
     public void TakeDamage(int damage, GameObject damageSource, float attackStrength)
@@ -37,7 +36,7 @@ public class EnemyHealth : MonoBehaviour, IHaveHealth
         _animator.SetTrigger("Hurt");
         if (isDying)
         {
-            HandleDeath();
+        OnDied?.Invoke();
         }
     }
 
@@ -54,7 +53,7 @@ public class EnemyHealth : MonoBehaviour, IHaveHealth
         _animator?.SetTrigger("Dying");
         Debug.Log(gameObject.name);
 
-        OnDied?.Invoke();
+
         if (_movement != null)
         {
             _movement.enabled = false;

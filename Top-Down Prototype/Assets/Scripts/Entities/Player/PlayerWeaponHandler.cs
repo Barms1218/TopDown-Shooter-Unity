@@ -35,7 +35,7 @@ public class PlayerWeaponHandler : WeaponHandler
     {
         weaponDictionary.Add(gun.name, gun);
         currentWeapon = gun.GetComponent<Weapon>();
-        WeaponSwap.OnWeaponSwap += ChangeWeapon;
+        GetComponent<WeaponSwap>().OnWeaponSwap += ChangeWeapon;
         Weapon.OnPickUp += GetNewWeapon;
         AmmoPickup.OnTrigger += AddAmmoToWeapon;
     }

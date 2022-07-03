@@ -12,15 +12,14 @@ GameObject:
   - component: {fileID: 2474475448183171319}
   - component: {fileID: 2474475448183171316}
   - component: {fileID: 2474475448183171317}
-  - component: {fileID: 2474475448183171083}
-  - component: {fileID: 2474475448183171080}
-  - component: {fileID: 2474475448183171081}
-  - component: {fileID: 2474475448183171082}
   - component: {fileID: 3165004206678583450}
+  - component: {fileID: 2474475448183171080}
+  - component: {fileID: 2474475448183171082}
+  - component: {fileID: -1303935936310323216}
   - component: {fileID: 2474475448183171085}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pistol Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,56 +129,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01205492, y: 0.48417813}
   m_Size: {x: 0.59198666, y: 1.0808562}
   m_Direction: 0
---- !u!114 &2474475448183171083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2474475448183171314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a0c2409aaf34743a50df961b04328e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 9bae83db8eae8a542a98994fcce358d4, type: 2}
---- !u!114 &2474475448183171080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2474475448183171314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2474475448183171081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2474475448183171314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f84a3d5a8527c7341a1dd821232d5bb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2474475448183171082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2474475448183171314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb4fcba7f85c2744818c26812e97962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 40
 --- !u!114 &3165004206678583450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +142,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 6233060729062997099}
+  attackRange: 5
+--- !u!114 &2474475448183171080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474475448183171314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 4
+--- !u!114 &2474475448183171082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474475448183171314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb4fcba7f85c2744818c26812e97962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 40
+--- !u!114 &-1303935936310323216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474475448183171314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625d3c46f13c22c46ab2782b0186e87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rifleAmmo: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
+  _shotgunAmmo: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
+  minRifleChance: 1
+  maxRifleChance: 12
+  minShotGunChance: 33
+  maxShotGunChance: 40
 --- !u!95 &2474475448183171085
 Animator:
   serializedVersion: 4

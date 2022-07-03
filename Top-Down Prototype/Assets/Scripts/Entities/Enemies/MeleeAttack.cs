@@ -11,33 +11,24 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private float attackCooldown;
     private float nextAttack;
     private float recoverTime;
-    private Enemy settings;
     private GameObject player;
     public static UnityAction<bool, MeleeAttack> OnMelee;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        settings = GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player");
     } 
 
-    /// <summary>
-    /// Sent when an incoming collider makes contact with this object's
-    /// collider (2D physics only).
-    /// </summary>
-    /// <param name="other">The Collision2D data associated with this collision.</param>
     private void OnCollisionEnter2D(Collision2D other)
     {
-        var _health = other.gameObject.GetComponent<IHaveHealth>();
-        if (other.gameObject.tag == "Player")
+
+        if (other.gameObject.tag == "Player" && CanAttack())
         {
-            if (CanAttack() && _health != null)
-            {
-                _health.TakeDamage(damage, this.gameObject, attackStrength);
-                nextAttack = Time.time + attackCooldown;
-                StartCoroutine(RecoverFromAttack());
-            }
+            var _health = player.GetComponent<IHaveHealth>();
+            _health.TakeDamage(damage, this.gameObject, attackStrength);
+            nextAttack = Time.time + attackCooldown;
+            StartCoroutine(RecoverFromAttack());
         }
 
     }

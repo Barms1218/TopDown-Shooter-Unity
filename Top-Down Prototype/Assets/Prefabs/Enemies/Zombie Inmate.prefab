@@ -59,9 +59,9 @@ GameObject:
   - component: {fileID: 2579200449049318825}
   - component: {fileID: 2579200449049318826}
   - component: {fileID: 2579200449049318830}
-  - component: {fileID: 5142457985080246888}
-  - component: {fileID: 8774389759331695210}
   - component: {fileID: 945709865741816382}
+  - component: {fileID: 4001802063013996520}
+  - component: {fileID: 847067256608029376}
   - component: {fileID: 2262175345093553424}
   - component: {fileID: 820337527391404187}
   - component: {fileID: 1010239956}
@@ -162,32 +162,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5142457985080246888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a0c2409aaf34743a50df961b04328e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 692fdf5158e7a0c498067f112fac82da, type: 2}
---- !u!114 &8774389759331695210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb4fcba7f85c2744818c26812e97962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 25
 --- !u!114 &945709865741816382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +177,31 @@ MonoBehaviour:
   attackStrength: 25
   damage: 5
   attackCooldown: 1
+--- !u!114 &4001802063013996520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e76c62a4223764ab9b9f87c6dde190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 25
+--- !u!114 &847067256608029376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84a3d5a8527c7341a1dd821232d5bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2262175345093553424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,12 +209,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 0.5
+  chaseDistance: 0
 --- !u!114 &820337527391404187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +229,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rifleAmmo: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
   _shotgunAmmo: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
+  minRifleChance: 1
+  maxRifleChance: 13
+  minShotGunChance: 33
+  maxShotGunChance: 40
 --- !u!70 &1010239956
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -240,7 +243,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.056406498, y: 0.4894669}

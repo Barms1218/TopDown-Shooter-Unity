@@ -4,37 +4,40 @@ using UnityEngine;
 
 public class EnemyDeath : MonoBehaviour
 {
-    [SerializeField] GameObject _rifleAmmo;
-    [SerializeField] GameObject _shotgunAmmo;
+    private Animator _animator;
+    private Rigidbody2D _body2d;
+    private Collider2D _collider;
 
-    private void Awake()
+    void Awake()
     {
-        //Health.OnDeath += HandleDeath;
-        //EventManager.AddHealthListener(HandleDeath);
+        _collider = GetComponent<Collider2D>();
+        _animator = GetComponent<Animator>();
+        _body2d = GetComponent<Rigidbody2D>();
+        GetComponent<Health>().OnDied += HandleDeath;
     }
 
     private void HandleDeath()
     {
-        var dyingObjectMovement = GetComponent<EnemyMove>();
-        var dyingObjectAnimator = GetComponent<Animator>();
-        var dyingObjectCollider = GetComponent<Collider2D>();
-        dyingObjectMovement.enabled = false;
-        //GetComponent<MeleeAttack>().enabled = false;
-        dyingObjectAnimator.SetTrigger("Dying");
+        var _movement = GetComponent<EnemyMove>();
+        var weaponHandler = GetComponent<EnemyWeaponHandler>();
+        if (weaponHandler != null)
+        {
+            weaponHandler.enabled = false;
+        }
+  
+
+        _animator?.SetTrigger("Dying");
         Debug.Log(gameObject.name);
 
-        int dropChance = Random.Range(1, 101);
-        if (dropChance >= 0 && dropChance <= 50)
+
+        if (_movement != null)
         {
-            var rifleAmmoDrop = Instantiate(_rifleAmmo, transform.position,
-             Quaternion.identity);
+            _movement.enabled = false;
         }
-        else if (dropChance >= 51 && dropChance <= 100)
+        if (_collider != null)
         {
-            var shotgunAmmoDrop = Instantiate(_shotgunAmmo, transform.position,
-             Quaternion.identity);
+            _collider.enabled = false;
         }
-        dyingObjectCollider.enabled = false;
         Destroy(gameObject, 1.0f);
 
     }
@@ -44,6 +47,6 @@ public class EnemyDeath : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        //Health.OnDeath -= HandleDeath;
+        GetComponent<Health>().OnDied -= HandleDeath;
     }
 }
