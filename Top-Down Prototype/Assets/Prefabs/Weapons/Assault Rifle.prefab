@@ -100,12 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5114801586880999095, guid: 37f550a7fbf876c489cc368cd4b40680, type: 3}
+  muzzleFlashPrefab: {fileID: 455240160870514496, guid: 4a02357a3aa81ba4c80a4064b9c29624, type: 3}
   muzzleTransform: {fileID: 462724276005966884}
-  currentAmmo: 11
+  currentAmmo: 30
   maxAmmo: 72
   magazineSize: 30
-  timeBetweenShots: 0.2
   ammoPerShot: 1
+  timeBetweenShots: 0.2
   reloadSpeed: 2
 --- !u!61 &131069197
 BoxCollider2D:

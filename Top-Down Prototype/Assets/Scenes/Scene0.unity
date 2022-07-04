@@ -2453,10 +2453,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2126229509927346937, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
-      propertyPath: currentAmmo
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 2126229509927346938, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2943,6 +2939,10 @@ PrefabInstance:
     - target: {fileID: 7490895233034298555, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490895233339170569, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}

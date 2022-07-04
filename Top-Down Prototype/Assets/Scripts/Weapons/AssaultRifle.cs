@@ -14,7 +14,9 @@ public class AssaultRifle : Weapon, IInteractable
         {
             var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
                 Quaternion.identity);
-
+            var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
+             transform.rotation);
+            Destroy(flash, timeBetweenShots / 5);
             var bulletScript = projectile.GetComponent<Projectile>();
             currentAmmo -= AmmoPerShot;
             bulletScript.MoveToTarget(direction);

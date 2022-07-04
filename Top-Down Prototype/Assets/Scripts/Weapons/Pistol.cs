@@ -13,7 +13,7 @@ public class Pistol : Weapon, IInteractable
                 Quaternion.identity);
             var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
              transform.rotation);
-            
+            Destroy(flash, timeBetweenShots / 5);
             var bulletScript = projectile.GetComponent<Projectile>();
             currentAmmo -= AmmoPerShot;
             bulletScript.MoveToTarget(direction);

@@ -19,6 +19,9 @@ public class Shotgun : Weapon, IInteractable
             direction.y -= Random.Range(-pelletSpread, pelletSpread);
             pelletScript.MoveToTarget(direction);
         }
+        var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
+         transform.rotation);
+        Destroy(flash, timeBetweenShots / 5);
         currentAmmo -= ammoPerShot;
         AudioManager.Play(AudioClipName.ShotgunBlast);
         firing = true;
