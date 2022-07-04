@@ -44,6 +44,6 @@ public class AssaultRifle : Weapon, IInteractable
 
         PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);       
         reloading = false;
-        AudioManager.Play(AudioClipName.AR_Finish_Reload);
+        AudioManager.Play(AudioClipName.ReloadSound);
     }
 }

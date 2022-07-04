@@ -20,22 +20,24 @@ public static class AudioManager
         audioSource = source;
         audioClips.Add(AudioClipName.AR_Fire,
             Resources.Load<AudioClip>("AR_Fire"));
-        audioClips.Add(AudioClipName.AR_Finish_Reload,
-            Resources.Load<AudioClip>("AR Finish Reload"));
-        audioClips.Add(AudioClipName.PistolEmpty, 
-            Resources.Load<AudioClip>("pistol empty"));
+        audioClips.Add(AudioClipName.GetGun,
+            Resources.Load<AudioClip>("GetGun"));
+        audioClips.Add(AudioClipName.MeleeAttack,
+            Resources.Load<AudioClip>("Melee_Attack"));
+        audioClips.Add(AudioClipName.NoAmmo,
+            Resources.Load<AudioClip>("No_Ammo_Sound"));
+        audioClips.Add(AudioClipName.Pickup,
+            Resources.Load<AudioClip>("Pickup"));
         audioClips.Add(AudioClipName.PlayerDeath,
             Resources.Load<AudioClip>("die"));
         audioClips.Add(AudioClipName.PistolShot,
             Resources.Load<AudioClip>("pistol fire"));
-        audioClips.Add(AudioClipName.PistolStartReload,
-            Resources.Load<AudioClip>("Pistol_Start_Reload"));
-        audioClips.Add(AudioClipName.PistolStopReload,
-            Resources.Load<AudioClip>("Pistol_Finish_Reload"));
+        audioClips.Add(AudioClipName.ReloadSound,
+            Resources.Load<AudioClip>("Reload_Sound"));
         audioClips.Add(AudioClipName.ShotgunBlast,
-            Resources.Load<AudioClip>("Shotgun_Two"));
-        audioClips.Add(AudioClipName.ShotgunReload,
-            Resources.Load<AudioClip>("Shotgun_Reload"));
+            Resources.Load<AudioClip>("Shotgun_Fire"));
+        audioClips.Add(AudioClipName.ZombieInmateDeath,
+            Resources.Load<AudioClip>("ZombieInmateDeath"));
     }
 
     /// <summary>

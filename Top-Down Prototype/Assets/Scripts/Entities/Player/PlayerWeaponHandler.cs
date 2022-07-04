@@ -65,6 +65,11 @@ public class PlayerWeaponHandler : WeaponHandler
             currentWeapon.Fire(aimDirection);
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
         }
+        else if (currentWeapon.CurrentAmmo == 0 && CanFire)
+        {
+            AudioManager.Play(AudioClipName.NoAmmo);
+            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;  
+        }
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
@@ -85,6 +90,7 @@ public class PlayerWeaponHandler : WeaponHandler
 
     private void GetNewWeapon(GameObject newGun)
     {
+        AudioManager.Play(AudioClipName.GetGun);
         gun.SetActive(false);        
         weaponDictionary.Add(newGun.name, newGun);
         newGun.transform.SetParent(transform);

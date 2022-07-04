@@ -31,7 +31,7 @@ public class EnemyDeath : MonoBehaviour
         {
             _movement.enabled = false;
         }
-        
+        AudioManager.Play(AudioClipName.ZombieInmateDeath);
         Destroy(gameObject, 1.0f);
 
     }

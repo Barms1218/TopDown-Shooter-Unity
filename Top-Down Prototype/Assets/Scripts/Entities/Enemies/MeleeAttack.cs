@@ -35,7 +35,7 @@ public class MeleeAttack : MonoBehaviour
         var _health = player.GetComponent<IHaveHealth>();
         if (CanAttack() && _health != null)
         {
-            Debug.Log("Attacking");
+            AudioManager.Play(AudioClipName.MeleeAttack);
             _health.TakeDamage(damage, this.gameObject, attackStrength);
             StartCoroutine(RecoverFromAttack());
             nextAttack = Time.time + attackCooldown;

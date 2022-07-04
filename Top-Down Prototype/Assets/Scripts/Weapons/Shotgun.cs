@@ -39,7 +39,8 @@ public class Shotgun : Weapon, IInteractable
             currentAmmo++;
             maxAmmo--;
             PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);
-            AudioManager.Play(AudioClipName.ShotgunReload);
+            //AudioManager.Play(AudioClipName.ShotgunReload);
+            AudioManager.Play(AudioClipName.ReloadSound);
             yield return new WaitForSeconds(reloadSpeed);
             reloading = false;
         }

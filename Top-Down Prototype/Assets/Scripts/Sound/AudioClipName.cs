@@ -4,13 +4,13 @@
 public enum AudioClipName
 {
     AR_Fire,
-    AR_Finish_Reload,
-    EnemyDeath,
-    PistolEmpty,
+    GetGun,
+    MeleeAttack,
+    NoAmmo,
+    ReloadSound,
+    Pickup,
     PlayerDeath,
     PistolShot,
-    PistolStartReload,
-    PistolStopReload,
     ShotgunBlast,
-    ShotgunReload
+    ZombieInmateDeath
 }

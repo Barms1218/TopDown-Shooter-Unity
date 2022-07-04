@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8846835937500090402}
   - component: {fileID: 4250514611349930946}
   - component: {fileID: 4250514611349930945}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Pistol
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -229,12 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 8fe1a738ac8acd3449e009d30fc5642d, type: 2}
   projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
+  muzzleFlashPrefab: {fileID: 455240160870514496, guid: 4a02357a3aa81ba4c80a4064b9c29624, type: 3}
   muzzleTransform: {fileID: 3785646919390945951}
   currentAmmo: 12
   maxAmmo: 60
   magazineSize: 12
-  timeBetweenShots: 0.5
   ammoPerShot: 1
+  timeBetweenShots: 1
   reloadSpeed: 2

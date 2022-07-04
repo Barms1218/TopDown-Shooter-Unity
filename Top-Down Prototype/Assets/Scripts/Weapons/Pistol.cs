@@ -11,7 +11,9 @@ public class Pistol : Weapon, IInteractable
         {
             var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
                 Quaternion.identity);
-
+            var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
+             transform.rotation);
+            
             var bulletScript = projectile.GetComponent<Projectile>();
             currentAmmo -= AmmoPerShot;
             bulletScript.MoveToTarget(direction);
@@ -30,11 +32,11 @@ public class Pistol : Weapon, IInteractable
     protected override IEnumerator StartReload()
     {
         reloading = true;
-        AudioManager.Play(AudioClipName.PistolStartReload);
+
         yield return new WaitForSeconds(reloadSpeed);
         currentAmmo = magazineSize;
 
-
+        AudioManager.Play(AudioClipName.ReloadSound);
         PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);       
         reloading = false;
     }

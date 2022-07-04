@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 6
+  chaseDistance: 5.5
 --- !u!114 &-6235309337624090876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +243,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 5114801586880999095, guid: b2fdda47b0cacab48a40589aa9a7cbd3, type: 3}
+    - target: {fileID: 2126229509927346937, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 2126229509927346938, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
       propertyPath: m_RootOrder
       value: 0

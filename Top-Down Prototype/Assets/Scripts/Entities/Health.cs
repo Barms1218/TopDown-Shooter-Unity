@@ -40,7 +40,7 @@ public class Health : MonoBehaviour, IHaveHealth
 
             _animator.SetTrigger("Hurt");
         }
-        else if (_health <= 0)
+        if (_health <= 0)
         {
             GetComponent<Collider2D>().enabled = false;
             OnDied?.Invoke();

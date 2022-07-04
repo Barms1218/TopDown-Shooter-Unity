@@ -14,6 +14,7 @@ public abstract class AmmoPickup : MonoBehaviour
         if (other.tag == "Player")
         {
             OnTrigger?.Invoke(_amount, gunName);
+            AudioManager.Play(AudioClipName.Pickup);
             Destroy(gameObject);
         }
     }

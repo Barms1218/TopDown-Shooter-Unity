@@ -7,13 +7,17 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 {
     #region Fields
 
+    [Header("Prefabs")]
     [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected GameObject muzzleFlashPrefab;
     [SerializeField] protected Transform muzzleTransform;
+    [Header("Ammunition Stats")]
     [SerializeField] protected int currentAmmo;
     [SerializeField] protected int maxAmmo;
     [SerializeField] protected int magazineSize;
-    [SerializeField] protected float timeBetweenShots;
     [SerializeField] protected int ammoPerShot;
+    [Header("Gun Properties")]
+    [SerializeField] protected float timeBetweenShots;
     [SerializeField] protected float reloadSpeed;
     protected bool reloading = false;
     protected bool facingRight;
