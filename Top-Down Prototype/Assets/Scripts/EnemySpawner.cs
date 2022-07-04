@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] _enemyPrefab;
+    [SerializeField] int spawnDelay = 5;
     float timeToNextSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 var enemy = Instantiate(_enemyPrefab[2], transform.position, Quaternion.identity);
             }
-            timeToNextSpawn = Time.time + 2f;
+            timeToNextSpawn = Time.time + spawnDelay;
         }
     }
 

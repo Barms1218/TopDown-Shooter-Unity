@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class MeleeAttack : MonoBehaviour
 {
     [SerializeField] private int attackStrength;
+    [SerializeField] private float attackRange;
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
     private float nextAttack;
@@ -18,20 +19,29 @@ public class MeleeAttack : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+    }
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    private void Update()
+    {
+        var _distance = Vector2.Distance(player.transform.position, transform.position);
+        if( _distance <= attackRange)
+            Attack();
     } 
 
-    private void OnCollisionEnter2D(Collision2D other)
+    void Attack()
     {
-
-        if (other.gameObject.tag == "Player" && CanAttack())
+        var _health = player.GetComponent<IHaveHealth>();
+        if (CanAttack() && _health != null)
         {
-            var _health = player.GetComponent<IHaveHealth>();
+            Debug.Log("Attacking");
             _health.TakeDamage(damage, this.gameObject, attackStrength);
-            nextAttack = Time.time + attackCooldown;
             StartCoroutine(RecoverFromAttack());
+            nextAttack = Time.time + attackCooldown;
         }
-
     }
+
 
     private IEnumerator RecoverFromAttack()
     {

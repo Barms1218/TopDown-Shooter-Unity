@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 748987354230509530}
   - component: {fileID: -7289052403578439756}
   - component: {fileID: 3363994205910854498}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Enemy Pistol Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}

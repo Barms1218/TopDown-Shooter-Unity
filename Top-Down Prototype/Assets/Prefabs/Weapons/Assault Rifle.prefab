@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2126229509927346939}
   - component: {fileID: 2126229509927346937}
   - component: {fileID: 131069197}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Assault Rifle
   m_TagString: Weapon
   m_Icon: {fileID: 0}

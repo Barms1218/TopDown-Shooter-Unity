@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 748987354230509530}
   - component: {fileID: 3363994205910854498}
   - component: {fileID: -5744950589920894807}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Enemy Shotgun Pellet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
