@@ -24,6 +24,8 @@ public static class AudioManager
             Resources.Load<AudioClip>("GetGun"));
         audioClips.Add(AudioClipName.MeleeAttack,
             Resources.Load<AudioClip>("Melee_Attack"));
+        audioClips.Add(AudioClipName.MenuButton,
+            Resources.Load<AudioClip>("MenuButton"));
         audioClips.Add(AudioClipName.NoAmmo,
             Resources.Load<AudioClip>("No_Ammo_Sound"));
         audioClips.Add(AudioClipName.Pickup,

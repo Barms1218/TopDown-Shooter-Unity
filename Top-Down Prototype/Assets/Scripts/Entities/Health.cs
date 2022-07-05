@@ -30,7 +30,6 @@ public class Health : MonoBehaviour, IHaveHealth
         if (_health > 0)
         {
             _health -= amount;
-            Debug.Log(_health);
             if (!_body2d.isKinematic)
             {
                 var pushDirection = gameObject.transform.position - damageSource.transform.position;

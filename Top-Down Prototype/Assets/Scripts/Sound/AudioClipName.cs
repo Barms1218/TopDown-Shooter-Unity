@@ -6,6 +6,7 @@ public enum AudioClipName
     AR_Fire,
     GetGun,
     MeleeAttack,
+    MenuButton,
     NoAmmo,
     ReloadSound,
     Pickup,

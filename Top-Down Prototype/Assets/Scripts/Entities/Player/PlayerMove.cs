@@ -6,13 +6,30 @@ public class PlayerMove : MonoBehaviour
 {
 
     private Rigidbody2D _body;
-    private Vector2 _direction;
-    private Vector2 _velocity;
-    private Vector2 desiredVelocity;
+    private Animator _animator;
+    private Vector2 _direction, _velocity, desiredVelocity;
+    private float dashTimer = 1.0f;
+    private float maxDashTime = 2.5f;
+    private float dashCoolDown;
+    private float dashDistance = 3f;
+    private bool isDashing;
+    private Vector2 dashStart, dashEnd;
+    private enum DashState
+    {
+        Ready,
+        Dashing,
+        Cooldown
+    }
+    DashState dashState;
     [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
     
     
-    void Awake() => _body = GetComponent<Rigidbody2D>();
+    void Awake()
+    {
+        _body = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        dashState = DashState.Ready;
+    }
 
     void Update()
     {
@@ -21,7 +38,18 @@ public class PlayerMove : MonoBehaviour
         _velocity.x = Mathf.MoveTowards(_velocity.x, desiredVelocity.x, 5f);
         _velocity.y = Mathf.MoveTowards(_velocity.y, desiredVelocity.y, 5f);
 
-        _body.velocity = _velocity;        
+        _body.velocity = _velocity;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isDashing = true;
+            dashStart = transform.position;
+            dashEnd = new Vector2(dashStart.x + dashDistance * _direction.x, 
+            dashStart.y);
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isDashing = false;
+        }
     }
 
     private void FixedUpdate()
@@ -29,8 +57,60 @@ public class PlayerMove : MonoBehaviour
         _direction.x = Input.GetAxis("Horizontal");
         _direction.y = Input.GetAxis("Vertical");
         var speed = Mathf.Abs(_direction.x + _direction.y);
-        GetComponent<Animator>().SetFloat("Speed", speed);
+        _animator.SetFloat("Speed", speed);
         desiredVelocity = new Vector2(_direction.x, _direction.y)
-            * Mathf.Max(maxSpeed, 0f);        
+            * Mathf.Max(maxSpeed, 0f);
+
+
+        if (isDashing && CanDash)
+        {
+            // incrementing time
+            float currentDashTime = 0;
+
+            // updating position
+            transform.position = Vector2.Lerp(dashStart, dashEnd, dashTimer);
+            currentDashTime += Time.deltaTime;
+            if (currentDashTime >= dashTimer)
+            {
+                // dash finished
+                isDashing = false;
+                transform.position = dashEnd;
+            }
+            dashCoolDown = Time.time + 2f;
+        }
+        // switch(dashState)
+        // {
+        //     case DashState.Ready:
+        //         if (isDashing)
+        //         {
+        //             _body.velocity = new Vector2(
+        //                 _body.velocity.x * dashForce, _body.velocity.y);
+        //             dashState = DashState.Dashing;
+        //             Debug.Log("About to dash");
+        //         }
+        //         break;
+        //     case DashState.Dashing:
+        //         dashTimer += Time.deltaTime * 3;
+        //         if (dashTimer >= maxDashTime)
+        //         {
+        //             dashTimer = maxDashTime;
+        //             _body.velocity = desiredVelocity;
+        //             dashState = DashState.Cooldown;
+        //             Debug.Log("Dashing");
+        //         }
+        //         break;
+        //     case DashState.Cooldown:
+        //         dashTimer -= Time.deltaTime;
+        //         if (dashTimer <= 0)
+        //         {
+        //             dashTimer = 0;
+        //             dashState = DashState.Ready;
+        //             Debug.Log("Ready to dash");
+        //         }
+        //         break;
+        // }        
     }
+
+    private bool CanDash => Time.time >= dashCoolDown;
+    private bool DashOver => Time.deltaTime >= maxDashTime;
 }

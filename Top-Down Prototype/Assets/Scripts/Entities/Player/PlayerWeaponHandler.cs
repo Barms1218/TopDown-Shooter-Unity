@@ -12,6 +12,7 @@ public class PlayerWeaponHandler : WeaponHandler
     new Dictionary<string, GameObject>();
     public static UnityAction<int, int> ReduceAmmo;
     public static UnityAction<int, int> SetAmmoCount;
+    GameObject aimCursor;
 
     #endregion
 
@@ -45,15 +46,20 @@ public class PlayerWeaponHandler : WeaponHandler
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         EntityInput.OnReload += Reload;
         EntityInput.OnSpecialAttack += SpecialAttack;
-        EntityInput.OnFire += Fire;        
+        EntityInput.OnFire += Fire;
+        aimCursor = GameObject.FindGameObjectWithTag("Cursor");
     }
 
     private void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         aimDirection = mousePos - transform.position;
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;        
-        currentWeapon.Aim(angle, GameObject.FindGameObjectWithTag("Cursor").transform);
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        if (aimCursor != null)
+        {
+            currentWeapon.Aim(angle, aimCursor.transform);
+        }        
+
     }
 
     #region Event Methods
@@ -63,7 +69,8 @@ public class PlayerWeaponHandler : WeaponHandler
         if (currentWeapon.CurrentAmmo > 0 && CanFire)
         {
             currentWeapon.Fire(aimDirection);
-            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;            
+            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
+                        
         }
         else if (currentWeapon.CurrentAmmo == 0 && CanFire)
         {
