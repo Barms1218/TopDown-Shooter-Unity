@@ -1,46 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] _enemyPrefab;
-    [SerializeField] int spawnDelay = 5;
-    float timeToNextSpawn;
+    [SerializeField] List<WaveConfig> waveConfigs;
+    [SerializeField] private float timeBetweenWaves = 0f;
+    [SerializeField] private bool isLooping;
+    private WaveConfig currentWave;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public WaveConfig CurrentWave => currentWave;
+
+    private void Start()
     {
-        
+        StartCoroutine(SpawnEnemyWaves());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator SpawnEnemyWaves()
     {
-        
-        if (CanSpawn)
+        do
         {
-            //rachel is the best person in the whole world
-            int spawnChance = Random.Range(0, 101);
-            if (spawnChance >= 0 && spawnChance <= 80)
+            foreach (WaveConfig wave in waveConfigs)
             {
-                var enemy = Instantiate(_enemyPrefab[0], transform.position, Quaternion.identity);
+                currentWave = wave;
+                for (int i = 0; i < currentWave.GetEnemyCount(); i++)
+                {
+                    var enemy = Instantiate(currentWave.GetEnemyPrefab(i),
+                        transform.position, Quaternion.identity, transform);
+                    yield return new WaitForSeconds(currentWave.GetRandomSpawnTime());
+                }
+
+                yield return new WaitForSeconds(timeBetweenWaves);
             }
-            else if (spawnChance >= 81 && spawnChance <= 90)
-            {
-                var enemy = Instantiate(_enemyPrefab[3], transform.position, Quaternion.identity);
-            }
-            else if (spawnChance >= 91 && spawnChance <= 96)
-            {
-                var enemy = Instantiate(_enemyPrefab[1], transform.position, Quaternion.identity);
-            }
-            else if (spawnChance >= 97 && spawnChance <= 101)
-            {
-                var enemy = Instantiate(_enemyPrefab[2], transform.position, Quaternion.identity);
-            }
-            timeToNextSpawn = Time.time + spawnDelay;
-        }
+        } while (isLooping);
+
     }
 
-    private bool CanSpawn => Time.time >= timeToNextSpawn;
+    private bool WaveComing => Time.time >= timeBetweenWaves;
 }

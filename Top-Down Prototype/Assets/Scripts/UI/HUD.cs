@@ -9,11 +9,14 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI interactText;
 
+    private int score;
+
     private void Awake()
     {
         interactText.enabled = false;
-        Pickup.OnRayCast += SetInteractTextState;
+        Interact.OnRayCast += SetInteractTextState;
         PlayerWeaponHandler.SetAmmoCount += UpdateWeaponAmmo;
+        EnemyDeath.addPoints += UpdatePointsText;
     }
 
     private void SetInteractTextState(bool isActive)
@@ -25,5 +28,11 @@ public class HUD : MonoBehaviour
     {
         ammoCountText.text = startAmmo.ToString() + "/" +
         startMaxAmmo.ToString();         
-    }    
+    }
+
+    private void UpdatePointsText(int points)
+    {
+        score += points;
+        scoreText.text = ("Score: " + score.ToString());
+    }
 }

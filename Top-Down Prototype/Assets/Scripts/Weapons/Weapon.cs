@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Collections; using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -78,7 +77,7 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
 
     protected virtual void AddAmmo(int _amount, string weaponName)
     {
-        
+
     }
     protected virtual void Interact() => OnPickUp?.Invoke(gameObject);
 }

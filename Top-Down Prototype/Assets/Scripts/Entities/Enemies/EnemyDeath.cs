@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyDeath : MonoBehaviour
 {
+    [SerializeField] private int points;
     private Animator _animator;
     private EnemyMove _movement;
+    private EnemyWeaponHandler _weapon;
+    public static UnityAction<int> addPoints;
 
     void Awake()
     {
         _movement = GetComponent<EnemyMove>();
         _animator = GetComponent<Animator>();
+        _weapon = GetComponent<EnemyWeaponHandler>();
         GetComponent<Health>().OnDied += HandleDeath;
     }
 
     private void HandleDeath()
     {
-        var weaponHandler = GetComponent<EnemyWeaponHandler>();
-        if (weaponHandler != null)
+        if (_weapon != null)
         {
-            weaponHandler.enabled = false;
+            _weapon.enabled = false;
         }
   
 
         _animator?.SetTrigger("Dying");
-        Debug.Log(gameObject.name);
 
 
         if (_movement != null)
@@ -32,6 +35,8 @@ public class EnemyDeath : MonoBehaviour
             _movement.enabled = false;
         }
         AudioManager.Play(AudioClipName.ZombieInmateDeath);
+
+        addPoints?.Invoke(points);
         Destroy(gameObject, 1.0f);
 
     }

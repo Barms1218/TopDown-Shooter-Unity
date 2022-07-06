@@ -6,47 +6,15 @@ using UnityEngine.Events;
 
 public class Pickup : MonoBehaviour
 {
-
-    private LayerMask interactLayer;
-    public static UnityAction<bool> OnRayCast;
     public static UnityAction<string> AddWeaponName;
-    private Collider2D playerCollider;
 
-    private void Awake()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        interactLayer = LayerMask.GetMask("Interactables");
-        playerCollider = GetComponent<Collider2D>();
-    }
-
-    private void FixedUpdate()
-    {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - gameObject.transform.position;
-        
-        Color lineColor;
-        
-        lineColor = Color.red;
-        if (Physics2D.Raycast(playerCollider.bounds.center, direction, 1.5f, interactLayer))
+        if (collision.gameObject.tag == "Weapon")
         {
-            RaycastHit2D hit = Physics2D.Raycast(
-                playerCollider.bounds.center, direction, 2.5f, interactLayer);
-            var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
-            if (Input.GetKeyDown(KeyCode.E) && interactable != null)
-            {
-                hit.collider.gameObject.GetComponent<IInteractable>().Interact();
-                if (hit.collider.gameObject.tag == "Weapon")
-                {
-                    AddWeaponName?.Invoke(hit.collider.gameObject.name);
-                }
-            }
-            OnRayCast?.Invoke(true);
-            lineColor = Color.green;
-        } 
-        else
-        {
-            OnRayCast?.Invoke(false);
-        }     
-        Debug.DrawRay(playerCollider.bounds.center, direction, lineColor);
+            AddWeaponName?.Invoke(collision.gameObject.name);
+            collision.gameObject.GetComponent<IInteractable>().Interact();
+        }
     }
-
 }

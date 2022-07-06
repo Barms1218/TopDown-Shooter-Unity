@@ -501,7 +501,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.349119, y: 1}
+    m_SensorSize: {x: 2.3962486, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1480,7 +1480,7 @@ GameObject:
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &784351703
 Transform:
   m_ObjectHideFlags: 0
@@ -1806,12 +1806,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557c2d3273f53984dabd90261a1d5f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab:
-  - {fileID: 2579200449049318824, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
-  - {fileID: 8699948889711129075, guid: 439b3c9273670f84a9a35c0f3942b7ae, type: 3}
-  - {fileID: 3543103714409048337, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
-  - {fileID: 2474475448183171314, guid: 66bb0e4ec0895594b89179a102eb6ba8, type: 3}
-  spawnDelay: 5
+  waveConfigs:
+  - {fileID: 11400000, guid: aafd135d187c747bbbbe10f28d142be9, type: 2}
+  - {fileID: 11400000, guid: 3ab1acebebbf24232a28f963fd9beba8, type: 2}
+  timeBetweenWaves: 10
+  isLooping: 1
 --- !u!1 &1546579119
 GameObject:
   m_ObjectHideFlags: 0
