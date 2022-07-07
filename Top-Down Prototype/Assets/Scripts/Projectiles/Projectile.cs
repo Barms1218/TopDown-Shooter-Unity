@@ -6,17 +6,10 @@ public class Projectile : MonoBehaviour
 {
     #region Fields
     
-    [SerializeField] private ProjectileData projectileData;    
-    private float timeToLive;
-    private Weapon weapon;
-
-    private GameObject intendedTarget;
-
-    #endregion
-
-    #region Properties
-
-    public float WeaponDamage => projectileData.Damage;
+    [SerializeField] private ProjectileData projectileData;
+    [SerializeField] int damage;
+    [SerializeField] float timeToLive;
+    [SerializeField] float forceMagnitude;
 
     #endregion
 
@@ -33,18 +26,18 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        IHaveHealth damageable = other.gameObject.GetComponent<IHaveHealth>();
+        IHaveHealth damageable = collision.gameObject.GetComponent<IHaveHealth>();
         if (damageable != null)
         {
-            damageable.TakeDamage(projectileData.Damage, this.gameObject, 
-            projectileData.ProjectileForce);
+            damageable.TakeDamage(damage, this.gameObject,
+            0);
         }
-        Destroy(gameObject);         
+        Destroy(gameObject);
     }
+
 
     public void MoveToTarget(Vector2 force)
     {
@@ -54,6 +47,6 @@ public class Projectile : MonoBehaviour
 
         transform.rotation = target;
         body.AddRelativeForce(force.normalized * 
-            projectileData.AmountOfForce, ForceMode2D.Impulse);
+            forceMagnitude, ForceMode2D.Impulse);
     }
 }

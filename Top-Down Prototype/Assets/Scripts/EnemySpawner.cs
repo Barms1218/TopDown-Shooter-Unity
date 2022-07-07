@@ -16,26 +16,33 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnEnemyWaves());
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            StartCoroutine(SpawnEnemyWaves());
+            GetComponent<CircleCollider2D>().enabled = false;
+        }
     }
 
     private IEnumerator SpawnEnemyWaves()
     {
-        do
-        {
-            foreach (WaveConfig wave in waveConfigs)
-            {
-                currentWave = wave;
-                for (int i = 0; i < currentWave.GetEnemyCount(); i++)
-                {
-                    var enemy = Instantiate(currentWave.GetEnemyPrefab(i),
-                        transform.position, Quaternion.identity, transform);
-                    yield return new WaitForSeconds(currentWave.GetRandomSpawnTime());
-                }
 
-                yield return new WaitForSeconds(timeBetweenWaves);
+        foreach (WaveConfig wave in waveConfigs)
+        {
+            currentWave = wave;
+            for (int i = 0; i < currentWave.GetEnemyCount(); i++)
+            {
+                var enemy = Instantiate(currentWave.GetEnemyPrefab(i),
+                    transform.position, Quaternion.identity, transform);
+                yield return new WaitForSeconds(currentWave.GetRandomSpawnTime());
             }
-        } while (isLooping);
+
+            yield return new WaitForSeconds(timeBetweenWaves);
+        }
 
     }
 

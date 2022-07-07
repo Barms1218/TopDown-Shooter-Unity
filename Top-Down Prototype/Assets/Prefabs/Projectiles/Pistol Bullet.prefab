@@ -121,6 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: fe7bcdc91be84d4409a8de1eb76a0076, type: 2}
+  damage: 4
+  timeToLive: 1
+  forceMagnitude: 40
 --- !u!61 &3363994205910854498
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,7 +134,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

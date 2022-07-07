@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 0
+  aggroRadius: 10
 --- !u!114 &820337527391404187
 MonoBehaviour:
   m_ObjectHideFlags: 0

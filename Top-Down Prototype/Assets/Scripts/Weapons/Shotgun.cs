@@ -12,12 +12,12 @@ public class Shotgun : Weapon, IInteractable
     {
         for (int i = 0; i < numProjectiles; i++)
         {
-            var pellet = Instantiate(projectilePrefab, muzzleTransform.position, 
+            var projectile = Instantiate(projectilePrefab, muzzleTransform.position, 
                 Quaternion.identity);
 
-            var pelletScript = pellet.GetComponent<PelletProjectile>();
+            var projectileScript = projectile.GetComponent<Projectile>();
             direction.y -= Random.Range(-pelletSpread, pelletSpread);
-            pelletScript.MoveToTarget(direction);
+            projectileScript.MoveToTarget(direction);
         }
         var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
          transform.rotation);

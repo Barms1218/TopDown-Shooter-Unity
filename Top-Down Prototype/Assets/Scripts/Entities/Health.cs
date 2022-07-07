@@ -11,8 +11,11 @@ public class Health : MonoBehaviour, IHaveHealth
     private Rigidbody2D _body2d;
     private Animator _animator;
     public event UnityAction OnDied;
-    public int MaxHealth => maxHealth;
+    public event UnityAction<bool> OnHit;
+    private bool isAngry = false;
 
+    public int MaxHealth => maxHealth;
+    public bool IsAngry => isAngry;
      int IHaveHealth.Health 
     { 
         get => _health; 
@@ -33,7 +36,6 @@ public class Health : MonoBehaviour, IHaveHealth
             if (!_body2d.isKinematic)
             {
                 var pushDirection = gameObject.transform.position - damageSource.transform.position;
-                //Vector2.Lerp(gameObject.transform.position, gameObject.transform.position - damageSource.transform.position * attackStrength, 3);
                 _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
             }
 
@@ -44,6 +46,14 @@ public class Health : MonoBehaviour, IHaveHealth
             GetComponent<Collider2D>().enabled = false;
             OnDied?.Invoke();
         }
+
+        if (!isAngry)
+        {
+            isAngry = true;
+            OnHit?.Invoke(isAngry);
+        }
+
+
     }
 
     public void HandleDeath()
