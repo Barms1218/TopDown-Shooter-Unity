@@ -33,11 +33,9 @@ public class Health : MonoBehaviour, IHaveHealth
         if (_health > 0)
         {
             _health -= amount;
-            if (!_body2d.isKinematic)
-            {
-                var pushDirection = gameObject.transform.position - damageSource.transform.position;
-                _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
-            }
+            Vector3 pushDirection = gameObject.transform.position - damageSource.transform.position;
+            _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
+
 
             _animator.SetTrigger("Hurt");
         }

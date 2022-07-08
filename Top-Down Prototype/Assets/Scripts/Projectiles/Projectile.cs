@@ -13,10 +13,6 @@ public class Projectile : MonoBehaviour
 
     #endregion
 
-    void Start()
-    {
-        timeToLive = projectileData.TimeToLive;
-    }
     void Update()
     {
         timeToLive -= Time.deltaTime;
@@ -27,17 +23,15 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         IHaveHealth damageable = collision.gameObject.GetComponent<IHaveHealth>();
         if (damageable != null)
         {
-            damageable.TakeDamage(damage, this.gameObject,
-            0);
+            damageable.TakeDamage(damage, this.gameObject, 0);
         }
         Destroy(gameObject);
     }
-
 
     public void MoveToTarget(Vector2 force)
     {

@@ -9,14 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270001635}
-  - component: {fileID: 270001636}
   m_Layer: 0
-  m_Name: Attack Sphere
+  m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &270001635
 Transform:
   m_ObjectHideFlags: 0
@@ -25,29 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270001634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 0.34, z: 0}
+  m_LocalPosition: {x: 0.69, y: 0.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2579200449049318825}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &270001636
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270001634}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.1351614, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.3648386
 --- !u!1 &2579200449049318824
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +46,7 @@ GameObject:
   - component: {fileID: 4001802063013996520}
   - component: {fileID: 847067256608029376}
   - component: {fileID: 2262175345093553424}
+  - component: {fileID: 5718955655383509796}
   - component: {fileID: 820337527391404187}
   - component: {fileID: 1010239956}
   - component: {fileID: 1401529239}
@@ -149,11 +133,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2579200449049318824}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -190,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e76c62a4223764ab9b9f87c6dde190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 20
 --- !u!114 &847067256608029376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +202,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 0
   aggroRadius: 10
+--- !u!114 &5718955655383509796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51ceb88a2dee40c0a81c668c8318d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyesTransform: {fileID: 270001635}
+  sightRange: 10
 --- !u!114 &820337527391404187
 MonoBehaviour:
   m_ObjectHideFlags: 0

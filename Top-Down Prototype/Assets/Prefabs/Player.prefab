@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4042253683196191775}
   - component: {fileID: 7490895233034298544}
   - component: {fileID: 510933966}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -235,11 +235,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.031943083, y: 0.557889}
-  m_Size: {x: 0.7584913, y: 1.246722}
+  m_Offset: {x: -0.026462793, y: 0.57433}
+  m_Size: {x: 0.5940825, y: 0.9946284}
   m_Direction: 0
 --- !u!1001 &6704132522768850120
 PrefabInstance:
@@ -260,13 +260,21 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4250514611349930945, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+      propertyPath: reloadSpeed
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4250514611349930945, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_LocalPosition.y

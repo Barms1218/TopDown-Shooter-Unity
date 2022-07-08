@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
             currentWave = wave;
             for (int i = 0; i < currentWave.GetEnemyCount(); i++)
             {
-                var enemy = Instantiate(currentWave.GetEnemyPrefab(i),
+                _ = Instantiate(currentWave.GetEnemyPrefab(i),
                     transform.position, Quaternion.identity, transform);
                 yield return new WaitForSeconds(currentWave.GetRandomSpawnTime());
             }
@@ -45,6 +45,4 @@ public class EnemySpawner : MonoBehaviour
         }
 
     }
-
-    private bool WaveComing => Time.time >= timeBetweenWaves;
 }

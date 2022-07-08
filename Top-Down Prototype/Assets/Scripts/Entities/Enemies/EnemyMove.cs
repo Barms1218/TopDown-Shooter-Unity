@@ -7,9 +7,10 @@ public class EnemyMove : MonoBehaviour
 {
     [SerializeField] private float chaseDistance;
     [SerializeField] private float aggroRadius;
+    private Transform startPos;
     private GameObject player;
     private bool facingRight = true;
-    private bool wiillChase = false;
+    private bool isChasingPlayer = false;
     private float moveSpeed;
 
     public static UnityAction OnEngage;
@@ -22,23 +23,27 @@ public class EnemyMove : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         MeleeAttack.OnMelee += ChangeMoveState;
         moveSpeed = Random.Range(2.7f, 3.2f);
-        GetComponent<Health>().OnHit += ChasePlayer;
+        GetComponent<Health>().OnHit += HitByPlayer;
+        GetComponent<KeepTrackOfPlayer>().OnSightedPlayer += HitByPlayer;
         _animator = GetComponent<Animator>();
+        startPos = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) <= aggroRadius
-            && Vector2.Distance(player.transform.position, transform.position) >= chaseDistance
-            || wiillChase)
+        if (Vector2.Distance(player.transform.position,
+            transform.position) >= chaseDistance && isChasingPlayer)
         {
+            //GetComponent<Rigidbody2D>().MovePosition(player.transform.position * Time.deltaTime * moveSpeed);
             transform.position = Vector2.MoveTowards(transform.position,
             player.transform.position, Time.deltaTime * moveSpeed);
             _animator.SetBool("Running", true);
         }
-        else
+        else if (!isChasingPlayer)
         {
+            transform.position = Vector2.MoveTowards(transform.position,
+                startPos.position, Time.deltaTime * moveSpeed);
             _animator.SetBool("Running", false);
         }
 
@@ -69,9 +74,9 @@ public class EnemyMove : MonoBehaviour
         var attackingEnemyMovement = attackingEnemy.GetComponent<EnemyMove>();
         attackingEnemyMovement.enabled = moveBool;
     }
-    private void ChasePlayer(bool isAngry)
+    private void HitByPlayer(bool isAngry)
     {
-        wiillChase = isAngry;
+        isChasingPlayer = isAngry;
         
     }
 }
