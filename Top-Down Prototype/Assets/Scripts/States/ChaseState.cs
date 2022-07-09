@@ -4,25 +4,51 @@ using UnityEngine;
 
 public class ChaseState : BaseState
 {
-    private EnemySM enemySM;
-    Transform target;
-    [SerializeField] float speed = 3f;
-    
+    private EnemySM enemyMachine;
 
-    public ChaseState(EnemySM enemyMachine) : base("Chase", enemyMachine)
+    [SerializeField]
+    float speed = 3f;
+
+
+    public ChaseState(EnemySM enemySM) : base("Chase", enemySM)
     {
-        enemySM = enemyMachine;
+        enemyMachine = enemySM;
     }
 
     public override void Enter()
     {
-        
-        enemySM._animator.SetBool("Running", true);
+        Debug.Log("Entering chase state");
+        enemyMachine.Animator.SetBool("Running", true);
     }
 
     public override void UpdateLogic()
     {
+        enemyMachine.transform.position = Vector2.MoveTowards(enemyMachine.transform.position,
+        enemyMachine.Player.transform.position, Time.deltaTime * speed);
 
+        if (enemyMachine.Player.transform.position.x > enemyMachine.transform.position.x
+        && !enemyMachine.FacingRIght)
+        {
+            enemyMachine.Flip();
+        }
+        else if (enemyMachine.Player.transform.position.x < enemyMachine.transform.position.x
+            && enemyMachine.FacingRIght)
+        {
+            enemyMachine.Flip();
+        }
+
+        // transition to idle state
+        if (!enemyMachine.CanSeePlayer())
+        {
+            enemyMachine.ChangeState(enemyMachine.idleState);
+        }
+
+        // transition to attack state
+        if (Vector2.Distance(enemyMachine.Player.transform.position,
+            enemyMachine.transform.position) <= enemyMachine.AttackRange)
+        {
+            enemyMachine.ChangeState(enemyMachine.attackState);
+        }
     }
 
     public override void UpdatePhysics()
@@ -34,4 +60,5 @@ public class ChaseState : BaseState
     {
         
     }
+
 }

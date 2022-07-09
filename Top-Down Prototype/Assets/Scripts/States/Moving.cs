@@ -7,7 +7,6 @@ public class Moving : BaseState
     private MovementSM _sm;
     private float horizontalInput;
     private float verticalInput;
-    private Animator _animator;
 
 
     public Moving(MovementSM stateMachine) : base("Moving", stateMachine) 
@@ -20,7 +19,6 @@ public class Moving : BaseState
         // horizontalInput = 0f;
         // verticalInput = 0f;
         _sm._animator.SetBool("Running", true);
-        //_sm._animator.Play("Player Run", 1);
     }
 
     public override void UpdateLogic()
@@ -31,7 +29,7 @@ public class Moving : BaseState
         || Mathf.Abs(verticalInput) < Mathf.Epsilon)
         {
             _sm._animator.SetBool("Running", false);
-            stateMachine.ChangeState(_sm.idleState);
+            _sm.ChangeState(_sm.idleState);
         }
     }
 

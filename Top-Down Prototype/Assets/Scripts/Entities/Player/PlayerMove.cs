@@ -78,39 +78,8 @@ public class PlayerMove : MonoBehaviour
             }
             dashCoolDown = Time.time + 2f;
         }
-        // switch(dashState)
-        // {
-        //     case DashState.Ready:
-        //         if (isDashing)
-        //         {
-        //             _body.velocity = new Vector2(
-        //                 _body.velocity.x * dashForce, _body.velocity.y);
-        //             dashState = DashState.Dashing;
-        //             Debug.Log("About to dash");
-        //         }
-        //         break;
-        //     case DashState.Dashing:
-        //         dashTimer += Time.deltaTime * 3;
-        //         if (dashTimer >= maxDashTime)
-        //         {
-        //             dashTimer = maxDashTime;
-        //             _body.velocity = desiredVelocity;
-        //             dashState = DashState.Cooldown;
-        //             Debug.Log("Dashing");
-        //         }
-        //         break;
-        //     case DashState.Cooldown:
-        //         dashTimer -= Time.deltaTime;
-        //         if (dashTimer <= 0)
-        //         {
-        //             dashTimer = 0;
-        //             dashState = DashState.Ready;
-        //             Debug.Log("Ready to dash");
-        //         }
-        //         break;
-        // }        
+     
     }
 
     private bool CanDash => Time.time >= dashCoolDown;
-    private bool DashOver => Time.deltaTime >= maxDashTime;
 }

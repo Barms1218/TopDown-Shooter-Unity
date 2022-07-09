@@ -5,17 +5,18 @@ using UnityEngine.Events;
 
 public class KeepTrackOfPlayer : MonoBehaviour
 {
-    [SerializeField] Transform eyesTransform;
-    [SerializeField] float sightRange = 10f;
-    private Collider2D _collider;
+    [SerializeField]
+    float sightRange = 10f;
     private GameObject _player;
-    
+    private Collider2D _collider;
+    private LayerMask detectionLayer;
     private bool seePlayer = false;
     public event UnityAction<bool> OnSightedPlayer;
 
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
+        detectionLayer = LayerMask.GetMask("Player", "Default");
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -26,7 +27,8 @@ public class KeepTrackOfPlayer : MonoBehaviour
 
         lineColor = Color.red;
 
-        RaycastHit2D hit2d = Physics2D.Raycast(_collider.bounds.center, _direction, sightRange);
+        RaycastHit2D hit2d = Physics2D.Raycast(_collider.bounds.center,
+            _direction, sightRange, detectionLayer);
         if (hit2d.collider != null && hit2d.collider.gameObject.CompareTag("Player"))
         {
             lineColor = Color.green;
@@ -34,16 +36,14 @@ public class KeepTrackOfPlayer : MonoBehaviour
             {
                 seePlayer = true;
                 OnSightedPlayer?.Invoke(seePlayer);
-                Debug.Log(seePlayer);
             }
         }
-        else if (!hit2d.collider.gameObject.CompareTag("Enemy") && !hit2d.collider.gameObject.CompareTag("Player"))
+        else if (hit2d.collider != null && !hit2d.collider.gameObject.CompareTag("Player"))
         {
             if (seePlayer)
             {
                 seePlayer = false;
                 OnSightedPlayer?.Invoke(seePlayer);
-                Debug.Log(seePlayer + " , " + hit2d.collider.gameObject.name);
             }
         }
         Debug.DrawRay(_collider.bounds.center, _direction, lineColor);

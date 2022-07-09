@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class AttackState : BaseState
 {
-    private EnemySM enemySM;
-    private Transform target;
+    EnemySM enemyMachine;
+    private float attackCooldown = 1f;
 
     public AttackState(EnemySM stateMachine) : base("Attack", stateMachine)
     {
-        enemySM = stateMachine;
+        enemyMachine = stateMachine;
     }
 
     public override void Enter()
     {
-        Debug.Log("Attacking now");
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        Debug.Log("Entering attack state");
+        var _health = enemyMachine.Player.GetComponent<IHaveHealth>();
+        if (_health != null)
+        {
+            AudioManager.Play(AudioClipName.MeleeAttack);
+            _health.TakeDamage(enemyMachine.Damage, enemyMachine.gameObject, enemyMachine.AttackStrength);
+            //StartCoroutine(RecoverFromAttack());
+            //nextAttack = Time.time + attackCooldown;
+            enemyMachine.StartCoroutine(RecoverFromAttack());
+            
+        }
     }
 
     public override void UpdateLogic()
@@ -30,5 +39,12 @@ public class AttackState : BaseState
     public override void Exit()
     {
         
+    }
+
+    private IEnumerator RecoverFromAttack()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+
+        enemyMachine.ChangeState(enemyMachine.chaseState);
     }
 }

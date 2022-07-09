@@ -74,7 +74,7 @@ public class EnemyMove : MonoBehaviour
         var attackingEnemyMovement = attackingEnemy.GetComponent<EnemyMove>();
         attackingEnemyMovement.enabled = moveBool;
     }
-    private void HitByPlayer(bool isAngry)
+    public void HitByPlayer(bool isAngry)
     {
         isChasingPlayer = isAngry;
         

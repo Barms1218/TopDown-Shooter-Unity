@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class EnemyIdle : BaseState
 {
-    private EnemySM enemySM;
-    private Transform target;
+    EnemySM enemyMachine;
 
-    public EnemyIdle(EnemySM enemyMachine) : base("Enemy Idle", enemyMachine)
+
+    public EnemyIdle(EnemySM enemySM) : base("Enemy Idle", enemySM)
     {
-        enemySM = enemyMachine;
+        enemyMachine = enemySM;
     }
 
     public override void Enter()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        enemyMachine.Animator.SetBool("Running", false);
     }
 
     public override void UpdateLogic()
     {
-        if (Vector2.Distance(enemySM.transform.position, target.position) > 2f)
+        if (enemyMachine.CanSeePlayer())
         {
-            Exit();
-            enemySM.ChangeState(enemySM.chaseState);
+            stateMachine.ChangeState(enemyMachine.chaseState);
         }
     }
 
@@ -34,4 +33,6 @@ public class EnemyIdle : BaseState
     {
 
     }
+
+
 }

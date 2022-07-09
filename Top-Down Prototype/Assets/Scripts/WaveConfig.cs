@@ -20,16 +20,4 @@ public class WaveConfig : ScriptableObject
     public int GetEnemyCount() => enemyPrefabs.Count;
     public GameObject GetEnemyPrefab(int index) => enemyPrefabs[index];
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

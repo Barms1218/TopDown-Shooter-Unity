@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseState
 {
-    public string name;
+    public new string name;
     protected StateMachine stateMachine;
 
     public BaseState(string name, StateMachine stateMachine)
