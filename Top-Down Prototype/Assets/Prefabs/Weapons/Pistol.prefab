@@ -237,7 +237,7 @@ MonoBehaviour:
   maxAmmo: 60
   magazineSize: 12
   ammoPerShot: 1
-  timeBetweenShots: 1
+  timeBetweenShots: 0.5
   reloadSpeed: 2
 --- !u!1001 &7215234132617951965
 PrefabInstance:

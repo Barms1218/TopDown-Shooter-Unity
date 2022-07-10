@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 2579200449049318825}
   - component: {fileID: 2579200449049318826}
   - component: {fileID: 2579200449049318830}
+  - component: {fileID: 1010239956}
   - component: {fileID: 8015716059274807240}
   - component: {fileID: 4001802063013996520}
   - component: {fileID: 847067256608029376}
-  - component: {fileID: 820337527391404187}
-  - component: {fileID: 1010239956}
+  - component: {fileID: 404427998}
   - component: {fileID: 1401529239}
   m_Layer: 8
   m_Name: Zombie Inmate
@@ -112,6 +112,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &1010239956
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.031168222, y: 0.4894669}
+  m_Size: {x: 0.60613775, y: 0.90725565}
+  m_Direction: 0
 --- !u!114 &8015716059274807240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,9 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRange: 10
-  attackRange: 0.75
-  attackStrength: 25
-  damage: 5
+  attackRange: 0.5
 --- !u!114 &4001802063013996520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,40 +168,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 5
---- !u!114 &820337527391404187
+--- !u!114 &404427998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625d3c46f13c22c46ab2782b0186e87f, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ec766de8b48942b996f2e397ea9ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rifleAmmo: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
-  _shotgunAmmo: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
-  minRifleChance: 1
-  maxRifleChance: 13
-  minShotGunChance: 33
-  maxShotGunChance: 40
---- !u!70 &1010239956
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.031168222, y: 0.4894669}
-  m_Size: {x: 0.60613775, y: 0.90725565}
-  m_Direction: 0
+  attackStrength: 25
+  attackRange: 0.5
+  damage: 5
+  attackCooldown: 1
 --- !u!95 &1401529239
 Animator:
   serializedVersion: 4

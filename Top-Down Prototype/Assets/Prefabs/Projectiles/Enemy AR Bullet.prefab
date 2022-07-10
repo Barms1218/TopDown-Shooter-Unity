@@ -120,10 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d9cf3503be13348947e76c1bf00c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileData: {fileID: 11400000, guid: 4971c061f48fcd2418822b3dce286e37, type: 2}
-  damage: 0
-  timeToLive: 0
-  forceMagnitude: 0
+  damage: 5
+  timeToLive: 1
+  forceMagnitude: 40
 --- !u!61 &4224721485798129384
 BoxCollider2D:
   m_ObjectHideFlags: 0

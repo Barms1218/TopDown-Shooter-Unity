@@ -9,13 +9,11 @@ public class Pistol : Weapon, IInteractable
     {
         if (!reloading)
         {
-            var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
-                Quaternion.identity);
-            var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
-             transform.rotation);
-            
-            Destroy(flash, timeBetweenShots / 5);
-            var bulletScript = projectile.GetComponent<Projectile>();
+
+            Destroy(Instantiate(muzzleFlashPrefab, muzzleTransform.position,
+             transform.rotation), timeBetweenShots / 5);
+            var bulletScript = Instantiate(projectilePrefab, muzzleTransform.position,
+                Quaternion.identity).GetComponent<Projectile>();
             currentAmmo -= AmmoPerShot;
             bulletScript.MoveToTarget(direction);
             AudioManager.Play(AudioClipName.PistolShot);

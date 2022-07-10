@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2474475448183171319}
   - component: {fileID: 2474475448183171316}
   - component: {fileID: 2474475448183171317}
+  - component: {fileID: 7798980212903436839}
   - component: {fileID: 3165004206678583450}
   - component: {fileID: -4776191114838315682}
   - component: {fileID: -8119643195282958802}
-  - component: {fileID: 2474475448183171080}
   - component: {fileID: -1303935936310323216}
   - component: {fileID: 2474475448183171085}
   m_Layer: 8
@@ -130,6 +130,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01205492, y: 0.48417813}
   m_Size: {x: 0.59198666, y: 1.0808562}
   m_Direction: 0
+--- !u!114 &7798980212903436839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474475448183171314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b92bbce29ff6b74f95d9f2ab9ceafb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRange: 10
+  attackRange: 4
 --- !u!114 &3165004206678583450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 6233060729062997099}
-  attackRange: 4
+  attackRange: 5
 --- !u!114 &-4776191114838315682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,19 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 7
---- !u!114 &2474475448183171080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2474475448183171314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chaseDistance: 4.5
 --- !u!114 &-1303935936310323216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.29
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_LocalPosition.y

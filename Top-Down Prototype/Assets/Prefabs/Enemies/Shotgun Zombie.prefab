@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8699948889711129077}
   - component: {fileID: 8699948889711129076}
   - component: {fileID: 8144528661079044507}
+  - component: {fileID: -814457193391338080}
   - component: {fileID: -5816319003111613719}
   - component: {fileID: -9072447316620631390}
-  - component: {fileID: 8699948889711128841}
   - component: {fileID: 1768611672242997327}
   - component: {fileID: 8699948889711128844}
   m_Layer: 8
@@ -143,6 +143,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 2078212320146545734}
+  attackRange: 4.5
+--- !u!114 &-814457193391338080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699948889711129075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b92bbce29ff6b74f95d9f2ab9ceafb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRange: 10
   attackRange: 3.5
 --- !u!114 &-5816319003111613719
 MonoBehaviour:
@@ -170,19 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 15
---- !u!114 &8699948889711128841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8699948889711129075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chaseDistance: 3
 --- !u!114 &1768611672242997327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7957779073280548603, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}

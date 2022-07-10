@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemySM : StateMachine
 {
@@ -29,11 +30,8 @@ public class EnemySM : StateMachine
     [SerializeField]
     private float attackRange;
 
-    [Header("Attack Fields")]
-    [SerializeField]
-    private int attackStrength;
-    [SerializeField]
-    private int damage;
+
+    public static UnityAction OnAttackState;
 
     #endregion
 
@@ -47,10 +45,6 @@ public class EnemySM : StateMachine
 
     // sight properties
     public float AttackRange => attackRange;
-
-    // fighting properties
-    public int AttackStrength => attackStrength;
-    public int Damage => damage;
 
     // miscellaneous properties
     public LayerMask DetectionLayer => detectionLayer;
@@ -108,8 +102,6 @@ public class EnemySM : StateMachine
 
         gameObject.transform.localScale = newScale;
     }
-
-
 
     protected override BaseState GetInitialState() => idleState;
 }

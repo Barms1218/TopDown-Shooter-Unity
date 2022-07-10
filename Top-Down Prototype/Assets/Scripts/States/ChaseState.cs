@@ -17,14 +17,15 @@ public class ChaseState : BaseState
 
     public override void Enter()
     {
-        Debug.Log("Entering chase state");
         enemyMachine.Animator.SetBool("Running", true);
     }
 
     public override void UpdateLogic()
     {
+
         enemyMachine.transform.position = Vector2.MoveTowards(enemyMachine.transform.position,
         enemyMachine.Player.transform.position, Time.deltaTime * speed);
+
 
         if (enemyMachine.Player.transform.position.x > enemyMachine.transform.position.x
         && !enemyMachine.FacingRIght)
@@ -43,7 +44,6 @@ public class ChaseState : BaseState
             enemyMachine.ChangeState(enemyMachine.idleState);
         }
 
-        // transition to attack state
         if (Vector2.Distance(enemyMachine.Player.transform.position,
             enemyMachine.transform.position) <= enemyMachine.AttackRange)
         {

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3543103714409048340}
   - component: {fileID: 3543103714409048343}
   - component: {fileID: 3543103714409048342}
+  - component: {fileID: 1863819634045794801}
   - component: {fileID: 4076007043845351801}
-  - component: {fileID: 3543103714409048555}
   - component: {fileID: -6235309337624090876}
   - component: {fileID: -4200519972683017157}
   - component: {fileID: 3877590269110434435}
@@ -130,6 +130,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01205492, y: 0.48417813}
   m_Size: {x: 0.59198666, y: 1.0808562}
   m_Direction: 0
+--- !u!114 &1863819634045794801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543103714409048337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b92bbce29ff6b74f95d9f2ab9ceafb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRange: 10
+  attackRange: 5
 --- !u!114 &4076007043845351801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,19 +158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 5486577705224575326}
   attackRange: 6
---- !u!114 &3543103714409048555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3543103714409048337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f61dc6edf2cc384e9a0781c8be34ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chaseDistance: 5.5
 --- !u!114 &-6235309337624090876
 MonoBehaviour:
   m_ObjectHideFlags: 0

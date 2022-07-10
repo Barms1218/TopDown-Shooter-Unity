@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 811826883169508780}
   - component: {fileID: 748987354230509530}
   - component: {fileID: 3363994205910854498}
-  - component: {fileID: -5744950589920894807}
+  - component: {fileID: 5533693617654170659}
   m_Layer: 11
   m_Name: Enemy Shotgun Pellet
   m_TagString: Projectile
@@ -118,7 +118,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -134,7 +134,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.125, y: 0.083333336}
   m_EdgeRadius: 0
---- !u!114 &-5744950589920894807
+--- !u!114 &5533693617654170659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9061488664235975576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84d5148a90c33f4e9951d62172e4501, type: 3}
+  m_Script: {fileID: 11500000, guid: 59d9cf3503be13348947e76c1bf00c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileData: {fileID: 11400000, guid: 1c3877703be0fb04a8b0350efac004cc, type: 2}
+  damage: 3
+  timeToLive: 1
+  forceMagnitude: 40

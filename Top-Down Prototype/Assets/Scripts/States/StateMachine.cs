@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    BaseState currentState;
+    BaseState _currentState;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -12,12 +12,12 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        currentState = GetInitialState();
-        currentState?.Enter();
+        _currentState = GetInitialState();
+        _currentState?.Enter();
     }
     void Update()
     {
-        currentState?.UpdateLogic();
+        _currentState?.UpdateLogic();
     }
 
     /// <summary>
@@ -26,13 +26,13 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     void LateUpdate()
     {
-        currentState?.UpdatePhysics();
+        _currentState?.UpdatePhysics();
     }
     public void ChangeState(BaseState newState)
     {
-        currentState.Exit();
-        currentState = newState;
-        currentState.Enter();
+        _currentState.Exit();
+        _currentState = newState;
+        _currentState.Enter();
     }
 
     protected virtual BaseState GetInitialState()

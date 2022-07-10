@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInteractable
+public interface IState
 {
-    void Interact();
+    void Enter();
+    void UpdateState();
+    void Exit();
 }

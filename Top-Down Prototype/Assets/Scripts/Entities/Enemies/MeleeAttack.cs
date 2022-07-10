@@ -13,12 +13,13 @@ public class MeleeAttack : MonoBehaviour
     private float nextAttack;
     private float recoverTime;
     private GameObject player;
-    public static UnityAction<bool, MeleeAttack> OnMelee;
+    public static UnityAction<MeleeAttack> OnMelee;
 
     // Start is called before the first frame update
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        EnemySM.OnAttackState += Attack;
     }
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
@@ -26,7 +27,7 @@ public class MeleeAttack : MonoBehaviour
     private void Update()
     {
         var _distance = Vector2.Distance(player.transform.position, transform.position);
-        if( _distance <= attackRange)
+        if (_distance <= attackRange)
             Attack();
     } 
 
@@ -37,25 +38,26 @@ public class MeleeAttack : MonoBehaviour
         {
             AudioManager.Play(AudioClipName.MeleeAttack);
             _health.TakeDamage(damage, this.gameObject, attackStrength);
-            StartCoroutine(RecoverFromAttack());
+            OnMelee?.Invoke(this);
+            //StartCoroutine(RecoverFromAttack());
             nextAttack = Time.time + attackCooldown;
         }
     }
 
 
-    private IEnumerator RecoverFromAttack()
-    {
-        recoverTime = 0f;
+    //private IEnumerator RecoverFromAttack()
+    //{
+    //    recoverTime = 0f;
         
-        while (recoverTime < 1)
-        {
-            recoverTime += Time.deltaTime;
-            OnMelee?.Invoke(false, this);
-            GetComponent<Animator>().SetBool("Running", false);
-            yield return null;
-        }
-        OnMelee?.Invoke(true, this);
-    }
+    //    while (recoverTime < 1)
+    //    {
+    //        recoverTime += Time.deltaTime;
+    //        OnMelee?.Invoke(this);
+    //        GetComponent<Animator>().SetBool("Running", false);
+    //        yield return null;
+    //    }
+    //    OnMelee?.Invoke(this);
+    //}
 
     private bool CanAttack() => Time.time >= nextAttack;
 }

@@ -21,7 +21,7 @@ public class EnemyMove : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        MeleeAttack.OnMelee += ChangeMoveState;
+        //MeleeAttack.OnMelee += ChangeMoveState;
         moveSpeed = Random.Range(2.7f, 3.2f);
         GetComponent<Health>().OnHit += HitByPlayer;
         GetComponent<KeepTrackOfPlayer>().OnSightedPlayer += HitByPlayer;
@@ -38,7 +38,7 @@ public class EnemyMove : MonoBehaviour
             //GetComponent<Rigidbody2D>().MovePosition(player.transform.position * Time.deltaTime * moveSpeed);
             transform.position = Vector2.MoveTowards(transform.position,
             player.transform.position, Time.deltaTime * moveSpeed);
-            _animator.SetBool("Running", true);
+            _animator.Play("Running");
         }
         else if (!isChasingPlayer)
         {

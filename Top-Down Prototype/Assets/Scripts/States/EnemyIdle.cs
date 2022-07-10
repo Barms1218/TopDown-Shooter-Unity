@@ -23,6 +23,10 @@ public class EnemyIdle : BaseState
         {
             stateMachine.ChangeState(enemyMachine.chaseState);
         }
+        else
+        {
+
+        }
     }
 
     public override void UpdatePhysics()

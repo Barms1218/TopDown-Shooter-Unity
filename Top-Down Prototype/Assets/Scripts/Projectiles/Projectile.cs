@@ -6,10 +6,12 @@ public class Projectile : MonoBehaviour
 {
     #region Fields
     
-    [SerializeField] private ProjectileData projectileData;
-    [SerializeField] int damage;
-    [SerializeField] float timeToLive;
-    [SerializeField] float forceMagnitude;
+    [SerializeField]
+    int damage;
+    [SerializeField]
+    float timeToLive;
+    [SerializeField]
+    float forceMagnitude;
 
     #endregion
 

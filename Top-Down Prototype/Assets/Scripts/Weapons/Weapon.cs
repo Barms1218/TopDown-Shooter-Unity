@@ -79,5 +79,5 @@ public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
     {
 
     }
-    protected virtual void Interact() => OnPickUp?.Invoke(gameObject);
+    public virtual void Interact() => OnPickUp?.Invoke(gameObject);
 }
