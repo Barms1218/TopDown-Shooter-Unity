@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  particleSystem: {fileID: 1652148467696156084, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
+  bloodParticle: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
 --- !u!114 &847067256608029376
 MonoBehaviour:
   m_ObjectHideFlags: 0

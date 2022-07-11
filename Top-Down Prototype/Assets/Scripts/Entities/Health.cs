@@ -13,8 +13,9 @@ public class Health : MonoBehaviour, IHaveHealth
     private int _health;
     private Rigidbody2D _body2d;
     private Animator _animator;
-    public event UnityAction OnDied;
+    private OnDiedEvent onDiedEvent = new OnDiedEvent();
     public event UnityAction<bool> OnHit;
+    private bool isDying = false;
     private bool isAngry = false;
 
     public int MaxHealth => maxHealth;
@@ -30,6 +31,7 @@ public class Health : MonoBehaviour, IHaveHealth
         _health = maxHealth;
         _body2d = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        EventManager.AddOnDiedEventInvoker(this);
     }
     public void TakeDamage(int amount, GameObject damageSource, float attackStrength)
     {
@@ -48,10 +50,11 @@ public class Health : MonoBehaviour, IHaveHealth
             }
             _animator.SetTrigger("Hurt");
         }
-        if (_health <= 0)
+        if (_health <= 0 && !isDying)
         {
+            isDying = true;
             GetComponent<Collider2D>().enabled = false;
-            OnDied?.Invoke();
+            onDiedEvent?.Invoke(this.gameObject);
         }
 
         if (!isAngry)
@@ -61,11 +64,6 @@ public class Health : MonoBehaviour, IHaveHealth
         }
 
 
-    }
-
-    public void HandleDeath()
-    {
-        throw new System.NotImplementedException();
     }
 
     public void RestoreHealth(int amount)
@@ -78,5 +76,15 @@ public class Health : MonoBehaviour, IHaveHealth
                 _health = maxHealth;
             }
         }
+    }
+
+    public void AddOnDiedEventListener(UnityAction<GameObject> listener)
+    {
+        onDiedEvent.AddListener(listener);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.RemoveInvoker(this);
     }
 }

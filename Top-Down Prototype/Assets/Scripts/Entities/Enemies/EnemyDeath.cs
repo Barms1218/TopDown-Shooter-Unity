@@ -11,38 +11,39 @@ public class EnemyDeath : MonoBehaviour
     private EnemyWeaponHandler _weapon;
     public static UnityAction<int> addPoints;
 
-    void Awake()
-    {
-        _movement = GetComponent<EnemyMove>();
-        _animator = GetComponent<Animator>();
-        _weapon = GetComponent<EnemyWeaponHandler>();
-        GetComponent<Health>().OnDied += HandleDeath;
-    }
+    void Awake() => EventManager.AddHealthListener(HandleDeath);
 
-    private void HandleDeath()
+    private void HandleDeath(GameObject dyingObject)
     {
+        _animator = dyingObject.GetComponent<Animator>();
+        _movement = dyingObject.GetComponent<EnemyMove>();
+        _weapon = dyingObject.GetComponent<EnemyWeaponHandler>();
+
+
         if (_weapon != null)
         {
             _weapon.enabled = false;
-        }
+        }    
+        
   
-
-        _animator?.SetTrigger("Dying");
-
-
         if (_movement != null)
         {
             _movement.enabled = false;
-        }
-        AudioManager.Play(AudioClipName.ZombieInmateDeath);
+        }    
+
+        if (_animator != null)
+        {
+            _animator?.SetTrigger("Dying");
+        }    
+
 
         addPoints?.Invoke(points);
-        Destroy(gameObject, 1.0f);
-
+        Destroy(dyingObject, 1.0f);
+        AudioManager.Play(AudioClipName.ZombieInmateDeath);
     }
 
     private void OnDestroy()
     {
-        GetComponent<Health>().OnDied -= HandleDeath;
+        EventManager.RemoveListener(HandleDeath);
     }
 }

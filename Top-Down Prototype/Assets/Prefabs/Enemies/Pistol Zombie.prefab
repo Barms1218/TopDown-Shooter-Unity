@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3165004206678583450}
   - component: {fileID: -4776191114838315682}
   - component: {fileID: -8119643195282958802}
-  - component: {fileID: -1303935936310323216}
   - component: {fileID: 2474475448183171085}
   m_Layer: 8
   m_Name: Pistol Zombie
@@ -171,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
+  bloodParticle: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
 --- !u!114 &-8119643195282958802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,24 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 7
---- !u!114 &-1303935936310323216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2474475448183171314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625d3c46f13c22c46ab2782b0186e87f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rifleAmmo: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
-  _shotgunAmmo: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
-  minRifleChance: 1
-  maxRifleChance: 12
-  minShotGunChance: 33
-  maxShotGunChance: 40
 --- !u!95 &2474475448183171085
 Animator:
   serializedVersion: 4

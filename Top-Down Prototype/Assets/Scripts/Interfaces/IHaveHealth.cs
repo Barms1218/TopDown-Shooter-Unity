@@ -8,7 +8,6 @@ public interface IHaveHealth
     int MaxHealth{ get; }
     void TakeDamage(int amount, GameObject damageSource, float attackStrength);
     void RestoreHealth(int amount);
-    void HandleDeath();
     bool IsDying => Health <= 0;
 }
 

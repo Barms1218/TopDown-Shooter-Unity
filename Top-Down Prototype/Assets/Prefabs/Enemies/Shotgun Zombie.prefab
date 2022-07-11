@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  bloodParticle: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
 --- !u!114 &-9072447316620631390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,12 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625d3c46f13c22c46ab2782b0186e87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rifleAmmo: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
-  _shotgunAmmo: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
-  minRifleChance: 1
-  maxRifleChance: 12
-  minShotGunChance: 33
-  maxShotGunChance: 40
+  _ammoDrop: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
+  minChance: 1
+  maxChance: 32
 --- !u!95 &8699948889711128844
 Animator:
   serializedVersion: 4
