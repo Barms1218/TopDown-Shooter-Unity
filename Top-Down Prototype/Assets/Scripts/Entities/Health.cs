@@ -6,7 +6,10 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour, IHaveHealth
 {
 
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField]
+    private int maxHealth = 100;
+    [SerializeField]
+    private GameObject bloodParticle;
     private int _health;
     private Rigidbody2D _body2d;
     private Animator _animator;
@@ -16,10 +19,10 @@ public class Health : MonoBehaviour, IHaveHealth
 
     public int MaxHealth => maxHealth;
     public bool IsAngry => isAngry;
-     int IHaveHealth.Health 
-    { 
-        get => _health; 
-        set => _health = (int)value; 
+    int IHaveHealth.Health
+    {
+       get => _health;
+       set => _health = (int)value; 
     }
 
     private void Awake()
@@ -36,7 +39,13 @@ public class Health : MonoBehaviour, IHaveHealth
             Vector3 pushDirection = gameObject.transform.position - damageSource.transform.position;
             _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
 
+            if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy"))
+            {
+                var bloodSplatter = Instantiate(bloodParticle,
+                    damageSource.transform.position, Quaternion.identity);
 
+                Destroy(bloodSplatter, 0.5f);
+            }
             _animator.SetTrigger("Hurt");
         }
         if (_health <= 0)
@@ -70,6 +79,4 @@ public class Health : MonoBehaviour, IHaveHealth
             }
         }
     }
-
-    private bool IsDying => _health <= 0;
 }

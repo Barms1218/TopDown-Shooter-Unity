@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
-  muzzleFlashPrefab: {fileID: 455240160870514496, guid: 4a02357a3aa81ba4c80a4064b9c29624, type: 3}
+  muzzleFlashPrefab: {fileID: 6482600914115156074, guid: 51b72d52f6727c344b3d6aff06ac2bb4, type: 3}
   muzzleTransform: {fileID: 3785646919390945951}
   currentAmmo: 12
   maxAmmo: 60

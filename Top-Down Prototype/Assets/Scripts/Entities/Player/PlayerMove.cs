@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
+    [SerializeField]
+    GameObject walkParticle;
+    [SerializeField]
+    GameObject dashParticle;
+    [SerializeField]
+    Transform particleTransform;
     private Rigidbody2D _body;
     private Animator _animator;
     private Vector2 _direction, _velocity, desiredVelocity;
     private float dashTimer = 1.0f;
-    private float maxDashTime = 2.5f;
     private float dashCoolDown;
     private float dashDistance = 3f;
     private bool isDashing;
     private Vector2 dashStart, dashEnd;
-    private enum DashState
-    {
-        Ready,
-        Dashing,
-        Cooldown
-    }
-    DashState dashState;
+
     [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
     
     
@@ -28,7 +26,6 @@ public class PlayerMove : MonoBehaviour
     {
         _body = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        dashState = DashState.Ready;
     }
 
     void Update()
@@ -57,6 +54,12 @@ public class PlayerMove : MonoBehaviour
         _direction.x = Input.GetAxis("Horizontal");
         _direction.y = Input.GetAxis("Vertical");
         var speed = Mathf.Abs(_direction.x + _direction.y);
+        if (speed > 0)
+        {
+            var dust = Instantiate(walkParticle,
+                particleTransform.position, particleTransform.rotation);
+            Destroy(dust, 0.2f);
+        }
         _animator.SetFloat("Speed", speed);
         desiredVelocity = new Vector2(_direction.x, _direction.y)
             * Mathf.Max(maxSpeed, 0f);
