@@ -4,32 +4,37 @@ using UnityEngine;
 
 public sealed class GameEnvironment : MonoBehaviour
 {
-    public static GameEnvironment Instance { get; private set; }
-    private static List<GameObject> wayPoints = new List<GameObject>();
-    public static List<GameObject> WayPoints => wayPoints; 
+    public static GameEnvironment _instance { get; private set; }
+    private static GameObject[] wayPoints;
+    public static GameObject[] WayPoints => wayPoints;
+    public static int WayPointCount => WayPoints.Length;
 
 
     private void Awake()
     {
-       if (Instance != null && Instance != this)
+       if (_instance != null && _instance != this)
         {
             Destroy(this);
             return;
         }
-        Instance = this;
+        _instance = this;
+        
     }
-    public static GameEnvironment SingleTon
+    private void Start()
+    {
+        wayPoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        Debug.Log(wayPoints.Length);
+    }
+    public static GameEnvironment Instance
     {
         get
         {
-            if (Instance == null)
+            if (_instance == null)
             {
-                Instance = new GameEnvironment();
-                GameEnvironment.WayPoints.AddRange(GameObject.FindGameObjectsWithTag("Waypoint"));
+                _instance = new();
+                
             }
-            return Instance;
+            return _instance;
         }
     }
-
-    public static List<GameObject> WayPoints1 { get => wayPoints; set => wayPoints = value; }
 }

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class WeaponSwap : MonoBehaviour
 {
     [SerializeField] private List<string> weapons = new List<string>();
-    public event UnityAction<string> OnWeaponSwap;
+    public static UnityAction<string> OnWeaponSwap;
 
     private void Awake() => Pickup.AddWeaponName += AddWeapon;
     private void Update()

@@ -53,6 +53,7 @@ public class Health : MonoBehaviour, IHaveHealth
         if (_health <= 0 && !isDying)
         {
             isDying = true;
+            _health = 0;
             GetComponent<Collider2D>().enabled = false;
             onDiedEvent?.Invoke(this.gameObject);
         }
@@ -85,6 +86,6 @@ public class Health : MonoBehaviour, IHaveHealth
 
     private void OnDestroy()
     {
-        EventManager.RemoveInvoker(this);
+        EventManager.RemoveOnDiedInvoker(this);
     }
 }

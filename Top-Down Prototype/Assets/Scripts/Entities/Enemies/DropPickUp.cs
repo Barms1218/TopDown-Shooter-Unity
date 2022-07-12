@@ -27,6 +27,6 @@ public class DropPickUp : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.RemoveListener(DropAmmo);
+        EventManager.RemoveOnDiedListener(DropAmmo);
     }
 }

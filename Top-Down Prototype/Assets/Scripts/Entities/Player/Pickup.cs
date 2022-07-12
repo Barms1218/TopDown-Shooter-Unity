@@ -11,7 +11,7 @@ public class Pickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.CompareTag("Weapon"))
         {
             AddWeaponName?.Invoke(collision.gameObject.name);
             collision.gameObject.GetComponent<IInteractable>().Interact();

@@ -2,7 +2,7 @@ using System.Collections; using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Weapon : MonoBehaviour, IFlippable, IInteractable
+public abstract class Weapon : MonoBehaviour, IInteractable
 {
     #region Fields
 

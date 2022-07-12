@@ -5,9 +5,17 @@ using UnityEngine.Events;
 
 public static class EventManager
 {
-    static List<Health> onDiedInvokers = new List<Health>();
-    static List<UnityAction<GameObject>> healthListeners = new List<UnityAction<GameObject>>();
+    private static List<Health> onDiedInvokers = new List<Health>();
+    private static List<UnityAction<GameObject>> healthListeners = new List<UnityAction<GameObject>>();
 
+    private static List<EnemyDeath> pointsAddedInvokers = new List<EnemyDeath>();
+    private static List<UnityAction<int>> pointsAddedListeners = new List<UnityAction<int>>();
+
+    private static List<PlayerWeaponHandler> setAmmoInvoker = new List<PlayerWeaponHandler>();
+    private static List<UnityAction<int, int>> setAmmoListener = new List<UnityAction<int, int>>();
+
+
+    #region Enemy Death Event
     public static void AddOnDiedEventInvoker(Health invoker)
     {
         onDiedInvokers.Add(invoker);
@@ -26,13 +34,44 @@ public static class EventManager
         }
     }
 
-    public static void RemoveInvoker(Health invoker)
+    public static void RemoveOnDiedInvoker(Health invoker)
     {
         onDiedInvokers.Remove(invoker);
     }
 
-    public static void RemoveListener(UnityAction<GameObject> listener)
+    public static void RemoveOnDiedListener(UnityAction<GameObject> listener)
     {
         healthListeners.Remove(listener);
     }
+
+    #endregion
+
+    #region Points Added Event
+
+    public static void AddPointsAddedInvoker(EnemyDeath invoker)
+    {
+        pointsAddedInvokers.Add(invoker);
+        foreach (UnityAction<int> _listener in pointsAddedListeners)
+        {
+            invoker.AddPointsAddedListener(_listener);
+        }
+    }
+
+    public static void AddPointsAddedListener(UnityAction<int> _listener)
+    {
+        pointsAddedListeners.Add(_listener);
+        foreach (EnemyDeath invoker in pointsAddedInvokers)
+        {
+            invoker.AddPointsAddedListener(_listener);
+        }
+    }
+
+    public static void RemovePointsAddedInvoker(EnemyDeath invoker)
+    {
+        pointsAddedInvokers.Remove(invoker);
+    }
+
+    #endregion
+
+
 }

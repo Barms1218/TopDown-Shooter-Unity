@@ -7,16 +7,18 @@ public class EnemyDeath : MonoBehaviour
 {
     [SerializeField] private int points;
     private Animator _animator;
-    private EnemyMove _movement;
     private EnemyWeaponHandler _weapon;
-    public static UnityAction<int> addPoints;
+    private PointsAddedEvent pointsAddedEvent = new PointsAddedEvent();
 
-    void Awake() => EventManager.AddHealthListener(HandleDeath);
+    void Awake()
+    {
+        EventManager.AddHealthListener(HandleDeath);
+        EventManager.AddPointsAddedInvoker(this);
+    }
 
     private void HandleDeath(GameObject dyingObject)
     {
         _animator = dyingObject.GetComponent<Animator>();
-        _movement = dyingObject.GetComponent<EnemyMove>();
         _weapon = dyingObject.GetComponent<EnemyWeaponHandler>();
 
 
@@ -24,26 +26,26 @@ public class EnemyDeath : MonoBehaviour
         {
             _weapon.enabled = false;
         }    
-        
-  
-        if (_movement != null)
-        {
-            _movement.enabled = false;
-        }    
+          
 
         if (_animator != null)
         {
             _animator?.SetTrigger("Dying");
-        }    
+        }
 
-
-        addPoints?.Invoke(points);
+        pointsAddedEvent?.Invoke(points);
         Destroy(dyingObject, 1.0f);
         AudioManager.Play(AudioClipName.ZombieInmateDeath);
     }
 
+    public void AddPointsAddedListener(UnityAction<int> _listener)
+    {
+        pointsAddedEvent.AddListener(_listener);
+    }
+
     private void OnDestroy()
     {
-        EventManager.RemoveListener(HandleDeath);
+        EventManager.RemoveOnDiedListener(HandleDeath);
+
     }
 }

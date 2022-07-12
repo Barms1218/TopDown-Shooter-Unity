@@ -16,7 +16,7 @@ public class HUD : MonoBehaviour
         interactText.enabled = false;
         Interact.OnRayCast += SetInteractTextState;
         PlayerWeaponHandler.SetAmmoCount += UpdateWeaponAmmo;
-        EnemyDeath.addPoints += UpdatePointsText;
+        EventManager.AddPointsAddedListener(UpdatePointsText);
     }
 
     private void SetInteractTextState(bool isActive)

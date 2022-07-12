@@ -18,7 +18,6 @@ public class EnemySM : StateMachine
     // cached components
     private Rigidbody2D _body;
     private Animator _animator;
-
     private GameObject _player;
     private Collider2D _collider;
     private LayerMask detectionLayer;
@@ -62,6 +61,10 @@ public class EnemySM : StateMachine
         _player = GameObject.FindGameObjectWithTag("Player");
         _collider = GetComponent<Collider2D>();
         detectionLayer = LayerMask.GetMask("Player", "Default");
+    }
+    private void Start()
+    {
+        var wayPoints = GameObject.FindGameObjectsWithTag("Waypoint");
     }
 
     public bool CanSeePlayer()
