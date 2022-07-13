@@ -7,7 +7,7 @@ public sealed class GameEnvironment : MonoBehaviour
     public static GameEnvironment _instance { get; private set; }
     private static GameObject[] wayPoints;
     public static GameObject[] WayPoints => wayPoints;
-    public static int WayPointCount => WayPoints.Length;
+    public static int WayPointCount => wayPoints.Length;
 
 
     private void Awake()
@@ -23,7 +23,7 @@ public sealed class GameEnvironment : MonoBehaviour
     private void Start()
     {
         wayPoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        Debug.Log(wayPoints.Length);
+        //Debug.Log(WayPointCount);
     }
     public static GameEnvironment Instance
     {

@@ -29,9 +29,6 @@ public class EnemySM : StateMachine
     [SerializeField]
     private float attackRange;
 
-
-    public static UnityAction OnAttackState;
-
     #endregion
 
     #region Properties
@@ -62,10 +59,7 @@ public class EnemySM : StateMachine
         _collider = GetComponent<Collider2D>();
         detectionLayer = LayerMask.GetMask("Player", "Default");
     }
-    private void Start()
-    {
-        var wayPoints = GameObject.FindGameObjectsWithTag("Waypoint");
-    }
+
 
     public bool CanSeePlayer()
     {

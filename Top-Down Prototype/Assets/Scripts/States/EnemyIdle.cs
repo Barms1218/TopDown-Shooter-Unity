@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyIdle : BaseState
 {
     EnemySM enemyMachine;
-    private GameObject[] wayPoints;
+    Vector2 newPosition;
 
     public EnemyIdle(EnemySM enemySM) : base("Enemy Idle", enemySM)
     {
@@ -15,23 +15,13 @@ public class EnemyIdle : BaseState
     public override void Enter()
     {
         enemyMachine.Animator.SetBool("Running", false);
-        wayPoints = GameEnvironment.WayPoints;
-        Debug.Log(wayPoints.Length);
+        enemyMachine.ChangeState(enemyMachine.chaseState);
     }
 
     public override void UpdateLogic()
     {
 
-        if (enemyMachine.CanSeePlayer())
-        {
-            enemyMachine.ChangeState(enemyMachine.chaseState);
-        }
-        else
-        {
-            enemyMachine.transform.position = Vector2.MoveTowards(
-                enemyMachine.transform.position, wayPoints[2].transform.position, Time.deltaTime * 3f);
-            
-        }
+
     }
 
     public override void UpdatePhysics()
@@ -43,5 +33,8 @@ public class EnemyIdle : BaseState
 
     }
 
-
+    void ChangePosition()
+    {
+        newPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(-2f, 2f));
+    }
 }
