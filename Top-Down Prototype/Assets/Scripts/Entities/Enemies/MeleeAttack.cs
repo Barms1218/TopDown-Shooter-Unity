@@ -11,9 +11,7 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
     private float nextAttack;
-    private float recoverTime;
     private GameObject player;
-    public static UnityAction<MeleeAttack> OnMelee;
 
     // Start is called before the first frame update
     private void Awake()
@@ -25,9 +23,13 @@ public class MeleeAttack : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        var _distance = Vector2.Distance(player.transform.position, transform.position);
-        if (_distance <= attackRange)
-            Attack();
+        if (player != null)
+        {
+            var _distance = Vector2.Distance(player.transform.position, transform.position);
+            if (_distance <= attackRange)
+                Attack();
+        }
+
     } 
 
     void Attack()
@@ -36,8 +38,7 @@ public class MeleeAttack : MonoBehaviour
         if (CanAttack() && _health != null)
         {
             AudioManager.Play(AudioClipName.MeleeAttack);
-            _health.TakeDamage(damage, this.gameObject, attackStrength);
-            OnMelee?.Invoke(this);
+            _health.TakeDamage(damage, gameObject, attackStrength);
             nextAttack = Time.time + attackCooldown;
         }
     }

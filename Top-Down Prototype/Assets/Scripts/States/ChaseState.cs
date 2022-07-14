@@ -18,37 +18,43 @@ public class ChaseState : BaseState
     public override void Enter()
     {
         enemyMachine.Animator.SetBool("Running", true);
+        Debug.Log("Entering chase state");
     }
 
     public override void UpdateLogic()
     {
 
-        enemyMachine.transform.position = Vector2.MoveTowards(enemyMachine.transform.position,
-        enemyMachine.Player.transform.position, Time.deltaTime * speed);
+        if (enemyMachine.Player != null)
+        {
+            enemyMachine.transform.position = Vector2.MoveTowards(enemyMachine.transform.position,
+            enemyMachine.Player.transform.position, Time.deltaTime * speed);
+
+            if (enemyMachine.Player.transform.position.x > enemyMachine.transform.position.x
+            && !enemyMachine.FacingRight)
+            {
+                enemyMachine.Flip();
+            }
+            else if (enemyMachine.Player.transform.position.x < enemyMachine.transform.position.x
+                && enemyMachine.FacingRight)
+            {
+                enemyMachine.Flip();
+            }
+
+            // transition to idle state
+            if (!enemyMachine.CanSeePlayer())
+            {
+                enemyMachine.ChangeState(enemyMachine.idleState);
+            }
+
+            if (Vector2.Distance(enemyMachine.Player.transform.position,
+                enemyMachine.transform.position) <= enemyMachine.AttackRange)
+            {
+                enemyMachine.ChangeState(enemyMachine.attackState);
+            }
+        }
 
 
-        if (enemyMachine.Player.transform.position.x > enemyMachine.transform.position.x
-        && !enemyMachine.FacingRIght)
-        {
-            enemyMachine.Flip();
-        }
-        else if (enemyMachine.Player.transform.position.x < enemyMachine.transform.position.x
-            && enemyMachine.FacingRIght)
-        {
-            enemyMachine.Flip();
-        }
 
-        // transition to idle state
-        if (!enemyMachine.CanSeePlayer())
-        {
-            enemyMachine.ChangeState(enemyMachine.idleState);
-        }
-
-        if (Vector2.Distance(enemyMachine.Player.transform.position,
-            enemyMachine.transform.position) <= enemyMachine.AttackRange)
-        {
-            enemyMachine.ChangeState(enemyMachine.attackState);
-        }
     }
 
     public override void UpdatePhysics()

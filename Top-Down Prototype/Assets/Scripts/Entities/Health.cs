@@ -45,7 +45,7 @@ public class Health : MonoBehaviour, IHaveHealth
             {
                 var bloodSplatter = Instantiate(bloodParticle,
                     damageSource.transform.position, Quaternion.identity);
-
+                AudioManager.Play(AudioClipName.BulletHit);
                 Destroy(bloodSplatter, 0.5f);
             }
             _animator.SetTrigger("Hurt");

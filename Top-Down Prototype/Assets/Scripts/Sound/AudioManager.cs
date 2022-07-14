@@ -20,6 +20,8 @@ public static class AudioManager
         audioSource = source;
         audioClips.Add(AudioClipName.AR_Fire,
             Resources.Load<AudioClip>("AR_Fire"));
+        audioClips.Add(AudioClipName.BulletHit,
+            Resources.Load<AudioClip>("Bullet Hit"));
         audioClips.Add(AudioClipName.GetGun,
             Resources.Load<AudioClip>("GetGun"));
         audioClips.Add(AudioClipName.MeleeAttack,

@@ -15,6 +15,7 @@ public class AttackState : BaseState
     public override void Enter()
     {
         enemyMachine.StartCoroutine(RecoverFromAttack());
+        Debug.Log("Entering attack state");
     }
 
     public override void UpdateLogic()
