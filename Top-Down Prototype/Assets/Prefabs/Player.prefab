@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7195624304276632818}
   - component: {fileID: 1330105217109831270}
   - component: {fileID: 949010934954473048}
+  - component: {fileID: 1538798372819519117}
   - component: {fileID: 1595143304064804017}
   - component: {fileID: 3223275096147143168}
   - component: {fileID: 3057960628780597368}
@@ -198,6 +199,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81905322adb6462186a7123472b0151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1538798372819519117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490895233034298552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8085e2cfa3e9f4030b85ca9bd3a93c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armor: 0
+  damageResistance: None
 --- !u!114 &1595143304064804017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +227,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   bloodParticle: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3223275096147143168
 MonoBehaviour:
   m_ObjectHideFlags: 0

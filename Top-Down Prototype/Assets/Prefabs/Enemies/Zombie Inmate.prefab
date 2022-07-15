@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2579200449049318830}
   - component: {fileID: 1010239956}
   - component: {fileID: 1335274637457500876}
+  - component: {fileID: 5294084347439653064}
   - component: {fileID: 4001802063013996520}
-  - component: {fileID: 1411119762326313622}
   - component: {fileID: 847067256608029376}
   - component: {fileID: 404427998}
   - component: {fileID: 1401529239}
@@ -144,6 +144,20 @@ MonoBehaviour:
   speed: 3
   rb2d: {fileID: 2579200449049318830}
   _animator: {fileID: 1401529239}
+--- !u!114 &5294084347439653064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8085e2cfa3e9f4030b85ca9bd3a93c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armor: 0
+  damageResistance: None
 --- !u!114 &4001802063013996520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,18 +199,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1411119762326313622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2579200449049318824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2bd2151c31f14b219513a3bbe402152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &847067256608029376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +215,7 @@ MonoBehaviour:
   givePoints:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7732697643445012712, guid: 846f1e1b85fe140eb9fd0ab834abe92f, type: 3}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
         m_MethodName: UpdatePointsText
         m_Mode: 0

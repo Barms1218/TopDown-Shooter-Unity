@@ -24,17 +24,14 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.TryGetComponent(out IDamageable damageable))
+        var hitObject = collision.gameObject;
+        if (hitObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.DealDamage(damage, gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     public void MoveToTarget(Vector2 force)

@@ -20,15 +20,25 @@ public class MeleeAttack : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable) &&
-            !collision.gameObject.CompareTag(gameObject.tag))
+        var hitObject = collision.gameObject;
+        TryToDamage(hitObject);
+    }
+
+    private void TryToDamage(GameObject hitObject)
+    {
+        if (hitObject.TryGetComponent(out IDamageable damageable) &&
+            !hitObject.CompareTag(gameObject.tag))
         {
             damageable.DealDamage(damage, gameObject);
-            var pushDirection = transform.position - collision.transform.position;
+            var pushDirection = transform.position - hitObject.transform.position;
             if (TryGetComponent(out Rigidbody2D _body2d))
             {
                 _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
             }
+        }
+        else
+        {
+            Debug.Log("I can't damage that target");
         }
     }
 }
