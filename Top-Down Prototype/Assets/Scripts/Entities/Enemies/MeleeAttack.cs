@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class MeleeAttack : MonoBehaviour
 {
     [SerializeField] private int attackStrength;
-    [SerializeField] private float attackRange;
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
     private float nextAttack;
@@ -18,30 +17,18 @@ public class MeleeAttack : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    private void Update()
-    {
-        if (player != null)
-        {
-            var _distance = Vector2.Distance(player.transform.position, transform.position);
-            if (_distance <= attackRange)
-                Attack();
-        }
 
-    } 
-
-    void Attack()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        var _health = player.GetComponent<IHaveHealth>();
-        if (CanAttack() && _health != null)
+        if (collision.gameObject.TryGetComponent(out IDamageable damageable) &&
+            !collision.gameObject.CompareTag(gameObject.tag))
         {
-            AudioManager.Play(AudioClipName.MeleeAttack);
-            _health.TakeDamage(damage, gameObject, attackStrength);
-            nextAttack = Time.time + attackCooldown;
+            damageable.DealDamage(damage, gameObject);
+            var pushDirection = transform.position - collision.transform.position;
+            if (TryGetComponent(out Rigidbody2D _body2d))
+            {
+                _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
+            }
         }
     }
-
-    private bool CanAttack() => Time.time >= nextAttack;
 }

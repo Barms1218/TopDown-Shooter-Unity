@@ -4,10 +4,9 @@ using UnityEngine;
 
 public interface IHaveHealth
 {
-    int Health { get; set; }
+    float Health { get; set; }
     int MaxHealth{ get; }
-    void TakeDamage(int amount, GameObject damageSource, float attackStrength);
-    void RestoreHealth(int amount);
-    bool IsDying => Health <= 0;
+    void ReduceHealth(float amount, GameObject damageSource);
+    void RestoreHealth(float amount);
 }
 

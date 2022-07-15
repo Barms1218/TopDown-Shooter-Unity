@@ -3919,6 +3919,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 847067256608029376, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
+      propertyPath: givePoints.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2023880278}
     - target: {fileID: 2579200449049318824, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
       propertyPath: m_Name
       value: Zombie Inmate
@@ -6828,6 +6832,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2023880278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7732697643445012712, guid: 846f1e1b85fe140eb9fd0ab834abe92f, type: 3}
+  m_PrefabInstance: {fileID: 7732697644306133773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8f5cbcc23bbe6469f094ad42624718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2036711363
 GameObject:
   m_ObjectHideFlags: 0

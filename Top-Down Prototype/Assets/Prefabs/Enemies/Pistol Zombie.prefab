@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2474475448183171316}
   - component: {fileID: 2474475448183171317}
   - component: {fileID: 3165004206678583450}
+  - component: {fileID: 3726766757209793094}
   - component: {fileID: -4776191114838315682}
   - component: {fileID: 8351774933863463687}
   - component: {fileID: -8119643195282958802}
@@ -143,6 +144,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 6233060729062997099}
   attackRange: 5
+--- !u!114 &3726766757209793094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474475448183171314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf147877182084a1a9b5b0405fa06c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  rb2d: {fileID: 2474475448183171316}
+  _animator: {fileID: 2474475448183171085}
 --- !u!114 &-4776191114838315682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +173,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   bloodParticle: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8119643195282958802}
+        m_TargetAssemblyTypeName: EnemyDeath, Assembly-CSharp
+        m_MethodName: HandleDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3726766757209793094}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8351774933863463687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackStrength: 0
-  attackRange: 0
   damage: 0
   attackCooldown: 0
 --- !u!114 &-8119643195282958802

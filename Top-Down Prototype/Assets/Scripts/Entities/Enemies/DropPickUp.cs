@@ -12,7 +12,6 @@ public class DropPickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.AddHealthListener(DropAmmo);
     }
 
     public void DropAmmo(GameObject dropper)
@@ -23,10 +22,5 @@ public class DropPickUp : MonoBehaviour
             var rifleAmmoDrop = Instantiate(_ammoDrop, transform.position,
              Quaternion.identity);
         }
-    }
-
-    private void OnDestroy()
-    {
-        EventManager.RemoveOnDiedListener(DropAmmo);
     }
 }

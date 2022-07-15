@@ -16,21 +16,20 @@ public class HUD : MonoBehaviour
         interactText.enabled = false;
         Interact.OnRayCast += SetInteractTextState;
         PlayerWeaponHandler.SetAmmoCount += UpdateWeaponAmmo;
-        EventManager.AddPointsAddedListener(UpdatePointsText);
     }
 
-    private void SetInteractTextState(bool isActive)
+    public void SetInteractTextState(bool isActive)
     {
         interactText.enabled = isActive;
     }
 
-    private void UpdateWeaponAmmo(int startAmmo, int startMaxAmmo)
+    public void UpdateWeaponAmmo(int startAmmo, int startMaxAmmo)
     {
         ammoCountText.text = startAmmo.ToString() + "/" +
         startMaxAmmo.ToString();         
     }
 
-    private void UpdatePointsText(int points)
+    public void UpdatePointsText(int points)
     {
         score += points;
         scoreText.text = ("Score: " + score.ToString());

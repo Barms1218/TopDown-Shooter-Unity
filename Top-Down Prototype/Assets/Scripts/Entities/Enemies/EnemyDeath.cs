@@ -6,46 +6,22 @@ using UnityEngine.Events;
 public class EnemyDeath : MonoBehaviour
 {
     [SerializeField] private int points;
-    private Animator _animator;
-    private EnemyWeaponHandler _weapon;
-    private PointsAddedEvent pointsAddedEvent = new PointsAddedEvent();
+    public UnityEvent<int> givePoints;
 
     void Awake()
     {
-        EventManager.AddHealthListener(HandleDeath);
-        EventManager.AddPointsAddedInvoker(this);
+
     }
 
-    private void HandleDeath(GameObject dyingObject)
+    public void HandleDeath()
     {
-        _animator = dyingObject.GetComponent<Animator>();
-        _weapon = dyingObject.GetComponent<EnemyWeaponHandler>();
-
-
-        if (_weapon != null)
-        {
-            _weapon.enabled = false;
-        }    
-          
-
-        if (_animator != null)
+                    
+        if (TryGetComponent<Animator>(out Animator _animator))
         {
             _animator?.SetTrigger("Dying");
         }
-
-        pointsAddedEvent?.Invoke(points);
-        Destroy(dyingObject, 1.0f);
+        givePoints.Invoke(points);
+        Destroy(gameObject, 1.0f);
         AudioManager.Play(AudioClipName.ZombieInmateDeath);
-    }
-
-    public void AddPointsAddedListener(UnityAction<int> _listener)
-    {
-        pointsAddedEvent.AddListener(_listener);
-    }
-
-    private void OnDestroy()
-    {
-        EventManager.RemoveOnDiedListener(HandleDeath);
-
     }
 }
