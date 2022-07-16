@@ -8,13 +8,15 @@ public abstract class WeaponHandler : MonoBehaviour
     protected float nextTriggerPull;
     protected Weapon currentWeapon;
     protected Vector2 aimDirection;
-    protected virtual void Reload()
+
+
+    public virtual void Reload()
     {
         currentWeapon.Reload();
     }
-    protected abstract void Fire();
+    public abstract void Fire();
 
-    protected virtual void SpecialAttack()
+    public virtual void SpecialAttack()
     {
         currentWeapon.SpecialAttack();
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OrientPlayer : MonoBehaviour
 {
@@ -12,26 +13,8 @@ public class OrientPlayer : MonoBehaviour
 
     void Update()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         
-        if (mousePos.x < transform.position.x && facingRight)
-        {
-            Flip();
-        }
-        else if (mousePos.x > transform.position.x && !facingRight)
-        {
-            Flip();
-        }
-    }
-
-    public virtual void Flip()
-    {
-        Vector3 newScale = gameObject.transform.localScale;
-        newScale.x *= -1f;
-
-        facingRight = !facingRight;
-
-        gameObject.transform.localScale = newScale;
     }
 
 }

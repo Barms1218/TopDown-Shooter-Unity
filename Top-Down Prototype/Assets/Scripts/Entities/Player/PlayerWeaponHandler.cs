@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 //[RequireComponent(typeof(InputController))]
 public class PlayerWeaponHandler : WeaponHandler
@@ -12,7 +13,6 @@ public class PlayerWeaponHandler : WeaponHandler
     new Dictionary<string, GameObject>();
     public static UnityAction<int, int> ReduceAmmo;
     public static UnityAction<int, int> SetAmmoCount;
-    GameObject aimCursor;
 
     #endregion
 
@@ -47,24 +47,11 @@ public class PlayerWeaponHandler : WeaponHandler
         EntityInput.OnReload += Reload;
         EntityInput.OnSpecialAttack += SpecialAttack;
         EntityInput.OnFire += Fire;
-        aimCursor = GameObject.FindGameObjectWithTag("Cursor");
-    }
-
-    private void Update()
-    {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        aimDirection = mousePos - transform.position;
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        if (aimCursor != null)
-        {
-            currentWeapon.Aim(angle, aimCursor.transform);
-        }        
-
     }
 
     #region Event Methods
 
-    protected override void Fire()
+    public override void Fire()
     {
         if (currentWeapon.CurrentAmmo > 0 && CanFire)
         {
@@ -78,6 +65,16 @@ public class PlayerWeaponHandler : WeaponHandler
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;  
         }
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+    }
+
+    public void Aim(InputAction.CallbackContext value)
+    {
+        var _direction = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
+
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        Quaternion gunRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        gun.transform.rotation = gunRotation;
+
     }
 
     #endregion

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class Interact : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Interact : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector3 direction = mousePos - gameObject.transform.position;
 
         Color lineColor;

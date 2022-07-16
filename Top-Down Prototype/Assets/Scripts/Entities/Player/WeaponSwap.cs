@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerWeaponHandler))]
 public class WeaponSwap : MonoBehaviour
@@ -10,7 +11,7 @@ public class WeaponSwap : MonoBehaviour
     public static UnityAction<string> OnWeaponSwap;
 
     private void Awake() => Pickup.AddWeaponName += AddWeapon;
-    private void Update()
+    private void Swap(InputAction.CallbackContext context)
     {
         // Initial weapon in player's inventory should always be pistol
         if (Input.GetKeyDown(KeyCode.Alpha1))

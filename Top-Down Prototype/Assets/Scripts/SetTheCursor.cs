@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SetTheCursor : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class SetTheCursor : MonoBehaviour
     [SerializeField] float yValue;
     [SerializeField] Sprite[] sprites;
     SpriteRenderer spriteRenderer;
-    Vector3 mousePos;
+    Vector2 position;
     GameObject player;
     
     // Start is called before the first frame update
@@ -20,17 +21,16 @@ public class SetTheCursor : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void ChangeCursorPosition(InputAction.CallbackContext value)
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z *= -1;
-        mousePos.x = Mathf.Clamp(mousePos.x, player.transform.position.x - xValue,
+        position = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
+        position.x = Mathf.Clamp(position.x, player.transform.position.x - xValue,
             player.transform.position.x + xValue);
-        mousePos.y = Mathf.Clamp(mousePos.y, player.transform.position.y - yValue,
+        position.y = Mathf.Clamp(position.y, player.transform.position.y - yValue,
             player.transform.position.y + yValue);
 
-        transform.position = mousePos;
+        transform.position = position;
     }
 
     /// <summary>

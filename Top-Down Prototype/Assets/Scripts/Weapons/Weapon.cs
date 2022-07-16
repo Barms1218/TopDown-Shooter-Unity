@@ -1,6 +1,7 @@
 using System.Collections; using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public abstract class Weapon : MonoBehaviour, IInteractable
 {
@@ -31,6 +32,7 @@ public abstract class Weapon : MonoBehaviour, IInteractable
     public float TimeBetweenShots => timeBetweenShots;
     public int CurrentAmmo => currentAmmo;
     public int AmmoPerShot => ammoPerShot;
+    public bool FacingRight => FacingRight;
 
     #endregion
 
@@ -39,20 +41,7 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 
     }
 
-    public virtual void Aim(float angle, Transform target)
-    {
-        if (target.position.x < transform.position.x && !facingRight)
-        {
-            Flip();
-        }
-        else if (target.position.x > transform.position.x && facingRight)
-        {
-            Flip();
-        }
 
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = rotation;
-    }
 
     public abstract void Fire(Vector2 direction);
 
@@ -66,7 +55,8 @@ public abstract class Weapon : MonoBehaviour, IInteractable
         }
     }
     protected abstract IEnumerator StartReload();
-    protected virtual void Flip()
+
+    public virtual void Flip()
     {
         facingRight = !facingRight;
         Vector3 newScale = transform.localScale;
