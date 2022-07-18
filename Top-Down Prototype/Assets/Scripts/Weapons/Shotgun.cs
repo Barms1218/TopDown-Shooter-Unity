@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : Weapon, IInteractable
+public class Shotgun : Weapon
 {
     [SerializeField] int numProjectiles = 5;
-    [SerializeField,Range(0, 2f)] float pelletSpread = 0.5f;
     private bool firing;
 
     public override void Fire(Vector2 direction)
@@ -16,12 +15,9 @@ public class Shotgun : Weapon, IInteractable
                 Quaternion.identity);
 
             var projectileScript = projectile.GetComponent<Projectile>();
-            direction.y -= Random.Range(-pelletSpread, pelletSpread);
+            direction.y += Random.Range(-recoil, recoil);
             projectileScript.MoveToTarget(direction);
         }
-        var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
-         transform.rotation);
-        Destroy(flash, timeBetweenShots / 5);
         currentAmmo -= ammoPerShot;
         AudioManager.Play(AudioClipName.ShotgunBlast);
         firing = true;

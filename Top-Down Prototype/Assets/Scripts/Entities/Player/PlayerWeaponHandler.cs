@@ -5,14 +5,18 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 //[RequireComponent(typeof(InputController))]
-public class PlayerWeaponHandler : WeaponHandler
+public class PlayerWeaponHandler : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private Dictionary<string, GameObject> weaponDictionary = 
-    new Dictionary<string, GameObject>();
+    [SerializeField] protected GameObject gun;
+    [SerializeField] private List<GameObject> weaponList = new List<GameObject>();
     public static UnityAction<int, int> ReduceAmmo;
     public static UnityAction<int, int> SetAmmoCount;
+    private Weapon currentWeapon;
+    private Transform targetTransform;
+    private float nextTriggerPull;
+    Vector2 _direction;
 
     #endregion
 
@@ -23,7 +27,7 @@ public class PlayerWeaponHandler : WeaponHandler
         set { gun = value; }
         get => gun;
     }
-    public Dictionary<string, GameObject> WeaponDictionary => weaponDictionary;
+    public List<GameObject> PlayerWeapons => weaponList;
     public Weapon CurrentWeapon
     {
         set { currentWeapon = value; }
@@ -34,32 +38,29 @@ public class PlayerWeaponHandler : WeaponHandler
 
     private void Awake()
     {
-        weaponDictionary.Add(gun.name, gun);
+        targetTransform = GameObject.FindGameObjectWithTag("Cursor").transform;
+        weaponList.Add(gun);
         currentWeapon = gun.GetComponent<Weapon>();
-        WeaponSwap.OnWeaponSwap += ChangeWeapon;
-        Weapon.OnPickUp += GetNewWeapon;
-        AmmoPickup.OnTrigger += AddAmmoToWeapon;
     }
 
     private void Start()
     {
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
-        EntityInput.OnReload += Reload;
-        EntityInput.OnSpecialAttack += SpecialAttack;
-        EntityInput.OnFire += Fire;
     }
 
     #region Event Methods
 
-    public override void Fire()
+    public void Shoot(InputAction.CallbackContext context)
     {
-        if (currentWeapon.CurrentAmmo > 0 && CanFire)
+        var fireValue = context.started;
+        if (fireValue && currentWeapon.CurrentAmmo > 0 && CanFire)
         {
-            currentWeapon.Fire(aimDirection);
+            currentWeapon.Fire(_direction);
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
                         
         }
-        else if (currentWeapon.CurrentAmmo == 0 && CanFire)
+
+        if (fireValue && currentWeapon.CurrentAmmo == 0 && CanFire)
         {
             AudioManager.Play(AudioClipName.NoAmmo);
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;  
@@ -67,60 +68,60 @@ public class PlayerWeaponHandler : WeaponHandler
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
+    public void Reload(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            currentWeapon.Reload();
+        }
+    }
+
     public void Aim(InputAction.CallbackContext value)
     {
-        var _direction = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
-
+        var aimDirection = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
+        _direction = aimDirection - transform.position;
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
-        Quaternion gunRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        gun.transform.rotation = gunRotation;
+
+        if (currentWeapon != null)
+        {
+            currentWeapon.Aim(angle, targetTransform);
+        }
 
     }
 
     #endregion
 
-    private void ChangeWeapon(string weaponkey)
-    {
-        if (weaponDictionary.ContainsKey(weaponkey))
-        {
-            gun.SetActive(false);
-            gun = weaponDictionary[weaponkey];
-            weaponDictionary[weaponkey].SetActive(true);
-            currentWeapon = gun.GetComponent<Weapon>();
-
-            SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
-        }
-    }
-
-    private void GetNewWeapon(GameObject newGun)
+    public void GetNewWeapon(GameObject newGun)
     {
         AudioManager.Play(AudioClipName.GetGun);
-        gun.SetActive(false);        
-        weaponDictionary.Add(newGun.name, newGun);
+        gun.SetActive(false);
+        weaponList.Add(newGun);
         newGun.transform.SetParent(transform);
         newGun.transform.position = gun.transform.position;
-        gun = newGun;      
+        gun = newGun;
         gun.GetComponent<Weapon>().enabled = true;
-        
+
         // Flip the weapon to proper scale to match player's
         if (newGun.transform.position.x < transform.position.x)
         {
             Vector3 newScale = gun.transform.localScale;
             newScale.x *= -1;
             gun.transform.localScale = newScale;
-        }          
+        }
         currentWeapon = newGun.GetComponent<Weapon>();
         gun.SetActive(true);
         gun.GetComponent<Collider2D>().enabled = false;
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
-    private void AddAmmoToWeapon(int amountToAdd, string weaponName)
+    private void AddAmmoToWeapon(int amountToAdd, int weaponIndex)
     {
-        if (weaponDictionary.ContainsKey(weaponName))
+        if (weaponList.Contains(weaponList[weaponIndex]))
         {
-            weaponDictionary[weaponName].GetComponent<Weapon>().MaxAmmo += amountToAdd;
+            weaponList[weaponIndex].GetComponent<Weapon>().MaxAmmo += amountToAdd;
             SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         }
     }
+
+    private bool CanFire => Time.time >= nextTriggerPull;
 }

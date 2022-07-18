@@ -20,17 +20,17 @@ public class EnemyWeaponHandler : WeaponHandler
         {
             aimDirection = player.transform.position - gun.transform.position;
             float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-            //currentWeapon.Aim(angle, player.transform);
+            currentWeapon.Aim(angle, player.transform);
             var _distance = Vector2.Distance(player.transform.position, transform.position);
             if (_distance < attackRange && CanFire)
             {
-                Fire();
+                OnFire();
                 nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
             }
         }
     }
 
-    public override void Fire()
+    public override void OnFire()
     {
 
         currentWeapon.Fire(aimDirection);

@@ -3,13 +3,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public abstract class Weapon : MonoBehaviour, IInteractable
+public abstract class Weapon : MonoBehaviour
 {
     #region Fields
 
     [Header("Prefabs")]
     [SerializeField] protected GameObject projectilePrefab;
-    [SerializeField] protected GameObject muzzleFlashPrefab;
     [SerializeField] protected Transform muzzleTransform;
     [Header("Ammunition Stats")]
     [SerializeField] protected int currentAmmo;
@@ -19,9 +18,9 @@ public abstract class Weapon : MonoBehaviour, IInteractable
     [Header("Gun Properties")]
     [SerializeField] protected float timeBetweenShots;
     [SerializeField] protected float reloadSpeed;
+    [SerializeField,Range(0, 1f)] protected float recoil;
     protected bool reloading = false;
     protected bool facingRight;
-    public static UnityAction OnReload;
     public static UnityAction<GameObject> OnPickUp;
 
     #endregion
@@ -36,27 +35,36 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 
     #endregion
 
-    protected virtual void Awake()  
+    public void Aim(float angle, Transform targetTransform)
     {
+        if (targetTransform.position.x < transform.position.x && !facingRight)
+        {
+            Flip();
+        }
+        else if (targetTransform.position.x > transform.position.x && facingRight)
+        {
+            Flip();
+        }
 
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = rotation;
     }
 
-
-
     public abstract void Fire(Vector2 direction);
+
 
     public abstract void SpecialAttack();
 
     public virtual void Reload()
     {
-        if (!reloading && maxAmmo > 0)
+        if (!reloading)
         {
             StartCoroutine(StartReload());
         }
     }
     protected abstract IEnumerator StartReload();
 
-    public virtual void Flip()
+    public void Flip()
     {
         facingRight = !facingRight;
         Vector3 newScale = transform.localScale;
@@ -69,5 +77,4 @@ public abstract class Weapon : MonoBehaviour, IInteractable
     {
 
     }
-    public virtual void Interact() => OnPickUp?.Invoke(gameObject);
 }

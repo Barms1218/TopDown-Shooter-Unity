@@ -6,7 +6,7 @@ public class ShotgunAmmoPickup : AmmoPickup
 {
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        gunName = "Shotgun";
+        ammoType = ammoTypes.Shotgun;
         base.OnTriggerEnter2D(other);
     }
 }

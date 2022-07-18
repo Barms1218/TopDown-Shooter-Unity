@@ -6,16 +6,13 @@ public class Projectile : MonoBehaviour
 {
     #region Fields
     
-    [SerializeField]
-    int damage;
-    [SerializeField]
-    float timeToLive;
-    [SerializeField]
-    float forceMagnitude;
+    [SerializeField] protected int damage;
+    [SerializeField] protected float timeToLive;
+    [SerializeField] protected float forceMagnitude;
 
     #endregion
 
-    void Update()
+    protected virtual void Update()
     {
         timeToLive -= Time.deltaTime;
 
@@ -34,7 +31,7 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void MoveToTarget(Vector2 force)
+    public virtual void MoveToTarget(Vector2 force)
     {
         if (TryGetComponent(out Rigidbody2D rigidbody2D))
         {

@@ -8,14 +8,19 @@ public class GunData : ScriptableObject
     [Header("Info")]
     [SerializeField] float fireRate;
     [SerializeField] int maxAmmo;
-    [SerializeField] int ammoPerShot;
     [SerializeField] float reloadSpeed;
+    [SerializeField] float timeBetweenShots;
     [SerializeField] int magazineSize;
+    [SerializeField] int currentAmmo;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField, Range(0, 1)] float recoil;
 
     public float FireRate => fireRate;
     public int MaxAmmo => maxAmmo;
     public int MagazineSize => magazineSize;
     public float ReloadSpeed => reloadSpeed;
-    public int AmmoPerShot => ammoPerShot;
-
+    public int CurrentAmmo => currentAmmo;
+    public GameObject ProjectilePrefab => projectilePrefab;
+    public float Recoil => recoil;
+    public float TimeBetweenShots => timeBetweenShots;
 }

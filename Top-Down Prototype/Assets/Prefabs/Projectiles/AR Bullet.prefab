@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5114801586880999092}
   - component: {fileID: 5114801586880999093}
   - component: {fileID: 5114801586880999091}
-  - component: {fileID: -2603206477184613473}
   - component: {fileID: 4224721485798129384}
+  - component: {fileID: 7055408941182717268}
   m_Layer: 10
   m_Name: AR Bullet
   m_TagString: Projectile
@@ -108,22 +108,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-2603206477184613473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5114801586880999095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d9cf3503be13348947e76c1bf00c41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileData: {fileID: 11400000, guid: 4971c061f48fcd2418822b3dce286e37, type: 2}
-  damage: 5
-  timeToLive: 1
-  forceMagnitude: 40
 --- !u!61 &4224721485798129384
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,3 +134,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41666666, y: 0.25}
   m_EdgeRadius: 0
+--- !u!114 &7055408941182717268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5114801586880999095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e2630c3ef14a70b5988d1c6eb1b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  timeToLive: 1
+  forceMagnitude: 40

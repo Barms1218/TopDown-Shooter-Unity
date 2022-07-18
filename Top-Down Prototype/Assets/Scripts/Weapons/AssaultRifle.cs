@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssaultRifle : Weapon, IInteractable
+public class AssaultRifle : Weapon
 {
 
     /// <summary>
@@ -14,11 +14,9 @@ public class AssaultRifle : Weapon, IInteractable
         {
             var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
                 Quaternion.identity);
-            var flash = Instantiate(muzzleFlashPrefab, muzzleTransform.position,
-             transform.rotation);
-            Destroy(flash, timeBetweenShots / 5);
             var bulletScript = projectile.GetComponent<Projectile>();
             currentAmmo -= AmmoPerShot;
+            direction.y += Random.Range(-recoil, recoil);
             bulletScript.MoveToTarget(direction);
             AudioManager.Play(AudioClipName.AR_Fire);
         }

@@ -5,14 +5,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerActions actions;
+
     [SerializeField] float speed;
     private Rigidbody2D _rigidbody2D;
     private bool facingRight = true;
     private GameObject cursor;
-
+    private Vector2 moveDir;
+    private bool isDashing = false;
 
     private void Awake()
     {
+        actions = new PlayerActions();
         cursor = GameObject.FindGameObjectWithTag("Cursor");
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -32,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext value)
     {
-        var moveDir = value.ReadValue<Vector2>();
+        moveDir = value.ReadValue<Vector2>().normalized;
         var velocity = _rigidbody2D.velocity;
 
         velocity.x = moveDir.x * speed;
@@ -43,8 +47,23 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext value)
     {
+        
+        Vector2 dashStart = new Vector2();
+        Vector2 dashEnd = new Vector2();
+        var dashDistance = 3f;
 
-
+        if (value.started)
+        {
+            isDashing = true;
+            dashStart = transform.position;
+            dashEnd = new Vector2(dashStart.x + dashDistance * moveDir.x,
+            dashStart.y);
+        }
+        else if (value.performed)
+        {
+            isDashing = false;
+            transform.position = dashEnd;
+        }
     }
 
     private void Flip()
@@ -58,16 +77,4 @@ public class PlayerController : MonoBehaviour
         
 
     }
-    private void OnEnable()
-    {
-        //moveAction = inputs.PlayerControls.Movement;
-        //attackAction = inputs.PlayerControls.Fire;
-    }
-
-    private void OnDisable()
-    {
-        //moveAction.Disable();
-        //attackAction.Disable();
-    }
-
 }

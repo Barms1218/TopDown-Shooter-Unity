@@ -6,15 +6,18 @@ using UnityEngine.Events;
 
 public class Pickup : MonoBehaviour
 {
-    public static UnityAction<string> AddWeaponName;
+    PlayerWeaponHandler weaponHandler;
 
-
+    private void Awake()
+    {
+        weaponHandler = GetComponent<PlayerWeaponHandler>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Weapon"))
+        var pickupObject = collision.gameObject;
+        if (pickupObject.TryGetComponent(out Weapon weapon))
         {
-            AddWeaponName?.Invoke(collision.gameObject.name);
-            collision.gameObject.GetComponent<IInteractable>().Interact();
+            weaponHandler.GetNewWeapon(pickupObject);
         }
     }
 }

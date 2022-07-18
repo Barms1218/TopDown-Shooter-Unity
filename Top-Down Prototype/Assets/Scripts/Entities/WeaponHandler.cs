@@ -14,7 +14,7 @@ public abstract class WeaponHandler : MonoBehaviour
     {
         currentWeapon.Reload();
     }
-    public abstract void Fire();
+    public abstract void OnFire();
 
     public virtual void SpecialAttack()
     {

@@ -7,50 +7,63 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerWeaponHandler))]
 public class WeaponSwap : MonoBehaviour
 {
-    [SerializeField] private List<string> weapons = new List<string>();
-    public static UnityAction<string> OnWeaponSwap;
+    PlayerWeaponHandler weaponHandler;
 
-    private void Awake() => Pickup.AddWeaponName += AddWeapon;
-    private void Swap(InputAction.CallbackContext context)
+    private void Awake() => weaponHandler = GetComponent<PlayerWeaponHandler>();
+
+    public void TryEquipWeaponOne(InputAction.CallbackContext context)
     {
-        // Initial weapon in player's inventory should always be pistol
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (context.started)
         {
             try
             {
-                OnWeaponSwap?.Invoke("Pistol");
+                ChangeWeapon(0);
             }
-            catch (System.Exception exception)
+            catch (System.Exception e)
             {
-                Debug.Log(exception);               
+                weaponHandler.Gun.SetActive(true);
+                Debug.Log(e);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+    }
+    public void TryEquipWeaponTwo(InputAction.CallbackContext context)
+    {
+        if (context.started)
         {
             try
             {
-                OnWeaponSwap?.Invoke(weapons[0]);
+                ChangeWeapon(1);
             }
-            catch(System.Exception exception)
+            catch (System.Exception e)
             {
-                Debug.Log(exception);
+                weaponHandler.Gun.SetActive(true);
+                Debug.Log(e);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+    }
+    public void TryEquipWeaponThree(InputAction.CallbackContext context)
+    {
+        if (context.started)
         {
             try
             {
-                OnWeaponSwap?.Invoke(weapons[1]);
+                ChangeWeapon(2);
             }
-            catch(System.Exception exception)
+            catch (System.Exception e)
             {
-                Debug.Log(exception);
+                weaponHandler.Gun.SetActive(true);
+                Debug.Log(e);
             }
-        }        
+        }
+    }
+    void ChangeWeapon(int weaponIndex)
+    {
+        weaponHandler.Gun.SetActive(false);
+        weaponHandler.Gun = weaponHandler.PlayerWeapons[weaponIndex];
+        weaponHandler.Gun.SetActive(true);
+        weaponHandler.CurrentWeapon = weaponHandler.Gun.GetComponent<Weapon>();
+        PlayerWeaponHandler.SetAmmoCount?.Invoke(
+            weaponHandler.CurrentWeapon.CurrentAmmo, weaponHandler.CurrentWeapon.MaxAmmo);
     }
 
-    private void AddWeapon(string weaponName)
-    {
-        weapons.Add(weaponName);
-    }
 }

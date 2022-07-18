@@ -106,7 +106,7 @@ MonoBehaviour:
   maxAmmo: 72
   magazineSize: 30
   ammoPerShot: 1
-  timeBetweenShots: 0.2
+  timeBetweenShots: 0.75
   reloadSpeed: 1.25
 --- !u!61 &131069197
 BoxCollider2D:
