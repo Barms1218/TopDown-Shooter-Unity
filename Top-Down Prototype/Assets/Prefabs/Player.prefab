@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 1595143304064804017}
   - component: {fileID: 4042253683196191775}
   - component: {fileID: 5095394726920402191}
-  - component: {fileID: 1263976143098778733}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -170,6 +169,7 @@ MonoBehaviour:
   cursor: {fileID: 1678716314}
   speed: 4
   _rigidbody2D: {fileID: 7490895233034298548}
+  _animator: {fileID: 7490895233034298544}
 --- !u!114 &7195624304276632818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 928871586691316587}
+  targetTransform: {fileID: 1678716295}
+  canRapidFire: 0
 --- !u!114 &5095394726920402191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,36 +268,6 @@ MonoBehaviour:
   movement: {fileID: 997266673648363870}
   weaponSwap: {fileID: 7195624304276632818}
   setTheCursor: {fileID: 1678716293}
---- !u!114 &1263976143098778733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7490895233034298552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4f64cf979c9834cdfb3897644c5cea2d, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerControls
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1001 &245405541957311665
 PrefabInstance:
   m_ObjectHideFlags: 0

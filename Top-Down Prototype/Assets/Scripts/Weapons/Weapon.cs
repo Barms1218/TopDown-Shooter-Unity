@@ -19,6 +19,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float timeBetweenShots;
     [SerializeField] protected float reloadSpeed;
     [SerializeField,Range(0, 1f)] protected float recoil;
+    [SerializeField] bool canRapidFire;
     protected bool reloading = false;
     protected bool facingRight;
     public static UnityAction<GameObject> OnPickUp;
@@ -32,6 +33,7 @@ public abstract class Weapon : MonoBehaviour
     public int CurrentAmmo => currentAmmo;
     public int AmmoPerShot => ammoPerShot;
     public bool FacingRight => FacingRight;
+    public bool CanRapidFire => canRapidFire;
 
     #endregion
 

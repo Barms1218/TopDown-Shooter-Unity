@@ -10,14 +10,15 @@ public class PlayerWeaponHandler : MonoBehaviour
     #region Fields
 
     [SerializeField] protected GameObject gun;
+    [SerializeField] Transform targetTransform;
+    [SerializeField] bool canRapidFire;
     private List<GameObject> weaponList = new List<GameObject>();
-    public static UnityAction<int, int> ReduceAmmo;
     public static UnityAction<int, int> SetAmmoCount;
     private Weapon currentWeapon;
-    private Transform targetTransform;
-    private float nextTriggerPull;
     Vector2 _direction;
-
+    WaitForSeconds timeBetweenShots;
+    Coroutine fireCoroutine;
+    float nextTriggerPull;
     #endregion
 
     #region Properties
@@ -27,18 +28,21 @@ public class PlayerWeaponHandler : MonoBehaviour
         set { gun = value; }
         get => gun;
     }
+
     public List<GameObject> PlayerWeapons => weaponList;
+
     public Weapon CurrentWeapon
     {
         set { currentWeapon = value; }
         get => currentWeapon;
     }
 
+    public WaitForSeconds TriggerDelay { set { timeBetweenShots = value; } }
+
     #endregion
 
     private void Awake()
     {
-        targetTransform = GameObject.FindGameObjectWithTag("Cursor").transform;
         weaponList.Add(gun);
         currentWeapon = gun.GetComponent<Weapon>();
     }
@@ -50,30 +54,44 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     #region Event Methods
 
-    public void Shoot(InputAction.CallbackContext context)
+    private void Shoot()
     {
-        Debug.Log(context);
-        if (currentWeapon.CurrentAmmo > 0 && CanFire)
+        if (currentWeapon.CurrentAmmo > 0)
         {
             currentWeapon.Fire(_direction);
-            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
-                        
+            SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         }
-
-        if (currentWeapon.CurrentAmmo == 0 && CanFire)
+        else
         {
             AudioManager.Play(AudioClipName.NoAmmo);
-            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;  
         }
-        SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+
+
     }
 
-    public void Reload(InputAction.CallbackContext context)
+    public IEnumerator RapidFire()
     {
-        if (context.started)
+
+        if (currentWeapon.CanRapidFire)
         {
-            currentWeapon.Reload();
+            while(true)
+            {
+                Shoot();
+                yield return timeBetweenShots;
+            }
         }
+        else if (Time.time >= nextTriggerPull)
+        {
+            Shoot();
+            nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
+            yield return null;
+        }
+    }
+
+
+    public void Reload()
+    {
+        currentWeapon.Reload();
     }
 
     public void Aim(Vector2 cursorPosition)
@@ -109,6 +127,7 @@ public class PlayerWeaponHandler : MonoBehaviour
             gun.transform.localScale = newScale;
         }
         currentWeapon = newGun.GetComponent<Weapon>();
+        timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
         gun.SetActive(true);
         gun.GetComponent<Collider2D>().enabled = false;
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
@@ -122,6 +141,4 @@ public class PlayerWeaponHandler : MonoBehaviour
             SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         }
     }
-
-    private bool CanFire => Time.time >= nextTriggerPull;
 }

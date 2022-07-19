@@ -11,10 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] WeaponSwap weaponSwap;
     [SerializeField] SetTheCursor setTheCursor;
 
+    Coroutine fireCoroutine;
+
     InputAction move;
-    InputAction shoot;
     InputAction aim;
-    InputAction equipWeaponOne;
 
     private void Awake()
     {
@@ -22,10 +22,13 @@ public class PlayerController : MonoBehaviour
         move = actions.PlayerControls.Movement;
         aim = actions.PlayerControls.Aim;
 
-        actions.PlayerControls.Shoot.started += weaponHandler.Shoot;
+        // inputs for player weapon
+        actions.PlayerControls.Shoot.started += _ => StartFiring();
+        actions.PlayerControls.Shoot.canceled += _ => StopFiring();
+        actions.PlayerControls.Reload.started += _ => weaponHandler.Reload();
 
         // input for dash ability
-        actions.PlayerControls.Dash.started += movement.OnDash;
+        actions.PlayerControls.Dash.started += _ => movement.OnDash();
 
         //Swap the player's weapon
         actions.PlayerControls.EquipWeapon1.started += weaponSwap.TryEquipWeaponOne;
@@ -34,13 +37,23 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        
+        setTheCursor.ChangeCursorPosition(aim.ReadValue<Vector2>());
+        weaponHandler.Aim(aim.ReadValue<Vector2>());
     }
     private void FixedUpdate()
     {
         movement.Movement(move.ReadValue<Vector2>());
-        setTheCursor.ChangeCursorPosition(aim.ReadValue<Vector2>());
-        weaponHandler.Aim(aim.ReadValue<Vector2>());
+
+    }
+
+    void StartFiring()
+    {
+        fireCoroutine = StartCoroutine(weaponHandler.RapidFire());
+    }
+
+    void StopFiring()
+    {
+        StopCoroutine(fireCoroutine);
     }
 
     private void OnEnable()
@@ -50,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        actions.Disable();
     }
 
 }

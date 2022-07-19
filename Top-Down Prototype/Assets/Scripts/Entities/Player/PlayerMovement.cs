@@ -42,10 +42,18 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D.velocity = velocity;
     }
 
-    public void OnDash(InputAction.CallbackContext context)
+    public void OnDash()
     {
-        Debug.Log(moveDir);
         _rigidbody2D.AddForce(moveDir * 20, ForceMode2D.Impulse);
+        //transform.position = Vector2.Lerp(dashStart, dashEnd, dashTimer);
+        //currentDashTime += Time.deltaTime;
+        //if (currentDashTime >= dashTimer)
+        //{
+        //    // dash finished
+        //    isDashing = false;
+        //    transform.position = dashEnd;
+        //}
+        //dashCoolDown = Time.time + 2f;
     }
 
     private void Flip()
@@ -56,7 +64,5 @@ public class PlayerMovement : MonoBehaviour
         facingRight = !facingRight;
 
         gameObject.transform.localScale = newScale;
-
-
     }
 }
