@@ -6,75 +6,51 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private PlayerActions actions;
+    [SerializeField] PlayerWeaponHandler weaponHandler;
+    [SerializeField] PlayerMovement movement;
+    [SerializeField] WeaponSwap weaponSwap;
+    [SerializeField] SetTheCursor setTheCursor;
 
-    [SerializeField] float speed;
-    private Rigidbody2D _rigidbody2D;
-    private bool facingRight = true;
-    private GameObject cursor;
-    private Vector2 moveDir;
-    private bool isDashing = false;
+    InputAction move;
+    InputAction shoot;
+    InputAction aim;
+    InputAction equipWeaponOne;
 
     private void Awake()
     {
         actions = new PlayerActions();
-        cursor = GameObject.FindGameObjectWithTag("Cursor");
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+        move = actions.PlayerControls.Movement;
+        aim = actions.PlayerControls.Aim;
 
+        actions.PlayerControls.Shoot.started += weaponHandler.Shoot;
+
+        // input for dash ability
+        actions.PlayerControls.Dash.started += movement.OnDash;
+
+        //Swap the player's weapon
+        actions.PlayerControls.EquipWeapon1.started += weaponSwap.TryEquipWeaponOne;
+        actions.PlayerControls.EquipWeapon2.started += weaponSwap.TryEquipWeaponTwo;
+        actions.PlayerControls.EquipWeapon3.started += weaponSwap.TryEquipWeaponThree;
+    }
     private void Update()
     {
-        if (cursor.transform.position.x < transform.position.x && facingRight)
-        {
-            Flip();
-        }
-        else if (cursor.transform.position.x > transform.position.x && !facingRight)
-        {
-            Flip();
-        }
-
+        
     }
-
-    public void OnMovement(InputAction.CallbackContext value)
+    private void FixedUpdate()
     {
-        moveDir = value.ReadValue<Vector2>().normalized;
-        var velocity = _rigidbody2D.velocity;
-
-        velocity.x = moveDir.x * speed;
-        velocity.y = moveDir.y * speed;
-
-        _rigidbody2D.velocity = velocity;
+        movement.Movement(move.ReadValue<Vector2>());
+        setTheCursor.ChangeCursorPosition(aim.ReadValue<Vector2>());
+        weaponHandler.Aim(aim.ReadValue<Vector2>());
     }
 
-    public void OnDash(InputAction.CallbackContext value)
+    private void OnEnable()
+    {
+        actions.Enable();
+    }
+
+    private void OnDisable()
     {
         
-        Vector2 dashStart = new Vector2();
-        Vector2 dashEnd = new Vector2();
-        var dashDistance = 3f;
-
-        if (value.started)
-        {
-            isDashing = true;
-            dashStart = transform.position;
-            dashEnd = new Vector2(dashStart.x + dashDistance * moveDir.x,
-            dashStart.y);
-        }
-        else if (value.performed)
-        {
-            isDashing = false;
-            transform.position = dashEnd;
-        }
     }
 
-    private void Flip()
-    {
-        Vector3 newScale = gameObject.transform.localScale;
-        newScale.x *= -1f;
-
-        facingRight = !facingRight;
-
-        gameObject.transform.localScale = newScale;
-        
-
-    }
 }

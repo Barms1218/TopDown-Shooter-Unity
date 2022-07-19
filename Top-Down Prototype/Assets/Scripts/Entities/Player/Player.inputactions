@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "Player",
     "maps": [
         {
             "name": "PlayerControls",
@@ -21,13 +21,13 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Shoot",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "fbc2926e-d840-4685-ae9b-73493a46f885",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -38,7 +38,7 @@
                     "id": "623ca206-44b3-4ca6-a867-d40d30436ba9",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": true
                 },
                 {
@@ -56,7 +56,7 @@
                     "id": "f0736cd7-b6b0-48ae-b7fa-a31096e5ddc8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": true
                 },
                 {
@@ -65,7 +65,7 @@
                     "id": "fa49d36a-76ae-4a07-b5c3-cd555a12e439",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": true
                 },
                 {
@@ -74,7 +74,7 @@
                     "id": "4d2748d7-13f3-408a-a27a-69926ca90caa",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 }
             ],
@@ -214,7 +214,7 @@
                 {
                     "name": "",
                     "id": "9252868b-a72e-4d58-8cdf-6a04568927f0",
-                    "path": "<Gamepad>/rightStick",
+                    "path": "<VirtualMouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

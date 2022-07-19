@@ -10,7 +10,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     #region Fields
 
     [SerializeField] protected GameObject gun;
-    [SerializeField] private List<GameObject> weaponList = new List<GameObject>();
+    private List<GameObject> weaponList = new List<GameObject>();
     public static UnityAction<int, int> ReduceAmmo;
     public static UnityAction<int, int> SetAmmoCount;
     private Weapon currentWeapon;
@@ -52,15 +52,15 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        var fireValue = context.started;
-        if (fireValue && currentWeapon.CurrentAmmo > 0 && CanFire)
+        Debug.Log(context);
+        if (currentWeapon.CurrentAmmo > 0 && CanFire)
         {
             currentWeapon.Fire(_direction);
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
                         
         }
 
-        if (fireValue && currentWeapon.CurrentAmmo == 0 && CanFire)
+        if (currentWeapon.CurrentAmmo == 0 && CanFire)
         {
             AudioManager.Play(AudioClipName.NoAmmo);
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;  
@@ -76,9 +76,9 @@ public class PlayerWeaponHandler : MonoBehaviour
         }
     }
 
-    public void Aim(InputAction.CallbackContext value)
+    public void Aim(Vector2 cursorPosition)
     {
-        var aimDirection = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
+        var aimDirection = Camera.main.ScreenToWorldPoint(cursorPosition);
         _direction = aimDirection - transform.position;
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 

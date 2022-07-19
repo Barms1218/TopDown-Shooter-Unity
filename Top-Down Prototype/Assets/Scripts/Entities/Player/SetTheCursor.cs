@@ -18,9 +18,9 @@ public class SetTheCursor : MonoBehaviour
     }
 
 
-    public void ChangeCursorPosition(InputAction.CallbackContext value)
+    public void ChangeCursorPosition(Vector2 newPosition)
     {
-        position = Camera.main.ScreenToWorldPoint(value.ReadValue<Vector2>());
+        position = Camera.main.ScreenToWorldPoint(newPosition);
         position.x = Mathf.Clamp(position.x, playerTransform.transform.position.x - xValue,
             playerTransform.transform.position.x + xValue);
         position.y = Mathf.Clamp(position.y, playerTransform.transform.position.y - yValue,
