@@ -17,7 +17,6 @@ public class PlayerWeaponHandler : MonoBehaviour
     private Weapon currentWeapon;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
-    Coroutine fireCoroutine;
     float nextTriggerPull;
     #endregion
 
@@ -133,12 +132,15 @@ public class PlayerWeaponHandler : MonoBehaviour
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
-    private void AddAmmoToWeapon(int amountToAdd, int weaponIndex)
+    public void AddAmmoToWeapon(int amountToAdd, string name)
     {
-        if (weaponList.Contains(weaponList[weaponIndex]))
+        foreach(GameObject weapon in weaponList)
         {
-            weaponList[weaponIndex].GetComponent<Weapon>().MaxAmmo += amountToAdd;
-            SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+            if (weapon.name == name)
+            {
+                weapon.GetComponent<Weapon>().MaxAmmo += amountToAdd;
+                SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+            }
         }
     }
 }

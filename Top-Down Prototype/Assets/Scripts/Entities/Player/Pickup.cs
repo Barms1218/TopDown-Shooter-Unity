@@ -19,5 +19,9 @@ public class Pickup : MonoBehaviour
         {
             weaponHandler.GetNewWeapon(pickupObject);
         }
+        else if (pickupObject.TryGetComponent(out AmmoPickup ammoPickup))
+        {
+            weaponHandler.AddAmmoToWeapon(ammoPickup.Amount, ammoPickup.GunName);
+        }
     }
 }

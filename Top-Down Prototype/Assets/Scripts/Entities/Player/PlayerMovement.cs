@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private bool facingRight = true;
     
     private Vector2 moveDir;
-    private bool isDashing = false;
 
     private void Update()
     {
@@ -35,10 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.x = moveDir.x * speed;
         velocity.y = moveDir.y * speed;
-        if (moveDir.x > 0 || moveDir.y > 0)
-        {
-            _animator.SetBool("Running", true);
-        }
+        _animator.SetBool("Running", true);
         _rigidbody2D.velocity = velocity;
     }
 

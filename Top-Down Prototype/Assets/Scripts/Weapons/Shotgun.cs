@@ -7,14 +7,25 @@ public class Shotgun : Weapon
     [SerializeField] int numProjectiles = 5;
     private bool firing;
 
+
+    private void Awake()
+    {
+        reloadDelay = new WaitForSeconds(reloadSpeed);
+    }
+
     public override void Fire(Vector2 direction)
     {
         for (int i = 0; i < numProjectiles; i++)
         {
-            var projectile = Instantiate(projectilePrefab, muzzleTransform.position, 
-                Quaternion.identity);
+            bullet = ShotgunBulletPool.ShotGunInstance.GetPooledObject();
+            if (bullet != null)
+            {
+                bullet.transform.position = muzzleTransform.transform.position;
+                bullet.transform.rotation = muzzleTransform.transform.rotation;
+                bullet.SetActive(true);
+            }
 
-            var projectileScript = projectile.GetComponent<Projectile>();
+            var projectileScript = bullet.GetComponent<Projectile>();
             direction.y += Random.Range(-recoil, recoil);
             projectileScript.MoveToTarget(direction);
         }

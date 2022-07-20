@@ -42,7 +42,7 @@ public class WeaponSwap : MonoBehaviour
         }
     }
     public void TryEquipWeaponThree(InputAction.CallbackContext context)
-    {
+    { 
         if (context.started)
         {
             try

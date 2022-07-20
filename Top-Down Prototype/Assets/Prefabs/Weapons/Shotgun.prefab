@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5416292742939780391}
   - component: {fileID: 5416292742939780390}
   - component: {fileID: 5416292742939780384}
+  - component: {fileID: 3119880114983045342}
   - component: {fileID: 7957779073280548603}
   m_Layer: 9
   m_Name: Shotgun
@@ -130,8 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9542651282bd8f40b8c441cc3fa061d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
-  muzzleFlashPrefab: {fileID: 455240160870514496, guid: 4a02357a3aa81ba4c80a4064b9c29624, type: 3}
   muzzleTransform: {fileID: 5416292742926382952}
   currentAmmo: 5
   maxAmmo: 25
@@ -139,8 +138,24 @@ MonoBehaviour:
   ammoPerShot: 1
   timeBetweenShots: 1
   reloadSpeed: 0.75
+  recoil: 0.706
+  canRapidFire: 0
   numProjectiles: 5
-  pelletSpread: 0.71
+--- !u!114 &3119880114983045342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5416292742939780387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03a3e784ce3d4e99890d88519fa4b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
+  amountToPool: 5
 --- !u!61 &7957779073280548603
 BoxCollider2D:
   m_ObjectHideFlags: 0

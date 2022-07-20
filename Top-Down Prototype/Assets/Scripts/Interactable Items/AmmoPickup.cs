@@ -5,24 +5,15 @@ using UnityEngine.Events;
 
 public abstract class AmmoPickup : MonoBehaviour
 {
-    [SerializeField] int _amount;
-    protected string gunName;
-    public static UnityAction<int, ammoTypes> OnTrigger;
+    [SerializeField] protected int _amount;
+    [SerializeField] protected string gunName;
 
-    public enum ammoTypes
-    {
-        Rifle,
-        Shotgun
-    }
+    public int Amount => _amount;
+    public string GunName => gunName;
 
-    protected ammoTypes ammoType;
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            OnTrigger?.Invoke(_amount, ammoType);
-            AudioManager.Play(AudioClipName.Pickup);
-            Destroy(gameObject);
-        }
+        AudioManager.Play(AudioClipName.Pickup);
+        Destroy(gameObject);
     }
 }

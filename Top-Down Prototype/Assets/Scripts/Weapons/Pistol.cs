@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
+
+    private void Awake()
+    {
+        reloadDelay = new WaitForSeconds(reloadSpeed);    
+    }
+
     public override void Fire(Vector2 direction)
     {
         if (!reloading)
         {
-            var bulletScript = Instantiate(projectilePrefab, muzzleTransform.position,
-                Quaternion.identity).GetComponent<Projectile>();
+            bullet = ObjectPool.SharedInstance.GetPooledObject();
+            if (bullet != null)
+            {
+                bullet.transform.position = muzzleTransform.transform.position;
+                bullet.transform.rotation = muzzleTransform.transform.rotation;
+                bullet.SetActive(true);
+            }
+            var bulletScript = bullet.GetComponent<Projectile>();
             currentAmmo -= 1;
             direction.y += Random.Range(-recoil, recoil);
             bulletScript.MoveToTarget(direction);
@@ -27,7 +39,7 @@ public class Pistol : Weapon
     {
         reloading = true;
 
-        yield return new WaitForSeconds(reloadSpeed);
+        yield return reloadDelay;
         currentAmmo = magazineSize;
 
         AudioManager.Play(AudioClipName.ReloadSound);

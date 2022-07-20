@@ -53,7 +53,10 @@ public class PlayerController : MonoBehaviour
 
     void StopFiring()
     {
-        StopCoroutine(fireCoroutine);
+        if (fireCoroutine != null)
+        {
+            StopCoroutine(fireCoroutine);
+        }
     }
 
     private void OnEnable()

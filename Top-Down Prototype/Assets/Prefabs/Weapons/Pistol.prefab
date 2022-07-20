@@ -229,4 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 0}
+  muzzleTransform: {fileID: 0}
+  currentAmmo: 12
+  maxAmmo: 60
+  magazineSize: 12
+  ammoPerShot: 1
+  timeBetweenShots: 0
+  reloadSpeed: 0
+  recoil: 0
+  canRapidFire: 0

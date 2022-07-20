@@ -7,14 +7,15 @@ public abstract class Weapon : MonoBehaviour
 {
     #region Fields
 
-    [Header("Prefabs")]
-    [SerializeField] protected GameObject projectilePrefab;
+    protected GameObject bullet;
     [SerializeField] protected Transform muzzleTransform;
+
     [Header("Ammunition Stats")]
     [SerializeField] protected int currentAmmo;
     [SerializeField] protected int maxAmmo;
     [SerializeField] protected int magazineSize;
     [SerializeField] protected int ammoPerShot;
+
     [Header("Gun Properties")]
     [SerializeField] protected float timeBetweenShots;
     [SerializeField] protected float reloadSpeed;
@@ -22,7 +23,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] bool canRapidFire;
     protected bool reloading = false;
     protected bool facingRight;
-    public static UnityAction<GameObject> OnPickUp;
+    protected WaitForSeconds reloadDelay;
 
     #endregion
 

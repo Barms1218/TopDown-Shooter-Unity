@@ -14,12 +14,12 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Update()
     {
-        timeToLive -= Time.deltaTime;
+        //timeToLive -= Time.deltaTime;
 
-        if (timeToLive <= 0)
-        {
-            Destroy(gameObject);
-        }
+        //if (timeToLive <= 0)
+        //{
+        //    gameObject.SetActive(false);
+        //}
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
         {
             damageable.DealDamage(damage, gameObject);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public virtual void MoveToTarget(Vector2 force)

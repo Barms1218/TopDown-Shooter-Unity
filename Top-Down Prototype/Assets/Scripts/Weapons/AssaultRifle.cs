@@ -5,14 +5,16 @@ using UnityEngine;
 public class AssaultRifle : Weapon
 {
 
-    /// <summary>
-    /// 
-    /// </summary>
+    private void Awake()
+    {
+        reloadDelay = new WaitForSeconds(reloadSpeed);    
+    }
+
     public override void Fire(Vector2 direction)
     {
         if (!reloading)
         {
-            var projectile = Instantiate(projectilePrefab, muzzleTransform.position,
+            var projectile = Instantiate(bullet, muzzleTransform.position,
                 Quaternion.identity);
             var bulletScript = projectile.GetComponent<Projectile>();
             currentAmmo -= AmmoPerShot;
@@ -30,7 +32,7 @@ public class AssaultRifle : Weapon
     protected override IEnumerator StartReload()
     {
         reloading = true;
-        yield return new WaitForSeconds(reloadSpeed);
+        yield return reloadDelay;
         if (maxAmmo > magazineSize - currentAmmo)
         {
             maxAmmo -= magazineSize - currentAmmo;
