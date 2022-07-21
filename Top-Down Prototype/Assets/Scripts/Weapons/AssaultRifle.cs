@@ -14,9 +14,14 @@ public class AssaultRifle : Weapon
     {
         if (!reloading)
         {
-            var projectile = Instantiate(bullet, muzzleTransform.position,
-                Quaternion.identity);
-            var bulletScript = projectile.GetComponent<Projectile>();
+            bullet = RiflePool.SharedInstance.GetPooledObject();
+            if (bullet != null)
+            {
+                bullet.transform.SetPositionAndRotation(
+                    muzzleTransform.position, muzzleTransform.rotation);
+                bullet.SetActive(true);
+            }
+            var bulletScript = bullet.GetComponent<Projectile>();
             currentAmmo -= AmmoPerShot;
             direction.y += Random.Range(-recoil, recoil);
             bulletScript.MoveToTarget(direction);

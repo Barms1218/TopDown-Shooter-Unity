@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonerMovement : EnemyMovement
+public class SummonerMovement : MonoBehaviour
 {
+    [SerializeField] private float speed;
+    [SerializeField] private Rigidbody2D rb2d;
+    [SerializeField] private Animator _animator;
+    [SerializeField] float maxDistance = 2f;
+    [SerializeField] float moveAgainTime = 2f;
+    [SerializeField] float moveTimer = 0;
     Vector2 newPosition;
-    float maxDistance = 2f;
-    float moveAgainTime = 2f;
-    float moveTimer = 0;
-
 
 
     // Update is called once per frame
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
         transform.position = Vector2.MoveTowards(
            transform.position, newPosition, 1f * Time.deltaTime);
         if (Time.time >= moveTimer)

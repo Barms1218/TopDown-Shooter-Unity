@@ -17,11 +17,11 @@ public class Shotgun : Weapon
     {
         for (int i = 0; i < numProjectiles; i++)
         {
-            bullet = ShotgunBulletPool.ShotGunInstance.GetPooledObject();
+            bullet = ShotgunPool.SharedInstance.GetPooledObject();
             if (bullet != null)
             {
-                bullet.transform.position = muzzleTransform.transform.position;
-                bullet.transform.rotation = muzzleTransform.transform.rotation;
+                bullet.transform.SetPositionAndRotation(
+                    muzzleTransform.position, muzzleTransform.rotation);
                 bullet.SetActive(true);
             }
 
@@ -49,9 +49,8 @@ public class Shotgun : Weapon
             currentAmmo++;
             maxAmmo--;
             PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);
-            //AudioManager.Play(AudioClipName.ShotgunReload);
             AudioManager.Play(AudioClipName.ReloadSound);
-            yield return new WaitForSeconds(reloadSpeed);
+            yield return reloadDelay;
             reloading = false;
         }
     }

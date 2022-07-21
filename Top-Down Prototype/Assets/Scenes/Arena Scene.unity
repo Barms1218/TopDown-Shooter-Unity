@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie Inmate
       objectReference: {fileID: 0}
+    - target: {fileID: 2579200449049318824, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2579200449049318825, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -206,6 +210,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1538798372819519117, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7490895233034298552, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
       propertyPath: m_Name
       value: Player
@@ -265,23 +273,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7490895233034298555, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
   m_PrefabInstance: {fileID: 502910529}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &688364954 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7490895233034298552, guid: 64952cfc2f6a5e440be8a39a6c06f352, type: 3}
-  m_PrefabInstance: {fileID: 502910529}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &688364967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 688364954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2bd2151c31f14b219513a3bbe402152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1138400001
 GameObject:
   m_ObjectHideFlags: 0
@@ -9301,7 +9292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2474475448183171314, guid: 66bb0e4ec0895594b89179a102eb6ba8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2474475448183171318, guid: 66bb0e4ec0895594b89179a102eb6ba8, type: 3}
       propertyPath: m_RootOrder

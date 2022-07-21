@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController player;
     private PlayerActions actions;
     [SerializeField] PlayerWeaponHandler weaponHandler;
     [SerializeField] PlayerMovement movement;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        player = this;
+
         actions = new PlayerActions();
         move = actions.PlayerControls.Movement;
         aim = actions.PlayerControls.Aim;

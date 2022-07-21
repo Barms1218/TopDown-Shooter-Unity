@@ -14,11 +14,11 @@ public class Pistol : Weapon
     {
         if (!reloading)
         {
-            bullet = ObjectPool.SharedInstance.GetPooledObject();
+            bullet = PistolPool.SharedInstance.GetPooledObject();
             if (bullet != null)
             {
-                bullet.transform.position = muzzleTransform.transform.position;
-                bullet.transform.rotation = muzzleTransform.transform.rotation;
+                bullet.transform.SetPositionAndRotation(
+                    muzzleTransform.position, muzzleTransform.rotation);
                 bullet.SetActive(true);
             }
             var bulletScript = bullet.GetComponent<Projectile>();

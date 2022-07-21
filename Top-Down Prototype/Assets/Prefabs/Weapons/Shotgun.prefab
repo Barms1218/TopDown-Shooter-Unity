@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5416292742939780391}
   - component: {fileID: 5416292742939780390}
   - component: {fileID: 5416292742939780384}
-  - component: {fileID: 3119880114983045342}
+  - component: {fileID: 437674891821303507}
   - component: {fileID: 7957779073280548603}
   m_Layer: 9
   m_Name: Shotgun
@@ -141,7 +141,7 @@ MonoBehaviour:
   recoil: 0.706
   canRapidFire: 0
   numProjectiles: 5
---- !u!114 &3119880114983045342
+--- !u!114 &437674891821303507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
-  amountToPool: 5
+  amountToPool: 10
 --- !u!61 &7957779073280548603
 BoxCollider2D:
   m_ObjectHideFlags: 0

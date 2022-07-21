@@ -151,8 +151,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.026462793, y: 0.57433}
-  m_Size: {x: 0.5940825, y: 0.9946284}
+  m_Offset: {x: -0.026462793, y: 0.4184311}
+  m_Size: {x: 0.5940825, y: 0.6828307}
   m_Direction: 0
 --- !u!114 &997266673648363870
 MonoBehaviour:
@@ -251,7 +251,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 928871586691316587}
   targetTransform: {fileID: 1678716295}
-  canRapidFire: 0
 --- !u!114 &5095394726920402191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,9 +360,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7490895233034298555}
     m_Modifications:
+    - target: {fileID: 3785646919390945951, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4250514611349930945, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: recoil
-      value: 0.253
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4250514611349930945, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: maxAmmo
@@ -445,6 +448,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 8846835937500090428, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c46e125ab903d804192922e885fbdd83, type: 3}
 --- !u!1 &928871586691316587 stripped
@@ -452,6 +459,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8846835937500090428, guid: c46e125ab903d804192922e885fbdd83, type: 3}
   m_PrefabInstance: {fileID: 8512442802509589335}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &807249196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928871586691316587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f2329b6198d4afab15b65f023885ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
+  amountToPool: 5
 --- !u!4 &928871586691316596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}

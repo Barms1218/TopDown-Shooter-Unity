@@ -147,6 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  timeToLive: 1
+  timeToLive: 3
   forceMagnitude: 40
-  canPenetrate: 1

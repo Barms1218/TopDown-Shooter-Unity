@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotgunBulletPool : MonoBehaviour
+public class RiflePool : MonoBehaviour
 {
-    public static ObjectPool ShotGunInstance;
+    public static RiflePool SharedInstance;
     [SerializeField] List<GameObject> pooledObjects;
     [SerializeField] GameObject objectToPool;
     [SerializeField] int amountToPool;
 
     void Awake()
     {
-        ShotGunInstance = new ObjectPool();
+        SharedInstance = this;
     }
 
     void Start()

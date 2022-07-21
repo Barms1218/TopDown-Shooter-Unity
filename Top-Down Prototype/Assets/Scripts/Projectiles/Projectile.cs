@@ -6,21 +6,13 @@ public class Projectile : MonoBehaviour
 {
     #region Fields
     
-    [SerializeField] protected int damage;
-    [SerializeField] protected float timeToLive;
-    [SerializeField] protected float forceMagnitude;
+    [SerializeField] int damage;
+    [SerializeField] float timeToLive;
+    [SerializeField] float forceMagnitude;
+    [SerializeField] Collider2D _collider;
 
     #endregion
 
-    protected virtual void Update()
-    {
-        //timeToLive -= Time.deltaTime;
-
-        //if (timeToLive <= 0)
-        //{
-        //    gameObject.SetActive(false);
-        //}
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var hitObject = collision.gameObject;
@@ -39,7 +31,7 @@ public class Projectile : MonoBehaviour
             Quaternion target = Quaternion.Euler(0, 0, angle);
 
             transform.rotation = target;
-            rigidbody2D.AddRelativeForce(force.normalized *
+            rigidbody2D.AddForce(force.normalized *
                 forceMagnitude, ForceMode2D.Impulse);
         }
 

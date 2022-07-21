@@ -11,13 +11,13 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     [SerializeField] protected GameObject gun;
     [SerializeField] Transform targetTransform;
-    [SerializeField] bool canRapidFire;
     private List<GameObject> weaponList = new List<GameObject>();
     public static UnityAction<int, int> SetAmmoCount;
     private Weapon currentWeapon;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
-    float nextTriggerPull;
+    private float nextTriggerPull;
+
     #endregion
 
     #region Properties
@@ -51,7 +51,20 @@ public class PlayerWeaponHandler : MonoBehaviour
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
-    #region Event Methods
+    #region Public Methods
+
+    public void Aim(Vector2 cursorPosition)
+    {
+        var aimDirection = Camera.main.ScreenToWorldPoint(cursorPosition);
+        _direction = aimDirection - gun.transform.position;
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+
+        if (currentWeapon != null)
+        {
+            currentWeapon.Aim(angle, targetTransform);
+        }
+
+    }
 
     private void Shoot()
     {
@@ -93,18 +106,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         currentWeapon.Reload();
     }
 
-    public void Aim(Vector2 cursorPosition)
-    {
-        var aimDirection = Camera.main.ScreenToWorldPoint(cursorPosition);
-        _direction = aimDirection - transform.position;
-        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 
-        if (currentWeapon != null)
-        {
-            currentWeapon.Aim(angle, targetTransform);
-        }
-
-    }
 
     #endregion
 

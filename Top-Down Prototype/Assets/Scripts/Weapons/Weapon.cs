@@ -25,6 +25,7 @@ public abstract class Weapon : MonoBehaviour
     protected bool facingRight;
     protected WaitForSeconds reloadDelay;
 
+    protected Vector2 shootDirection;
     #endregion
 
     #region Properties
@@ -74,10 +75,5 @@ public abstract class Weapon : MonoBehaviour
         newScale.y *= -1;
         newScale.x *= -1;
         transform.localScale = newScale;
-    }
-
-    protected virtual void AddAmmo(int _amount, string weaponName)
-    {
-
     }
 }

@@ -8,11 +8,6 @@ public class EnemyDeath : MonoBehaviour
     [SerializeField] private int points;
     public UnityEvent<int> givePoints;
 
-    void Awake()
-    {
-
-    }
-
     public void HandleDeath()
     {
                     

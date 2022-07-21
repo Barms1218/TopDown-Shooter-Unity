@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public class ShotgunPool : MonoBehaviour
 {
-    public static ObjectPool SharedInstance;
+    public static ShotgunPool SharedInstance;
     [SerializeField] List<GameObject> pooledObjects;
     [SerializeField] GameObject objectToPool;
     [SerializeField] int amountToPool;

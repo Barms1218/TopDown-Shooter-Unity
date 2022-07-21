@@ -4,38 +4,51 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] protected float speed;
-    [SerializeField] protected Rigidbody2D rb2d;
-    [SerializeField] protected Animator _animator;
-    protected GameObject _player;
+    [SerializeField] private float speed;
+    [SerializeField] private Rigidbody2D rb2d;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private float chaseDistance;
 
     protected bool facingRight = true;
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player");
-    }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (_player.transform.position.x > transform.position.x && !facingRight)
+        if (PlayerController.player != null)
         {
-            Flip();
-        }
-        else if (_player.transform.position.x < transform.position.x && facingRight)
-        {
-            Flip();
+            if (PlayerController.player.transform.position.x >
+                transform.position.x && !facingRight)
+            {
+                Flip();
+            }
+            else if (PlayerController.player.transform.position.x <
+                transform.position.x && facingRight)
+            {
+                Flip();
+            }
         }
     }
     void FixedUpdate()
     {
-        _animator.SetBool("Running", true);
-        Vector2 movePosition = transform.position;
-        movePosition = Vector2.MoveTowards(transform.position,
-            _player.transform.position, speed * Time.deltaTime);
-        rb2d.MovePosition(movePosition);
+        var _distance = Vector2.Distance(PlayerController.player.transform.position,
+            transform.position);
+        if (_distance > chaseDistance)
+        {
+            ChasePlayer();
+        }
+    }
+
+    private void ChasePlayer()
+    {
+        if (PlayerController.player != null)
+        {
+            _animator.SetBool("Running", true);
+            Vector2 movePosition = transform.position;
+            movePosition = Vector2.MoveTowards(transform.position,
+                PlayerController.player.transform.position, speed * Time.deltaTime);
+            rb2d.MovePosition(movePosition);
+        }
     }
 
     protected virtual void Flip()
