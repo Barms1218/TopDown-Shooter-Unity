@@ -42,11 +42,10 @@ GameObject:
   - component: {fileID: 5416292742939780391}
   - component: {fileID: 5416292742939780390}
   - component: {fileID: 5416292742939780384}
-  - component: {fileID: 437674891821303507}
   - component: {fileID: 7957779073280548603}
   m_Layer: 9
   m_Name: Shotgun
-  m_TagString: Weapon
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,21 +140,6 @@ MonoBehaviour:
   recoil: 0.706
   canRapidFire: 0
   numProjectiles: 5
---- !u!114 &437674891821303507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5416292742939780387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a03a3e784ce3d4e99890d88519fa4b20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObjects: []
-  objectToPool: {fileID: 9061488664235975576, guid: e5607b0107555b947ac642c91587f0df, type: 3}
-  amountToPool: 10
 --- !u!61 &7957779073280548603
 BoxCollider2D:
   m_ObjectHideFlags: 0

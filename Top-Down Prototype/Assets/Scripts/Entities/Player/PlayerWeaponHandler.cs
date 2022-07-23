@@ -11,7 +11,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     [SerializeField] protected GameObject gun;
     [SerializeField] Transform targetTransform;
-    private List<GameObject> weaponList = new List<GameObject>();
+    private List<GameObject> weaponList = new();
     public static UnityAction<int, int> SetAmmoCount;
     private Weapon currentWeapon;
     Vector2 _direction;
@@ -77,13 +77,10 @@ public class PlayerWeaponHandler : MonoBehaviour
         {
             AudioManager.Play(AudioClipName.NoAmmo);
         }
-
-
     }
 
     public IEnumerator RapidFire()
     {
-
         if (currentWeapon.CanRapidFire)
         {
             while(true)
@@ -105,8 +102,6 @@ public class PlayerWeaponHandler : MonoBehaviour
     {
         currentWeapon.Reload();
     }
-
-
 
     #endregion
 

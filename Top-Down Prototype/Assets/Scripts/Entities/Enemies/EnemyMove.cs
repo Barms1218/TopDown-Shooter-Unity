@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private Animator _animator;
     [SerializeField] private float chaseDistance;
+    private GameObject player;
+    private bool facingRight = true;
 
-    protected bool facingRight = true;
-
-
+    private void Start()
+    {
+        player = PlayerController.player.gameObject;
+    }
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (PlayerController.player != null)
+        if (player != null)
         {
-            if (PlayerController.player.transform.position.x >
+            if (player.transform.position.x >
                 transform.position.x && !facingRight)
             {
                 Flip();
             }
-            else if (PlayerController.player.transform.position.x <
+            else if (player.transform.position.x <
                 transform.position.x && facingRight)
             {
                 Flip();
@@ -31,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        var _distance = Vector2.Distance(PlayerController.player.transform.position,
+        var _distance = Vector2.Distance(player.transform.position,
             transform.position);
         if (_distance > chaseDistance)
         {
@@ -46,7 +49,7 @@ public class EnemyMovement : MonoBehaviour
             _animator.SetBool("Running", true);
             Vector2 movePosition = transform.position;
             movePosition = Vector2.MoveTowards(transform.position,
-                PlayerController.player.transform.position, speed * Time.deltaTime);
+                player.transform.position, speed * Time.deltaTime);
             rb2d.MovePosition(movePosition);
         }
     }

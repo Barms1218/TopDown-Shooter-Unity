@@ -1,26 +1,29 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolPool : MonoBehaviour
+public class BloodPool : MonoBehaviour
 {
-    public static PistolPool SharedInstance;
+    public static BloodPool SharedInstance;
     private List<GameObject> pooledObjects;
-    [SerializeField] GameObject objectToPool;
-    [SerializeField] int amountToPool;
+    [SerializeField] private GameObject objectToPool;
+    [SerializeField] private int amountToPool;
 
-    void Awake()
+
+    private void Awake()
     {
-        SharedInstance = this;
+        SharedInstance = this;    
+    }
 
+    private void Start()
+    {
         pooledObjects = new List<GameObject>();
-        GameObject tmp;
+        GameObject blood;
         for (int i = 0; i < amountToPool; i++)
         {
-            tmp = Instantiate(objectToPool);
-            tmp.SetActive(false);
-            pooledObjects.Add(tmp);
+            blood = Instantiate(objectToPool);
+            blood.SetActive(false);
+            pooledObjects.Add(blood);
         }
     }
 

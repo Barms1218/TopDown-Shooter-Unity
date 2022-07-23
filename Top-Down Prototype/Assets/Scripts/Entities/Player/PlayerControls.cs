@@ -37,15 +37,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""f8ac4d20-dfca-43f0-9059-7592dfe60c0e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""fbc2926e-d840-4685-ae9b-73493a46f885"",
@@ -94,6 +85,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""name"": ""Equip Weapon 3"",
                     ""type"": ""Button"",
                     ""id"": ""4d2748d7-13f3-408a-a27a-69926ca90caa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7fa01d2-f6ae-4c40-9b2b-e6197511aec2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Tap"",
@@ -164,28 +164,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e57cbc0b-fd0d-479b-a763-9b0b3cb26359"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""991ecb88-a4ba-43d1-95e9-86a5513c8f35"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -320,6 +298,28 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Equip Weapon 3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2357cdde-991b-4832-b6e7-7630b75a808d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4c7705f-b06e-47ca-bd1e-3c49c48d45a7"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -357,13 +357,13 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Movement = m_PlayerControls.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerControls_Dash = m_PlayerControls.FindAction("Dash", throwIfNotFound: true);
         m_PlayerControls_Shoot = m_PlayerControls.FindAction("Shoot", throwIfNotFound: true);
         m_PlayerControls_Reload = m_PlayerControls.FindAction("Reload", throwIfNotFound: true);
         m_PlayerControls_Aim = m_PlayerControls.FindAction("Aim", throwIfNotFound: true);
         m_PlayerControls_EquipWeapon1 = m_PlayerControls.FindAction("Equip Weapon 1", throwIfNotFound: true);
         m_PlayerControls_EquipWeapon2 = m_PlayerControls.FindAction("Equip Weapon 2", throwIfNotFound: true);
         m_PlayerControls_EquipWeapon3 = m_PlayerControls.FindAction("Equip Weapon 3", throwIfNotFound: true);
+        m_PlayerControls_Dash = m_PlayerControls.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -424,25 +424,25 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControls;
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Movement;
-    private readonly InputAction m_PlayerControls_Dash;
     private readonly InputAction m_PlayerControls_Shoot;
     private readonly InputAction m_PlayerControls_Reload;
     private readonly InputAction m_PlayerControls_Aim;
     private readonly InputAction m_PlayerControls_EquipWeapon1;
     private readonly InputAction m_PlayerControls_EquipWeapon2;
     private readonly InputAction m_PlayerControls_EquipWeapon3;
+    private readonly InputAction m_PlayerControls_Dash;
     public struct PlayerControlsActions
     {
         private @PlayerActions m_Wrapper;
         public PlayerControlsActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerControls_Movement;
-        public InputAction @Dash => m_Wrapper.m_PlayerControls_Dash;
         public InputAction @Shoot => m_Wrapper.m_PlayerControls_Shoot;
         public InputAction @Reload => m_Wrapper.m_PlayerControls_Reload;
         public InputAction @Aim => m_Wrapper.m_PlayerControls_Aim;
         public InputAction @EquipWeapon1 => m_Wrapper.m_PlayerControls_EquipWeapon1;
         public InputAction @EquipWeapon2 => m_Wrapper.m_PlayerControls_EquipWeapon2;
         public InputAction @EquipWeapon3 => m_Wrapper.m_PlayerControls_EquipWeapon3;
+        public InputAction @Dash => m_Wrapper.m_PlayerControls_Dash;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -455,9 +455,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMovement;
-                @Dash.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
                 @Shoot.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShoot;
@@ -476,6 +473,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @EquipWeapon3.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnEquipWeapon3;
                 @EquipWeapon3.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnEquipWeapon3;
                 @EquipWeapon3.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnEquipWeapon3;
+                @Dash.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -483,9 +483,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
@@ -504,6 +501,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @EquipWeapon3.started += instance.OnEquipWeapon3;
                 @EquipWeapon3.performed += instance.OnEquipWeapon3;
                 @EquipWeapon3.canceled += instance.OnEquipWeapon3;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -529,12 +529,12 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     public interface IPlayerControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnEquipWeapon1(InputAction.CallbackContext context);
         void OnEquipWeapon2(InputAction.CallbackContext context);
         void OnEquipWeapon3(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

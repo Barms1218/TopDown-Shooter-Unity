@@ -30,10 +30,10 @@ public class PlayerController : MonoBehaviour
         actions.PlayerControls.Shoot.canceled += _ => StopFiring();
         actions.PlayerControls.Reload.started += _ => weaponHandler.Reload();
 
-        // input for dash ability
-        actions.PlayerControls.Dash.started += _ => movement.OnDash();
+        //Dash input
+        actions.PlayerControls.Dash.started += _ => movement.Dash();
 
-        //Swap the player's weapon
+        // Inputs for weapon swap
         actions.PlayerControls.EquipWeapon1.started += weaponSwap.TryEquipWeaponOne;
         actions.PlayerControls.EquipWeapon2.started += weaponSwap.TryEquipWeaponTwo;
         actions.PlayerControls.EquipWeapon3.started += weaponSwap.TryEquipWeaponThree;

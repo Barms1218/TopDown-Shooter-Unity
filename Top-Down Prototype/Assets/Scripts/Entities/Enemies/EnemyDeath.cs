@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public class EnemyDeath : MonoBehaviour
 {
     [SerializeField] private int points;
-    public UnityEvent<int> givePoints;
+    public static UnityAction<int> GivePoints;
+    public UnityEvent liveAgain;
 
     public void HandleDeath()
     {
@@ -15,8 +16,16 @@ public class EnemyDeath : MonoBehaviour
         {
             _animator?.SetTrigger("Dying");
         }
-        givePoints.Invoke(points);
-        Destroy(gameObject, 1.0f);
+        GivePoints?.Invoke(points);
+        StartCoroutine(Die());
         AudioManager.Play(AudioClipName.ZombieInmateDeath);
+    }
+
+    private IEnumerator Die()
+    {
+
+        yield return new WaitForSeconds(1f);
+        liveAgain.Invoke();
+        gameObject.SetActive(false);
     }
 }

@@ -16,7 +16,8 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var hitObject = collision.gameObject;
-        if (hitObject.TryGetComponent(out IDamageable damageable))
+        if (hitObject.TryGetComponent(out IDamageable damageable)
+            && !hitObject.CompareTag(gameObject.tag))
         {
             damageable.DealDamage(damage, gameObject);
         }

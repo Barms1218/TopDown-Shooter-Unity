@@ -20,6 +20,7 @@ public class Pistol : Weapon
                 bullet.transform.SetPositionAndRotation(
                     muzzleTransform.position, muzzleTransform.rotation);
                 bullet.SetActive(true);
+                bullet.tag = gameObject.tag;
             }
             var bulletScript = bullet.GetComponent<Projectile>();
             currentAmmo -= 1;

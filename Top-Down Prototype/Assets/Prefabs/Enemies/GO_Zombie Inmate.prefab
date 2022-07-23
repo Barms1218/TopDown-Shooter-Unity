@@ -19,12 +19,12 @@ GameObject:
   - component: {fileID: 404427998}
   - component: {fileID: 1401529239}
   m_Layer: 8
-  m_Name: Zombie Inmate
+  m_Name: GO_Zombie Inmate
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2579200449049318825
 Transform:
   m_ObjectHideFlags: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   speed: 3
   rb2d: {fileID: 2579200449049318830}
   _animator: {fileID: 1401529239}
+  chaseDistance: 0
 --- !u!114 &5294084347439653064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  bloodParticle: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -199,6 +199,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5294084347439653064}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &847067256608029376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,20 +224,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 5
-  givePoints:
+  liveAgain:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7732697643445012712, guid: 846f1e1b85fe140eb9fd0ab834abe92f, type: 3}
-        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
-        m_MethodName: UpdatePointsText
-        m_Mode: 0
+      - m_Target: {fileID: 1335274637457500876}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5294084347439653064}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &404427998
 MonoBehaviour:

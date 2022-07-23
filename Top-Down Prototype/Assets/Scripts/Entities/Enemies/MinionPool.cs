@@ -1,27 +1,32 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolPool : MonoBehaviour
+public class MinionPool : MonoBehaviour
 {
-    public static PistolPool SharedInstance;
+    public static MinionPool SharedInstance;
     private List<GameObject> pooledObjects;
-    [SerializeField] GameObject objectToPool;
+    [SerializeField] GameObject minionObject;
     [SerializeField] int amountToPool;
 
-    void Awake()
+
+    private void Awake()
     {
         SharedInstance = this;
-
         pooledObjects = new List<GameObject>();
-        GameObject tmp;
+
+
         for (int i = 0; i < amountToPool; i++)
         {
-            tmp = Instantiate(objectToPool);
-            tmp.SetActive(false);
-            pooledObjects.Add(tmp);
+            var minion = Instantiate(minionObject);
+            pooledObjects.Add(minion);
+            minion.SetActive(false);
         }
+    }
+
+    private void Start()
+    {
+
     }
 
     public GameObject GetPooledObject()
@@ -33,6 +38,7 @@ public class PistolPool : MonoBehaviour
                 return pooledObjects[i];
             }
         }
+
         return null;
     }
 }

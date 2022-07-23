@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "f8ac4d20-dfca-43f0-9059-7592dfe60c0e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Shoot",
                     "type": "Button",
                     "id": "fbc2926e-d840-4685-ae9b-73493a46f885",
@@ -72,6 +63,15 @@
                     "name": "Equip Weapon 3",
                     "type": "Button",
                     "id": "4d2748d7-13f3-408a-a27a-69926ca90caa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "c7fa01d2-f6ae-4c40-9b2b-e6197511aec2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Tap",
@@ -142,28 +142,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e57cbc0b-fd0d-479b-a763-9b0b3cb26359",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "991ecb88-a4ba-43d1-95e9-86a5513c8f35",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -296,6 +274,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Equip Weapon 3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2357cdde-991b-4832-b6e7-7630b75a808d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4c7705f-b06e-47ca-bd1e-3c49c48d45a7",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
