@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class SetTheCursor : MonoBehaviour
 {
+    public static SetTheCursor cursor;
     [SerializeField] float xValue;
     [SerializeField] float yValue;
     Vector2 position;
@@ -13,6 +14,7 @@ public class SetTheCursor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cursor = this;
         Cursor.visible = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }

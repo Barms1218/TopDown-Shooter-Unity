@@ -10,6 +10,7 @@ public abstract class Weapon : MonoBehaviour
     protected GameObject bullet;
     [SerializeField] protected Transform muzzleTransform;
 
+
     [Header("Ammunition Stats")]
     [SerializeField] protected int currentAmmo;
     [SerializeField] protected int maxAmmo;
@@ -37,6 +38,12 @@ public abstract class Weapon : MonoBehaviour
     public bool CanRapidFire => canRapidFire;
 
     #endregion
+
+
+    protected virtual void Awake()
+    {
+        reloadDelay = new WaitForSeconds(reloadSpeed);
+    }
 
     public void Aim(float angle, Transform targetTransform)
     {
@@ -73,6 +80,7 @@ public abstract class Weapon : MonoBehaviour
         Vector3 newScale = transform.localScale;
         newScale.y *= -1;
         newScale.x *= -1;
+
         transform.localScale = newScale;
     }
 

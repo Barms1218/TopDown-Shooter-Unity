@@ -18,13 +18,14 @@ GameObject:
   - component: {fileID: 847067256608029376}
   - component: {fileID: 404427998}
   - component: {fileID: 1401529239}
+  - component: {fileID: 1912698520}
   m_Layer: 8
   m_Name: GO_Zombie Inmate
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2579200449049318825
 Transform:
   m_ObjectHideFlags: 0
@@ -60,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -141,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc78a25e6f5ac408cbc4abbd10ce0be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1
   rb2d: {fileID: 2579200449049318830}
   _animator: {fileID: 1401529239}
   chaseDistance: 0
@@ -286,3 +287,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1912698520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 21492ffb00000000d765133ab30ce9d3
+  m_ShapePath:
+  - {x: -0.32331514, y: -0.0005168915, z: 0}
+  - {x: -0.34054327, y: 0.969429, z: 0}
+  - {x: 0.27163124, y: 0.9780431, z: 0}
+  - {x: 0.27163124, y: 0.016710281, z: 0}
+  - {x: -0.0007658005, y: -0.013768196, z: 0}
+  m_ShapePathHash: -2016855217
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -45610

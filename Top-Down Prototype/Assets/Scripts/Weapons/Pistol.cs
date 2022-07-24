@@ -5,10 +5,7 @@ using UnityEngine;
 public class Pistol : Weapon
 {
 
-    private void Awake()
-    {
-        reloadDelay = new WaitForSeconds(reloadSpeed);    
-    }
+
 
     public override void Fire(Vector2 direction)
     {

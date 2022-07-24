@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,9 +198,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
   muzzleTransform: {fileID: 1041894282683477753}
+  currentAmmo: 0
+  maxAmmo: 0
+  magazineSize: 0
+  ammoPerShot: 0
+  timeBetweenShots: 0
+  reloadSpeed: 0
+  recoil: 0
+  canRapidFire: 0
 --- !u!1 &7283325689304226780
 GameObject:
   m_ObjectHideFlags: 0

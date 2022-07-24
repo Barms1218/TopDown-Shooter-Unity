@@ -17,12 +17,6 @@ public class EntityTakeDamage : MonoBehaviour, IDamageable
         health = GetComponent<IHaveHealth>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void DealDamage(float amount, GameObject damageSource)
     {
         if (armor <= 0)

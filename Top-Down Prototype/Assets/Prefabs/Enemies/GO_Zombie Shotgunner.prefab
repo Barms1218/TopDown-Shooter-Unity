@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -9072447316620631390}
   - component: {fileID: 1768611672242997327}
   - component: {fileID: 8699948889711128844}
+  - component: {fileID: 6673453120967635622}
   m_Layer: 8
   m_Name: GO_Zombie Shotgunner
   m_TagString: Enemy
@@ -62,7 +63,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -253,21 +254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 15
-  givePoints:
+  liveAgain:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7732697643445012712, guid: 846f1e1b85fe140eb9fd0ab834abe92f, type: 3}
-        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
-        m_MethodName: UpdatePointsText
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1768611672242997327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +293,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6673453120967635622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699948889711129075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 21492ffb00000000d765133ab30ce9d3
+  m_ShapePath:
+  - {x: -0.32331514, y: -0.0005168915, z: 0}
+  - {x: -0.34054327, y: 0.969429, z: 0}
+  - {x: 0.27163124, y: 0.9780431, z: 0}
+  - {x: 0.27163124, y: 0.016710281, z: 0}
+  - {x: -0.0007658005, y: -0.013768196, z: 0}
+  m_ShapePathHash: -2016855217
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -122288
 --- !u!1001 &6169604220452868149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,6 +328,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8699948889711129079}
     m_Modifications:
+    - target: {fileID: 4939106545695439771, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939106545695439771, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5204024822327154203, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
       propertyPath: m_RootOrder
       value: 0
