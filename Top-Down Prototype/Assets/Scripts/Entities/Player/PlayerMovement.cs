@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject cursor;
     [SerializeField] float speed;
     [SerializeField] Rigidbody2D _rigidbody2D;
     [SerializeField] Animator _animator;
@@ -27,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
 
-        if (cursor.transform.position.x < transform.position.x && facingRight)
+        if (SetTheCursor.cursor.transform.position.x < transform.position.x && facingRight)
         {
             Flip();
         }
-        else if (cursor.transform.position.x > transform.position.x && !facingRight)
+        else if (SetTheCursor.cursor.transform.position.x > transform.position.x && !facingRight)
         {
             Flip();
         }

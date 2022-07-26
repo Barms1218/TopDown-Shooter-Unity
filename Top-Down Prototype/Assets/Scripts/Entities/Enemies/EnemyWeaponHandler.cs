@@ -7,7 +7,7 @@ public class EnemyWeaponHandler : MonoBehaviour
     [SerializeField] GameObject gun;
     [SerializeField] float attackRange;
     [SerializeField] Weapon weapon;
-    private GameObject player;
+    private Transform playerTransform;
     float nextTriggerPull;
     Vector2 aimDirection;
 
@@ -16,18 +16,18 @@ public class EnemyWeaponHandler : MonoBehaviour
     private void Update()
     {
         Aim();
-        player = PlayerController.player.gameObject;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Aim()
     {
-        if (player != null)
+        if (playerTransform != null)
         {
-            aimDirection = player.transform.position - gun.transform.position;
+            aimDirection = playerTransform.position - gun.transform.position;
             float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-            weapon.Aim(angle, player.transform);
+            weapon.Aim(angle, playerTransform.position);
 
-            var _distance = Vector2.Distance(player.transform.position, transform.position);
+            var _distance = Vector2.Distance(playerTransform.position, transform.position);
             if (_distance < attackRange && CanFire)
             {
                 OnFire();

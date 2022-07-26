@@ -129,8 +129,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01205492, y: 0.45320654}
-  m_Size: {x: 0.59198666, y: 0.92599964}
+  m_Offset: {x: -0.01205492, y: 0.49007225}
+  m_Size: {x: 0.59198666, y: 0.99973106}
   m_Direction: 0
 --- !u!114 &8144528661079044507
 MonoBehaviour:
@@ -320,7 +320,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: -122288
+  m_InstanceId: -80954
 --- !u!1001 &6169604220452868149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -384,7 +384,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5340181779401697177, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
 --- !u!114 &2136605463380756009 stripped
 MonoBehaviour:

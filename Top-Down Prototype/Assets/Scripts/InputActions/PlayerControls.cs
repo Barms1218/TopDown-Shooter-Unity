@@ -98,6 +98,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Tap"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause Game"",
+                    ""type"": ""Button"",
+                    ""id"": ""029fe054-bd75-410c-99a1-8f67660869c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,28 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9c1d085-ce54-4782-8cc9-ed689b531b0a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""894f0d3b-d650-4bd0-9baf-a057ad721645"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause Game"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -364,6 +395,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_PlayerControls_EquipWeapon2 = m_PlayerControls.FindAction("Equip Weapon 2", throwIfNotFound: true);
         m_PlayerControls_EquipWeapon3 = m_PlayerControls.FindAction("Equip Weapon 3", throwIfNotFound: true);
         m_PlayerControls_Dash = m_PlayerControls.FindAction("Dash", throwIfNotFound: true);
+        m_PlayerControls_PauseGame = m_PlayerControls.FindAction("Pause Game", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -431,6 +463,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_EquipWeapon2;
     private readonly InputAction m_PlayerControls_EquipWeapon3;
     private readonly InputAction m_PlayerControls_Dash;
+    private readonly InputAction m_PlayerControls_PauseGame;
     public struct PlayerControlsActions
     {
         private @PlayerActions m_Wrapper;
@@ -443,6 +476,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @EquipWeapon2 => m_Wrapper.m_PlayerControls_EquipWeapon2;
         public InputAction @EquipWeapon3 => m_Wrapper.m_PlayerControls_EquipWeapon3;
         public InputAction @Dash => m_Wrapper.m_PlayerControls_Dash;
+        public InputAction @PauseGame => m_Wrapper.m_PlayerControls_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -476,6 +510,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDash;
+                @PauseGame.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -504,6 +541,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -536,5 +576,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnEquipWeapon2(InputAction.CallbackContext context);
         void OnEquipWeapon3(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

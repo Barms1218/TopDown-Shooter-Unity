@@ -5,7 +5,7 @@ using UnityEngine;
 public class AssaultRifle : Weapon
 {
 
-    private void Awake()
+    protected override void Awake()
     {
         reloadDelay = new WaitForSeconds(reloadSpeed);    
     }
@@ -27,11 +27,6 @@ public class AssaultRifle : Weapon
             bulletScript.MoveToTarget(direction);
             AudioManager.Play(AudioClipName.AR_Fire);
         }
-    }
-
-    public override void SpecialAttack()
-    {
-        return;
     }
 
     protected override IEnumerator StartReload()

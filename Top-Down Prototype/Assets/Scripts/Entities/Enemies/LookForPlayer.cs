@@ -8,11 +8,12 @@ public class LookForPlayer : MonoBehaviour
     [SerializeField] int sightRange = 7;
     [SerializeField] float maxDistance = 2f;
     [SerializeField] float moveAgainTime = 2f;
+    [SerializeField] Collider2D _collider;
     Vector3 newPosition;
     GameObject _player;
     
     LayerMask detectionLayer;
-    Collider2D _collider;
+
     
     float moveTimer = 0;
     
@@ -22,9 +23,8 @@ public class LookForPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = PlayerController.player.gameObject;
         detectionLayer = LayerMask.GetMask("Default", "Player");
-        _collider = GetComponent<Collider2D>();
         ChangePosition();
     }
 
@@ -85,13 +85,13 @@ public class LookForPlayer : MonoBehaviour
                     SawPlayer?.Invoke();
                 }
             }
-            else if (hit2d.collider != null && !hit2d.collider.gameObject.CompareTag("Player"))
-            {
-                if (seePlayer)
-                {
-                    seePlayer = false;
-                }
-            }
+            //else if (hit2d.collider != null && !hit2d.collider.gameObject.CompareTag("Player"))
+            //{
+            //    if (seePlayer)
+            //    {
+            //        seePlayer = false;
+            //    }
+            //}
             Debug.DrawRay(_collider.bounds.center, _direction * sightRange, lineColor);
             
         }

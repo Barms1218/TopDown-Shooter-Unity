@@ -8,7 +8,7 @@ public class Shotgun : Weapon
     private bool firing;
 
 
-    private void Awake()
+    protected override void Awake()
     {
         reloadDelay = new WaitForSeconds(reloadSpeed);
     }
@@ -53,10 +53,5 @@ public class Shotgun : Weapon
             yield return reloadDelay;
             reloading = false;
         }
-    }
-
-    public override void SpecialAttack()
-    {
-
     }
 }

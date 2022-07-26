@@ -44,7 +44,7 @@ public class EnemyMove : MonoBehaviour
 
     private void ChasePlayer()
     {
-        if (PlayerController.player != null)
+        if (player != null)
         {
             _animator.SetBool("Running", true);
             Vector2 movePosition = transform.position;

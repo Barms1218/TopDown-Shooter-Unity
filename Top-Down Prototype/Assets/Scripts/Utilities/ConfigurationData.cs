@@ -256,6 +256,7 @@ public class ConfigurationData
         }
         catch (Exception e)
         {
+            Debug.Log(e);
         }
         finally
         {

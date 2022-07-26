@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,11 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var hitObject = collision.gameObject;
+        ProcessHit(collision.gameObject);
+    }
+
+    private void ProcessHit(GameObject hitObject)
+    {
         if (hitObject.TryGetComponent(out IDamageable damageable)
             && !hitObject.CompareTag(gameObject.tag))
         {

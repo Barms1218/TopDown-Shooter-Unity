@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerWeaponHandler weaponHandler;
     [SerializeField] PlayerMovement movement;
     [SerializeField] WeaponSwap weaponSwap;
-    [SerializeField] SetTheCursor setTheCursor;
+
 
     Coroutine fireCoroutine;
 
+    // Vector Input Actions
     InputAction move;
-    InputAction aim;
 
     private void Awake()
     {
@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
         actions = new PlayerActions();
         move = actions.PlayerControls.Movement;
-        aim = actions.PlayerControls.Aim;
 
         // inputs for player weapon
         actions.PlayerControls.Shoot.started += _ => StartFiring();
@@ -37,17 +36,16 @@ public class PlayerController : MonoBehaviour
         actions.PlayerControls.EquipWeapon1.started += weaponSwap.TryEquipWeaponOne;
         actions.PlayerControls.EquipWeapon2.started += weaponSwap.TryEquipWeaponTwo;
         actions.PlayerControls.EquipWeapon3.started += weaponSwap.TryEquipWeaponThree;
+
+        
     }
-    private void Update()
-    {
-        setTheCursor.ChangeCursorPosition(aim.ReadValue<Vector2>());
-        weaponHandler.Aim(aim.ReadValue<Vector2>());
-    }
+
     private void FixedUpdate()
     {
         movement.Movement(move.ReadValue<Vector2>());
 
     }
+
 
     void StartFiring()
     {

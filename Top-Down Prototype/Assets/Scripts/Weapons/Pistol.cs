@@ -5,8 +5,6 @@ using UnityEngine;
 public class Pistol : Weapon
 {
 
-
-
     public override void Fire(Vector2 direction)
     {
         if (!reloading)
@@ -26,11 +24,6 @@ public class Pistol : Weapon
             AudioManager.Play(AudioClipName.PistolShot);
             Debug.Log(currentAmmo);
         }
-    }
-
-    public override void SpecialAttack()
-    {
-
     }
 
     protected override IEnumerator StartReload()

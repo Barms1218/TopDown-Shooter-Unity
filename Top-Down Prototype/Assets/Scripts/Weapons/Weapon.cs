@@ -45,13 +45,13 @@ public abstract class Weapon : MonoBehaviour
         reloadDelay = new WaitForSeconds(reloadSpeed);
     }
 
-    public void Aim(float angle, Transform targetTransform)
+    public void Aim(float angle, Vector2 targetPosition)
     {
-        if (targetTransform.position.x < transform.position.x && !facingRight)
+        if (targetPosition.x < transform.position.x && !facingRight)
         {
             Flip();
         }
-        else if (targetTransform.position.x > transform.position.x && facingRight)
+        else if (targetPosition.x > transform.position.x && facingRight)
         {
             Flip();
         }
@@ -62,9 +62,6 @@ public abstract class Weapon : MonoBehaviour
 
     public abstract void Fire(Vector2 direction);
 
-
-    public abstract void SpecialAttack();
-
     public virtual void Reload()
     {
         if (!reloading)
@@ -72,9 +69,10 @@ public abstract class Weapon : MonoBehaviour
             StartCoroutine(StartReload());
         }
     }
+
     protected abstract IEnumerator StartReload();
 
-    public void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
         Vector3 newScale = transform.localScale;

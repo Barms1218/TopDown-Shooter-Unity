@@ -8,12 +8,11 @@ public class Interact : MonoBehaviour
 {
     private LayerMask interactLayer;
     public static UnityAction<bool> OnRayCast;
-    private Collider2D playerCollider;
+    [SerializeField] private Collider2D playerCollider;
 
     private void Awake()
     {
         interactLayer = LayerMask.GetMask("Interactables");
-        playerCollider = GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()
@@ -29,9 +28,9 @@ public class Interact : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(
                 playerCollider.bounds.center, direction, 2.5f, interactLayer);
             var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
-            if (Input.GetKeyDown(KeyCode.E) && interactable != null)
+            if (TryGetComponent(out interactable))
             {
-                hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+                interactable.Interact();
             }
             OnRayCast?.Invoke(true);
             lineColor = Color.green;
