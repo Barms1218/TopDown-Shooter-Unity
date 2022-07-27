@@ -19,8 +19,12 @@ public class SetTheCursor : MonoBehaviour
         inputActions = new CursorActions();
         cursor = this;
         Cursor.visible = false;
-        playerTransform = PlayerController.player.transform;
         move = inputActions.CursorAction.Move;
+    }
+
+    private void Start()
+    {
+        playerTransform = PlayerController.player.transform;
     }
 
     private void Update()

@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] PlayerController controller;
     [SerializeField] float speed;
-    [SerializeField] Rigidbody2D _rigidbody2D;
-    [SerializeField] Animator _animator;
     [SerializeField] float dashTime;
     [SerializeField] float dashCoolDown;
     private bool facingRight = true;
@@ -36,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (moveDir.magnitude != 0)
         {
-            _animator.SetBool("Running", true);
+            controller.Animator.SetBool("Running", true);
         }
     }
 
@@ -44,12 +43,12 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDir = input;
 
-        var velocity = _rigidbody2D.velocity;
+        var velocity = controller.Rigidbody2D.velocity;
 
         velocity.x = moveDir.x * speed;
         velocity.y = moveDir.y * speed;
-        _animator.SetBool("Running", true);
-        _rigidbody2D.velocity = velocity;
+        controller.Animator.SetBool("Running", true);
+        controller.Rigidbody2D.velocity = velocity;
 
 
     }

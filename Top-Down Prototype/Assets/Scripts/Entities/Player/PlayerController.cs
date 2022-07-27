@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController player;
     private PlayerActions actions;
+    [SerializeField] private Rigidbody2D rb2d;
+    [SerializeField] private Collider2D _collider2D;
+    [SerializeField] private Animator _animator;
     [SerializeField] PlayerWeaponHandler weaponHandler;
     [SerializeField] PlayerMovement movement;
     [SerializeField] WeaponSwap weaponSwap;
@@ -16,6 +19,11 @@ public class PlayerController : MonoBehaviour
 
     // Vector Input Actions
     InputAction move;
+
+
+    public Rigidbody2D Rigidbody2D => rb2d;
+    public Collider2D Collider => _collider2D;
+    public Animator Animator => _animator;
 
     private void Awake()
     {

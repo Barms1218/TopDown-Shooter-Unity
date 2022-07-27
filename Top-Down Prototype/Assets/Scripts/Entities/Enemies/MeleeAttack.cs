@@ -9,22 +9,20 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private int attackStrength;
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
-    private float nextAttack;
     private GameObject player;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = PlayerController.player.gameObject;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var hitObject = collision.gameObject;
-        TryToDamage(hitObject);
+        ProcessHit(collision.gameObject);
     }
 
-    private void TryToDamage(GameObject hitObject)
+    private void ProcessHit(GameObject hitObject)
     {
         if (hitObject.TryGetComponent(out IDamageable damageable) &&
             !hitObject.CompareTag(gameObject.tag))

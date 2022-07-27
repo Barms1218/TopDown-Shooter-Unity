@@ -15,6 +15,7 @@ public class EnemyMove : MonoBehaviour
     {
         player = PlayerController.player.gameObject;
     }
+
     // Update is called once per frame
     protected virtual void Update()
     {

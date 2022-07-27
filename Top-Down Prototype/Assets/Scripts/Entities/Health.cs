@@ -8,6 +8,7 @@ public class Health : MonoBehaviour, IHaveHealth
 
     [SerializeField] private int maxHealth = 100;
     [SerializeField] UnityEvent onDeath;
+    [SerializeField] HealthBar healthBar;
     private float _health;
 
     public int MaxHealth => maxHealth;
@@ -21,12 +22,15 @@ public class Health : MonoBehaviour, IHaveHealth
     private void Awake()
     {
         _health = maxHealth;
+        healthBar.MaxValue = maxHealth;
+        healthBar.CurrentValue = maxHealth;
     }
     public void ReduceHealth(float amount, GameObject damageSource)
     {
         if (_health > 0)
         {
             _health -= amount;
+            healthBar.CurrentValue = _health;
             if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy"))
             {
                 var bloodSplatter = BloodPool.SharedInstance.GetPooledObject();
