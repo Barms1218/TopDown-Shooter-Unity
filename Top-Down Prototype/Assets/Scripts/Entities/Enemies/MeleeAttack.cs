@@ -9,6 +9,7 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private int attackStrength;
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
+    [SerializeField] EnemyMove moveComponent;
     private GameObject player;
 
     // Start is called before the first frame update
@@ -28,15 +29,21 @@ public class MeleeAttack : MonoBehaviour
             !hitObject.CompareTag(gameObject.tag))
         {
             damageable.DealDamage(damage, gameObject);
-            var pushDirection = transform.position - hitObject.transform.position;
-            if (TryGetComponent(out Rigidbody2D _body2d))
-            {
-                _body2d?.AddForce(pushDirection.normalized * attackStrength, ForceMode2D.Impulse);
-            }
+            Debug.Log(damage + "damage dealt to target");
+            StartCoroutine(Stagger());
         }
         else
         {
             Debug.Log("I can't damage that target");
         }
+    }
+
+    private IEnumerator Stagger()
+    {
+        moveComponent.enabled = false;
+
+        yield return new WaitForSeconds(1f);
+
+        moveComponent.enabled = true;
     }
 }

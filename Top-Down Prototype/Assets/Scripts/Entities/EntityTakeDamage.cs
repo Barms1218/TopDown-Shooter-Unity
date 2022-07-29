@@ -6,26 +6,31 @@ public class EntityTakeDamage : MonoBehaviour, IDamageable
 {
     [SerializeField] private int armor;
     [SerializeField] private string damageResistance;
-    IHaveHealth health;
+    [SerializeField] Health health;
+    [SerializeField] bool canTakeDamage = true;
 
 
     public int Armor => armor;
     public string DamageResistance => damageResistance;
-
-    void Awake()
+    public bool CanTakeDamage
     {
-        health = GetComponent<IHaveHealth>();
+        get => canTakeDamage;
+        set { canTakeDamage = value; }
     }
 
     public void DealDamage(float amount, GameObject damageSource)
     {
-        if (armor <= 0)
+        if (canTakeDamage)
         {
-            health.ReduceHealth(amount, damageSource);
+            if (armor <= 0)
+            {
+                health.ReduceHealth(amount, damageSource);
+            }
+            else
+            {
+                armor--;
+            }
         }
-        else
-        {
-            armor--;
-        }
+        Debug.Log(amount + "damage taken");
     }
 }

@@ -161,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armor: 0
   damageResistance: None
+  health: {fileID: 4001802063013996520}
 --- !u!114 &4001802063013996520
 MonoBehaviour:
   m_ObjectHideFlags: 0

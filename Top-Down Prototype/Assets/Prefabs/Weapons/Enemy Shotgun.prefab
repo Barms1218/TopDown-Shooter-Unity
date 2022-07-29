@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3673212464124785664, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5416292742926382952, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.8
@@ -21,12 +25,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416292742939780387, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
       propertyPath: m_Name
-      value: Shotgun Variant
+      value: Enemy Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 5416292742939780387, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5416292742939780390, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5416292742939780391, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
       propertyPath: m_RootOrder
       value: 0

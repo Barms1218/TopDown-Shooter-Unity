@@ -23,6 +23,7 @@ public class Shotgun : Weapon
                 bullet.transform.SetPositionAndRotation(
                     muzzleTransform.position, muzzleTransform.rotation);
                 bullet.SetActive(true);
+                bullet.tag = gameObject.tag;
             }
 
             var projectileScript = bullet.GetComponent<Projectile>();

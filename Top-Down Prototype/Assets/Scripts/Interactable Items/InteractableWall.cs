@@ -5,8 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class InteractableWall : MonoBehaviour, IInteractable
 {
+    [SerializeField] Health health;
+
     public void Interact()
     {
-        Destroy(gameObject);
+        health.RestoreHealth(10);
     }
 }

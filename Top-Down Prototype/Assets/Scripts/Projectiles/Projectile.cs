@@ -10,14 +10,15 @@ public class Projectile : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] float timeToLive;
     [SerializeField] float forceMagnitude;
-    [SerializeField] Collider2D _collider;
+    [SerializeField] TrailRenderer trail;
 
     #endregion
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         ProcessHit(collision.gameObject);
     }
+
 
     private void ProcessHit(GameObject hitObject)
     {
@@ -27,6 +28,7 @@ public class Projectile : MonoBehaviour
             damageable.DealDamage(damage, gameObject);
         }
         gameObject.SetActive(false);
+        trail.Clear();
     }
 
     public virtual void MoveToTarget(Vector2 force)

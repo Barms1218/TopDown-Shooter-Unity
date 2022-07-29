@@ -13,14 +13,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerWeaponHandler weaponHandler;
     [SerializeField] PlayerMovement movement;
     [SerializeField] WeaponSwap weaponSwap;
-
+    [SerializeField] private bool canMove = true;
 
     Coroutine fireCoroutine;
 
     // Vector Input Actions
     InputAction move;
 
-
+    public bool CanMove
+    {
+        get => canMove;
+        set
+        {
+            canMove = value;
+            //movement.enabled = value;
+        }
+    }
     public Rigidbody2D Rigidbody2D => rb2d;
     public Collider2D Collider => _collider2D;
     public Animator Animator => _animator;
@@ -50,7 +58,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        movement.Movement(move.ReadValue<Vector2>());
+        if (canMove)
+        {
+            movement.Movement(move.ReadValue<Vector2>());
+        }
 
     }
 

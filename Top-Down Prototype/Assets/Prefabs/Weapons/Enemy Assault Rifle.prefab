@@ -11,9 +11,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 1600329873547801589, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2126229509927346937, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
       propertyPath: recoil
-      value: 0.753
+      value: 0.837
       objectReference: {fileID: 0}
     - target: {fileID: 2126229509927346937, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
       propertyPath: timeBetweenShots
@@ -63,6 +67,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2126229509927346939, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 2126229509927346940, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
       propertyPath: m_Name
       value: Enemy Assault Rifle
@@ -70,6 +78,10 @@ PrefabInstance:
     - target: {fileID: 2126229509927346940, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574452075181350150, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 131069197, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
