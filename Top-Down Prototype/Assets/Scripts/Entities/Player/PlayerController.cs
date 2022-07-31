@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
             canMove = value;
         }
     }
+
     public Rigidbody2D Rigidbody2D => rb2d;
     public Collider2D Collider => _collider2D;
     public Animator Animator => _animator;

@@ -10,6 +10,7 @@ public class HUD : MonoBehaviour
 
     private int score;
 
+
     private void Awake()
     {
         PlayerWeaponHandler.SetAmmoCount += UpdateWeaponAmmo;

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 2130195811771715608}
   - component: {fileID: 17609510590602279}
   - component: {fileID: 1595143304064804017}
+  - component: {fileID: 3812815861809502713}
   - component: {fileID: 4042253683196191775}
   - component: {fileID: 5095394726920402191}
   - component: {fileID: 1067710636}
@@ -384,6 +385,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 4400083414860235553}
+--- !u!114 &3812815861809502713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490895233034298552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f6a4f9e242045f7a70ad557694e40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 5095394726920402191}
+  _gameOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _health: {fileID: 0}
 --- !u!114 &4042253683196191775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,7 +476,7 @@ MonoBehaviour:
   - {x: 0.30464268, y: 0.022864461, z: 0}
   m_ShapePathHash: 1356235761
   m_Mesh: {fileID: 0}
-  m_InstanceId: 65498
+  m_InstanceId: 43208
 --- !u!1001 &7702730474771794694
 PrefabInstance:
   m_ObjectHideFlags: 0

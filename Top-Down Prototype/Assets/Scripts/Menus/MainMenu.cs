@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// The main menu
 /// </summary>
 public class MainMenu : MonoBehaviour
 {
-    #region Public methods
 
     private void Start()
     {
         //AudioManager.Play(AudioClipName.Gameplay_Music);
     }
+
+    #region Public methods
+
     /// <summary>
     /// Goes to the difficulty menu
     /// </summary>

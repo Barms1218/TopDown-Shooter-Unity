@@ -11,13 +11,13 @@ public class EnemyDeath : MonoBehaviour
     [SerializeField] EnemyMove movement;
     [SerializeField] EnemyWeaponHandler weaponHandler;
     [SerializeField] private int points;
-    private WaitForSeconds reviveSeconds;
-    private float reviveTime = 1f;
+    private WaitForSeconds dieSeconds;
+    private float dieTime = 1f;
     public static UnityAction<int> GivePoints;
 
     private void Start()
     {
-        reviveSeconds = new WaitForSeconds(reviveTime);
+        dieSeconds = new WaitForSeconds(dieTime);
         health.onDeath += HandleDeath;
     }
 
@@ -41,7 +41,7 @@ public class EnemyDeath : MonoBehaviour
     private IEnumerator Die()
     {
 
-        yield return reviveSeconds;
+        yield return dieSeconds;
         gameObject.SetActive(false);
     }
 

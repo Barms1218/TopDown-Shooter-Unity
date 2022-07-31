@@ -9,14 +9,7 @@ public class WeaponSelectorUI : MonoBehaviour
 
     public void ShowImage(GameObject weaponObject)
     {
-        foreach (GameObject weapon in weaponImages)
-        {
-            if (weapon.GetComponent<SpriteRenderer>() == weaponObject.GetComponent<SpriteRenderer>());
-            {
-                weapon.SetActive(true);
-                StartCoroutine(HideImage(weapon));
-            }
-        }
+
     }
 
     private IEnumerator HideImage(GameObject objectToHide)
