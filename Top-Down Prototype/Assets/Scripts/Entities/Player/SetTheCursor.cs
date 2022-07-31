@@ -18,29 +18,37 @@ public class SetTheCursor : MonoBehaviour
     {
         inputActions = new CursorActions();
         cursor = this;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         move = inputActions.CursorAction.Move;
     }
 
     private void Start()
     {
-        playerTransform = PlayerController.player.transform;
+        if (PlayerController.player != null)
+        {
+            playerTransform = PlayerController.player.transform;
+        }
     }
 
     private void Update()
     {
         var inputValue = move.ReadValue<Vector2>();
+        
         ChangeCursorPosition(inputValue);
     }
 
     public void ChangeCursorPosition(Vector2 newPosition)
     {
         var position = Camera.main.ScreenToWorldPoint(newPosition);
-        position.x = Mathf.Clamp(position.x, playerTransform.transform.position.x - xValue,
-            playerTransform.transform.position.x + xValue);
-        position.y = Mathf.Clamp(position.y, playerTransform.transform.position.y - yValue,
-            playerTransform.transform.position.y + yValue);
-        position.z = 0;
+        if (playerTransform != null)
+        {
+            position.x = Mathf.Clamp(position.x, playerTransform.transform.position.x - xValue,
+                playerTransform.transform.position.x + xValue);
+            position.y = Mathf.Clamp(position.y, playerTransform.transform.position.y - yValue,
+                playerTransform.transform.position.y + yValue);
+            position.z = 0;
+        }
+
         transform.position = position;
     }
 

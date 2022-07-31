@@ -15,9 +15,6 @@ public class GamePlayTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        seconds = Mathf.Floor(timer / 60f);
-        minutes = Mathf.Floor(timer / 60f);
-
         incrementDelay = new WaitForSeconds(1);
         StartCoroutine(IncrementTimer());
     }
@@ -31,8 +28,11 @@ public class GamePlayTimer : MonoBehaviour
             seconds++;
             if (seconds == 60)
             {
+                seconds = 0;
                 minutes++;
             }
+            //seconds = Mathf.Floor(timer / 60f);
+            //minutes = Mathf.Floor(timer / 60f);
             yield return incrementDelay;
         }
     }

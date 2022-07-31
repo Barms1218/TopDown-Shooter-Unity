@@ -5,6 +5,7 @@ public enum AudioClipName
 {
     AR_Fire,
     BulletHit,
+    Gameplay_Music,
     GetGun,
     MeleeAttack,
     MenuButton,

@@ -11,6 +11,13 @@ public class EnemyMove : MonoBehaviour
     private GameObject player;
     private bool facingRight = true;
 
+
+    public float Speed
+    {
+        get => speed;
+        set { speed = value; }
+    }
+
     private void Start()
     {
         player = PlayerController.player.gameObject;

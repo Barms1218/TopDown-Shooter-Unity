@@ -10,12 +10,16 @@ public class MainMenu : MonoBehaviour
 {
     #region Public methods
 
-	/// <summary>
-	/// Goes to the difficulty menu
-	/// </summary>
-	public void GoToGameplayScene()
+    private void Start()
     {
-        SceneManager.LoadScene("Gameplay Scene");
+        //AudioManager.Play(AudioClipName.Gameplay_Music);
+    }
+    /// <summary>
+    /// Goes to the difficulty menu
+    /// </summary>
+    public void GoToGameplayScene()
+    {
+        SceneManager.LoadScene("Arena Scene");
 
     }
 
@@ -35,6 +39,7 @@ public class MainMenu : MonoBehaviour
     {
 		Application.Quit();
     }
+
 
     #endregion
 }

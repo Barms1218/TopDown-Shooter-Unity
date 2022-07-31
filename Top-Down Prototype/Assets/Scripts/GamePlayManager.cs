@@ -7,30 +7,33 @@ public class GamePlayManager : MonoBehaviour
 {
     PauseAction pause;
 
+    [SerializeField] GameObject pauseCanvas;
+
     private void Awake()
     {
         pause = new PauseAction();
 
         pause.Pause.PauseGame.started += _ => PauseGame();
     }
-
-    private void Update()
+    private void Start()
     {
-
+        AudioManager.Play(AudioClipName.Gameplay_Music);
     }
 
     public void PauseGame()
     {
         if (Time.timeScale > 0)
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
+            pauseCanvas.SetActive(true);
         }
         else
         {
             Time.timeScale = 1f;
+            pauseCanvas.SetActive(false);
         }
-        //MenuManager.GoToMenu(MenuName.Pause);
     }
+
     private void GameOver()
     {
 

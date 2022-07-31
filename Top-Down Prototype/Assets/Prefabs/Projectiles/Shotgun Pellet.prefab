@@ -150,7 +150,7 @@ MonoBehaviour:
   damage: 3
   timeToLive: 3
   forceMagnitude: 40
-  _collider: {fileID: 0}
+  trail: {fileID: 9174659960593178145}
 --- !u!96 &9174659960593178145
 TrailRenderer:
   serializedVersion: 2
@@ -211,7 +211,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.77117115
-        value: 0.08403362
+        value: 0.008395806
         inSlope: 0
         outSlope: 0
         tangentMode: 0

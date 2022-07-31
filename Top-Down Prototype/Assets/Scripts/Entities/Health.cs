@@ -7,9 +7,9 @@ public class Health : MonoBehaviour, IHaveHealth
 {
 
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] UnityEvent onDeath;
     [SerializeField] HealthBar healthBar;
     private float _health;
+    public UnityAction onDeath;
 
     public int MaxHealth => maxHealth;
 
@@ -50,7 +50,7 @@ public class Health : MonoBehaviour, IHaveHealth
         if (_health <= 0)
         {
             _health = maxHealth;
-            onDeath.Invoke();
+            onDeath?.Invoke();
         }
 
 

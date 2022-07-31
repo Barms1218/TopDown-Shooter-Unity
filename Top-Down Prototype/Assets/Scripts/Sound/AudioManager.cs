@@ -40,6 +40,8 @@ public static class AudioManager
             Resources.Load<AudioClip>("Reload_Sound"));
         audioClips.Add(AudioClipName.ShotgunBlast,
             Resources.Load<AudioClip>("Shotgun_Fire"));
+        audioClips.Add(AudioClipName.Gameplay_Music,
+            Resources.Load<AudioClip>("Gameplay Scene Music"));
         audioClips.Add(AudioClipName.ZombieInmateDeath,
             Resources.Load<AudioClip>("ZombieInmateDeath"));
     }

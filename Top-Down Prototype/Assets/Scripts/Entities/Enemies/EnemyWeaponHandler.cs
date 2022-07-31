@@ -5,18 +5,22 @@ using UnityEngine;
 public class EnemyWeaponHandler : MonoBehaviour
 {
     [SerializeField] GameObject gun;
-    [SerializeField] float attackRange;
+    [SerializeField] float maximumRange;
+    [SerializeField] float minimumRange;
     [SerializeField] Weapon weapon;
     private Transform playerTransform;
     float nextTriggerPull;
     Vector2 aimDirection;
 
+    private void Start()
+    {
+        playerTransform = PlayerController.player.transform;
+    }
 
     // Update is called once per frame
     private void Update()
     {
         Aim();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Aim()
@@ -28,7 +32,7 @@ public class EnemyWeaponHandler : MonoBehaviour
             weapon.Aim(angle, playerTransform.position);
 
             var _distance = Vector2.Distance(playerTransform.position, transform.position);
-            if (_distance < attackRange && CanFire)
+            if (_distance > minimumRange && _distance < maximumRange && CanFire)
             {
                 OnFire();
                 nextTriggerPull = Time.time + weapon.TimeBetweenShots;

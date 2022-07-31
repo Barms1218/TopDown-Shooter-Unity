@@ -201,8 +201,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.223423
-        value: 0.0672245
+        time: 0.22702408
+        value: 0.05881691
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -211,7 +211,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.79999995
-        value: 0.12605041
+        value: 0.06722778
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -223,15 +223,15 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.37254903, g: 0.8000001, b: 0.8941177, a: 1}
-      key1: {r: 0.38823533, g: 0.6117647, b: 0.9960785, a: 1}
+      key0: {r: 0.89411765, g: 0.372549, b: 0.39297077, a: 1}
+      key1: {r: 1, g: 0, b: 0.11387253, a: 1}
       key2: {r: 0.87843144, g: 0.8431373, b: 0.18039216, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 14456
+      ctime0: 14842
       ctime1: 65535
       ctime2: 65535
       ctime3: 0

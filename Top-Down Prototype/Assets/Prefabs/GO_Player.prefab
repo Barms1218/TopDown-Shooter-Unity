@@ -296,6 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347722c73cd25534aa3b4f1b49733173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponHandler: {fileID: 4042253683196191775}
+  weaponSelector: {fileID: 0}
 --- !u!114 &1330105217109831270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680931e8eb66fae4197c016fda63fca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponHandler: {fileID: 4042253683196191775}
 --- !u!114 &949010934954473048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +339,7 @@ MonoBehaviour:
   armor: 0
   damageResistance: None
   health: {fileID: 1595143304064804017}
+  canTakeDamage: 1
 --- !u!114 &2130195811771715608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +353,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5095394726920402191}
+  takeDamage: {fileID: 1538798372819519117}
   knockbackStrength: 10
+  invincibleTime: 1
 --- !u!114 &17609510590602279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347722c73cd25534aa3b4f1b49733173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponHandler: {fileID: 0}
+  weaponSelector: {fileID: 0}
 --- !u!114 &1595143304064804017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,9 +383,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
   healthBar: {fileID: 4400083414860235553}
 --- !u!114 &4042253683196191775
 MonoBehaviour:
@@ -410,6 +415,7 @@ MonoBehaviour:
   weaponHandler: {fileID: 4042253683196191775}
   movement: {fileID: 997266673648363870}
   weaponSwap: {fileID: 7195624304276632818}
+  canMove: 1
 --- !u!114 &1067710636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +446,7 @@ MonoBehaviour:
   - {x: 0.30464268, y: 0.022864461, z: 0}
   m_ShapePathHash: 1356235761
   m_Mesh: {fileID: 0}
-  m_InstanceId: 81680
+  m_InstanceId: 65498
 --- !u!1001 &7702730474771794694
 PrefabInstance:
   m_ObjectHideFlags: 0

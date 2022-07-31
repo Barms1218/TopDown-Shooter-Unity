@@ -24,11 +24,6 @@ public class MinionPool : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
-
     public GameObject GetPooledObject()
     {
         for (int i = 0; i < amountToPool; i++)

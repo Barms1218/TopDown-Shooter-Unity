@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
         set
         {
             canMove = value;
-            //movement.enabled = value;
         }
     }
     public Rigidbody2D Rigidbody2D => rb2d;
@@ -49,9 +48,9 @@ public class PlayerController : MonoBehaviour
         actions.PlayerControls.Dash.started += _ => movement.Dash();
 
         // Inputs for weapon swap
-        actions.PlayerControls.EquipWeapon1.started += weaponSwap.TryEquipWeaponOne;
-        actions.PlayerControls.EquipWeapon2.started += weaponSwap.TryEquipWeaponTwo;
-        actions.PlayerControls.EquipWeapon3.started += weaponSwap.TryEquipWeaponThree;
+        actions.PlayerControls.EquipWeapon1.started += _ => weaponSwap.TryEquipWeaponOne();
+        actions.PlayerControls.EquipWeapon2.started += _ => weaponSwap.TryEquipWeaponTwo();
+        actions.PlayerControls.EquipWeapon3.started += _ => weaponSwap.TryEquipWeaponThree();
 
         
     }

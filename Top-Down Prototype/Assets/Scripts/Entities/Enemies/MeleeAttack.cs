@@ -10,12 +10,14 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
     [SerializeField] EnemyMove moveComponent;
+    private WaitForSeconds staggerTime;
     private GameObject player;
 
     // Start is called before the first frame update
     private void Start()
     {
         player = PlayerController.player.gameObject;
+        staggerTime = new WaitForSeconds(attackCooldown);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -29,7 +31,6 @@ public class MeleeAttack : MonoBehaviour
             !hitObject.CompareTag(gameObject.tag))
         {
             damageable.DealDamage(damage, gameObject);
-            Debug.Log(damage + "damage dealt to target");
             StartCoroutine(Stagger());
         }
         else
@@ -42,7 +43,7 @@ public class MeleeAttack : MonoBehaviour
     {
         moveComponent.enabled = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return staggerTime;
 
         moveComponent.enabled = true;
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The pause menu
@@ -10,31 +11,28 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// Start is called before the first frame update
     /// </summary>
-    void Start()
+    void OnEnable()
     {
         // pause the game when added to the scene
         Time.timeScale = 0;
     }
 
     /// <summary>
-    /// Resumes the paused game
+    /// Exits the application
     /// </summary>
-    public void ResumeGame()
+    public void QuitToDesktop()
     {
-        // unpause game and destroy menu
-        Time.timeScale = 1;
-        Destroy(gameObject);
-        AudioManager.Play(AudioClipName.MenuButton);
+        Application.Quit();
     }
 
     /// <summary>
     /// Quits the paused game
     /// </summary>
-    public void QuitGame()
+    public void QuitToMainMenu()
     {
         // unpause game, destroy menu, and go to main menu
         Time.timeScale = 1;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         MenuManager.GoToMenu(MenuName.Main);
     }
 }

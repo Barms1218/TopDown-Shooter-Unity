@@ -130,7 +130,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         currentWeapon = newGun.GetComponent<Weapon>();
         timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
         gun.SetActive(true);
-        gun.GetComponent<Collider2D>().enabled = false;
+        currentWeapon.Collider.enabled = false;
         SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 

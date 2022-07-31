@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3847233161207401429}
   - component: {fileID: 3847233161207401430}
-  - component: {fileID: 3847233161207401431}
   m_Layer: 5
   m_Name: Spawn Point
   m_TagString: Untagged
@@ -25,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3847233161207401428}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.94, y: 3.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -42,26 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3847233161207401428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557c2d3273f53984dabd90261a1d5f85, type: 3}
+  m_Script: {fileID: 11500000, guid: 785f92aacc618462d9b004741f78c111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveConfigs:
-  - {fileID: 11400000, guid: aafd135d187c747bbbbe10f28d142be9, type: 2}
-  timeBetweenWaves: 10
-  isLooping: 1
---- !u!58 &3847233161207401431
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3847233161207401428}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -3.1557422, y: -3.2858758}
-  serializedVersion: 2
-  m_Radius: 4.892016
+  timeVariation: 0
+  callTimer: 8

@@ -6,12 +6,8 @@ using UnityEngine.Events;
 
 public class Pickup : MonoBehaviour
 {
-    PlayerWeaponHandler weaponHandler;
+    [SerializeField] PlayerWeaponHandler weaponHandler;
 
-    private void Awake()
-    {
-        weaponHandler = GetComponent<PlayerWeaponHandler>();
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var pickupObject = collision.gameObject;

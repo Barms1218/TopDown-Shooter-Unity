@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2126229509927346938}
   - component: {fileID: 2126229509927346939}
-  - component: {fileID: 2126229509927346937}
   - component: {fileID: 131069197}
+  - component: {fileID: 2126229509927346937}
   m_Layer: 9
   m_Name: Assault Rifle
   m_TagString: Player
@@ -88,27 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2126229509927346937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126229509927346940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ada9ea896278594b9229d12bdb8f197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleTransform: {fileID: 462724276005966884}
-  currentAmmo: 24
-  maxAmmo: 72
-  magazineSize: 24
-  ammoPerShot: 1
-  timeBetweenShots: 0.15
-  reloadSpeed: 1
-  recoil: 0
-  canRapidFire: 1
 --- !u!61 &131069197
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135,6 +114,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.79166675, y: 0.375}
   m_EdgeRadius: 0
+--- !u!114 &2126229509927346937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126229509927346940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ada9ea896278594b9229d12bdb8f197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleTransform: {fileID: 462724276005966884}
+  _collider: {fileID: 131069197}
+  weapon: {fileID: 2126229509927346937}
+  currentAmmo: 24
+  maxAmmo: 72
+  magazineSize: 24
+  ammoPerShot: 1
+  timeBetweenShots: 0.15
+  reloadSpeed: 1
+  recoil: 0
+  canRapidFire: 1
 --- !u!1 &3660060279596217372
 GameObject:
   m_ObjectHideFlags: 0

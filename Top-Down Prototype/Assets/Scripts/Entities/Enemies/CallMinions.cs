@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CallMinions : MonoBehaviour
 {
-    [SerializeField] float callTimer;
+    [SerializeField] float timeVariation;
+    [SerializeField] private float callTimer;
+    [SerializeField] private float minionSpeed;
     WaitForSeconds callDelay;
     
 
@@ -24,8 +26,14 @@ public class CallMinions : MonoBehaviour
                 minion.transform.SetPositionAndRotation(transform.position,
                     transform.rotation);
                 minion.SetActive(true);
+                if (minion.TryGetComponent(out EnemyMove move))
+                {
+                    move.Speed = minionSpeed;
+                }
             }
-
+            callTimer = Random.Range(callTimer - timeVariation,
+                callTimer + timeVariation);
+            Debug.Log(callDelay);
             yield return callDelay;
         }
     }

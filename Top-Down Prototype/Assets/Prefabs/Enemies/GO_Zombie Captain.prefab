@@ -167,7 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 5139305327798337524}
-  attackRange: 5
+  maximumRange: 0
+  minimumRange: 4
   weapon: {fileID: 533922958477208585}
 --- !u!114 &3726766757209793094
 MonoBehaviour:
@@ -199,45 +200,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -8119643195282958802}
-        m_TargetAssemblyTypeName: EnemyDeath, Assembly-CSharp
-        m_MethodName: HandleDeath
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3165004206678583450}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6236775548561513312}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   healthBar: {fileID: 8807797602043678526}
 --- !u!114 &6236775548561513312
 MonoBehaviour:
@@ -254,6 +216,7 @@ MonoBehaviour:
   armor: 0
   damageResistance: 
   health: {fileID: -4776191114838315682}
+  canTakeDamage: 1
 --- !u!114 &8351774933863463687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +232,7 @@ MonoBehaviour:
   attackStrength: 25
   damage: 5
   attackCooldown: 1
+  moveComponent: {fileID: 0}
 --- !u!114 &-8119643195282958802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,10 +245,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84a3d5a8527c7341a1dd821232d5bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: -4776191114838315682}
+  _collider: {fileID: 2474475448183171317}
+  movement: {fileID: 0}
+  weaponHandler: {fileID: 3165004206678583450}
   points: 200
-  liveAgain:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7989791296695908668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785f92aacc618462d9b004741f78c111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeVariation: 0
   callTimer: 3
+  minionSpeed: 2.5
 --- !u!114 &1356982498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +292,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 48242
+  m_InstanceId: 55902
 --- !u!1001 &3300629741057705753
 PrefabInstance:
   m_ObjectHideFlags: 0

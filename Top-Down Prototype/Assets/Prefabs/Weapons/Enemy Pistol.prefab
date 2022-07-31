@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzleTransform: {fileID: 8324532898143128113}
+  _collider: {fileID: 0}
+  weapon: {fileID: 9075637003023313775}
   currentAmmo: 12
   maxAmmo: 60
   magazineSize: 12
