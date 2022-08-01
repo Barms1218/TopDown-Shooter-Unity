@@ -23,14 +23,7 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public int Score
-    {
-        get
-        {
-            return score;
-        }
-
-    }
+    public int Score => score;
 
     private void Awake()
     {

@@ -7,13 +7,13 @@ public class GamePlayTimer : MonoBehaviour
 {
     private static GamePlayTimer _instance;
     [SerializeField] TextMeshProUGUI timerText;
-    float seconds = 0;
-    float minutes = 0;
-    private float timer;
+    //float seconds = 0;
+    //float minutes = 0;
+    private float timeElapsed;
     string timerTime;
     private WaitForSeconds incrementDelay;
 
-    public TextMeshProUGUI Time => timerText;
+    public TextMeshProUGUI GameTime => timerText;
 
     public static GamePlayTimer Instance
     {
@@ -27,27 +27,25 @@ public class GamePlayTimer : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _instance = this;
-        incrementDelay = new WaitForSeconds(timer);
-        StartCoroutine(IncrementTimer());
     }
 
-    private IEnumerator IncrementTimer()
+    private void Update()
     {
-        while(PlayerController.player.enabled)
+        if (PlayerController.player.enabled)
         {
-            timerTime = string.Format("{0:0}:{1:00}", minutes, seconds);
-            timerText.text = timerTime;
-            seconds++;
-            if (seconds == 60)
-            {
-                seconds = 0;
-                minutes++;
-            }
-            yield return incrementDelay;
+            timeElapsed += Time.deltaTime;
+            DisplayTime(timeElapsed);
         }
+    }
+
+    void DisplayTime(float timeToDisplay)
+    {
+        timeToDisplay += 1;
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

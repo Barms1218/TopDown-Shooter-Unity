@@ -9,6 +9,7 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI killCountText;
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] TextMeshProUGUI finalTimeText;
+    [SerializeField] Canvas canvas;
 
     private int killCount;
     private int score;
@@ -36,30 +37,15 @@ public class GameOverMenu : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        DontDestroyOnLoad(this);
     }
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    public void ShowGameOverScreen()
     {
-        
-    }
-
-    private void Update()
-    {
-        finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.Time.text;
-    }
-
-    public void UpdateKillCount()
-    {
-        killCount++;
-        killCountText.text = "Enemies Killed: " + killCount.ToString();
-    }
-
-    public void UpdateFinalScore(int points)
-    {
-        score += points;
-        finalScoreText.text = "Final Score:" + score.ToString();
+        canvas.enabled = true;
+        Time.timeScale = 0;
+        killCountText.text = "Enemies Killed: " + GamePlayManager.Instance.KillCount.ToString();
+        finalScoreText.text = "Final Score: " + HUD.Instance.Score;
+        finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.GameTime.text;
     }
 }

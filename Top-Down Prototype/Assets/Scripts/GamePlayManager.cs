@@ -6,12 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class GamePlayManager : MonoBehaviour
 {
+    private static GamePlayManager _instance;
     PauseAction pause;
 
     [SerializeField] Canvas pauseCanvas;
+    private int killCount;
+
+    public static GamePlayManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.Log("Game's broken");
+            }
+            return _instance;
+        }
+    }
+
+    public int KillCount => killCount;
 
     private void Awake()
     {
+        _instance = this;
         pause = new PauseAction();
 
         pause.Pause.PauseGame.started += _ => PauseGame();
@@ -49,8 +66,7 @@ public class GamePlayManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    private void OnEnable()
-    {
-        pause.Enable();
-    }
+    public void UpdateKillCount() => killCount++;
+
+    private void OnEnable() => pause.Enable();
 }
