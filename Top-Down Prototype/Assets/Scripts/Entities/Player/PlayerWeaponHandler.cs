@@ -12,7 +12,6 @@ public class PlayerWeaponHandler : MonoBehaviour
     [SerializeField] protected GameObject gun;
     private Transform targetTransform;
     private List<GameObject> weaponList = new();
-    public static UnityAction<int, int> SetAmmoCount;
     private Weapon currentWeapon;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
@@ -49,7 +48,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     private void Start()
     {
-        SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+        HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
     private void Update()
@@ -76,7 +75,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         if (currentWeapon.CurrentAmmo > 0)
         {
             currentWeapon.Fire(_direction);
-            SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+            HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         }
         else
         {
@@ -86,7 +85,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public IEnumerator RapidFire()
     {
-        if (currentWeapon.CanRapidFire)
+        if (currentWeapon.CanRapidFire && Time.timeScale > 0)
         {
             while(true)
             {
@@ -94,7 +93,7 @@ public class PlayerWeaponHandler : MonoBehaviour
                 yield return timeBetweenShots;
             }
         }
-        else if (Time.time >= nextTriggerPull)
+        else if (Time.time >= nextTriggerPull && Time.timeScale > 0)
         {
             Shoot();
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
@@ -131,7 +130,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
         gun.SetActive(true);
         currentWeapon.Collider.enabled = false;
-        SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+        HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
     public void AddAmmoToWeapon(int amountToAdd, string name)
@@ -141,7 +140,7 @@ public class PlayerWeaponHandler : MonoBehaviour
             if (weapon.name == name)
             {
                 weapon.GetComponent<Weapon>().MaxAmmo += amountToAdd;
-                SetAmmoCount?.Invoke(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+                HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
             }
         }
     }

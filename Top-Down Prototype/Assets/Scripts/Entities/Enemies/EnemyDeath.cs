@@ -13,7 +13,6 @@ public class EnemyDeath : MonoBehaviour
     [SerializeField] private int points;
     private WaitForSeconds dieSeconds;
     private float dieTime = 1f;
-    public static UnityAction<int> GivePoints;
 
     private void Start()
     {
@@ -33,7 +32,6 @@ public class EnemyDeath : MonoBehaviour
         {
             _animator?.SetTrigger("Dying");
         }
-        GivePoints?.Invoke(points);
         StartCoroutine(Die());
         AudioManager.Play(AudioClipName.ZombieInmateDeath);
     }
@@ -42,6 +40,9 @@ public class EnemyDeath : MonoBehaviour
     {
 
         yield return dieSeconds;
+        HUD.Instance.UpdatePointsText(points);
+        GameOverMenu.Instance.UpdateKillCount();
+        GameOverMenu.Instance.UpdateFinalScore(points);
         gameObject.SetActive(false);
     }
 

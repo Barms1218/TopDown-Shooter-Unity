@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GamePlayManager : MonoBehaviour
 {
     PauseAction pause;
 
-    [SerializeField] GameObject pauseCanvas;
+    [SerializeField] Canvas pauseCanvas;
 
     private void Awake()
     {
@@ -24,21 +25,29 @@ public class GamePlayManager : MonoBehaviour
     {
         if (Time.timeScale > 0)
         {
-            //Time.timeScale = 0f;
-            pauseCanvas.SetActive(true);
+            Time.timeScale = 0f;
+            SetTheCursor.cursor.enabled = false;
+            pauseCanvas.enabled = true;
         }
         else
         {
             Time.timeScale = 1f;
-            pauseCanvas.SetActive(false);
+            SetTheCursor.cursor.enabled = true;
+            pauseCanvas.enabled = false;
         }
     }
 
-    private void GameOver()
+    public void StartOver()
     {
-
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Arena Scene");
     }
 
+    public void QuitGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
+    }
 
     private void OnEnable()
     {

@@ -49,7 +49,7 @@ public class Shotgun : Weapon
         {
             currentAmmo++;
             maxAmmo--;
-            PlayerWeaponHandler.SetAmmoCount?.Invoke(currentAmmo, maxAmmo);
+            HUD.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);
             AudioManager.Play(AudioClipName.ReloadSound);
             yield return reloadDelay;
             reloading = false;

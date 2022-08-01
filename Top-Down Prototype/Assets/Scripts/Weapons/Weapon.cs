@@ -60,7 +60,7 @@ public abstract class Weapon : MonoBehaviour
             Flip();
         }
 
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward * Time.deltaTime);
         transform.rotation = rotation;
     }
 

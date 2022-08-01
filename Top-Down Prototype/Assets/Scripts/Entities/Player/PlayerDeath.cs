@@ -17,6 +17,7 @@ public class PlayerDeath : MonoBehaviour
     private void EndGame()
     {
         _controller.enabled = false;
+        Time.timeScale = 0;
         _gameOver.Invoke();
     }
 

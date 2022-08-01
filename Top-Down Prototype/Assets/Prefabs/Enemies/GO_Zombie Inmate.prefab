@@ -257,7 +257,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 56686
+  m_InstanceId: 41444
 --- !u!1001 &740140503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,6 +372,18 @@ PrefabInstance:
     - target: {fileID: 5685970453560146967, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
       propertyPath: m_Type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338152386767112216, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338152386767112216, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338152386767112216, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6338152387634571807, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
       propertyPath: m_AnchorMax.x

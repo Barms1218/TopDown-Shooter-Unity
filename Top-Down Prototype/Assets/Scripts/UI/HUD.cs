@@ -5,16 +5,37 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
+    public static HUD _instance;
     [SerializeField] TextMeshProUGUI ammoCountText;
     [SerializeField] TextMeshProUGUI scoreText;
 
     private int score;
 
+    public static HUD Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.Log("Dude, there's no HUD.");
+            }
+            return _instance;
+        }
+    }
+
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+
+    }
 
     private void Awake()
     {
-        PlayerWeaponHandler.SetAmmoCount += UpdateWeaponAmmo;
-        EnemyDeath.GivePoints += UpdatePointsText;
+        _instance = this;
+
         score = 0;
     }
 

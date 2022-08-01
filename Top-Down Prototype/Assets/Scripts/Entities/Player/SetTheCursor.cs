@@ -56,4 +56,9 @@ public class SetTheCursor : MonoBehaviour
     {
         inputActions.Enable();
     }
+
+    private void OnDisable()
+    {
+        inputActions.Disable();
+    }
 }

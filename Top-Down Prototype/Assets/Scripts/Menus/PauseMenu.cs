@@ -13,8 +13,7 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     void OnEnable()
     {
-        // pause the game when added to the scene
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     /// <summary>
