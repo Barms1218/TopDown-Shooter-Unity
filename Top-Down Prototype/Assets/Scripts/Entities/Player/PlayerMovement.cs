@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] PlayerController controller;
+    [SerializeField] GameObject child;
     [SerializeField] float speed;
     [SerializeField] float dashTime;
     [SerializeField] float dashCoolDown;
@@ -75,11 +76,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        Vector3 newScale = gameObject.transform.localScale;
+        Vector3 newScale = child.transform.localScale;
         newScale.x *= -1f;
 
         facingRight = !facingRight;
 
-        gameObject.transform.localScale = newScale;
+        child.transform.localScale = newScale;
     }
 }

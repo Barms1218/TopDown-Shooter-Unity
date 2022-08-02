@@ -34,7 +34,7 @@ public class Pistol : Weapon
         currentAmmo = magazineSize;
 
         AudioManager.Play(AudioClipName.ReloadSound);
-        HUD.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);
         reloading = false;
     }
 

@@ -76,7 +76,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected abstract IEnumerator StartReload();
 
-    private void Flip()
+    public void Flip()
     {
         facingRight = !facingRight;
         Vector3 newScale = transform.localScale;

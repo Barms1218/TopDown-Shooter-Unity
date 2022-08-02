@@ -7,11 +7,7 @@ public class GamePlayTimer : MonoBehaviour
 {
     private static GamePlayTimer _instance;
     [SerializeField] TextMeshProUGUI timerText;
-    //float seconds = 0;
-    //float minutes = 0;
     private float timeElapsed;
-    string timerTime;
-    private WaitForSeconds incrementDelay;
 
     public TextMeshProUGUI GameTime => timerText;
 

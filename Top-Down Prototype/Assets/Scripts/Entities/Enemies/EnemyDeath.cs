@@ -42,7 +42,6 @@ public class EnemyDeath : MonoBehaviour
         yield return dieSeconds;
         HUD.Instance.UpdatePointsText(points);
         GamePlayManager.Instance.UpdateKillCount();
-        //GameOverMenu.Instance.UpdateFinalScore(points);
         gameObject.SetActive(false);
     }
 

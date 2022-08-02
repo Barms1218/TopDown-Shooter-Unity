@@ -6,7 +6,6 @@ using TMPro;
 public class HUD : MonoBehaviour
 {
     public static HUD _instance;
-    [SerializeField] TextMeshProUGUI ammoCountText;
     [SerializeField] TextMeshProUGUI scoreText;
 
     private int score;
@@ -30,12 +29,6 @@ public class HUD : MonoBehaviour
         _instance = this;
 
         score = 0;
-    }
-
-    public void UpdateWeaponAmmo(int startAmmo, int startMaxAmmo)
-    {
-        ammoCountText.text = startAmmo.ToString() + "/" +
-        startMaxAmmo.ToString();         
     }
 
     public void UpdatePointsText(int points)

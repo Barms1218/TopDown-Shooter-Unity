@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerMovement movement;
     [SerializeField] WeaponSwap weaponSwap;
     [SerializeField] private bool canMove = true;
+    [SerializeField] GameObject childObject;
 
     Coroutine fireCoroutine;
 
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D Rigidbody2D => rb2d;
     public Collider2D Collider => _collider2D;
     public Animator Animator => _animator;
+    public GameObject Child => childObject;
 
     private void Awake()
     {

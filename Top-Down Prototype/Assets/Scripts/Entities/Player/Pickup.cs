@@ -13,7 +13,7 @@ public class Pickup : MonoBehaviour
         var pickupObject = collision.gameObject;
         if (pickupObject.TryGetComponent(out Weapon weapon))
         {
-            weaponHandler.GetNewWeapon(pickupObject);
+            weaponHandler.GetNewWeapon(weapon.gameObject);
         }
         else if (pickupObject.TryGetComponent(out AmmoPickup ammoPickup))
         {

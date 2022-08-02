@@ -37,7 +37,7 @@ public class GameOverMenu : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     public void ShowGameOverScreen()

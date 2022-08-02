@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinionPool : MonoBehaviour
+public class RifleManPool : MonoBehaviour
 {
-    private static MinionPool _instance;
+    private static RifleManPool _instance;
     private List<GameObject> pooledObjects;
     [SerializeField] GameObject minionObject;
     [SerializeField] int amountToPool;
 
-    public static MinionPool SharedInstance
+    public static RifleManPool SharedInstance
     {
         get
         {

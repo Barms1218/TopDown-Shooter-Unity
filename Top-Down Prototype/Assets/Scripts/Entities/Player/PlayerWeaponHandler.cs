@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
+using TMPro;
 
 //[RequireComponent(typeof(InputController))]
 public class PlayerWeaponHandler : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] protected GameObject gun;
+    [SerializeField] private GameObject gun;
+    [SerializeField] private PlayerController _controller;
     private Transform targetTransform;
     private List<GameObject> weaponList = new();
     private Weapon currentWeapon;
@@ -48,7 +48,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     private void Start()
     {
-        HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
     private void Update()
@@ -75,7 +75,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         if (currentWeapon.CurrentAmmo > 0)
         {
             currentWeapon.Fire(_direction);
-            HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+            UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
         }
         else
         {
@@ -102,10 +102,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     }
 
 
-    public void Reload()
-    {
-        currentWeapon.Reload();
-    }
+    public void Reload() => currentWeapon.Reload();
 
     #endregion
 
@@ -119,18 +116,23 @@ public class PlayerWeaponHandler : MonoBehaviour
         gun = newGun;
         gun.GetComponent<Weapon>().enabled = true;
 
+
+
+        currentWeapon = gun.GetComponent<Weapon>();
+        timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
+        gun.SetActive(true);
+        currentWeapon.Collider.enabled = false;
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+
         // Flip the weapon to proper scale to match player's
-        if (newGun.transform.position.x < transform.position.x)
+        if (gun.transform.position.x != transform.localScale.x)
         {
+            Debug.Log("Flipping");
+            //currentWeapon.Flip();
             Vector3 newScale = gun.transform.localScale;
             newScale.x *= -1;
             gun.transform.localScale = newScale;
         }
-        currentWeapon = newGun.GetComponent<Weapon>();
-        timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
-        gun.SetActive(true);
-        currentWeapon.Collider.enabled = false;
-        HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }
 
     public void AddAmmoToWeapon(int amountToAdd, string name)
@@ -140,7 +142,7 @@ public class PlayerWeaponHandler : MonoBehaviour
             if (weapon.name == name)
             {
                 weapon.GetComponent<Weapon>().MaxAmmo += amountToAdd;
-                HUD.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+                UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
             }
         }
     }

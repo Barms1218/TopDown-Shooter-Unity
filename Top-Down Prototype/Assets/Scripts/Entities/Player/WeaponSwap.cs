@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class WeaponSwap : MonoBehaviour
 {
     [SerializeField] PlayerWeaponHandler weaponHandler;
-    [SerializeField] WeaponSelectorUI weaponSelector;
 
     public void TryEquipWeaponOne()
     {
@@ -53,15 +52,11 @@ public class WeaponSwap : MonoBehaviour
         weaponHandler.Gun.SetActive(false);
         weaponHandler.Gun = weaponHandler.PlayerWeapons[weaponIndex];
         weaponHandler.Gun.SetActive(true);
-
-
-
         weaponHandler.CurrentWeapon = weaponHandler.Gun.GetComponent<Weapon>();
         weaponHandler.TriggerDelay = new WaitForSeconds(
             weaponHandler.CurrentWeapon.TimeBetweenShots);
-        HUD.Instance.UpdateWeaponAmmo(weaponHandler.CurrentWeapon.CurrentAmmo,
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(weaponHandler.CurrentWeapon.CurrentAmmo,
             weaponHandler.CurrentWeapon.MaxAmmo);
-        weaponSelector.ShowImage(weaponHandler.Gun);
     }
 
 }

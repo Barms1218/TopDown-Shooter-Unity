@@ -45,7 +45,7 @@ public class AssaultRifle : Weapon
             maxAmmo -= maxAmmo;
         }
 
-        HUD.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);      
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);      
         reloading = false;
         AudioManager.Play(AudioClipName.ReloadSound);
     }

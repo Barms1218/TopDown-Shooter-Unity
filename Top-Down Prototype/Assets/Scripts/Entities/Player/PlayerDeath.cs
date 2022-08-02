@@ -18,7 +18,7 @@ public class PlayerDeath : MonoBehaviour
     {
         _controller.enabled = false;
         _gameOver.Invoke();
-
+        StartCoroutine(End());
 
     }
 

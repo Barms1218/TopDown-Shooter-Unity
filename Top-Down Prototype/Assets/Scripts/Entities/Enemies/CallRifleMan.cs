@@ -2,37 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CallMinions : MonoBehaviour
+public class CallRifleMan : MonoBehaviour
 {
     [SerializeField] float timeVariation;
     [SerializeField] private float callTimer;
-    [SerializeField] private float minionSpeed;
     WaitForSeconds callDelay;
-    
+
 
     private void Start()
     {
         callDelay = new WaitForSeconds(callTimer);
-        StartCoroutine(Call());
+        //StartCoroutine(Call());
+    }
+
+    private void Update()
+    {
+        if (Time.time == 30f)
+        {
+            Debug.Log("Bringing out the snipey bois");
+            StartCoroutine(Call());
+        }
     }
 
     private IEnumerator Call()
     {
-        while(true)
+        while (true)
         {
-            var minion = MinionPool.SharedInstance.GetPooledObject();
-            if (minion != null)
+            var rifleMan = RifleManPool.SharedInstance.GetPooledObject();
+            if (rifleMan != null)
             {
-                minion.transform.SetPositionAndRotation(transform.position,
+                rifleMan.transform.SetPositionAndRotation(transform.position,
                     transform.rotation);
-                minion.SetActive(true);
-                if (minion.TryGetComponent(out EnemyMove move))
-                {
-                    move.Speed = minionSpeed;
-                }
+                rifleMan.SetActive(true);
             }
             callTimer = Random.Range(callTimer - timeVariation,
                 callTimer + timeVariation);
+            Debug.Log(callDelay);
             yield return callDelay;
         }
     }
