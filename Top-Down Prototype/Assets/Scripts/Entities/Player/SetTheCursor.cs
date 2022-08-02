@@ -7,18 +7,21 @@ public class SetTheCursor : MonoBehaviour
 {
     public static SetTheCursor cursor;
     CursorActions inputActions;
-    
+    [SerializeField] Texture2D cursorAim;
+    //[SerializeField] Texture2D cursorClicked;
     InputAction move;
     [SerializeField] float xValue;
     [SerializeField] float yValue;
     Transform playerTransform;
-    
+
+    public CursorActions CursorActions => inputActions;
+
     // Start is called before the first frame update
     void Awake()
     {
         inputActions = new CursorActions();
         cursor = this;
-        //Cursor.visible = false;
+        ChangeCursor(cursorAim);
         move = inputActions.CursorAction.Move;
     }
 
@@ -28,12 +31,25 @@ public class SetTheCursor : MonoBehaviour
         {
             playerTransform = PlayerController.player.transform;
         }
+        //move.started += ctx => ChangeCursorPosition(ctx.ReadValue<Vector2>());
+    }
+
+    private void ChangeCursor(Texture2D cursorType)
+    {
+        Vector2 hotSpot = new Vector2(cursorType.width / 2, cursorType.height / 2);
+        Cursor.SetCursor(cursorType, hotSpot, CursorMode.Auto);
+    }
+
+    public void BecomeUICursor(Texture2D cursorType)
+    {
+        Vector2 hotSpot = new Vector2(cursorType.width / 2, cursorType.height / 2);
+        Cursor.SetCursor(cursorType, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()
     {
         var inputValue = move.ReadValue<Vector2>();
-        
+
         ChangeCursorPosition(inputValue);
     }
 

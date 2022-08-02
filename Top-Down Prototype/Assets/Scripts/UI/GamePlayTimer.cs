@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class GamePlayTimer : MonoBehaviour
@@ -8,6 +9,7 @@ public class GamePlayTimer : MonoBehaviour
     private static GamePlayTimer _instance;
     [SerializeField] TextMeshProUGUI timerText;
     private float timeElapsed;
+    public static UnityAction onTimeElapsed;
 
     public TextMeshProUGUI GameTime => timerText;
 

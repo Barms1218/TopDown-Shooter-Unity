@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class GamePlayManager : MonoBehaviour
 {
     private static GamePlayManager _instance;
+    [SerializeField] Canvas pauseCanvas;
+    [SerializeField] Texture2D uiCursor;
     PauseAction pause;
 
-    [SerializeField] Canvas pauseCanvas;
     private int killCount;
 
     public static GamePlayManager Instance
@@ -43,7 +44,8 @@ public class GamePlayManager : MonoBehaviour
         if (Time.timeScale > 0)
         {
             Time.timeScale = 0f;
-            SetTheCursor.cursor.enabled = false;
+            //SetTheCursor.cursor.enabled = false;
+            SetTheCursor.cursor.BecomeUICursor(uiCursor);
             pauseCanvas.enabled = true;
         }
         else
@@ -68,5 +70,13 @@ public class GamePlayManager : MonoBehaviour
 
     public void UpdateKillCount() => killCount++;
 
-    private void OnEnable() => pause.Enable();
+    private void OnEnable()
+    {
+        pause.Enable();
+    }
+
+    private void OnDisable()
+    {
+        pause.Disable();
+    }
 }

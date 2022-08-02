@@ -10,8 +10,9 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     [SerializeField] private GameObject gun;
     [SerializeField] private PlayerController _controller;
+    [SerializeField] private List<GameObject> weaponList = new();
     private Transform targetTransform;
-    private List<GameObject> weaponList = new();
+
     private Weapon currentWeapon;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
@@ -41,14 +42,13 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     private void Awake()
     {
-        weaponList.Add(gun);
         currentWeapon = gun.GetComponent<Weapon>();
-        targetTransform = GameObject.FindGameObjectWithTag("Cursor").transform;
     }
 
     private void Start()
     {
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
+        targetTransform = SetTheCursor.cursor.transform;
     }
 
     private void Update()
@@ -111,28 +111,16 @@ public class PlayerWeaponHandler : MonoBehaviour
         AudioManager.Play(AudioClipName.GetGun);
         gun.SetActive(false);
         weaponList.Add(newGun);
-        newGun.transform.SetParent(transform);
+        newGun.transform.SetParent(transform, false);
         newGun.transform.position = gun.transform.position;
         gun = newGun;
         gun.GetComponent<Weapon>().enabled = true;
-
-
 
         currentWeapon = gun.GetComponent<Weapon>();
         timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
         gun.SetActive(true);
         currentWeapon.Collider.enabled = false;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
-
-        // Flip the weapon to proper scale to match player's
-        if (gun.transform.position.x != transform.localScale.x)
-        {
-            Debug.Log("Flipping");
-            //currentWeapon.Flip();
-            Vector3 newScale = gun.transform.localScale;
-            newScale.x *= -1;
-            gun.transform.localScale = newScale;
-        }
     }
 
     public void AddAmmoToWeapon(int amountToAdd, string name)
