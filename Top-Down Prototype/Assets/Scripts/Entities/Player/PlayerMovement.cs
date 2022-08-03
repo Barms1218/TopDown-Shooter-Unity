@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float dashTime;
     [SerializeField] float dashCoolDown;
+    Transform theCursor;
     private bool facingRight = true;
     private bool canDash = true;
     private WaitForSeconds dashSeconds;
@@ -23,20 +24,23 @@ public class PlayerMovement : MonoBehaviour
         coolDownSeconds = new WaitForSeconds(dashCoolDown);
     }
 
+    private void Start()
+    {
+        theCursor = GameObject.FindGameObjectWithTag("Cursor").transform;
+    }
+
     private void Update()
     {
 
-        if (SetTheCursor.cursor.transform.position.x < transform.position.x && facingRight)
+        if (theCursor.position.x < transform.position.x
+            && facingRight && Time.deltaTime != 0)
         {
             Flip();
         }
-        else if (SetTheCursor.cursor.transform.position.x > transform.position.x && !facingRight)
+        else if (theCursor.position.x > transform.position.x
+            && !facingRight && Time.deltaTime != 0)
         {
             Flip();
-        }
-        if (moveDir.magnitude != 0)
-        {
-            controller.Animator.SetBool("Running", true);
         }
     }
 

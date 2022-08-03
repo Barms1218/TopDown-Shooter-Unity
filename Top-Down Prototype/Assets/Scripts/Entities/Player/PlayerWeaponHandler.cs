@@ -11,9 +11,8 @@ public class PlayerWeaponHandler : MonoBehaviour
     [SerializeField] private GameObject gun;
     [SerializeField] private PlayerController _controller;
     [SerializeField] private List<GameObject> weaponList = new();
+    [SerializeField] private Weapon currentWeapon;
     private Transform targetTransform;
-
-    private Weapon currentWeapon;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
     private float nextTriggerPull;
@@ -40,15 +39,10 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     #endregion
 
-    private void Awake()
-    {
-        currentWeapon = gun.GetComponent<Weapon>();
-    }
-
     private void Start()
     {
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
-        targetTransform = SetTheCursor.cursor.transform;
+        targetTransform = GameObject.FindGameObjectWithTag("Cursor").transform;
     }
 
     private void Update()
@@ -67,7 +61,6 @@ public class PlayerWeaponHandler : MonoBehaviour
         {
             currentWeapon.Aim(angle, targetTransform.position);
         }
-
     }
 
     private void Shoot()
@@ -101,7 +94,6 @@ public class PlayerWeaponHandler : MonoBehaviour
         }
     }
 
-
     public void Reload() => currentWeapon.Reload();
 
     #endregion
@@ -114,11 +106,9 @@ public class PlayerWeaponHandler : MonoBehaviour
         newGun.transform.SetParent(transform, false);
         newGun.transform.position = gun.transform.position;
         gun = newGun;
-        gun.GetComponent<Weapon>().enabled = true;
 
         currentWeapon = gun.GetComponent<Weapon>();
         timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
-        gun.SetActive(true);
         currentWeapon.Collider.enabled = false;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
     }

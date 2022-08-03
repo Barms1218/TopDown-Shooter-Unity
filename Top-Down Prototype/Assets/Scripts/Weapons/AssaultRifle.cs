@@ -23,7 +23,7 @@ public class AssaultRifle : Weapon
                 bullet.tag = gameObject.tag;
             }
             var bulletScript = bullet.GetComponent<Projectile>();
-            currentAmmo -= AmmoPerShot;
+            currentAmmo -= ammoPerShot;
             direction.y += Random.Range(-recoil, recoil);
             bulletScript.MoveToTarget(direction);
             AudioManager.Play(AudioClipName.AR_Fire);

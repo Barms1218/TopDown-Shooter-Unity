@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CallMinions : MonoBehaviour
 {
-    [SerializeField] float timeVariation;
+    [SerializeField] private int timeVariation;
     [SerializeField] private float callTimer;
     [SerializeField] private float minionSpeed;
     WaitForSeconds callDelay;

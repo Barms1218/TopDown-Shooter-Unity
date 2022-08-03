@@ -5,45 +5,43 @@ using UnityEngine.InputSystem;
 
 public class SetTheCursor : MonoBehaviour
 {
-    public static SetTheCursor cursor;
-    CursorActions inputActions;
+
     [SerializeField] Texture2D cursorAim;
-    //[SerializeField] Texture2D cursorClicked;
-    InputAction move;
+    [SerializeField] Texture2D cursorClicked;
     [SerializeField] float xValue;
     [SerializeField] float yValue;
+    CursorActions inputActions;
     Transform playerTransform;
+    InputAction move;
 
+
+    // Properties
     public CursorActions CursorActions => inputActions;
+    public Texture2D AimCursor => cursorAim;
+    public Texture2D UICursor => cursorClicked;
 
     // Start is called before the first frame update
     void Awake()
     {
         inputActions = new CursorActions();
-        cursor = this;
         ChangeCursor(cursorAim);
         move = inputActions.CursorAction.Move;
     }
 
     private void Start()
     {
-        if (PlayerController.player != null)
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    public void ChangeCursor(Texture2D cursorType)
+    {
+        Vector2 hotSpot = new(cursorType.width / 2, cursorType.height / 2);
+        if (cursorType == cursorClicked)
         {
-            playerTransform = PlayerController.player.transform;
+            hotSpot = new(cursorClicked.width / 2, cursorClicked.height);
         }
-        //move.started += ctx => ChangeCursorPosition(ctx.ReadValue<Vector2>());
-    }
-
-    private void ChangeCursor(Texture2D cursorType)
-    {
-        Vector2 hotSpot = new Vector2(cursorType.width / 2, cursorType.height / 2);
+        
         Cursor.SetCursor(cursorType, hotSpot, CursorMode.Auto);
-    }
-
-    public void BecomeUICursor(Texture2D cursorType)
-    {
-        Vector2 hotSpot = new Vector2(cursorType.width / 2, cursorType.height / 2);
-        Cursor.SetCursor(cursorType, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()

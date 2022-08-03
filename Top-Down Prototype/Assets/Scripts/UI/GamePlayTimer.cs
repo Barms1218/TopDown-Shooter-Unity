@@ -36,6 +36,10 @@ public class GamePlayTimer : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
             DisplayTime(timeElapsed);
+            if (timeElapsed == 30f)
+            {
+                onTimeElapsed?.Invoke();
+            }
         }
     }
 

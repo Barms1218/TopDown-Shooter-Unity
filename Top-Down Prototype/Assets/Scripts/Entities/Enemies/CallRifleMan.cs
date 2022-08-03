@@ -4,41 +4,47 @@ using UnityEngine;
 
 public class CallRifleMan : MonoBehaviour
 {
-    [SerializeField] float timeVariation;
+    [SerializeField] int timeVariation;
     [SerializeField] private float callTimer;
     WaitForSeconds callDelay;
-
+    private float seconds;
 
     private void Start()
     {
         callDelay = new WaitForSeconds(callTimer);
-        //StartCoroutine(Call());
+        GamePlayTimer.onTimeElapsed += BeginCall;
+        StartCoroutine(Call());
     }
 
-    private void Update()
+    private void BeginCall()
     {
-        if (Time.time == 30f)
-        {
-            Debug.Log("Bringing out the snipey bois");
-            StartCoroutine(Call());
-        }
+        StartCoroutine(Call());
     }
 
     private IEnumerator Call()
     {
         while (true)
         {
-            var rifleMan = RifleManPool.SharedInstance.GetPooledObject();
-            if (rifleMan != null)
+            if (seconds < 30)
             {
-                rifleMan.transform.SetPositionAndRotation(transform.position,
-                    transform.rotation);
-                rifleMan.SetActive(true);
+                seconds++;
+                Debug.Log(callDelay);
+                yield return new WaitForSeconds(1f);
             }
-            callTimer = Random.Range(callTimer - timeVariation,
-                callTimer + timeVariation);
-            Debug.Log(callDelay);
-            yield return callDelay;
+            else
+            {
+                var rifleMan = RifleManPool.SharedInstance.GetPooledObject();
+                if (rifleMan != null)
+                {
+                    rifleMan.transform.SetPositionAndRotation(transform.position,
+                        transform.rotation);
+                    rifleMan.SetActive(true);
+                }
+                callTimer = Random.Range(callTimer - timeVariation,
+                    callTimer + timeVariation);
+
+                yield return callDelay;
+            }
         }
     }
 }

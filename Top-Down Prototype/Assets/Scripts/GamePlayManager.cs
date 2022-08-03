@@ -9,6 +9,7 @@ public class GamePlayManager : MonoBehaviour
     private static GamePlayManager _instance;
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Texture2D uiCursor;
+    private SetTheCursor theCursor;
     PauseAction pause;
 
     private int killCount;
@@ -37,6 +38,7 @@ public class GamePlayManager : MonoBehaviour
     private void Start()
     {
         AudioManager.Play(AudioClipName.Gameplay_Music);
+        theCursor = GameObject.FindObjectOfType<SetTheCursor>();
     }
 
     public void PauseGame()
@@ -44,14 +46,13 @@ public class GamePlayManager : MonoBehaviour
         if (Time.timeScale > 0)
         {
             Time.timeScale = 0f;
-            //SetTheCursor.cursor.enabled = false;
-            SetTheCursor.cursor.BecomeUICursor(uiCursor);
+            theCursor.ChangeCursor(theCursor.UICursor);
             pauseCanvas.enabled = true;
         }
         else
         {
             Time.timeScale = 1f;
-            SetTheCursor.cursor.enabled = true;
+            theCursor.ChangeCursor(theCursor.AimCursor);
             pauseCanvas.enabled = false;
         }
     }

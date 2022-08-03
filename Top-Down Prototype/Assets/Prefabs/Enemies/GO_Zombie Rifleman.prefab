@@ -248,6 +248,7 @@ MonoBehaviour:
   weaponDrop: {fileID: 2126229509927346940, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
   minChance: 1
   maxChance: 32
+  health: {fileID: -6235309337624090876}
 --- !u!114 &7852778782486491207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +276,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 53568
+  m_InstanceId: 53420
 --- !u!1001 &298068568110556017
 PrefabInstance:
   m_ObjectHideFlags: 0

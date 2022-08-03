@@ -7,14 +7,15 @@ using UnityEngine;
 public class InvincibilityFrames : MonoBehaviour
 {
     [SerializeField] PlayerController controller;
-    [SerializeField] EntityTakeDamage takeDamage;
     [SerializeField] int knockbackStrength = 10;
     [SerializeField] float invincibleTime = 1f;
+    private IDamageable takeDamage;
     private WaitForSeconds invincibility;
 
     private void Start()
     {
         invincibility = new WaitForSeconds(invincibleTime);
+        takeDamage = gameObject.GetComponent<IDamageable>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

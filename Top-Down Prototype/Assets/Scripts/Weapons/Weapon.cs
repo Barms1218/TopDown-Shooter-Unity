@@ -10,7 +10,6 @@ public abstract class Weapon : MonoBehaviour
     protected GameObject bullet;
     [SerializeField] protected Transform muzzleTransform;
     [SerializeField] Collider2D _collider;
-    [SerializeField] Weapon weapon;
 
 
     [Header("Ammunition Stats")]
@@ -36,10 +35,8 @@ public abstract class Weapon : MonoBehaviour
     public float TimeBetweenShots => timeBetweenShots;
     public int CurrentAmmo => currentAmmo;
     public int AmmoPerShot => ammoPerShot;
-    public bool FacingRight => FacingRight;
     public bool CanRapidFire => canRapidFire;
     public Collider2D Collider => _collider;
-    public Weapon CurrentWeapon => weapon;
 
     #endregion
 
@@ -76,7 +73,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected abstract IEnumerator StartReload();
 
-    public void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
         Vector3 newScale = transform.localScale;

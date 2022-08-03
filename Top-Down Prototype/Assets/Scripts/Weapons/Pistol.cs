@@ -18,7 +18,7 @@ public class Pistol : Weapon
                 bullet.tag = gameObject.tag;
             }
             var bulletScript = bullet.GetComponent<Projectile>();
-            currentAmmo -= 1;
+            currentAmmo -= ammoPerShot;
             direction.y += Random.Range(-recoil, recoil);
             bulletScript.MoveToTarget(direction);
             AudioManager.Play(AudioClipName.PistolShot);

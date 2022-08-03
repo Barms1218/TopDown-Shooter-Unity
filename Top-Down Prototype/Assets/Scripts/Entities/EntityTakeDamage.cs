@@ -31,6 +31,5 @@ public class EntityTakeDamage : MonoBehaviour, IDamageable
                 armor--;
             }
         }
-        Debug.Log(amount + "damage taken");
     }
 }
