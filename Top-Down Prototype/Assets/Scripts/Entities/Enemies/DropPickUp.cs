@@ -9,7 +9,7 @@ public class DropPickUp : MonoBehaviour
     [SerializeField] private int minChance = 1;
     [SerializeField] private int maxChance = 32;
     [SerializeField] Health health;
-    private bool hasDroppedWeapon = false;
+    [SerializeField] private static bool hasDroppedWeapon = false;
 
     
     // Start is called before the first frame update

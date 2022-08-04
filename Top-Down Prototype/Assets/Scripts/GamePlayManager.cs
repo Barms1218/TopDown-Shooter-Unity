@@ -37,7 +37,7 @@ public class GamePlayManager : MonoBehaviour
     }
     private void Start()
     {
-        AudioManager.Play(AudioClipName.Gameplay_Music);
+        //AudioManager.Play(AudioClipName.Gameplay_Music);
         theCursor = GameObject.FindObjectOfType<SetTheCursor>();
     }
 
@@ -66,7 +66,9 @@ public class GamePlayManager : MonoBehaviour
     public void QuitGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        pauseCanvas.enabled = false;
+        GameOverMenu.Instance.ShowGameOverScreen();
+        //SceneManager.LoadScene("MainMenu");
     }
 
     public void UpdateKillCount() => killCount++;

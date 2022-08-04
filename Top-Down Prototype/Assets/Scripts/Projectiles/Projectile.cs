@@ -8,8 +8,7 @@ public class Projectile : MonoBehaviour
     #region Fields
     
     [SerializeField] int damage;
-    [SerializeField] float timeToLive;
-    [SerializeField] float forceMagnitude;
+    [SerializeField] float speed;
     [SerializeField] TrailRenderer trail;
 
     #endregion
@@ -40,7 +39,7 @@ public class Projectile : MonoBehaviour
 
             transform.rotation = target;
             rigidbody2D.AddForce(force.normalized *
-                forceMagnitude, ForceMode2D.Impulse);
+                speed, ForceMode2D.Impulse);
         }
 
     }

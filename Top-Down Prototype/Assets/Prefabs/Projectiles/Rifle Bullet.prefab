@@ -147,9 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d9cf3503be13348947e76c1bf00c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 8
-  timeToLive: 3
-  forceMagnitude: 40
+  damage: 4
+  speed: 40
   trail: {fileID: 3473233552381047733}
 --- !u!96 &3473233552381047733
 TrailRenderer:

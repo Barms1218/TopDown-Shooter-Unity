@@ -24,10 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool CanMove
     {
         get => canMove;
-        set
-        {
-            canMove = value;
-        }
+        set => canMove = value;
     }
 
     public Rigidbody2D Rigidbody2D => rb2d;

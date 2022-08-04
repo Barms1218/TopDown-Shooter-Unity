@@ -25,6 +25,7 @@ public class Health : MonoBehaviour, IHaveHealth
         healthBar.MaxValue = maxHealth;
         healthBar.CurrentValue = maxHealth;
     }
+
     public void ReduceHealth(float amount, GameObject damageSource)
     {
         if (_health > 0)
@@ -52,8 +53,6 @@ public class Health : MonoBehaviour, IHaveHealth
             _health = maxHealth;
             onDeath?.Invoke();
         }
-
-
     }
 
     public void RestoreHealth(float amount)

@@ -31,6 +31,7 @@ public class CallMinions : MonoBehaviour
                     move.Speed = minionSpeed;
                 }
             }
+            Debug.Log(callDelay);
             callTimer = Random.Range(callTimer - timeVariation,
                 callTimer + timeVariation);
             yield return callDelay;

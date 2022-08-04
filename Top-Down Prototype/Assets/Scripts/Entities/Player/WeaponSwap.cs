@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerWeaponHandler))]
 public class WeaponSwap : MonoBehaviour
@@ -50,9 +48,9 @@ public class WeaponSwap : MonoBehaviour
     void ChangeWeapon(int weaponIndex)
     {
         weaponHandler.Gun.SetActive(false);
-        weaponHandler.Gun = weaponHandler.PlayerWeapons[weaponIndex];
+        weaponHandler.Gun = weaponHandler.PlayerWeapons[weaponIndex].gameObject;
         weaponHandler.Gun.SetActive(true);
-        weaponHandler.CurrentWeapon = weaponHandler.Gun.GetComponent<Weapon>();
+        weaponHandler.CurrentWeapon = weaponHandler.PlayerWeapons[weaponIndex];
         weaponHandler.TriggerDelay = new WaitForSeconds(
             weaponHandler.CurrentWeapon.TimeBetweenShots);
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(weaponHandler.CurrentWeapon.CurrentAmmo,

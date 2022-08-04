@@ -15,6 +15,4 @@ public interface IShoot
     void Aim(float angle, Transform target);
 
     void Reload();
-
-    void SpecialAttack();
 }

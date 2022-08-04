@@ -36,18 +36,14 @@ public class SetTheCursor : MonoBehaviour
     public void ChangeCursor(Texture2D cursorType)
     {
         Vector2 hotSpot = new(cursorType.width / 2, cursorType.height / 2);
-        if (cursorType == cursorClicked)
-        {
-            hotSpot = new(cursorClicked.width / 2, cursorClicked.height);
-        }
-        
+
         Cursor.SetCursor(cursorType, hotSpot, CursorMode.Auto);
+        //Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Update()
     {
         var inputValue = move.ReadValue<Vector2>();
-
         ChangeCursorPosition(inputValue);
     }
 

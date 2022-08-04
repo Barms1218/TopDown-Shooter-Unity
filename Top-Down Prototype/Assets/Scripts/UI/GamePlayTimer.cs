@@ -9,7 +9,6 @@ public class GamePlayTimer : MonoBehaviour
     private static GamePlayTimer _instance;
     [SerializeField] TextMeshProUGUI timerText;
     private float timeElapsed;
-    public static UnityAction onTimeElapsed;
 
     public TextMeshProUGUI GameTime => timerText;
 
@@ -36,10 +35,6 @@ public class GamePlayTimer : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
             DisplayTime(timeElapsed);
-            if (timeElapsed == 30f)
-            {
-                onTimeElapsed?.Invoke();
-            }
         }
     }
 

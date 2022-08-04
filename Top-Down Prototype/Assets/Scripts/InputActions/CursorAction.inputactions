@@ -1,5 +1,5 @@
 {
-    "name": "Cursor",
+    "name": "CursorAction",
     "maps": [
         {
             "name": "CursorAction",
@@ -30,7 +30,7 @@
                 {
                     "name": "",
                     "id": "474efdba-fed0-49e3-b44f-dcea1ebc97a6",
-                    "path": "<VirtualMouse>/position",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",

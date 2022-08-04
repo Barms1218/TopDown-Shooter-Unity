@@ -10,7 +10,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     [SerializeField] private GameObject gun;
     [SerializeField] private PlayerController _controller;
-    [SerializeField] private List<GameObject> weaponList = new();
+    [SerializeField] private List<Weapon> weaponList = new List<Weapon>();
     [SerializeField] private Weapon currentWeapon;
     private Transform targetTransform;
     Vector2 _direction;
@@ -27,7 +27,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         get => gun;
     }
 
-    public List<GameObject> PlayerWeapons => weaponList;
+    public List<Weapon> PlayerWeapons => weaponList;
 
     public Weapon CurrentWeapon
     {
@@ -98,16 +98,16 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     #endregion
 
-    public void GetNewWeapon(GameObject newGun)
+    public void GetNewWeapon(Weapon newGun)
     {
         AudioManager.Play(AudioClipName.GetGun);
         gun.SetActive(false);
         weaponList.Add(newGun);
         newGun.transform.SetParent(transform, false);
         newGun.transform.position = gun.transform.position;
-        gun = newGun;
+        gun = newGun.gameObject;
 
-        currentWeapon = gun.GetComponent<Weapon>();
+        currentWeapon = newGun;
         timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
         currentWeapon.Collider.enabled = false;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
@@ -115,7 +115,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public void AddAmmoToWeapon(int amountToAdd, string name)
     {
-        foreach(GameObject weapon in weaponList)
+        foreach(Weapon weapon in weaponList)
         {
             if (weapon.name == name)
             {

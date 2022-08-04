@@ -6,45 +6,34 @@ public class CallRifleMan : MonoBehaviour
 {
     [SerializeField] int timeVariation;
     [SerializeField] private float callTimer;
-    WaitForSeconds callDelay;
+    [SerializeField] private float firstSpawnTime = 15f;
+    WaitForSeconds callInterval;
+    WaitForSeconds firstSpawnCall;
     private float seconds;
 
     private void Start()
     {
-        callDelay = new WaitForSeconds(callTimer);
-        GamePlayTimer.onTimeElapsed += BeginCall;
-        StartCoroutine(Call());
-    }
-
-    private void BeginCall()
-    {
+        callInterval = new WaitForSeconds(callTimer);
+        firstSpawnCall = new WaitForSeconds(firstSpawnTime);
         StartCoroutine(Call());
     }
 
     private IEnumerator Call()
     {
+        yield return firstSpawnCall;
         while (true)
         {
-            if (seconds < 30)
+            var rifleMan = RifleManPool.SharedInstance.GetPooledObject();
+            if (rifleMan != null)
             {
-                seconds++;
-                Debug.Log(callDelay);
-                yield return new WaitForSeconds(1f);
+                rifleMan.transform.SetPositionAndRotation(transform.position,
+                    transform.rotation);
+                rifleMan.SetActive(true);
             }
-            else
-            {
-                var rifleMan = RifleManPool.SharedInstance.GetPooledObject();
-                if (rifleMan != null)
-                {
-                    rifleMan.transform.SetPositionAndRotation(transform.position,
-                        transform.rotation);
-                    rifleMan.SetActive(true);
-                }
-                callTimer = Random.Range(callTimer - timeVariation,
-                    callTimer + timeVariation);
+            callTimer = Random.Range(callTimer - timeVariation,
+                callTimer + timeVariation);
 
-                yield return callDelay;
-            }
+            yield return callInterval;
         }
     }
 }

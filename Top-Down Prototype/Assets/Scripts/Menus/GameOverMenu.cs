@@ -12,7 +12,6 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] Canvas canvas;
 
     private int killCount;
-    private int score;
 
     public static GameOverMenu Instance
     {
@@ -34,10 +33,11 @@ public class GameOverMenu : MonoBehaviour
         }
     }
 
+    public Canvas Canvas => canvas;
+
     private void Awake()
     {
         _instance = this;
-        //DontDestroyOnLoad(this);
     }
 
     public void ShowGameOverScreen()

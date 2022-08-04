@@ -8,6 +8,7 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private Animator _animator;
     [SerializeField] private float chaseDistance;
+    [SerializeField] private GameObject child;
     private GameObject player;
     private bool facingRight = true;
 
@@ -15,7 +16,7 @@ public class EnemyMove : MonoBehaviour
     public float Speed
     {
         get => speed;
-        set { speed = value; }
+        set => speed = value;
     }
 
     private void Start()
@@ -42,12 +43,16 @@ public class EnemyMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        var _distance = Vector2.Distance(player.transform.position,
-            transform.position);
-        if (_distance > chaseDistance)
+        if (player != null)
         {
-            ChasePlayer();
+            var _distance = Vector2.Distance(player.transform.position,
+                transform.position);
+            if (_distance > chaseDistance)
+            {
+                ChasePlayer();
+            }
         }
+
     }
 
     private void ChasePlayer()
@@ -64,11 +69,11 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual void Flip()
     {
-        Vector3 newScale = gameObject.transform.localScale;
+        Vector3 newScale = child.transform.localScale;
         newScale.x *= -1f;
 
         facingRight = !facingRight;
 
-        gameObject.transform.localScale = newScale;
+        child.transform.localScale = newScale;
     }
 }
