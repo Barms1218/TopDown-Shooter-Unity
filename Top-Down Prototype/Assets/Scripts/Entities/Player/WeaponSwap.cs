@@ -51,8 +51,7 @@ public class WeaponSwap : MonoBehaviour
         weaponHandler.Gun = weaponHandler.PlayerWeapons[weaponIndex].gameObject;
         weaponHandler.Gun.SetActive(true);
         weaponHandler.CurrentWeapon = weaponHandler.PlayerWeapons[weaponIndex];
-        weaponHandler.TriggerDelay = new WaitForSeconds(
-            weaponHandler.CurrentWeapon.TimeBetweenShots);
+        weaponHandler.TriggerDelay = weaponHandler.CurrentWeapon.TimeBetweenShots;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(weaponHandler.CurrentWeapon.CurrentAmmo,
             weaponHandler.CurrentWeapon.MaxAmmo);
     }

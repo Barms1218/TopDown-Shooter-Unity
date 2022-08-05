@@ -29,7 +29,7 @@ public class InvincibilityFrames : MonoBehaviour
 
         if (hitObject.CompareTag("Enemy"))
         {
-            controller.CanMove = false;
+            controller.IsAlive = false;
             takeDamage.CanTakeDamage = false;
             var pushDirection = transform.position - hitObject.transform.position;
             controller.Rigidbody2D.AddForce(pushDirection * knockbackStrength,
@@ -41,7 +41,7 @@ public class InvincibilityFrames : MonoBehaviour
     private IEnumerator Recover()
     {
         yield return invincibility;
-        controller.CanMove = true;
+        controller.IsAlive = true;
         takeDamage.CanTakeDamage = true;
     }
 }

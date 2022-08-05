@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,18 +14,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerWeaponHandler weaponHandler;
     [SerializeField] PlayerMovement movement;
     [SerializeField] WeaponSwap weaponSwap;
-    [SerializeField] private bool canMove = true;
+    [SerializeField] private bool isAlive = true;
     [SerializeField] GameObject childObject;
 
     Coroutine fireCoroutine;
 
     // Vector Input Actions
     InputAction move;
+    public UnityAction<Vector2> moveDelegate;
 
-    public bool CanMove
+    public bool IsAlive
     {
-        get => canMove;
-        set => canMove = value;
+        get => isAlive;
+        set => isAlive = value;
     }
 
     public Rigidbody2D Rigidbody2D => rb2d;
@@ -57,11 +59,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canMove)
+        if (isAlive)
         {
-            movement.Movement(move.ReadValue<Vector2>());
-        }
+            //movement.MoveObject(move.ReadValue<Vector2>());
 
+        }
+        moveDelegate?.Invoke(move.ReadValue<Vector2>());
     }
 
 

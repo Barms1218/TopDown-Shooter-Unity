@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyWeaponHandler : MonoBehaviour
 {
+    [SerializeField] AIController _controller;
     [SerializeField] GameObject gun;
     [SerializeField] float maximumRange;
     [SerializeField] float minimumRange;
@@ -14,7 +15,7 @@ public class EnemyWeaponHandler : MonoBehaviour
 
     private void Start()
     {
-        playerTransform = PlayerController.player.transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -30,18 +31,29 @@ public class EnemyWeaponHandler : MonoBehaviour
             aimDirection = playerTransform.position - gun.transform.position;
             float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
             weapon.Aim(angle, playerTransform.position);
-
-            var _distance = Vector2.Distance(playerTransform.position, transform.position);
-            if (_distance > minimumRange && _distance < maximumRange && CanFire)
-            {
-                OnFire();
-                nextTriggerPull = Time.time + weapon.TimeBetweenShots;
-            }
         }
     }
 
-    private void OnFire() => weapon.Fire(aimDirection);
+    private void Attack()
+    {
+        var _distance = Vector2.Distance(playerTransform.position, transform.position);
+        if (CanFire)
+        {
+            weapon.Fire(aimDirection);
+            nextTriggerPull = Time.time + weapon.TimeBetweenShots;
+        }
 
+    }
 
     private bool CanFire => Time.time >= nextTriggerPull;
+
+    private void OnEnable()
+    {
+        _controller.attackDelegate += Attack;
+    }
+
+    private void OnDisable()
+    {
+        _controller.attackDelegate -= Attack;
+    }
 }

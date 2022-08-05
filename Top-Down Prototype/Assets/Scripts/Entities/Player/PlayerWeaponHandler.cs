@@ -16,6 +16,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
     private float nextTriggerPull;
+    private float triggerTime;
 
     #endregion
 
@@ -35,7 +36,14 @@ public class PlayerWeaponHandler : MonoBehaviour
         get => currentWeapon;
     }
 
-    public WaitForSeconds TriggerDelay { set { timeBetweenShots = value; } }
+    public float TriggerDelay
+    {
+        set
+        {
+            triggerTime = value;
+            timeBetweenShots = new WaitForSeconds(triggerTime);
+        }
+    }
 
     #endregion
 

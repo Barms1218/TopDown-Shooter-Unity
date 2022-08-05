@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3543103714409048558}
   - component: {fileID: 3543103714409048343}
   - component: {fileID: 3543103714409048342}
+  - component: {fileID: 2197870145766887852}
   - component: {fileID: 1863819634045794801}
-  - component: {fileID: 4076007043845351801}
   - component: {fileID: -6235309337624090876}
   - component: {fileID: 308554320419807269}
   - component: {fileID: -4200519972683017157}
@@ -100,6 +100,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01205492, y: 0.43198586}
   m_Size: {x: 0.59198666, y: 0.89365864}
   m_Direction: 0
+--- !u!114 &2197870145766887852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543103714409048337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0101f9915b9f94dc5aa01a492b23340a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: 3543103714409048343}
+  _collider: {fileID: 3543103714409048342}
+  _animator: {fileID: 4338167231598836216}
+  attackDistance: 6
+  minAttackDistance: 3
 --- !u!114 &1863819634045794801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,26 +130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  rb2d: {fileID: 3543103714409048343}
-  _animator: {fileID: 3543103714409048558}
-  chaseDistance: 5
   child: {fileID: 5270326861657880261}
---- !u!114 &4076007043845351801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3543103714409048337}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd1b8790a69e6243842520ea63aa1a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gun: {fileID: 2662633390049074438}
-  maximumRange: 6.5
-  minimumRange: 3
-  weapon: {fileID: 2662633390049074435}
+  _controller: {fileID: 2197870145766887852}
+  chaseDistance: 5
 --- !u!114 &-6235309337624090876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 62408
+  m_InstanceId: 65158
 --- !u!1 &5270326861657880261
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd1b8790a69e6243842520ea63aa1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _controller: {fileID: 2197870145766887852}
   gun: {fileID: 2662633390049074438}
   maximumRange: 6.5
   minimumRange: 3

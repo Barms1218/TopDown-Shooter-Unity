@@ -26,7 +26,7 @@ public class CallMinions : MonoBehaviour
                 minion.transform.SetPositionAndRotation(transform.position,
                     transform.rotation);
                 minion.SetActive(true);
-                if (minion.TryGetComponent(out EnemyMove move))
+                if (minion.TryGetComponent(out Move move))
                 {
                     move.Speed = minionSpeed;
                 }

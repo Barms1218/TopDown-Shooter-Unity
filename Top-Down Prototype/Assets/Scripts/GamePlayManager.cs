@@ -68,7 +68,6 @@ public class GamePlayManager : MonoBehaviour
         Time.timeScale = 1;
         pauseCanvas.enabled = false;
         GameOverMenu.Instance.ShowGameOverScreen();
-        //SceneManager.LoadScene("MainMenu");
     }
 
     public void UpdateKillCount() => killCount++;

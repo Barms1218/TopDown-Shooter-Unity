@@ -9,7 +9,7 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private int attackStrength;
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
-    [SerializeField] EnemyMove moveComponent;
+    [SerializeField] AIController _controller;
     private WaitForSeconds staggerTime;
     private GameObject player;
 
@@ -18,7 +18,17 @@ public class MeleeAttack : MonoBehaviour
     {
         player = PlayerController.player.gameObject;
         staggerTime = new WaitForSeconds(attackCooldown);
+        //_controller.attackDelegate += Attack;
     }
+
+    //private void Attack()
+    //{
+    //    if (player.TryGetComponent(out IDamageable damageable))
+    //    {
+    //        damageable.DealDamage(damage, gameObject);
+    //    }
+    //    StartCoroutine(Stagger());
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -41,10 +51,10 @@ public class MeleeAttack : MonoBehaviour
 
     private IEnumerator Stagger()
     {
-        moveComponent.enabled = false;
+        _controller.enabled = false;
 
         yield return staggerTime;
 
-        moveComponent.enabled = true;
+        _controller.enabled = true;
     }
 }

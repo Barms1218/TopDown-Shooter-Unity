@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 847067256608029376}
   - component: {fileID: 404427998}
   - component: {fileID: 1912698520}
+  - component: {fileID: 5731720627620535405}
   m_Layer: 8
   m_Name: GO_Zombie Inmate
   m_TagString: Enemy
@@ -91,10 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  rb2d: {fileID: 2579200449049318830}
-  _animator: {fileID: 8951342379862610509}
-  chaseDistance: 0
   child: {fileID: 8191513672832862777}
+  _controller: {fileID: 5731720627620535405}
+  chaseDistance: 0
 --- !u!114 &5294084347439653064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   attackStrength: 25
   damage: 5
   attackCooldown: 1
-  moveComponent: {fileID: 1335274637457500876}
+  _controller: {fileID: 5731720627620535405}
 --- !u!114 &1912698520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +248,23 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 62268
+  m_InstanceId: 31994
+--- !u!114 &5731720627620535405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0101f9915b9f94dc5aa01a492b23340a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: 2579200449049318830}
+  _collider: {fileID: 1010239956}
+  _animator: {fileID: 8951342379862610509}
+  attackDistance: 0
 --- !u!1 &8191513672832862777
 GameObject:
   m_ObjectHideFlags: 0

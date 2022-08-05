@@ -52,7 +52,7 @@ public partial class @CursorActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""474efdba-fed0-49e3-b44f-dcea1ebc97a6"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<VirtualMouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
