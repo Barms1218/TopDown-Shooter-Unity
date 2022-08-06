@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
     #region Fields
     
     [SerializeField] int damage;
+    [SerializeField] float timeToLive = 0.5f;
+    [SerializeField] float elapsedTime;
     [SerializeField] float speed;
     [SerializeField] TrailRenderer trail;
 
@@ -18,6 +20,14 @@ public class Projectile : MonoBehaviour
         ProcessHit(collision.gameObject);
     }
 
+    private void Update()
+    {
+        elapsedTime -= Time.deltaTime;
+        if (elapsedTime <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     private void ProcessHit(GameObject hitObject)
     {
@@ -25,9 +35,10 @@ public class Projectile : MonoBehaviour
             && !hitObject.CompareTag(gameObject.tag))
         {
             damageable.DealDamage(damage, gameObject);
+            gameObject.SetActive(false);
         }
-        gameObject.SetActive(false);
-        trail.Clear();
+
+
     }
 
     public virtual void MoveToTarget(Vector2 force)
@@ -41,6 +52,15 @@ public class Projectile : MonoBehaviour
             rigidbody2D.AddForce(force.normalized *
                 speed, ForceMode2D.Impulse);
         }
+    }
 
+    private void OnEnable()
+    {
+        elapsedTime = timeToLive;
+    }
+
+    private void OnDisable()
+    {
+        trail.Clear();
     }
 }

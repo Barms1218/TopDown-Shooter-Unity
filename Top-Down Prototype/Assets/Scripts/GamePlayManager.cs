@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,10 @@ public class GamePlayManager : MonoBehaviour
 {
     private static GamePlayManager _instance;
     [SerializeField] Canvas pauseCanvas;
-    [SerializeField] Texture2D uiCursor;
+    [SerializeField] TextMeshProUGUI killCountText;
+    [SerializeField] TextMeshProUGUI finalScoreText;
+    [SerializeField] TextMeshProUGUI finalTimeText;
+    [SerializeField] Canvas gameOverCanvas;
     private SetTheCursor theCursor;
     PauseAction pause;
 
@@ -25,8 +29,6 @@ public class GamePlayManager : MonoBehaviour
             return _instance;
         }
     }
-
-    public int KillCount => killCount;
 
     private void Awake()
     {
@@ -59,22 +61,47 @@ public class GamePlayManager : MonoBehaviour
 
     public void StartOver()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
         Time.timeScale = 1;
-        SceneManager.LoadScene("Arena Scene");
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void QuitGame()
     {
-        Time.timeScale = 1;
         pauseCanvas.enabled = false;
-        GameOverMenu.Instance.ShowGameOverScreen();
+        ShowGameOverScreen();
     }
 
-    public void UpdateKillCount() => killCount++;
+    public void QuitToMainMenu()
+    {
+        Time.timeScale = 1;
+        gameObject.SetActive(false);
+        MenuManager.GoToMenu(MenuName.Main);
+    }
+
+    public void QuitToDesktop()
+    {
+        Application.Quit();
+    }
+
+    public void UpdateKillCount()
+    {
+        killCount++;
+    }
+
+    private void ShowGameOverScreen()
+    {
+        gameOverCanvas.enabled = true;
+        Time.timeScale = 0;
+        killCountText.text = "Enemies Killed: " + killCount.ToString();
+        finalScoreText.text = "Final Score: " + HUD.Instance.Score;
+        finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.GameTime.text;
+    }
 
     private void OnEnable()
     {
         pause.Enable();
+        PlayerDeath.gameOver += ShowGameOverScreen;
     }
 
     private void OnDisable()

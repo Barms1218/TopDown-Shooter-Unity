@@ -6,7 +6,7 @@ public interface IHaveHealth
 {
     float Health { get; set; }
     int MaxHealth{ get; }
-    void ReduceHealth(float amount, GameObject damageSource);
-    void RestoreHealth(float amount);
+    void ReduceHealth(int amount, GameObject damageSource);
+    void RestoreHealth(int amount);
 }
 

@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleTransform: {fileID: 462724276005966884}
   _collider: {fileID: 131069197}
-  weapon: {fileID: 2126229509927346937}
+  targetTransform: {fileID: 245405541487620406, guid: 7755a7a314c4e4b08b4a9131c35a422a, type: 3}
   currentAmmo: 24
   maxAmmo: 72
   magazineSize: 24

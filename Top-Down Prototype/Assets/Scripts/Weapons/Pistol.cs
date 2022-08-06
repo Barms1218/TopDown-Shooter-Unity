@@ -22,7 +22,6 @@ public class Pistol : Weapon
             direction.y += Random.Range(-recoil, recoil);
             bulletScript.MoveToTarget(direction);
             AudioManager.Play(AudioClipName.PistolShot);
-            Debug.Log(currentAmmo);
         }
     }
 

@@ -20,6 +20,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5416292742939780384, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 5713588412531873688, guid: 3f670652539aa43068bf9aa99460e89d, type: 3}
+    - target: {fileID: 5416292742939780384, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
       propertyPath: timeBetweenShots
       value: 2
       objectReference: {fileID: 0}

@@ -4,38 +4,32 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Controller
 {
     public static PlayerController player;
+    [SerializeField]
+    GameObject gun;
     private PlayerActions actions;
-    [SerializeField] private Rigidbody2D rb2d;
-    [SerializeField] private Collider2D _collider2D;
-    [SerializeField] private Animator _animator;
-    [SerializeField] PlayerWeaponHandler weaponHandler;
-    [SerializeField] PlayerMovement movement;
-    [SerializeField] WeaponSwap weaponSwap;
-    [SerializeField] private bool isAlive = true;
-    [SerializeField] GameObject childObject;
+    [SerializeField]
+    PlayerWeaponHandler weaponHandler;
+    [SerializeField]
+    WeaponSwap weaponSwap;
+
+    Weapon currentWeapon;
 
     Coroutine fireCoroutine;
 
     // Vector Input Actions
     InputAction move;
+
+    // delegates
     public UnityAction<Vector2> moveDelegate;
+    public UnityAction dashDelegate;
+    public UnityAction<IEnumerator> rapidFireEvent;
 
-    public bool IsAlive
+    protected override void Awake()
     {
-        get => isAlive;
-        set => isAlive = value;
-    }
-
-    public Rigidbody2D Rigidbody2D => rb2d;
-    public Collider2D Collider => _collider2D;
-    public Animator Animator => _animator;
-    public GameObject Child => childObject;
-
-    private void Awake()
-    {
+        base.Awake();
         player = this;
 
         actions = new PlayerActions();
@@ -47,7 +41,7 @@ public class PlayerController : MonoBehaviour
         actions.PlayerControls.Reload.started += _ => weaponHandler.Reload();
 
         //Dash input
-        actions.PlayerControls.Dash.started += _ => movement.Dash();
+        actions.PlayerControls.Dash.started += _ => Dash();
 
         // Inputs for weapon swap
         actions.PlayerControls.EquipWeapon1.started += _ => weaponSwap.TryEquipWeaponOne();
@@ -57,20 +51,20 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        if (isAlive)
-        {
-            //movement.MoveObject(move.ReadValue<Vector2>());
-
-        }
         moveDelegate?.Invoke(move.ReadValue<Vector2>());
     }
 
+    void Dash()
+    {
+        dashDelegate?.Invoke();
+    }
 
     void StartFiring()
     {
         fireCoroutine = StartCoroutine(weaponHandler.RapidFire());
+        //rapidFireEvent?.Invoke(weaponHandler.RapidFire());
     }
 
     void StopFiring()

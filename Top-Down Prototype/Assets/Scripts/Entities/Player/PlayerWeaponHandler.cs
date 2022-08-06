@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-//[RequireComponent(typeof(InputController))]
 public class PlayerWeaponHandler : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private GameObject gun;
-    [SerializeField] private PlayerController _controller;
-    [SerializeField] private List<Weapon> weaponList = new List<Weapon>();
-    [SerializeField] private Weapon currentWeapon;
+    [SerializeField]
+    private PlayerController _controller;
+    private Weapon currentWeapon;
     private Transform targetTransform;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
@@ -22,18 +20,9 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     #region Properties
 
-    public GameObject Gun
-    {
-        set { gun = value; }
-        get => gun;
-    }
-
-    public List<Weapon> PlayerWeapons => weaponList;
-
     public Weapon CurrentWeapon
     {
-        set { currentWeapon = value; }
-        get => currentWeapon;
+        set => currentWeapon = value;
     }
 
     public float TriggerDelay
@@ -62,7 +51,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public void Aim()
     {
-        _direction = targetTransform.position - gun.transform.position;
+        _direction = targetTransform.position - currentWeapon.gameObject.transform.position;
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 
         if (currentWeapon != null)
@@ -71,7 +60,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    private void FireWeapon()
     {
         if (currentWeapon.CurrentAmmo > 0)
         {
@@ -90,13 +79,13 @@ public class PlayerWeaponHandler : MonoBehaviour
         {
             while(true)
             {
-                Shoot();
+                FireWeapon();
                 yield return timeBetweenShots;
             }
         }
         else if (Time.time >= nextTriggerPull && Time.timeScale > 0)
         {
-            Shoot();
+            FireWeapon();
             nextTriggerPull = Time.time + currentWeapon.TimeBetweenShots;
             yield return null;
         }
@@ -106,30 +95,11 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     #endregion
 
-    public void GetNewWeapon(Weapon newGun)
-    {
-        AudioManager.Play(AudioClipName.GetGun);
-        gun.SetActive(false);
-        weaponList.Add(newGun);
-        newGun.transform.SetParent(transform, false);
-        newGun.transform.position = gun.transform.position;
-        gun = newGun.gameObject;
-
-        currentWeapon = newGun;
-        timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
-        currentWeapon.Collider.enabled = false;
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
-    }
-
-    public void AddAmmoToWeapon(int amountToAdd, string name)
-    {
-        foreach(Weapon weapon in weaponList)
-        {
-            if (weapon.name == name)
-            {
-                weapon.GetComponent<Weapon>().MaxAmmo += amountToAdd;
-                UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
-            }
-        }
-    }
+    //public void AddAmmoToWeapon(int amountToAdd, Weapon weapon)
+    //{
+    //    if (weaponList.Contains(weapon))
+    //    {
+    //        weapon.MaxAmmo += amountToAdd;
+    //    }
+    //}
 }

@@ -7,20 +7,20 @@ using UnityEngine.Events;
 public class PlayerDeath : MonoBehaviour
 {
     [SerializeField] PlayerController _controller;
-    [SerializeField] UnityEvent _gameOver;
-    [SerializeField] Health _health;
+    Health _health;
+    public static UnityAction gameOver;
 
     private void Awake()
     {
-        _health.onDeath += EndGame;
+        _controller = GetComponent<PlayerController>();
+        _health = GetComponent<Health>();
     }
 
-    private void EndGame()
+    private void HandleDeath()
     {
         _controller.Animator.SetTrigger("Dead");
-        GetComponent<Collider2D>().enabled = false;
+        _controller.Collider.enabled = false;
         _controller.enabled = false;
-        _gameOver.Invoke();
         StartCoroutine(End());
 
     }
@@ -29,6 +29,18 @@ public class PlayerDeath : MonoBehaviour
     {
         
         yield return new WaitForSeconds(2f);
+        gameOver?.Invoke();
         gameObject.SetActive(false);
+
+    }
+
+    private void OnEnable()
+    {
+        _health.onDeath += HandleDeath;
+    }
+
+    private void OnDisable()
+    {
+        _health.onDeath -= HandleDeath;
     }
 }

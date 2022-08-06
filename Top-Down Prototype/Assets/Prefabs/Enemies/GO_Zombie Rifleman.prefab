@@ -112,8 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0101f9915b9f94dc5aa01a492b23340a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: 3543103714409048343}
-  _collider: {fileID: 3543103714409048342}
   _animator: {fileID: 4338167231598836216}
   attackDistance: 6
   minAttackDistance: 3
@@ -146,7 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  healthBar: {fileID: 4485535153180673299}
 --- !u!114 &308554320419807269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armor: 0
-  damageResistance: 
   health: {fileID: -6235309337624090876}
   canTakeDamage: 1
 --- !u!114 &-4200519972683017157
@@ -175,98 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84a3d5a8527c7341a1dd821232d5bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: -6235309337624090876}
   points: 300
-  disableEnemy:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3543103714409048342}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1863819634045794801}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2868215780164156571}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3543103714409048558}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Dying
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableEnemy:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3543103714409048342}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1863819634045794801}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 2868215780164156571}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &3877590269110434435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,8 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ammoDrop: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
   weaponDrop: {fileID: 2126229509927346940, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
-  minChance: 1
-  maxChance: 32
+  minChance: 0
+  maxChance: 34
   health: {fileID: -6235309337624090876}
 --- !u!114 &7852778782486491207
 MonoBehaviour:
@@ -311,7 +216,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 65158
+  m_InstanceId: 57968
 --- !u!1 &5270326861657880261
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,14 +537,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5685970451474781401, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
   m_PrefabInstance: {fileID: 7623035573041679668}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4485535153180673299 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6338152386767112231, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
-  m_PrefabInstance: {fileID: 7623035573041679668}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003bff5b75c3d47378814a35d0a915c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

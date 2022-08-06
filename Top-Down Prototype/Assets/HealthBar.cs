@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    Health health;
     [SerializeField] private Slider slider;
     [SerializeField] Gradient gradient;
     [SerializeField] Image fill;
@@ -16,27 +17,26 @@ public class HealthBar : MonoBehaviour
         set { slider.maxValue = value; }
     }
 
-    public float CurrentValue
+    public void ChangeValue(float value)
     {
-        get { return slider.value; }
-        set
+        slider.value = value;
+        fill.color = gradient.Evaluate(slider.normalizedValue);
+        if (slider.normalizedValue < 1)
         {
-            slider.value = value;
-            fill.color = gradient.Evaluate(slider.normalizedValue);
-            if (slider.normalizedValue < 1)
-            {
-                healthBarImage.enabled = true;
-                fill.enabled = true;
-
-            }
+            healthBarImage.enabled = true;
+            fill.enabled = true;
         }
     }
 
     private void Awake()
     {
+        health = GetComponentInParent<Health>();
+    }
+    private void OnEnable()
+    {
+        health.onHit += ChangeValue;
         fill.color = gradient.Evaluate(1f);
         fill.enabled = false;
         healthBarImage.enabled = false;
     }
-
 }

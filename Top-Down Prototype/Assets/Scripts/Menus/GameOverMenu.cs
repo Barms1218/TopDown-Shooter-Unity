@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalTimeText;
     [SerializeField] Canvas canvas;
 
-    private int killCount;
+    //private int killCount;
 
     public static GameOverMenu Instance
     {
@@ -25,13 +26,13 @@ public class GameOverMenu : MonoBehaviour
         }
     }
 
-    public int KillCount
-    {
-        get
-        {
-            return killCount;
-        }
-    }
+    //public int KillCount
+    //{
+    //    get
+    //    {
+    //        return killCount;
+    //    }
+    //}
 
     public Canvas Canvas => canvas;
 
@@ -40,12 +41,19 @@ public class GameOverMenu : MonoBehaviour
         _instance = this;
     }
 
-    public void ShowGameOverScreen()
+    public void StartOver()
     {
-        canvas.enabled = true;
-        Time.timeScale = 0;
-        killCountText.text = "Enemies Killed: " + GamePlayManager.Instance.KillCount.ToString();
-        finalScoreText.text = "Final Score: " + HUD.Instance.Score;
-        finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.GameTime.text;
+        Scene currentScene = SceneManager.GetActiveScene();
+        Time.timeScale = 1;
+        SceneManager.LoadScene(currentScene.name);
     }
+
+    //public void ShowGameOverScreen()
+    //{
+    //    canvas.enabled = true;
+    //    Time.timeScale = 0;
+    //    killCountText.text = "Enemies Killed: " + killCount.ToString();
+    //    finalScoreText.text = "Final Score: " + HUD.Instance.Score;
+    //    finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.GameTime.text;
+    //}
 }

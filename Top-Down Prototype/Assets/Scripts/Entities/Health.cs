@@ -7,9 +7,10 @@ public class Health : MonoBehaviour, IHaveHealth
 {
 
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] HealthBar healthBar;
+    HealthBar healthBar;
     private float _health;
     public UnityAction onDeath;
+    public UnityAction<float> onHit;
 
     public int MaxHealth => maxHealth;
 
@@ -21,17 +22,18 @@ public class Health : MonoBehaviour, IHaveHealth
 
     private void Awake()
     {
-        _health = maxHealth;
+        healthBar = GetComponentInChildren<HealthBar>();
         healthBar.MaxValue = maxHealth;
-        healthBar.CurrentValue = maxHealth;
+        //healthBar.CurrentValue = maxHealth;
     }
 
-    public void ReduceHealth(float amount, GameObject damageSource)
+    public void ReduceHealth(int amount, GameObject damageSource)
     {
         if (_health > 0)
         {
             _health -= amount;
-            healthBar.CurrentValue = _health;
+            onHit?.Invoke(_health);
+            //healthBar.CurrentValue = _health;
             if (gameObject.CompareTag("Player") || gameObject.CompareTag("Enemy"))
             {
                 var bloodSplatter = BloodPool.SharedInstance.GetPooledObject();
@@ -50,12 +52,11 @@ public class Health : MonoBehaviour, IHaveHealth
         }
         if (_health <= 0)
         {
-            _health = maxHealth;
             onDeath?.Invoke();
         }
     }
 
-    public void RestoreHealth(float amount)
+    public void RestoreHealth(int amount)
     {
         if (_health < maxHealth)
         {
@@ -65,5 +66,10 @@ public class Health : MonoBehaviour, IHaveHealth
                 _health = maxHealth;
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        _health = maxHealth;
     }
 }

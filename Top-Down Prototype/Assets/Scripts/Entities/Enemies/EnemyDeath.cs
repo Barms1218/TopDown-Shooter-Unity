@@ -6,23 +6,24 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Health))]
 public class EnemyDeath : MonoBehaviour
 {
-    [SerializeField] Health health;
-    [SerializeField] private int points;
+    Health health;
+    Controller _controller;
+    [SerializeField]
+    private int points;
     private WaitForSeconds dieSeconds;
     private float dieTime = 1f;
 
-    public UnityEvent disableEnemy;
-    public UnityEvent enableEnemy;
-
-    private void Start()
+    private void Awake()
     {
+        _controller = GetComponent<Controller>();
         dieSeconds = new WaitForSeconds(dieTime);
-
+        health = GetComponent<Health>();
     }
 
     public void HandleDeath()
     {
-        disableEnemy?.Invoke();
+        _controller.Animator.SetTrigger("Dying");
+        _controller.enabled = false;
         StartCoroutine(Die());
         AudioManager.Play(AudioClipName.ZombieInmateDeath);
     }
@@ -39,7 +40,7 @@ public class EnemyDeath : MonoBehaviour
 
     private void OnEnable()
     {
-        enableEnemy?.Invoke();
+        _controller.enabled = true;
         health.onDeath += HandleDeath;
     }
 

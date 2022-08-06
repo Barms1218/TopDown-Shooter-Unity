@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class AmmoPickup : MonoBehaviour
+public class AmmoPickup : MonoBehaviour
 {
     [SerializeField] protected int _amount;
-    [SerializeField] protected string gunName;
+    [SerializeField] protected Weapon weaponType;
 
-    public int Amount => _amount;
-    public string GunName => gunName;
+    public Weapon WeaponType => weaponType;
+    public int AmountToAdd => _amount;
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {

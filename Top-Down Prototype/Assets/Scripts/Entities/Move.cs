@@ -20,6 +20,7 @@ public abstract class Move : MonoBehaviour
 
 
     }
+
     // Update is called once per frame
     protected virtual void Update()
     {

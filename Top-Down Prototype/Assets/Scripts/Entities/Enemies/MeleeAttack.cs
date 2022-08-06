@@ -21,24 +21,18 @@ public class MeleeAttack : MonoBehaviour
         //_controller.attackDelegate += Attack;
     }
 
-    //private void Attack()
-    //{
-    //    if (player.TryGetComponent(out IDamageable damageable))
-    //    {
-    //        damageable.DealDamage(damage, gameObject);
-    //    }
-    //    StartCoroutine(Stagger());
-    //}
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ProcessHit(collision.gameObject);
+        var hitObject = collision.gameObject;
+        if (!hitObject.CompareTag(gameObject.tag))
+        {
+            ProcessHit(hitObject);
+        }
     }
 
     private void ProcessHit(GameObject hitObject)
     {
-        if (hitObject.TryGetComponent(out IDamageable damageable) &&
-            !hitObject.CompareTag(gameObject.tag))
+        if (hitObject.TryGetComponent(out IDamageable damageable))
         {
             damageable.DealDamage(damage, gameObject);
             StartCoroutine(Stagger());

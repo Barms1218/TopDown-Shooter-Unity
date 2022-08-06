@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 785605495467004109}
   - component: {fileID: 785605495467004106}
   - component: {fileID: 785605495467004107}
-  - component: {fileID: 785605495467004108}
+  - component: {fileID: 911398341377501459}
   m_Layer: 9
   m_Name: Assault Rifle Ammo
   m_TagString: Pickup
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &785605495467004108
+--- !u!114 &911398341377501459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 785605495467004104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722b4068a4dd2714eb2cfafc57dcc9e7, type: 3}
+  m_Script: {fileID: 11500000, guid: a658314e0414a434996a2df49734bd5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _amount: 24
-  gunName: 
+  weaponType: {fileID: 2126229509927346937, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}

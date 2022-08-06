@@ -21,7 +21,6 @@ public class PlayerMovement : Move
     protected override void Start()
     {
         lookAtTransform = GameObject.FindGameObjectWithTag("Cursor").transform;
-        _controller.moveDelegate += MoveObject;
     }
 
 
@@ -39,7 +38,6 @@ public class PlayerMovement : Move
 
     public void Dash()
     {
-        Debug.Log("Dashing");
         if (canDash)
         {
             StartCoroutine(Dashing());
@@ -55,5 +53,17 @@ public class PlayerMovement : Move
         speed = savedSpeed;
         yield return coolDownSeconds;
         canDash = true;
+    }
+
+    private void OnEnable()
+    {
+        _controller.moveDelegate += MoveObject;
+        _controller.dashDelegate += Dash;
+    }
+
+    private void OnDisable()
+    {
+        _controller.moveDelegate -= MoveObject;
+        _controller.dashDelegate -= Dash;
     }
 }

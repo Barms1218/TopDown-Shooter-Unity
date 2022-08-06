@@ -34,7 +34,7 @@ public class EnemyWeaponHandler : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void FireWeapon()
     {
         var _distance = Vector2.Distance(playerTransform.position, transform.position);
         if (CanFire)
@@ -49,11 +49,11 @@ public class EnemyWeaponHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        _controller.attackDelegate += Attack;
+        _controller.attackDelegate += FireWeapon;
     }
 
     private void OnDisable()
     {
-        _controller.attackDelegate -= Attack;
+        _controller.attackDelegate -= FireWeapon;
     }
 }
