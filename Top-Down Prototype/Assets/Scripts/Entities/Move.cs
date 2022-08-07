@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Move : MonoBehaviour
+public class Move : MonoBehaviour, IMoveable
 {
-    [SerializeField] protected float speed;
-    [SerializeField] protected GameObject child;
-    protected Transform lookAtTransform;
-    protected bool facingRight = true;
+    [SerializeField] private float speed;
+    [SerializeField] private GameObject flipObject;
+    [SerializeField] private string transformName;
+    private Rigidbody2D rb2d;
+    private Animator animator;
+    Transform lookAtTransform;
+    private bool facingRight = true;
 
     public float Speed
     {
@@ -15,10 +18,15 @@ public abstract class Move : MonoBehaviour
         set => speed = value;
     }
 
-    protected virtual void Start()
+    private void Awake()
     {
+        rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
+    }
 
-
+    private void Start()
+    {
+        lookAtTransform = GameObject.FindGameObjectWithTag(transformName).transform;
     }
 
     // Update is called once per frame
@@ -39,15 +47,23 @@ public abstract class Move : MonoBehaviour
         }
     }
 
-    public abstract void MoveObject(Vector2 moveInput);
-
-    protected virtual void Flip()
+    public void MoveObject(Vector2 moveInput)
     {
-        Vector3 newScale = child.transform.localScale;
+        rb2d.MovePosition(rb2d.position + speed * Time.deltaTime * moveInput);
+        animator.SetBool("Running", true);
+        if (moveInput == Vector2.zero)
+        {
+            animator.SetBool("Running", false);
+        }
+    }
+
+    private void Flip()
+    {
+        Vector3 newScale = flipObject.transform.localScale;
         newScale.x *= -1f;
 
         facingRight = !facingRight;
 
-        child.transform.localScale = newScale;
+        flipObject.transform.localScale = newScale;
     }
 }

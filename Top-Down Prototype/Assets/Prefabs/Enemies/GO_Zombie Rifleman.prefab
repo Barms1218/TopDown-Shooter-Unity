@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 3543103714409048343}
   - component: {fileID: 3543103714409048342}
   - component: {fileID: 2197870145766887852}
-  - component: {fileID: 1863819634045794801}
+  - component: {fileID: 2142940768495354035}
   - component: {fileID: -6235309337624090876}
   - component: {fileID: 308554320419807269}
   - component: {fileID: -4200519972683017157}
   - component: {fileID: 3877590269110434435}
   - component: {fileID: 7852778782486491207}
+  - component: {fileID: 8622964572214741114}
   m_Layer: 8
   m_Name: GO_Zombie Rifleman
   m_TagString: Enemy
@@ -40,6 +41,7 @@ Transform:
   m_Children:
   - {fileID: 2820052123592776173}
   - {fileID: 4402255661531932550}
+  - {fileID: 2662633390049074432}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,10 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0101f9915b9f94dc5aa01a492b23340a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 4338167231598836216}
   attackDistance: 6
   minAttackDistance: 3
---- !u!114 &1863819634045794801
+  chaseDistance: 5
+--- !u!114 &2142940768495354035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,13 +126,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3543103714409048337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc78a25e6f5ac408cbc4abbd10ce0be5, type: 3}
+  m_Script: {fileID: 11500000, guid: 486ddc62c430943cab58c15c1d9d202e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  child: {fileID: 5270326861657880261}
-  _controller: {fileID: 2197870145766887852}
-  chaseDistance: 5
+  flipObject: {fileID: 5270326861657880261}
+  transformName: Player
 --- !u!114 &-6235309337624090876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +217,23 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 57968
+  m_InstanceId: 93536
+--- !u!114 &8622964572214741114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543103714409048337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd1b8790a69e6243842520ea63aa1a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 2197870145766887852}
+  maximumRange: 6.5
+  minimumRange: 3
+  weapon: {fileID: 2662633390049074435}
 --- !u!1 &5270326861657880261
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +245,6 @@ GameObject:
   - component: {fileID: 4402255661531932550}
   - component: {fileID: 8052718747281021824}
   - component: {fileID: 4338167231598836216}
-  - component: {fileID: 2868215780164156571}
   m_Layer: 8
   m_Name: Weapon Handler
   m_TagString: Untagged
@@ -247,8 +263,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2662633390049074432}
+  m_Children: []
   m_Father: {fileID: 3543103714409048341}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -324,33 +339,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2868215780164156571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5270326861657880261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd1b8790a69e6243842520ea63aa1a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _controller: {fileID: 2197870145766887852}
-  gun: {fileID: 2662633390049074438}
-  maximumRange: 6.5
-  minimumRange: 3
-  weapon: {fileID: 2662633390049074435}
 --- !u!1001 &298068568110556017
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4402255661531932550}
+    m_TransformParent: {fileID: 3543103714409048341}
     m_Modifications:
     - target: {fileID: 2364778200745672305, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2364778200745672305, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -412,17 +410,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2364778200745672306, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
   m_PrefabInstance: {fileID: 298068568110556017}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2662633390049074438}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ada9ea896278594b9229d12bdb8f197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2662633390049074438 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2364778200745672311, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
-  m_PrefabInstance: {fileID: 298068568110556017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7623035573041679668
 PrefabInstance:
   m_ObjectHideFlags: 0

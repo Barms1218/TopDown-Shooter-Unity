@@ -3,46 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AIController : Controller
+[RequireComponent(typeof(Move))]
+public class AIController : MonoBehaviour
 {
     [SerializeField] private float attackDistance;
     [SerializeField] private float minAttackDistance;
+    [SerializeField] private float chaseDistance;
     private GameObject player;
-
-    public UnityAction<Vector2> moveDelegate;
+    private Move enemyMove;
+    private float distanceToTarget;
     public UnityAction attackDelegate;
 
+    private void Awake()
+    {
+        enemyMove = GetComponent<Move>();
+    }
+
     // Start is called before the first frame update
-    protected override void Start()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    protected override void Update()
+    private void Update()
     {
         if (player != null)
         {
-            var _distance = Vector2.Distance(player.transform.position, transform.position);
-            if (_distance > minAttackDistance && _distance < attackDistance)
+            distanceToTarget = Vector2.Distance(player.transform.position, transform.position);
+            if (distanceToTarget > minAttackDistance && distanceToTarget < attackDistance)
             {
                 attackDelegate?.Invoke();
             }
         }
     }
 
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
-        Vector2 moveInput = player.transform.position;
-        moveDelegate?.Invoke(moveInput);
-    }
-
-    private void OnEnable()
-    {
-        _collider.enabled = true;
-    }
-
-    private void OnDisable()
-    {
-        _collider.enabled = false;
+        var moveInput = player.transform.position - transform.position;
+        if (moveInput != null && distanceToTarget > chaseDistance)
+        {
+            enemyMove.MoveObject(moveInput.normalized);
+        }
     }
 }

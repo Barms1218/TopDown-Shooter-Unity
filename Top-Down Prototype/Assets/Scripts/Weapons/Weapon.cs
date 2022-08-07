@@ -7,6 +7,7 @@ public abstract class Weapon : MonoBehaviour
 {
     #region Fields
 
+    [SerializeField] GunData data;
     protected GameObject bullet;
     [SerializeField] protected Transform muzzleTransform;
     [SerializeField] Collider2D _collider;
@@ -46,21 +47,6 @@ public abstract class Weapon : MonoBehaviour
         reloadDelay = new WaitForSeconds(reloadSpeed);
     }
 
-    public void Aim(float angle, Vector2 targetPosition)
-    {
-        if (targetPosition.x < transform.position.x && !facingRight)
-        {
-            Flip();
-        }
-        else if (targetPosition.x > transform.position.x && facingRight)
-        {
-            Flip();
-        }
-
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward * Time.deltaTime);
-        transform.rotation = rotation;
-    }
-
     public abstract void Fire(Vector2 direction);
 
     public virtual void Reload()
@@ -72,15 +58,4 @@ public abstract class Weapon : MonoBehaviour
     }
 
     protected abstract IEnumerator StartReload();
-
-    private void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 newScale = transform.localScale;
-        newScale.y *= -1;
-        newScale.x *= -1;
-
-        transform.localScale = newScale;
-    }
-
 }

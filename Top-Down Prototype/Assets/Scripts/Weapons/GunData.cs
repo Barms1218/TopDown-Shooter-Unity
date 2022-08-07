@@ -6,6 +6,7 @@ using UnityEngine;
 public class GunData : ScriptableObject
 {
     [Header("Info")]
+    [SerializeField] GameObject gun;
     [SerializeField] float fireRate;
     [SerializeField] int maxAmmo;
     [SerializeField] float reloadSpeed;

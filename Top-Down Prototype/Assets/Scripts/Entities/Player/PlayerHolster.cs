@@ -2,18 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerWeaponHandler))]
-public class WeaponSwap : MonoBehaviour
+[RequireComponent(typeof(PlayerShoot))]
+public class PlayerHolster : MonoBehaviour
 {
-    [SerializeField] PlayerWeaponHandler weaponHandler;
+    PlayerShoot shooter;
     [SerializeField] GameObject gun;
     private List<Weapon> weaponList = new List<Weapon>();
     private Weapon currentWeapon;
 
+    public List<Weapon> WeaponList => weaponList;
+    public Weapon CurrentWeapon { set => currentWeapon = value; }
+    public GameObject Gun
+    {
+        get => gun;
+        set => gun = value;
+    }
+
     private void Awake()
     {
-        currentWeapon = gun.GetComponent<Weapon>();
-        weaponHandler.CurrentWeapon = currentWeapon;
+        shooter = GetComponent<PlayerShoot>();
+        currentWeapon = GetComponentInChildren<Weapon>();
+        currentWeapon.transform.SetParent(transform, false);
+        weaponList.Add(currentWeapon);
+        shooter.CurrentWeapon = currentWeapon;
     }
 
     public void TryEquipWeaponOne()
@@ -60,37 +71,32 @@ public class WeaponSwap : MonoBehaviour
         gun = weaponList[weaponIndex].gameObject;
         gun.SetActive(true);
         currentWeapon = weaponList[weaponIndex];
-        weaponHandler.TriggerDelay = currentWeapon.TimeBetweenShots;
+        shooter.CurrentWeapon = currentWeapon;
+        shooter.TriggerDelay = currentWeapon.TimeBetweenShots;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo,
             currentWeapon.MaxAmmo);
     }
 
-    //public void GetNewWeapon(Weapon newGun)
-    //{
-    //    AudioManager.Play(AudioClipName.GetGun);
-    //    gun.SetActive(false);
-    //    weaponList.Add(newGun);
-    //    newGun.transform.SetParent(transform, false);
-    //    newGun.transform.position = gun.transform.position;
-    //    gun = newGun.gameObject;
-
-    //    currentWeapon = newGun;
-    //    //timeBetweenShots = new WaitForSeconds(currentWeapon.TimeBetweenShots);
-    //    currentWeapon.Collider.enabled = false;
-    //    UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo, currentWeapon.MaxAmmo);
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var pickupObject = collision.gameObject;
+        if (pickupObject.TryGetComponent(out Weapon weapon))
+        {
+            GetNewWeapon(weapon);
+        }
+    }
 
     public void GetNewWeapon(Weapon newGun)
     {
         AudioManager.Play(AudioClipName.GetGun);
-        //gun.SetActive(false);
+        gun.SetActive(false);
         weaponList.Add(newGun);
         newGun.transform.SetParent(transform, false);
-        newGun.transform.position = newGun.gameObject.transform.position;
-        //gun = newGun.gameObject;
+        newGun.transform.position = gun.transform.position;
+        gun = newGun.gameObject;
 
-        weaponHandler.CurrentWeapon = newGun;
-        weaponHandler.TriggerDelay = newGun.TimeBetweenShots;
+        shooter.CurrentWeapon = newGun;
+        shooter.TriggerDelay = newGun.TimeBetweenShots;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun.CurrentAmmo, newGun.MaxAmmo);
     }
 
@@ -100,15 +106,5 @@ public class WeaponSwap : MonoBehaviour
         {
             weapon.MaxAmmo += amountToAdd;
         }
-    }
-
-    private void OnEnable()
-    {
-        Pickup.getWeapon += GetNewWeapon;
-    }
-
-    private void OnDisable()
-    {
-        Pickup.getWeapon -= GetNewWeapon;
     }
 }

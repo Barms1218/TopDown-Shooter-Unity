@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class EnemyDeath : MonoBehaviour
 {
     Health health;
-    Controller _controller;
+    AIController _controller;
     [SerializeField]
     private int points;
     private WaitForSeconds dieSeconds;
@@ -15,14 +15,13 @@ public class EnemyDeath : MonoBehaviour
 
     private void Awake()
     {
-        _controller = GetComponent<Controller>();
+        _controller = GetComponent<AIController>();
         dieSeconds = new WaitForSeconds(dieTime);
         health = GetComponent<Health>();
     }
 
     public void HandleDeath()
     {
-        _controller.Animator.SetTrigger("Dying");
         _controller.enabled = false;
         StartCoroutine(Die());
         AudioManager.Play(AudioClipName.ZombieInmateDeath);

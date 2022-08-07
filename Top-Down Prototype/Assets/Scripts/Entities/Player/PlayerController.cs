@@ -4,18 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-public class PlayerController : Controller
+[RequireComponent(typeof(Move))]
+public class PlayerController : MonoBehaviour
 {
     public static PlayerController player;
-    [SerializeField]
-    GameObject gun;
     private PlayerActions actions;
-    [SerializeField]
-    PlayerWeaponHandler weaponHandler;
-    [SerializeField]
-    WeaponSwap weaponSwap;
-
-    Weapon currentWeapon;
+    PlayerShoot shooter;
+    PlayerHolster holster;
+    Move playerMove;
 
     Coroutine fireCoroutine;
 
@@ -23,13 +19,14 @@ public class PlayerController : Controller
     InputAction move;
 
     // delegates
-    public UnityAction<Vector2> moveDelegate;
     public UnityAction dashDelegate;
     public UnityAction<IEnumerator> rapidFireEvent;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        holster = GetComponent<PlayerHolster>();
+        shooter = GetComponent<PlayerShoot>();
+        playerMove = GetComponent<Move>();
         player = this;
 
         actions = new PlayerActions();
@@ -38,33 +35,30 @@ public class PlayerController : Controller
         // inputs for player weapon
         actions.PlayerControls.Shoot.started += _ => StartFiring();
         actions.PlayerControls.Shoot.canceled += _ => StopFiring();
-        actions.PlayerControls.Reload.started += _ => weaponHandler.Reload();
+        actions.PlayerControls.Reload.started += _ => shooter.Reload();
 
         //Dash input
-        actions.PlayerControls.Dash.started += _ => Dash();
+        //actions.PlayerControls.Dash.started += _ => Dash();
 
         // Inputs for weapon swap
-        actions.PlayerControls.EquipWeapon1.started += _ => weaponSwap.TryEquipWeaponOne();
-        actions.PlayerControls.EquipWeapon2.started += _ => weaponSwap.TryEquipWeaponTwo();
-        actions.PlayerControls.EquipWeapon3.started += _ => weaponSwap.TryEquipWeaponThree();
-
-        
+        actions.PlayerControls.EquipWeapon1.started += _ => holster.TryEquipWeaponOne();
+        actions.PlayerControls.EquipWeapon2.started += _ => holster.TryEquipWeaponTwo();
+        actions.PlayerControls.EquipWeapon3.started += _ => holster.TryEquipWeaponThree();
     }
 
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
-        moveDelegate?.Invoke(move.ReadValue<Vector2>());
+        playerMove.MoveObject(move.ReadValue<Vector2>());
     }
 
-    void Dash()
+    private void Dash()
     {
-        dashDelegate?.Invoke();
+        //dashDelegate?.Invoke();
     }
 
     void StartFiring()
     {
-        fireCoroutine = StartCoroutine(weaponHandler.RapidFire());
-        //rapidFireEvent?.Invoke(weaponHandler.RapidFire());
+        fireCoroutine = StartCoroutine(shooter.RapidFire());
     }
 
     void StopFiring()

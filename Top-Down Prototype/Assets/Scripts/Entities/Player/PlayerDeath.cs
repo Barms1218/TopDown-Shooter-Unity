@@ -18,8 +18,8 @@ public class PlayerDeath : MonoBehaviour
 
     private void HandleDeath()
     {
-        _controller.Animator.SetTrigger("Dead");
-        _controller.Collider.enabled = false;
+        //_controller.Animator.SetTrigger("Dead");
+        //_controller.Collider.enabled = false;
         _controller.enabled = false;
         StartCoroutine(End());
 
