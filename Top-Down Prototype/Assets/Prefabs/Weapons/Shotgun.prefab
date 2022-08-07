@@ -394,15 +394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9542651282bd8f40b8c441cc3fa061d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 9c454d31b4b5e824db76a1428226807c, type: 2}
   muzzleTransform: {fileID: 5416292742926382952}
   _collider: {fileID: 7957779073280548603}
-  targetTransform: {fileID: 245405541487620406, guid: 7755a7a314c4e4b08b4a9131c35a422a, type: 3}
-  currentAmmo: 5
-  maxAmmo: 25
-  magazineSize: 5
-  ammoPerShot: 1
-  timeBetweenShots: 1
-  reloadSpeed: 0.5
-  recoil: 0.706
   canRapidFire: 0
   numProjectiles: 5

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssaultRifle : Weapon
+public class AssaultRifle : Gun
 {
 
     protected override void Awake()
     {
-        reloadDelay = new WaitForSeconds(reloadSpeed);    
+        reloadDelay = new WaitForSeconds(data.ReloadSpeed);    
     }
 
-    public override void Fire(Vector2 direction)
+    public override void Fire   (Vector2 direction)
     {
         if (!reloading)
         {
@@ -23,9 +23,9 @@ public class AssaultRifle : Weapon
                 bullet.tag = gameObject.tag;
             }
             var bulletScript = bullet.GetComponent<Projectile>();
-            currentAmmo -= ammoPerShot;
-            direction.y += Random.Range(-recoil, recoil);
-            bulletScript.MoveToTarget(direction);
+            data.CurrentAmmo -= 1;
+            direction.y += Random.Range(-data.Recoil, data.Recoil);
+            bulletScript.MoveToTarget(direction.normalized);
             AudioManager.Play(AudioClipName.AR_Fire);
         }
     }
@@ -34,18 +34,18 @@ public class AssaultRifle : Weapon
     {
         reloading = true;
         yield return reloadDelay;
-        if (maxAmmo > magazineSize - currentAmmo)
+        if (data.MaxAmmo > data.MagazineSize - data.CurrentAmmo)
         {
-            maxAmmo -= magazineSize - currentAmmo;
-            currentAmmo = magazineSize;
+            data.MaxAmmo -= data.MagazineSize - data.CurrentAmmo;
+            data.CurrentAmmo = data.MagazineSize;
         }
-        else if (maxAmmo < magazineSize - currentAmmo)
+        else if (data.MaxAmmo < data.MagazineSize - data.CurrentAmmo)
         {
-            currentAmmo += maxAmmo;
-            maxAmmo -= maxAmmo;
+            data.CurrentAmmo += data.MaxAmmo;
+            data.MaxAmmo -= data.MaxAmmo;
         }
 
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);      
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(data.CurrentAmmo, data.CurrentAmmo);      
         reloading = false;
         AudioManager.Play(AudioClipName.ReloadSound);
     }

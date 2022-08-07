@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : Weapon
+public class Shotgun : Gun
 {
     [SerializeField] int numProjectiles = 5;
     private bool firing;
@@ -10,7 +10,7 @@ public class Shotgun : Weapon
 
     protected override void Awake()
     {
-        reloadDelay = new WaitForSeconds(reloadSpeed);
+        reloadDelay = new WaitForSeconds(data.ReloadSpeed);
     }
 
     public override void Fire(Vector2 direction)
@@ -27,10 +27,10 @@ public class Shotgun : Weapon
             }
 
             var projectileScript = bullet.GetComponent<Projectile>();
-            direction.y += Random.Range(-recoil, recoil);
-            projectileScript.MoveToTarget(direction);
+            direction.y += Random.Range(-data.Recoil, data.Recoil);
+            projectileScript.MoveToTarget(direction.normalized);
         }
-        currentAmmo -= ammoPerShot;
+        data.CurrentAmmo--;
         AudioManager.Play(AudioClipName.ShotgunBlast);
         firing = true;
     }
@@ -45,11 +45,11 @@ public class Shotgun : Weapon
     {
         reloading = true;
 
-        while (currentAmmo < magazineSize && !firing && maxAmmo > 0)
+        while (data.CurrentAmmo < data.MagazineSize && !firing && data.MaxAmmo > 0)
         {
-            currentAmmo++;
-            maxAmmo--;
-            UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);
+            data.CurrentAmmo++;
+            data.MaxAmmo--;
+            UpdateAmmoUI.Instance.UpdateWeaponAmmo(data.CurrentAmmo, data.MaxAmmo);
             AudioManager.Play(AudioClipName.ReloadSound);
             yield return reloadDelay;
             reloading = false;

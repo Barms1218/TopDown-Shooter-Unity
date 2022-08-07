@@ -11,12 +11,14 @@ public class AIController : MonoBehaviour
     [SerializeField] private float chaseDistance;
     private GameObject player;
     private Move enemyMove;
+    private IAttack attack;
     private float distanceToTarget;
     public UnityAction attackDelegate;
 
     private void Awake()
     {
         enemyMove = GetComponent<Move>();
+        attack = GetComponent<IAttack>();
     }
 
     // Start is called before the first frame update
@@ -32,7 +34,7 @@ public class AIController : MonoBehaviour
             distanceToTarget = Vector2.Distance(player.transform.position, transform.position);
             if (distanceToTarget > minAttackDistance && distanceToTarget < attackDistance)
             {
-                attackDelegate?.Invoke();
+                attack.Attack();
             }
         }
     }

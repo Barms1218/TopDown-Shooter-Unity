@@ -6,9 +6,9 @@ using UnityEngine.Events;
 public class AmmoPickup : MonoBehaviour
 {
     [SerializeField] protected int _amount;
-    [SerializeField] protected Weapon weaponType;
+    [SerializeField] protected Gun weaponType;
 
-    public Weapon WeaponType => weaponType;
+    public Gun WeaponType => weaponType;
     public int AmountToAdd => _amount;
 
     protected virtual void OnTriggerEnter2D(Collider2D other)

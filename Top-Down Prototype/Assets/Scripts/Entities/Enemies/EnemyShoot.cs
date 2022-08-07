@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour
+public class EnemyShoot : MonoBehaviour, IAttack
 {
-    [SerializeField] AIController _controller;
     [SerializeField] float maximumRange;
     [SerializeField] float minimumRange;
-    [SerializeField] Weapon weapon;
+    [SerializeField] Gun weapon;
     private Transform targetTransform;
     float nextTriggerPull;
     Vector2 _direction;
     private bool weaponFlipped = false;
+
+    Coroutine fireCoroutine;
 
 
     private bool CanFire => Time.time >= nextTriggerPull;
@@ -45,14 +46,13 @@ public class EnemyShoot : MonoBehaviour
         weapon.transform.rotation = rotation;
     }
 
-    private void FireWeapon()
+    public void Attack()
     {
         if (CanFire)
         {
             weapon.Fire(_direction);
-            nextTriggerPull = Time.time + weapon.TimeBetweenShots;
+            nextTriggerPull = Time.time + weapon.FireRate;
         }
-
     }
 
     private void FlipWeapon()
@@ -64,13 +64,4 @@ public class EnemyShoot : MonoBehaviour
         weapon.transform.localScale = newScale;
     }
 
-    private void OnEnable()
-    {
-        _controller.attackDelegate += FireWeapon;
-    }
-
-    private void OnDisable()
-    {
-        _controller.attackDelegate -= FireWeapon;
-    }
 }

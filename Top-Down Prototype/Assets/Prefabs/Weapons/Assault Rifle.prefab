@@ -126,16 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ada9ea896278594b9229d12bdb8f197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: aa73bd07c2cb3a540846dcdb9552e1ac, type: 2}
   muzzleTransform: {fileID: 462724276005966884}
   _collider: {fileID: 131069197}
-  targetTransform: {fileID: 245405541487620406, guid: 7755a7a314c4e4b08b4a9131c35a422a, type: 3}
-  currentAmmo: 24
-  maxAmmo: 72
-  magazineSize: 24
-  ammoPerShot: 1
-  timeBetweenShots: 0.15
-  reloadSpeed: 1
-  recoil: 0
   canRapidFire: 1
 --- !u!1 &3660060279596217372
 GameObject:

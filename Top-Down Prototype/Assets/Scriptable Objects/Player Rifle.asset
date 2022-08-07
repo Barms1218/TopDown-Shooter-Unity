@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12604e66c8f86df42986309dcde512db, type: 3}
-  m_Name: Pistol
+  m_Name: Player Rifle
   m_EditorClassIdentifier: 
-  fireRate: 0.5
-  maxAmmo: 60
-  reloadSpeed: 0.75
-  timeBetweenShots: 0.35
-  magazineSize: 12
-  currentAmmo: 12
-  projectilePrefab: {fileID: 9061488664235975576, guid: c8aa8ac0f270ed24c94dc4872dcd1a55, type: 3}
-  recoil: 0.357
+  gun: {fileID: 2126229509927346940, guid: dd4ad1b6f87101e418bb3cc8a96e6fcf, type: 3}
+  fireRate: 0.2
+  startAmmo: 72
+  maxAmmo: 72
+  reloadSpeed: 0.5
+  magazineSize: 24
+  currentAmmo: 24
+  recoil: 0.547

@@ -6,12 +6,14 @@ using UnityEngine;
 public class PlayerHolster : MonoBehaviour
 {
     PlayerShoot shooter;
-    [SerializeField] GameObject gun;
-    private List<Weapon> weaponList = new List<Weapon>();
-    private Weapon currentWeapon;
+    GameObject gun;
+    private List<Gun> weaponList = new();
+    private Gun currentWeapon;
+    [SerializeField] Transform weaponParent;
 
-    public List<Weapon> WeaponList => weaponList;
-    public Weapon CurrentWeapon { set => currentWeapon = value; }
+
+    public List<Gun> WeaponList => weaponList;
+    public Gun CurrentWeapon { set => currentWeapon = value; }
     public GameObject Gun
     {
         get => gun;
@@ -21,8 +23,10 @@ public class PlayerHolster : MonoBehaviour
     private void Awake()
     {
         shooter = GetComponent<PlayerShoot>();
-        currentWeapon = GetComponentInChildren<Weapon>();
-        currentWeapon.transform.SetParent(transform, false);
+        currentWeapon = GetComponentInChildren<Gun>();
+
+        gun = currentWeapon.gameObject;
+        //gun.transform.SetParent(transform, false);
         weaponList.Add(currentWeapon);
         shooter.CurrentWeapon = currentWeapon;
     }
@@ -72,7 +76,6 @@ public class PlayerHolster : MonoBehaviour
         gun.SetActive(true);
         currentWeapon = weaponList[weaponIndex];
         shooter.CurrentWeapon = currentWeapon;
-        shooter.TriggerDelay = currentWeapon.TimeBetweenShots;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo,
             currentWeapon.MaxAmmo);
     }
@@ -80,13 +83,13 @@ public class PlayerHolster : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var pickupObject = collision.gameObject;
-        if (pickupObject.TryGetComponent(out Weapon weapon))
+        if (pickupObject.TryGetComponent(out Gun weapon))
         {
             GetNewWeapon(weapon);
         }
     }
 
-    public void GetNewWeapon(Weapon newGun)
+    public void GetNewWeapon(Gun newGun)
     {
         AudioManager.Play(AudioClipName.GetGun);
         gun.SetActive(false);
@@ -96,11 +99,10 @@ public class PlayerHolster : MonoBehaviour
         gun = newGun.gameObject;
 
         shooter.CurrentWeapon = newGun;
-        shooter.TriggerDelay = newGun.TimeBetweenShots;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun.CurrentAmmo, newGun.MaxAmmo);
     }
 
-    public void AddAmmoToWeapon(int amountToAdd, Weapon weapon)
+    public void AddAmmoToWeapon(int amountToAdd, Gun weapon)
     {
         if (weaponList.Contains(weapon))
         {

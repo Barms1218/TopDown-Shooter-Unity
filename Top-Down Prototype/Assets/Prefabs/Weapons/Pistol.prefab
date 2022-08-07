@@ -286,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8846835937500090403
 Transform:
   m_ObjectHideFlags: 0
@@ -368,16 +368,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   muzzleTransform: {fileID: 3785646919390945951}
   _collider: {fileID: 0}
-  targetTransform: {fileID: 245405541487620406, guid: 7755a7a314c4e4b08b4a9131c35a422a, type: 3}
-  currentAmmo: 3
-  maxAmmo: 60
-  magazineSize: 12
-  ammoPerShot: 1
-  timeBetweenShots: 0.2
-  reloadSpeed: 0.5
-  recoil: 0
   canRapidFire: 0
 --- !u!114 &8189164775384074622
 MonoBehaviour:

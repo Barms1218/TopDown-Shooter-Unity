@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        holster = GetComponent<PlayerHolster>();
+        holster = GetComponentInChildren<PlayerHolster>();
         shooter = GetComponent<PlayerShoot>();
         playerMove = GetComponent<Move>();
         player = this;

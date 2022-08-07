@@ -43,15 +43,12 @@ public class Projectile : MonoBehaviour
 
     public virtual void MoveToTarget(Vector2 force)
     {
-        if (TryGetComponent(out Rigidbody2D rigidbody2D))
-        {
-            float angle = Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg;
-            Quaternion target = Quaternion.Euler(0, 0, angle);
+        var rigidbody2D = GetComponent<Rigidbody2D>();
+        float angle = Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg;
+        Quaternion target = Quaternion.Euler(0, 0, angle);
 
-            transform.rotation = target;
-            rigidbody2D.AddForce(force.normalized *
-                speed, ForceMode2D.Impulse);
-        }
+        transform.rotation = target;
+        rigidbody2D.AddForce(force * speed, ForceMode2D.Impulse);
     }
 
     private void OnEnable()

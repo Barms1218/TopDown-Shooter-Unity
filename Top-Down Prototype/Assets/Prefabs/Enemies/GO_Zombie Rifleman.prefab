@@ -217,7 +217,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 93536
+  m_InstanceId: 48972
 --- !u!114 &8622964572214741114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd1b8790a69e6243842520ea63aa1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controller: {fileID: 2197870145766887852}
   maximumRange: 6.5
   minimumRange: 3
   weapon: {fileID: 2662633390049074435}

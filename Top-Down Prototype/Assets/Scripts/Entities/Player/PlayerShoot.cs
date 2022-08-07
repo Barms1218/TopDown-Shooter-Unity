@@ -7,29 +7,23 @@ public class PlayerShoot : MonoBehaviour
 {
     #region Fields
 
-    private Weapon weapon;
+    private Gun weapon;
     private Transform targetTransform;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
     private float nextTriggerPull;
-    private float triggerTime;
     private bool weaponFlipped = false;
 
     #endregion
 
     #region Properties
 
-    public Weapon CurrentWeapon
-    {
-        set => weapon = value;
-    }
-
-    public float TriggerDelay
+    public Gun CurrentWeapon
     {
         set
         {
-            triggerTime = value;
-            timeBetweenShots = new WaitForSeconds(triggerTime);
+            weapon = value;
+            timeBetweenShots = new WaitForSeconds(weapon.FireRate);
         }
     }
 
@@ -66,7 +60,7 @@ public class PlayerShoot : MonoBehaviour
 
     #region Public Methods
 
-    private void FireWeapon()
+    private void Attack()
     {
         if (weapon.CurrentAmmo > 0)
         {
@@ -85,14 +79,14 @@ public class PlayerShoot : MonoBehaviour
         {
             while(true)
             {
-                FireWeapon();
+                Attack();
                 yield return timeBetweenShots;
             }
         }
         else if (Time.time >= nextTriggerPull && Time.timeScale > 0)
         {
-            FireWeapon();
-            nextTriggerPull = Time.time + weapon.TimeBetweenShots;
+            Attack();
+            nextTriggerPull = Time.time + weapon.FireRate;
             yield return null;
         }
     }
@@ -104,7 +98,7 @@ public class PlayerShoot : MonoBehaviour
         weaponFlipped = !weaponFlipped;
         Vector3 newScale = weapon.transform.localScale;
         newScale.y *= -1;
-
+        //newScale.x *= -1;
         weapon.transform.localScale = newScale;
     }
 

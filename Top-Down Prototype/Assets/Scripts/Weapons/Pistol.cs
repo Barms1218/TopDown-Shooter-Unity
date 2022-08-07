@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Weapon
+public class Pistol : Gun
 {
 
     public override void Fire(Vector2 direction)
@@ -18,9 +18,9 @@ public class Pistol : Weapon
                 bullet.tag = gameObject.tag;
             }
             var bulletScript = bullet.GetComponent<Projectile>();
-            currentAmmo -= ammoPerShot;
-            direction.y += Random.Range(-recoil, recoil);
-            bulletScript.MoveToTarget(direction);
+            data.CurrentAmmo -= 1;
+            direction.y += Random.Range(-data.Recoil, data.Recoil);
+            bulletScript.MoveToTarget(direction.normalized);
             AudioManager.Play(AudioClipName.PistolShot);
         }
     }
@@ -30,10 +30,10 @@ public class Pistol : Weapon
         reloading = true;
 
         yield return reloadDelay;
-        currentAmmo = magazineSize;
+        data.CurrentAmmo = data.MagazineSize;
 
         AudioManager.Play(AudioClipName.ReloadSound);
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentAmmo, maxAmmo);
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(data.CurrentAmmo, data.MaxAmmo);
         reloading = false;
     }
 
