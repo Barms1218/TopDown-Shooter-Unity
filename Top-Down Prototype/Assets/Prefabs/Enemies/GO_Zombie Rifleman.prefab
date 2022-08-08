@@ -117,6 +117,7 @@ MonoBehaviour:
   attackDistance: 6
   minAttackDistance: 3
   chaseDistance: 5
+  attackCoolDown: 0.5
 --- !u!114 &2142940768495354035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 52544
+  m_InstanceId: 73232
 --- !u!114 &8622964572214741114
 MonoBehaviour:
   m_ObjectHideFlags: 0

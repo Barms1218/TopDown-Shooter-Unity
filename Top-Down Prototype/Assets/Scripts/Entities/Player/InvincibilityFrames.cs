@@ -31,9 +31,9 @@ public class InvincibilityFrames : MonoBehaviour
         {
             controller.enabled = false;
             takeDamage.CanTakeDamage = false;
-            //var pushDirection = transform.position - hitObject.transform.position;
-            //controller.Rigidbody2D.AddForce(pushDirection * knockbackStrength,
-            //    ForceMode2D.Impulse);
+            var pushDirection = transform.position - hitObject.transform.position;
+            GetComponent<Rigidbody2D>().AddForce(pushDirection * knockbackStrength,
+                ForceMode2D.Impulse);
             StartCoroutine(Recover());
         }
     }

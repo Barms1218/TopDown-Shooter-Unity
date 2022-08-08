@@ -91,9 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0101f9915b9f94dc5aa01a492b23340a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 0
+  attackDistance: 1
   minAttackDistance: 0
-  chaseDistance: 0
+  chaseDistance: 0.5
+  attackCoolDown: 1
 --- !u!114 &8855957164897592162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,10 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8ec766de8b48942b996f2e397ea9ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackStrength: 25
+  attackStrength: 2
   damage: 5
   attackCooldown: 1
-  _controller: {fileID: 5731720627620535405}
 --- !u!114 &1912698520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 79264
+  m_InstanceId: 84640
 --- !u!1 &8191513672832862777
 GameObject:
   m_ObjectHideFlags: 0

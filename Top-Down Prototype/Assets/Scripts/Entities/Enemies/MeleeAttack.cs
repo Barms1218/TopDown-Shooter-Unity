@@ -4,51 +4,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MeleeAttack : MonoBehaviour
+public class MeleeAttack : MonoBehaviour, IAttack
 {
     [SerializeField] private int attackStrength;
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
-    [SerializeField] AIController _controller;
+    private Rigidbody2D rb2d;
     private WaitForSeconds staggerTime;
     private GameObject player;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
     private void Start()
     {
-        player = PlayerController.player.gameObject;
+        player = PlayerController.playerInstance.gameObject;
         staggerTime = new WaitForSeconds(attackCooldown);
-        //_controller.attackDelegate += Attack;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Attack()
     {
-        var hitObject = collision.gameObject;
-        if (!hitObject.CompareTag(gameObject.tag))
-        {
-            ProcessHit(hitObject);
-        }
-    }
-
-    private void ProcessHit(GameObject hitObject)
-    {
-        if (hitObject.TryGetComponent(out IDamageable damageable))
-        {
-            damageable.DealDamage(damage, gameObject);
-            StartCoroutine(Stagger());
-        }
-        else
-        {
-            Debug.Log("I can't damage that target");
-        }
+        //var pushForce = player.transform.position - transform.position;
+        player.GetComponent<IDamageable>().DealDamage(damage, gameObject);
+        //player.GetComponent<Rigidbody2D>().AddForce(
+        //    pushForce.normalized * attackStrength, ForceMode2D.Impulse);
+        StartCoroutine(Stagger());
     }
 
     private IEnumerator Stagger()
     {
-        _controller.enabled = false;
+        rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
 
         yield return staggerTime;
-
-        _controller.enabled = true;
+        rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

@@ -14,6 +14,8 @@ public class AIController : MonoBehaviour
     private IAttack attack;
     private float distanceToTarget;
     public UnityAction attackDelegate;
+    private float nextAttack;
+    [SerializeField] private float attackCoolDown;
 
     private void Awake()
     {
@@ -34,7 +36,13 @@ public class AIController : MonoBehaviour
             distanceToTarget = Vector2.Distance(player.transform.position, transform.position);
             if (distanceToTarget > minAttackDistance && distanceToTarget < attackDistance)
             {
-                attack.Attack();
+                 if (Time.time >= nextAttack && Time.timeScale > 0)
+                {
+                    attack.Attack();
+                    nextAttack = Time.time + attackCoolDown;
+                    attack.Attack();
+                }
+
             }
         }
     }

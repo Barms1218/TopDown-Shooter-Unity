@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CallRifleman : MonoBehaviour
+public class CallShotgunZombie : MonoBehaviour
 {
     [SerializeField] int timeVariation;
     [SerializeField] private float callTimer;
@@ -22,12 +22,12 @@ public class CallRifleman : MonoBehaviour
         yield return firstSpawnCall;
         while (true)
         {
-            var rifleman = RifleManPool.SharedInstance.GetPooledObject();
-            if (rifleman != null)
+            var shotGunner = CaptainPool.SharedInstance.GetPooledObject();
+            if (shotGunner != null)
             {
-                rifleman.transform.SetPositionAndRotation(transform.position,
+                shotGunner.transform.SetPositionAndRotation(transform.position,
                     transform.rotation);
-                rifleman.SetActive(true);
+                shotGunner.SetActive(true);
             }
             callTimer = Random.Range(callTimer - timeVariation,
                 callTimer + timeVariation);

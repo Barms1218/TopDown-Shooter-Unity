@@ -19,4 +19,4 @@ MonoBehaviour:
   reloadSpeed: 0.5
   magazineSize: 24
   currentAmmo: 24
-  recoil: 0.547
+  recoil: 0.302

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaptainPool : MonoBehaviour
+public class ShotgunZombiePool : MonoBehaviour
 {
-    private static CaptainPool _instance;
+    private static ShotgunZombiePool _instance;
     private List<GameObject> pooledObjects;
     [SerializeField] GameObject minionObject;
     [SerializeField] int amountToPool;
 
-    public static CaptainPool SharedInstance
+    public static ShotgunZombiePool SharedInstance
     {
         get
         {

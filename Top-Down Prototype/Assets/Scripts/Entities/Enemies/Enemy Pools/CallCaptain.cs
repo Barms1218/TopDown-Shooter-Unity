@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CallRifleman : MonoBehaviour
+public class CallCaptain : MonoBehaviour
 {
     [SerializeField] int timeVariation;
     [SerializeField] private float callTimer;
@@ -22,12 +22,12 @@ public class CallRifleman : MonoBehaviour
         yield return firstSpawnCall;
         while (true)
         {
-            var rifleman = RifleManPool.SharedInstance.GetPooledObject();
-            if (rifleman != null)
+            var captain = CaptainPool.SharedInstance.GetPooledObject();
+            if (captain != null)
             {
-                rifleman.transform.SetPositionAndRotation(transform.position,
+                captain.transform.SetPositionAndRotation(transform.position,
                     transform.rotation);
-                rifleman.SetActive(true);
+                captain.SetActive(true);
             }
             callTimer = Random.Range(callTimer - timeVariation,
                 callTimer + timeVariation);

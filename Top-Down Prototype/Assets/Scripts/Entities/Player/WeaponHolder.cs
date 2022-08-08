@@ -5,26 +5,25 @@ using UnityEngine;
 public class WeaponHolder : MonoBehaviour
 {
     PlayerShoot shooter;
-    GameObject gun;
+    GameObject gunPrefab;
     private List<Gun> weaponList = new();
-    private Gun currentWeapon;
-    [SerializeField] Transform weaponParent;
+    private Gun gun;
 
     public List<Gun> WeaponList => weaponList;
-    public Gun CurrentWeapon { set => currentWeapon = value; }
+    public Gun CurrentWeapon { set => gun = value; }
     public GameObject Gun
     {
-        get => gun;
-        set => gun = value;
+        get => gunPrefab;
+        set => gunPrefab = value;
     }
 
     private void Awake()
     {
         shooter = GetComponentInParent<PlayerShoot>();
-        currentWeapon = GetComponentInChildren<Gun>();
-        gun = currentWeapon.gameObject;
-        gun.transform.SetParent(transform, false);
-        weaponList.Add(currentWeapon);
+        gun = GetComponentInChildren<Gun>();
+        gunPrefab = gun.gameObject;
+        gunPrefab.transform.SetParent(transform, false);
+        weaponList.Add(gun);
     }
 
     public void TryEquipWeaponOne()
@@ -36,7 +35,7 @@ public class WeaponHolder : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            gun.SetActive(true);
+            gunPrefab.SetActive(true);
             Debug.Log(e);
         }
     }
@@ -48,7 +47,7 @@ public class WeaponHolder : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            gun.SetActive(true);
+            gunPrefab.SetActive(true);
             Debug.Log(e);
         }
     }
@@ -60,20 +59,20 @@ public class WeaponHolder : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            gun.SetActive(true);
+            gunPrefab.SetActive(true);
             Debug.Log(e);
         }
     }
 
     void ChangeWeapon(int weaponIndex)
     {
-        gun.SetActive(false);
-        gun = weaponList[weaponIndex].gameObject;
-        gun.SetActive(true);
-        currentWeapon = weaponList[weaponIndex];
-        shooter.CurrentWeapon = currentWeapon;
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(currentWeapon.CurrentAmmo,
-            currentWeapon.MaxAmmo);
+        gunPrefab.SetActive(false);
+        gunPrefab = weaponList[weaponIndex].gameObject;
+        gunPrefab.SetActive(true);
+        gun = weaponList[weaponIndex];
+        shooter.CurrentWeapon = gun;
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun.CurrentAmmo,
+            gun.MaxAmmo);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -88,11 +87,11 @@ public class WeaponHolder : MonoBehaviour
     public void GetNewWeapon(Gun newGun)
     {
         AudioManager.Play(AudioClipName.GetGun);
-        gun.SetActive(false);
+        gunPrefab.SetActive(false);
         weaponList.Add(newGun);
         newGun.transform.SetParent(transform, false);
-        newGun.transform.SetPositionAndRotation(gun.transform.position, Quaternion.identity);
-        gun = newGun.gameObject;
+        newGun.transform.SetPositionAndRotation(gunPrefab.transform.position, Quaternion.identity);
+        gunPrefab = newGun.gameObject;
 
         shooter.CurrentWeapon = newGun;
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun.CurrentAmmo, newGun.MaxAmmo);

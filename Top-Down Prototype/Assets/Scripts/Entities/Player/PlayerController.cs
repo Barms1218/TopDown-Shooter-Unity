@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Move))]
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController player;
+    public static PlayerController playerInstance;
     private PlayerActions actions;
     PlayerShoot shooter;
     WeaponHolder holder;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         holder = GetComponentInChildren<WeaponHolder>();
         shooter = GetComponent<PlayerShoot>();
         playerMove = GetComponent<Move>();
-        player = this;
+        playerInstance = this;
 
         actions = new PlayerActions();
         move = actions.PlayerControls.Movement;
