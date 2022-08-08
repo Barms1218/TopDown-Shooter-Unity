@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 8846835937500090428, guid: c46e125ab903d804192922e885fbdd83, type: 3}
   fireRate: 0.3
+  startAmmo: 60
   maxAmmo: 60
   reloadSpeed: 0.75
   magazineSize: 12

@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerShoot))]
-public class PlayerHolster : MonoBehaviour
+public class WeaponHolder : MonoBehaviour
 {
     PlayerShoot shooter;
     GameObject gun;
     private List<Gun> weaponList = new();
     private Gun currentWeapon;
     [SerializeField] Transform weaponParent;
-
 
     public List<Gun> WeaponList => weaponList;
     public Gun CurrentWeapon { set => currentWeapon = value; }
@@ -22,13 +20,11 @@ public class PlayerHolster : MonoBehaviour
 
     private void Awake()
     {
-        shooter = GetComponent<PlayerShoot>();
+        shooter = GetComponentInParent<PlayerShoot>();
         currentWeapon = GetComponentInChildren<Gun>();
-
         gun = currentWeapon.gameObject;
-        //gun.transform.SetParent(transform, false);
+        gun.transform.SetParent(transform, false);
         weaponList.Add(currentWeapon);
-        shooter.CurrentWeapon = currentWeapon;
     }
 
     public void TryEquipWeaponOne()
@@ -95,7 +91,7 @@ public class PlayerHolster : MonoBehaviour
         gun.SetActive(false);
         weaponList.Add(newGun);
         newGun.transform.SetParent(transform, false);
-        newGun.transform.position = gun.transform.position;
+        newGun.transform.SetPositionAndRotation(gun.transform.position, Quaternion.identity);
         gun = newGun.gameObject;
 
         shooter.CurrentWeapon = newGun;

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController player;
     private PlayerActions actions;
     PlayerShoot shooter;
-    PlayerHolster holster;
+    WeaponHolder holder;
     Move playerMove;
 
     Coroutine fireCoroutine;
@@ -20,11 +20,10 @@ public class PlayerController : MonoBehaviour
 
     // delegates
     public UnityAction dashDelegate;
-    public UnityAction<IEnumerator> rapidFireEvent;
 
     private void Awake()
     {
-        holster = GetComponentInChildren<PlayerHolster>();
+        holder = GetComponentInChildren<WeaponHolder>();
         shooter = GetComponent<PlayerShoot>();
         playerMove = GetComponent<Move>();
         player = this;
@@ -41,9 +40,9 @@ public class PlayerController : MonoBehaviour
         //actions.PlayerControls.Dash.started += _ => Dash();
 
         // Inputs for weapon swap
-        actions.PlayerControls.EquipWeapon1.started += _ => holster.TryEquipWeaponOne();
-        actions.PlayerControls.EquipWeapon2.started += _ => holster.TryEquipWeaponTwo();
-        actions.PlayerControls.EquipWeapon3.started += _ => holster.TryEquipWeaponThree();
+        actions.PlayerControls.EquipWeapon1.started += _ => holder.TryEquipWeaponOne();
+        actions.PlayerControls.EquipWeapon2.started += _ => holder.TryEquipWeaponTwo();
+        actions.PlayerControls.EquipWeapon3.started += _ => holder.TryEquipWeaponThree();
     }
 
     private void FixedUpdate()

@@ -59,11 +59,9 @@ public class Move : MonoBehaviour, IMoveable
 
     private void Flip()
     {
+        facingRight = !facingRight;
         Vector3 newScale = flipObject.transform.localScale;
         newScale.x *= -1f;
-
-        facingRight = !facingRight;
-
         flipObject.transform.localScale = newScale;
     }
 }

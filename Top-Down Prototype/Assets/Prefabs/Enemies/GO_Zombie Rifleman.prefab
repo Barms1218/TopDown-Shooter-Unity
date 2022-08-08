@@ -40,8 +40,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2820052123592776173}
-  - {fileID: 4402255661531932550}
   - {fileID: 2662633390049074432}
+  - {fileID: 4402255661531932550}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 48972
+  m_InstanceId: 52544
 --- !u!114 &8622964572214741114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 8052718747281021824}
   - component: {fileID: 4338167231598836216}
   m_Layer: 8
-  m_Name: Weapon Handler
+  m_Name: Weapon Holder Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3543103714409048341}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8052718747281021824
 SpriteRenderer:
@@ -347,7 +347,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2364778200745672305, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2364778200745672305, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
       propertyPath: m_LocalPosition.x

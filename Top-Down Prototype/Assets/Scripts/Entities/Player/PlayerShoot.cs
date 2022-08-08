@@ -7,12 +7,13 @@ public class PlayerShoot : MonoBehaviour
 {
     #region Fields
 
-    private Gun weapon;
+    [SerializeField] private Gun weapon;
+    [SerializeField] private GameObject weaponHolder;
     private Transform targetTransform;
     Vector2 _direction;
     WaitForSeconds timeBetweenShots;
     private float nextTriggerPull;
-    private bool weaponFlipped = false;
+    [SerializeField] private bool weaponFlipped = true;
 
     #endregion
 
@@ -31,7 +32,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Awake()
     {
-        weapon.gameObject.transform.SetParent(transform, false);
+        weapon = GetComponentInChildren<Gun>();
     }
 
     private void Start()
@@ -42,15 +43,17 @@ public class PlayerShoot : MonoBehaviour
 
     private void Update()
     {
-        _direction = targetTransform.position - weapon.gameObject.transform.position;
+        _direction = targetTransform.position - weapon.transform.position;
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 
-        if (targetTransform.position.x > transform.position.x && weaponFlipped)
+        if (targetTransform.position.x > transform.position.x && !weaponFlipped)
         {
+            Debug.Log("Flipping");
             FlipWeapon();
         }
-        else if (targetTransform.position.x < transform.position.x && !weaponFlipped)
+        else if (targetTransform.position.x < transform.position.x && weaponFlipped)
         {
+            Debug.Log("Flipping");
             FlipWeapon();
         }
 
@@ -60,7 +63,7 @@ public class PlayerShoot : MonoBehaviour
 
     #region Public Methods
 
-    private void Attack()
+    private void Shoot()
     {
         if (weapon.CurrentAmmo > 0)
         {
@@ -77,15 +80,15 @@ public class PlayerShoot : MonoBehaviour
     {
         if (weapon.CanRapidFire && Time.timeScale > 0)
         {
-            while(true)
+            while (true && Time.timeScale > 0)
             {
-                Attack();
+                Shoot();
                 yield return timeBetweenShots;
             }
         }
         else if (Time.time >= nextTriggerPull && Time.timeScale > 0)
         {
-            Attack();
+            Shoot();
             nextTriggerPull = Time.time + weapon.FireRate;
             yield return null;
         }
@@ -93,15 +96,14 @@ public class PlayerShoot : MonoBehaviour
 
     public void Reload() => weapon.Reload();
 
+    #endregion
+
     private void FlipWeapon()
     {
         weaponFlipped = !weaponFlipped;
-        Vector3 newScale = weapon.transform.localScale;
+        Vector3 newScale = weaponHolder.transform.localScale;
         newScale.y *= -1;
         //newScale.x *= -1;
-        weapon.transform.localScale = newScale;
+        weaponHolder.transform.localScale = newScale;
     }
-
-    #endregion
-
 }

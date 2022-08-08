@@ -8,11 +8,10 @@ public abstract class Gun : MonoBehaviour
     #region Fields
 
     [SerializeField] protected GunData data;
-    protected GameObject bullet;
     [SerializeField] protected Transform muzzleTransform;
     [SerializeField] Collider2D _collider;
-
     [SerializeField] bool canRapidFire;
+    protected GameObject bullet;
     protected bool reloading = false;
     protected WaitForSeconds reloadDelay;
 

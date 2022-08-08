@@ -60,8 +60,7 @@ public class EnemyShoot : MonoBehaviour, IAttack
         weaponFlipped = !weaponFlipped;
         Vector3 newScale = weapon.transform.localScale;
         newScale.y *= -1;
-
+        //newScale.x *= -1;
         weapon.transform.localScale = newScale;
     }
-
 }
