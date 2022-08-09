@@ -30,7 +30,7 @@ public class Shotgun : Gun
             direction.y += Random.Range(-data.Recoil, data.Recoil);
             projectileScript.MoveToTarget(direction.normalized);
         }
-        data.CurrentAmmo--;
+        currentAmmo--;
         AudioManager.Play(AudioClipName.ShotgunBlast);
         firing = true;
     }
@@ -45,11 +45,11 @@ public class Shotgun : Gun
     {
         reloading = true;
 
-        while (data.CurrentAmmo < data.MagazineSize && !firing && data.MaxAmmo > 0)
+        while (currentAmmo < data.MagazineSize && !firing && data.MaxAmmo > 0)
         {
-            data.CurrentAmmo++;
+            currentAmmo++;
             data.MaxAmmo--;
-            UpdateAmmoUI.Instance.UpdateWeaponAmmo(data.CurrentAmmo, data.MaxAmmo);
+            UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
             AudioManager.Play(AudioClipName.ReloadSound);
             yield return reloadDelay;
             reloading = false;

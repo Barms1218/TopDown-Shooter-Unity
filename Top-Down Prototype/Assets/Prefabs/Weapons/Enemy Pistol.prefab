@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792628246927425300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.45, y: 0, z: 0}
+  m_LocalPosition: {x: 0.41, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,14 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 38234d3ceecab4edeb4bf47e41bae269, type: 2}
   muzzleTransform: {fileID: 8324532898143128113}
-  _collider: {fileID: 0}
-  targetTransform: {fileID: 5713588412531873688, guid: 3f670652539aa43068bf9aa99460e89d, type: 3}
-  currentAmmo: 12
-  maxAmmo: 60
-  magazineSize: 12
-  ammoPerShot: 1
-  timeBetweenShots: 1
-  reloadSpeed: 0.5
-  recoil: 0.506
   canRapidFire: 0

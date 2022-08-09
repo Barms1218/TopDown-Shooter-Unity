@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f8dc685addc4164384fc350119fc9d4, type: 3}
-  m_Name: Melee Zombie
+  m_Script: {fileID: 11500000, guid: 5bd1b8790a69e6243842520ea63aa1a1, type: 3}
+  m_Name: Rifleman Attack
   m_EditorClassIdentifier: 
-  speed: 3.5
-  attackRange: 0
-  damage: 5
-  coolDown: 1
-  attackStrength: 25
+  weapon: {fileID: 0}

@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f8dc685addc4164384fc350119fc9d4, type: 3}
-  m_Name: Ranged Zombie
+  m_Script: {fileID: 11500000, guid: 91cc2f37bbd77443ab25c87c8a872121, type: 3}
+  m_Name: Inmate Health
   m_EditorClassIdentifier: 
-  speed: 3
-  attackRange: 5
-  damage: 5
-  coolDown: 1
-  attackStrength: 0
+  maxValue: 20

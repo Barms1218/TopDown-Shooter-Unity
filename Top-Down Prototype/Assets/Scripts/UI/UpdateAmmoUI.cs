@@ -25,8 +25,10 @@ public class UpdateAmmoUI : MonoBehaviour
         _instance = this;
     }
 
-    public void UpdateWeaponAmmo(int currentAmmo, int maxAmmo)
+    public void UpdateWeaponAmmo(Gun gun)
     {
+        var currentAmmo = gun.CurrentAmmo;
+        var maxAmmo = gun.MaxAmmo;
         ammoText.text = currentAmmo.ToString() + "/" + maxAmmo.ToString();
     }
 }

@@ -9,11 +9,11 @@ public abstract class Gun : MonoBehaviour
 
     [SerializeField] protected GunData data;
     [SerializeField] protected Transform muzzleTransform;
-    [SerializeField] Collider2D _collider;
     [SerializeField] bool canRapidFire;
     protected GameObject bullet;
     protected bool reloading = false;
     protected WaitForSeconds reloadDelay;
+    protected int currentAmmo;
 
     #endregion
 
@@ -25,7 +25,7 @@ public abstract class Gun : MonoBehaviour
         set => data.MaxAmmo = value;
     }
     public float FireRate => data.FireRate;
-    public int CurrentAmmo => data.CurrentAmmo;
+    public int CurrentAmmo => currentAmmo;
     public bool CanRapidFire => canRapidFire;
     public GameObject CurrentGun => data.Gun;
 
@@ -34,6 +34,7 @@ public abstract class Gun : MonoBehaviour
 
     protected virtual void Awake()
     {
+        currentAmmo = data.MagazineSize;
         reloadDelay = new WaitForSeconds(data.ReloadSpeed);
     }
 
@@ -48,4 +49,9 @@ public abstract class Gun : MonoBehaviour
     }
 
     protected abstract IEnumerator StartReload();
+
+    private void OnEnable()
+    {
+        currentAmmo = data.MagazineSize;
+    }
 }

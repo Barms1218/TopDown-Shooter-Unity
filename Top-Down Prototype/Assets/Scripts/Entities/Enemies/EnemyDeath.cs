@@ -40,11 +40,11 @@ public class EnemyDeath : MonoBehaviour
     private void OnEnable()
     {
         _controller.enabled = true;
-        health.onDeath += HandleDeath;
+        health.onDiedEvent += HandleDeath;
     }
 
     private void OnDisable()
     {
-        health.onDeath -= HandleDeath;
+        health.onDiedEvent -= HandleDeath;
     }
 }

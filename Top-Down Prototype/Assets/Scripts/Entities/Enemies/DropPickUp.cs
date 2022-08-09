@@ -15,7 +15,7 @@ public class DropPickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health.onDeath += DropItem;
+        health.onDiedEvent += DropItem;
     }
 
     public void DropItem()

@@ -7,5 +7,5 @@ public interface IDamageable
     int Armor { get; }
     bool CanTakeDamage { get; set; }
 
-    public void DealDamage(int amount, GameObject damageSource);
+    public void DealDamage(int amount);
 }

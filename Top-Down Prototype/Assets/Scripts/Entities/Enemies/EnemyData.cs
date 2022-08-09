@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyData : MonoBehaviour
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy/New Enemy")]
+public class EnemyData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] string targetTag;
+    [SerializeField] float startingHealth;
+    [SerializeField] float minimumAttackDistance;
+    [SerializeField] float maximumAttackDistance;
+    [SerializeField] float chaseDistance;
+    [SerializeField] float attackCooldown;
+    [SerializeField] AttackObject attackType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string TargetTag => targetTag;
+    public float StartingHealth => startingHealth;
+    public float MinAttackDistance => minimumAttackDistance;
+    public float MaxAttackDistance => maximumAttackDistance;
+    public float ChaseDistance => chaseDistance;
+    public float AttackCooldown => attackCooldown;
+    public AttackObject AttackType => attackType;
 }

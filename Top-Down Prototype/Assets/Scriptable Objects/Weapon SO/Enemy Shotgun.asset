@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12604e66c8f86df42986309dcde512db, type: 3}
-  m_Name: Player Shotgun
+  m_Name: Enemy Shotgun
   m_EditorClassIdentifier: 
-  gun: {fileID: 5416292742939780387, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
-  fireRate: 1
-  startAmmo: 20
-  maxAmmo: 20
-  reloadSpeed: 0.5
-  magazineSize: 5
-  currentAmmo: 5
-  recoil: 1
+  gun: {fileID: 0}
+  fireRate: 0
+  startAmmo: 0
+  maxAmmo: 0
+  reloadSpeed: 0
+  magazineSize: 0
+  currentAmmo: 0
+  recoil: 0

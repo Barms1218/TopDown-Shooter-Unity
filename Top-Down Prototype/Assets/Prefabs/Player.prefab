@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5713588412531873689}
   - component: {fileID: 7753021285560868109}
   - component: {fileID: 109958759835751098}
+  - component: {fileID: 4855202955557867881}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -135,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e76c62a4223764ab9b9f87c6dde190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  health: {fileID: 11400000, guid: 89fdebc1e413044ed99a4e2c67260493, type: 2}
 --- !u!114 &5713588412531873689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,9 +177,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 0}
+  gun: {fileID: 0}
   weaponHolder: {fileID: 6143145111739917885}
   weaponFlipped: 1
+--- !u!114 &4855202955557867881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5713588412531873691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8793f55003054437da9cc35d0d3f4c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 2734695023450441189}
+  weaponHolder: {fileID: 6143145111739917885}
+  targetTag: Cursor
 --- !u!1 &5713588412911097777
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +491,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347722c73cd25534aa3b4f1b49733173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponParent: {fileID: 0}
+  swapEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 109958759835751098}
+        m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
+        m_MethodName: set_CurrentWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4855202955557867881}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: set_Gun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!70 &8239745620444605824
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -682,6 +724,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+--- !u!114 &2734695023450441189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4250514611349930945, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+  m_PrefabInstance: {fileID: 2238089068302042660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7334407005669316103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}
@@ -798,6 +851,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6338152386767112231, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
+      propertyPath: healthObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 89fdebc1e413044ed99a4e2c67260493, type: 2}
     - target: {fileID: 6338152387634571807, guid: cb9034b5785ee4030a3639a8f42affb0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

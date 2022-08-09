@@ -36,11 +36,11 @@ public class PlayerDeath : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.onDeath += HandleDeath;
+        _health.onDiedEvent += HandleDeath;
     }
 
     private void OnDisable()
     {
-        _health.onDeath -= HandleDeath;
+        _health.onDiedEvent -= HandleDeath;
     }
 }

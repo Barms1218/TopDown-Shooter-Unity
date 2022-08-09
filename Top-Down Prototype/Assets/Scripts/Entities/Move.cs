@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour, IMoveable
+public class Move : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private GameObject flipObject;

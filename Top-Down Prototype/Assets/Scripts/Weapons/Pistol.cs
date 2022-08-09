@@ -18,7 +18,7 @@ public class Pistol : Gun
                 bullet.tag = gameObject.tag;
             }
             var bulletScript = bullet.GetComponent<Projectile>();
-            data.CurrentAmmo -= 1;
+            currentAmmo--;
             direction.y += Random.Range(-data.Recoil, data.Recoil);
             bulletScript.MoveToTarget(direction.normalized);
             AudioManager.Play(AudioClipName.PistolShot);
@@ -30,10 +30,10 @@ public class Pistol : Gun
         reloading = true;
 
         yield return reloadDelay;
-        data.CurrentAmmo = data.MagazineSize;
+        currentAmmo = data.MagazineSize;
 
         AudioManager.Play(AudioClipName.ReloadSound);
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(data.CurrentAmmo, data.MaxAmmo);
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
         reloading = false;
     }
 

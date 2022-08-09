@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MeleeAttack : MonoBehaviour, IAttack
+[CreateAssetMenu(fileName = "New Attack", menuName = "AI Attacks/Melee")]
+public class MeleeAttack : AttackObject
 {
     [SerializeField] private int attackStrength;
     [SerializeField] private int damage;
@@ -13,24 +14,15 @@ public class MeleeAttack : MonoBehaviour, IAttack
     private WaitForSeconds staggerTime;
     private GameObject player;
 
-    private void Awake()
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-    }
-
     private void Start()
     {
         player = PlayerController.playerInstance.gameObject;
         staggerTime = new WaitForSeconds(attackCooldown);
     }
 
-    public void Attack()
+    public override void Attack(AIController controller)
     {
-        //var pushForce = player.transform.position - transform.position;
-        player.GetComponent<IDamageable>().DealDamage(damage, gameObject);
-        //player.GetComponent<Rigidbody2D>().AddForce(
-        //    pushForce.normalized * attackStrength, ForceMode2D.Impulse);
-        StartCoroutine(Stagger());
+        player.GetComponent<IDamageable>().DealDamage(-damage);
     }
 
     private IEnumerator Stagger()

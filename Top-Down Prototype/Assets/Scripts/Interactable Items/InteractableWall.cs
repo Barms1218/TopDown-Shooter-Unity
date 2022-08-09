@@ -9,6 +9,6 @@ public class InteractableWall : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        health.RestoreHealth(10);
+        health.ChangeHealth(10);
     }
 }

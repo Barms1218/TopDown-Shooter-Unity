@@ -16,13 +16,13 @@ public class EntityTakeDamage : MonoBehaviour, IDamageable
         set { canTakeDamage = value; }
     }
 
-    public void DealDamage(int amount, GameObject damageSource)
+    public void DealDamage(int amount)
     {
         if (canTakeDamage)
         {
             if (armor <= 0)
             {
-                health.ReduceHealth(amount, damageSource);
+                health.ChangeHealth(amount);
             }
             else
             {

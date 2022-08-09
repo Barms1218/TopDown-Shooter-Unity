@@ -37,27 +37,27 @@ public class PlayerShoot : MonoBehaviour
 
     private void Start()
     {
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun.CurrentAmmo, gun.MaxAmmo);
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
         targetTransform = GameObject.FindGameObjectWithTag("Cursor").transform;
     }
 
-    private void Update()
-    {
-        _direction = targetTransform.position - gun.transform.position;
-        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+    //private void Update()
+    //{
+    //    _direction = targetTransform.position - gun.transform.position;
+    //    float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 
-        if (targetTransform.position.x > transform.position.x && !weaponFlipped)
-        {
-            FlipWeapon();
-        }
-        else if (targetTransform.position.x < transform.position.x && weaponFlipped)
-        {
-            FlipWeapon();
-        }
+    //    if (targetTransform.position.x > transform.position.x && !weaponFlipped)
+    //    {
+    //        FlipWeapon();
+    //    }
+    //    else if (targetTransform.position.x < transform.position.x && weaponFlipped)
+    //    {
+    //        FlipWeapon();
+    //    }
 
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward * Time.deltaTime);
-        gun.transform.rotation = rotation;
-    }
+    //    Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward * Time.deltaTime);
+    //    gun.transform.rotation = rotation;
+    //}
 
     #region Public Methods
 
@@ -65,8 +65,8 @@ public class PlayerShoot : MonoBehaviour
     {
         if (gun.CurrentAmmo > 0)
         {
-            gun.Fire(_direction);
-            UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun.CurrentAmmo, gun.MaxAmmo);
+            gun.Fire(Vector2.right);
+            UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
         }
         else
         {

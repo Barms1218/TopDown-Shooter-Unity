@@ -23,7 +23,7 @@ public class AssaultRifle : Gun
                 bullet.tag = gameObject.tag;
             }
             var bulletScript = bullet.GetComponent<Projectile>();
-            data.CurrentAmmo -= 1;
+            currentAmmo--;
             direction.y += Random.Range(-data.Recoil, data.Recoil);
             bulletScript.MoveToTarget(direction.normalized);
             AudioManager.Play(AudioClipName.AR_Fire);
@@ -34,18 +34,18 @@ public class AssaultRifle : Gun
     {
         reloading = true;
         yield return reloadDelay;
-        if (data.MaxAmmo > data.MagazineSize - data.CurrentAmmo)
+        if (data.MaxAmmo > data.MagazineSize - currentAmmo)
         {
-            data.MaxAmmo -= data.MagazineSize - data.CurrentAmmo;
-            data.CurrentAmmo = data.MagazineSize;
+            data.MaxAmmo -= data.MagazineSize - currentAmmo;
+            currentAmmo = data.MagazineSize;
         }
-        else if (data.MaxAmmo < data.MagazineSize - data.CurrentAmmo)
+        else if (data.MaxAmmo < data.MagazineSize - currentAmmo)
         {
-            data.CurrentAmmo += data.MaxAmmo;
-            data.MaxAmmo -= data.MaxAmmo;
+            currentAmmo += data.MaxAmmo;
+            data.MaxAmmo = 0;
         }
 
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(data.CurrentAmmo, data.CurrentAmmo);      
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);      
         reloading = false;
         AudioManager.Play(AudioClipName.ReloadSound);
     }

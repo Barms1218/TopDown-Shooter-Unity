@@ -6,41 +6,36 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Move))]
 public class AIController : MonoBehaviour
 {
-    [SerializeField] private float attackDistance;
-    [SerializeField] private float minAttackDistance;
-    [SerializeField] private float chaseDistance;
-    private GameObject player;
+    [SerializeField] EnemyData data;
+    [SerializeField] AttackObject attack;
+    private Transform targetTransform;
     private Move enemyMove;
-    private IAttack attack;
     private float distanceToTarget;
-    public UnityAction attackDelegate;
     private float nextAttack;
-    [SerializeField] private float attackCoolDown;
 
     private void Awake()
     {
         enemyMove = GetComponent<Move>();
-        attack = GetComponent<IAttack>();
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        targetTransform = GameObject.FindGameObjectWithTag(data.TargetTag).transform;
     }
 
     private void Update()
     {
-        if (player != null)
+        if (targetTransform != null)
         {
-            distanceToTarget = Vector2.Distance(player.transform.position, transform.position);
-            if (distanceToTarget > minAttackDistance && distanceToTarget < attackDistance)
+            distanceToTarget = Vector2.Distance(targetTransform.position, transform.position);
+            if (distanceToTarget > data.MinAttackDistance &&
+                distanceToTarget < data.MaxAttackDistance)
             {
                  if (Time.time >= nextAttack && Time.timeScale > 0)
                 {
-                    attack.Attack();
-                    nextAttack = Time.time + attackCoolDown;
-                    attack.Attack();
+                    attack.Attack(this);
+                    nextAttack = Time.time + data.AttackCooldown;
                 }
 
             }
@@ -49,8 +44,8 @@ public class AIController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var moveInput = player.transform.position - transform.position;
-        if (moveInput != null && distanceToTarget > chaseDistance)
+        var moveInput = targetTransform.position - transform.position;
+        if (moveInput != null && distanceToTarget > data.ChaseDistance)
         {
             enemyMove.MoveObject(moveInput.normalized);
         }

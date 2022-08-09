@@ -34,10 +34,18 @@ public class Projectile : MonoBehaviour
         if (hitObject.TryGetComponent(out IDamageable damageable)
             && !hitObject.CompareTag(gameObject.tag))
         {
-            damageable.DealDamage(damage, gameObject);
+            damageable.DealDamage(-damage);
             gameObject.SetActive(false);
-        }
 
+            AudioManager.Play(AudioClipName.BulletHit);
+        }
+        var bloodSplatter = BloodPool.SharedInstance.GetPooledObject();
+        if (bloodSplatter != null && hitObject.TryGetComponent(out Health health))
+        {
+            bloodSplatter.transform.SetPositionAndRotation(
+                transform.position, transform.rotation);
+            bloodSplatter.SetActive(true);
+        }
 
     }
 
@@ -48,7 +56,7 @@ public class Projectile : MonoBehaviour
         Quaternion target = Quaternion.Euler(0, 0, angle);
 
         transform.rotation = target;
-        rigidbody2D.AddForce(force * speed, ForceMode2D.Impulse);
+        rigidbody2D.AddRelativeForce(force * speed, ForceMode2D.Impulse);
     }
 
     private void OnEnable()

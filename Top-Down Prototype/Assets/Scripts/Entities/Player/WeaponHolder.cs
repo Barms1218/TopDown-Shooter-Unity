@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponHolder : MonoBehaviour
 {
-    PlayerShoot shooter;
     GameObject gunPrefab;
     private List<Gun> weaponList = new();
     private Gun gun;
+    public UnityEvent<Gun> swapEvent;
 
     public List<Gun> WeaponList => weaponList;
     public Gun CurrentWeapon { set => gun = value; }
@@ -19,10 +20,8 @@ public class WeaponHolder : MonoBehaviour
 
     private void Awake()
     {
-        shooter = GetComponentInParent<PlayerShoot>();
         gun = GetComponentInChildren<Gun>();
         gunPrefab = gun.gameObject;
-        gunPrefab.transform.SetParent(transform, false);
         weaponList.Add(gun);
     }
 
@@ -70,9 +69,8 @@ public class WeaponHolder : MonoBehaviour
         gunPrefab = weaponList[weaponIndex].gameObject;
         gunPrefab.SetActive(true);
         gun = weaponList[weaponIndex];
-        shooter.CurrentWeapon = gun;
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun.CurrentAmmo,
-            gun.MaxAmmo);
+        swapEvent?.Invoke(gun);
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -93,8 +91,8 @@ public class WeaponHolder : MonoBehaviour
         newGun.transform.SetPositionAndRotation(gunPrefab.transform.position, Quaternion.identity);
         gunPrefab = newGun.gameObject;
 
-        shooter.CurrentWeapon = newGun;
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun.CurrentAmmo, newGun.MaxAmmo);
+        swapEvent?.Invoke(newGun);
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun);
     }
 
     public void AddAmmoToWeapon(int amountToAdd, Gun weapon)
