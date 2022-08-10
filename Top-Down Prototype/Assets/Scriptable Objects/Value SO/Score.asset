@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462e41e4e06184766ae80f671292ee1b, type: 3}
-  m_Name: Wave3
+  m_Script: {fileID: 11500000, guid: c22312de7fd0a431397f9a007dbbbba8, type: 3}
+  m_Name: Score
   m_EditorClassIdentifier: 
-  enemyPrefabs: []
-  waveSpawnDelay: 3
-  spawnTimeVariation: 0.5
-  minSpawnTime: 0.5
+  intValue: 0

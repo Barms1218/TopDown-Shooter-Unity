@@ -31,7 +31,7 @@ public class GamePlayTimer : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.playerInstance.enabled)
+        if (PlayerController.PlayerInstance.enabled)
         {
             timeElapsed += Time.deltaTime;
             DisplayTime(timeElapsed);

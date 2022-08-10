@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     Health health;
-    [SerializeField] FloatVariable playerHealth;
     [SerializeField] private Slider slider;
     [SerializeField] Gradient gradient;
     [SerializeField] Image fill;
@@ -16,7 +15,6 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         health = GetComponentInParent<Health>();
-        
     }
 
     private void Update()

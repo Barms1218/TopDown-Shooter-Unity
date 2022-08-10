@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -8119643195282958802}
   - component: {fileID: 1356982498}
   - component: {fileID: 5435720360568982246}
+  - component: {fileID: 7464971134713734651}
   m_Layer: 8
   m_Name: GO_Zombie Captain
   m_TagString: Enemy
@@ -76,8 +77,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01205492, y: 0.4144826}
-  m_Size: {x: 0.59198666, y: 0.7556095}
+  m_Offset: {x: -0.01205492, y: 0.55180717}
+  m_Size: {x: 0.59198666, y: 1.0302587}
   m_Direction: 0
 --- !u!114 &8188929821096494593
 MonoBehaviour:
@@ -92,7 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 23344150521db4cc6b563a9041400382, type: 2}
-  attack: {fileID: 11400000, guid: e1d38df0746814334911ffa1a2054fba, type: 2}
 --- !u!114 &6908280974322434613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 200
+  scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
+  killCountObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
 --- !u!114 &1356982498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +178,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 72214
+  m_InstanceId: 50618
 --- !u!114 &5435720360568982246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +194,18 @@ MonoBehaviour:
   gun: {fileID: 533922958477208585}
   weaponHolder: {fileID: 5768122300237971118}
   targetTag: Player
+--- !u!114 &7464971134713734651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474475448183171314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5760962458442664344
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91cc2f37bbd77443ab25c87c8a872121, type: 3}
-  m_Name: Captain Health
+  m_Script: {fileID: 11500000, guid: c22312de7fd0a431397f9a007dbbbba8, type: 3}
+  m_Name: Kill Count
   m_EditorClassIdentifier: 
-  Value: 15
+  intValue: 0

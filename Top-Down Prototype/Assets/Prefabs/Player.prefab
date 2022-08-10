@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5713588412531873692}
   - component: {fileID: 5713588412531873695}
   - component: {fileID: 5713588412531873694}
-  - component: {fileID: 5713588412531873689}
   - component: {fileID: 7753021285560868109}
   - component: {fileID: 109958759835751098}
   - component: {fileID: 4855202955557867881}
@@ -137,21 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 11400000, guid: 89fdebc1e413044ed99a4e2c67260493, type: 2}
---- !u!114 &5713588412531873689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5713588412531873691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831901da137184b229b8edd06baf4b76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 5713588412531873692}
-  knockbackStrength: 1
-  invincibleTime: 1
 --- !u!114 &7753021285560868109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,9 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 0}
-  weaponHolder: {fileID: 6143145111739917885}
-  weaponFlipped: 1
 --- !u!114 &4855202955557867881
 MonoBehaviour:
   m_ObjectHideFlags: 0

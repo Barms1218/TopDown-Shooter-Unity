@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] private float speed;
     [SerializeField] private GameObject flipObject;
     [SerializeField] private string transformName;
     private Rigidbody2D rb2d;
     private Animator animator;
     Transform lookAtTransform;
     private bool facingRight = true;
-
-    public float Speed
-    {
-        get => speed;
-        set => speed = value;
-    }
 
     private void Awake()
     {
@@ -47,14 +40,10 @@ public class Move : MonoBehaviour
         }
     }
 
-    public void MoveObject(Vector2 moveInput)
+    public void MoveObject(Vector2 moveInput, float speed)
     {
         rb2d.MovePosition(rb2d.position + speed * Time.deltaTime * moveInput);
-        animator.SetBool("Running", true);
-        if (moveInput == Vector2.zero)
-        {
-            animator.SetBool("Running", false);
-        }
+        animator.SetFloat("Move Magnitude", moveInput.magnitude);
     }
 
     private void Flip()

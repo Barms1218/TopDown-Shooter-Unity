@@ -5,35 +5,23 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
-    public static HUD _instance;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] IntVariable scoreObject;
+
+    [SerializeField] TextMeshProUGUI killText;
+    [SerializeField] IntVariable killObject;
 
     private int score;
-
-    public static HUD Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                Debug.Log("Dude, there's no HUD.");
-            }
-            return _instance;
-        }
-    }
+    private int killCount;
 
     public int Score => score;
 
-    private void Awake()
+    private void Update()
     {
-        _instance = this;
+        score = scoreObject.Value;
+        scoreText.text = "Score: " + score.ToString();
 
-        score = 0;
-    }
-
-    public void UpdatePointsText(int points)
-    {
-        score += points;
-        scoreText.text = ("Score: " + score.ToString());
+        killCount = killObject.Value;
+        killText.text = "Targets: " + killCount.ToString();
     }
 }

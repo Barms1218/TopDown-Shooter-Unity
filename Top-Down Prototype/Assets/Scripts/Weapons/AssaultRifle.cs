@@ -34,15 +34,15 @@ public class AssaultRifle : Gun
     {
         reloading = true;
         yield return reloadDelay;
-        if (data.MaxAmmo > data.MagazineSize - currentAmmo)
+        if (maxAmmo > data.MagazineSize - currentAmmo)
         {
-            data.MaxAmmo -= data.MagazineSize - currentAmmo;
+            maxAmmo -= data.MagazineSize - currentAmmo;
             currentAmmo = data.MagazineSize;
         }
-        else if (data.MaxAmmo < data.MagazineSize - currentAmmo)
+        else if (maxAmmo < data.MagazineSize - currentAmmo)
         {
-            currentAmmo += data.MaxAmmo;
-            data.MaxAmmo = 0;
+            currentAmmo += maxAmmo;
+            maxAmmo = 0;
         }
 
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);      

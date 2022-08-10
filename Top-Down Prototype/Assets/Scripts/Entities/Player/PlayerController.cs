@@ -7,16 +7,29 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Move))]
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController playerInstance;
+    private static PlayerController playerInstance;
+    [SerializeField] float playerSpeed;
     private PlayerActions actions;
-    PlayerShoot shooter;
+    Shooter shooter;
     WeaponHolder holder;
     Move playerMove;
+    private bool canDash = true;
 
     Coroutine fireCoroutine;
 
     // Vector Input Actions
     InputAction move;
+
+    public static PlayerController PlayerInstance
+    {
+        get
+        {
+            if (playerInstance == null)
+                Debug.Log("There's no player");
+
+            return playerInstance;
+        }
+    }
 
     // delegates
     public UnityAction dashDelegate;
@@ -24,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         holder = GetComponentInChildren<WeaponHolder>();
-        shooter = GetComponent<PlayerShoot>();
+        shooter = GetComponent<Shooter>();
         playerMove = GetComponent<Move>();
         playerInstance = this;
 
@@ -37,7 +50,7 @@ public class PlayerController : MonoBehaviour
         actions.PlayerControls.Reload.started += _ => shooter.Reload();
 
         //Dash input
-        //actions.PlayerControls.Dash.started += _ => Dash();
+        actions.PlayerControls.Dash.started += _ => Dash();
 
         // Inputs for weapon swap
         actions.PlayerControls.EquipWeapon1.started += _ => holder.TryEquipWeaponOne();
@@ -47,12 +60,26 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerMove.MoveObject(move.ReadValue<Vector2>());
+        playerMove.MoveObject(move.ReadValue<Vector2>(), playerSpeed);
     }
 
     private void Dash()
     {
-        //dashDelegate?.Invoke();
+        if (canDash)
+        {
+            StartCoroutine(DashRoutine());
+        }
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        playerSpeed *= 2;
+        yield return new WaitForSeconds(0.3f);
+        canDash = false;
+        playerSpeed /= 2;
+
+        yield return new WaitForSeconds(2f);
+        canDash = true;
     }
 
     void StartFiring()

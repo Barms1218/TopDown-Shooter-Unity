@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4001802063013996520}
   - component: {fileID: 847067256608029376}
   - component: {fileID: 1912698520}
+  - component: {fileID: 4166903830583077417}
   m_Layer: 8
   m_Name: GO_Zombie Inmate
   m_TagString: Enemy
@@ -52,7 +53,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.47107655
+  m_Mass: 0.5102321
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -74,8 +75,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.031168222, y: 0.4894669}
-  m_Size: {x: 0.60613775, y: 0.90725565}
+  m_Offset: {x: -0.031168222, y: 0.5217661}
+  m_Size: {x: 0.60613775, y: 0.9718541}
   m_Direction: 0
 --- !u!114 &5731720627620535405
 MonoBehaviour:
@@ -90,7 +91,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8e9ee8872645c4151bab83a4b85131f5, type: 2}
-  attack: {fileID: 11400000, guid: 44b5d9b6b1ce24c9cbf10b1f47f2d05e, type: 2}
 --- !u!114 &8855957164897592162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 50
+  scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
+  killCountObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
 --- !u!114 &1912698520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +176,23 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 57462
+  m_InstanceId: 50556
+--- !u!114 &4166903830583077417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579200449049318824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8ec766de8b48942b996f2e397ea9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackStrength: 2
+  damage: 5
+  attackCooldown: 1
+  targetTag: Player
 --- !u!1 &8191513672832862777
 GameObject:
   m_ObjectHideFlags: 0

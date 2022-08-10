@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour, IHaveHealth
+public class Health : MonoBehaviour
 {
     [SerializeField] FloatVariable health;
+    private Animator _animator;
     private float _health;
     public UnityAction onDiedEvent;
 
-    public int MaxHealth => health.MaxValue;
+    public float MaxHealth => health.Value;
 
     public float CurrentHealth
     {
@@ -18,7 +19,7 @@ public class Health : MonoBehaviour, IHaveHealth
 
     private void Awake()
     {
-        //_health = health.MaxValue;
+        _animator = GetComponentInChildren<Animator>();
     }
 
     public void ChangeHealth(int amount)
@@ -26,19 +27,29 @@ public class Health : MonoBehaviour, IHaveHealth
         if (_health > 0)
         {
             _health += amount;
-            if (TryGetComponent(out Animator _animator))
+            _animator.SetTrigger("Hurt");
+
+            var bloodSplatter = BloodPool.SharedInstance.GetPooledObject();
+            if (bloodSplatter != null)
             {
-                _animator.SetTrigger("Hurt");
+                bloodSplatter.transform.SetPositionAndRotation(
+                    transform.position, transform.rotation);
+                bloodSplatter.SetActive(true);
             }
         }
         else if (_health <= 0)
         {
-            onDiedEvent?.Invoke();
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        onDiedEvent?.Invoke();
     }
 
     private void OnEnable()
     {
-        _health = health.MaxValue;
+        _health = health.Value;
     }
 }

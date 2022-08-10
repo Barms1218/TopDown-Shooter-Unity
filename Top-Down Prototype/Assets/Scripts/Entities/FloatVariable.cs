@@ -7,16 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "float")]
 public class FloatVariable : ScriptableObject
 {
-    [SerializeField] int maxValue;
-    [NonSerialized] public float runtimeValue;
+    public float Value;
 
-    public int MaxValue
-    {
-        get => maxValue;
-    }
-
-    public void OnEnable()
-    {
-        runtimeValue = maxValue;
-    }
 }

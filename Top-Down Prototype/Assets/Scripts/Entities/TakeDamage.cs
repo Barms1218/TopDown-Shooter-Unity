@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityTakeDamage : MonoBehaviour, IDamageable
+public class TakeDamage : MonoBehaviour, IDamageable
 {
     [SerializeField] private int armor;
     [SerializeField] Health health;

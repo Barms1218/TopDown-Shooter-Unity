@@ -4,25 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "New Attack", menuName = "AI Attacks/Melee")]
-public class MeleeAttack : AttackObject
+public class MeleeAttack : MonoBehaviour, IAttack
 {
     [SerializeField] private int attackStrength;
     [SerializeField] private int damage;
     [SerializeField] private float attackCooldown;
+    [SerializeField] private string targetTag;
     private Rigidbody2D rb2d;
+    private IDamageable damageable;
     private WaitForSeconds staggerTime;
-    private GameObject player;
+    private GameObject target;
 
     private void Start()
     {
-        player = PlayerController.playerInstance.gameObject;
+        target = GameObject.FindGameObjectWithTag(targetTag);
         staggerTime = new WaitForSeconds(attackCooldown);
+        damageable = target.GetComponent<IDamageable>();
     }
 
-    public override void Attack(AIController controller)
+    public void Attack()
     {
-        player.GetComponent<IDamageable>().DealDamage(-damage);
+        Debug.Log("Attacking player from " + gameObject.name);
+        damageable.DealDamage(-damage);
+        StartCoroutine(Stagger());
     }
 
     private IEnumerator Stagger()

@@ -7,32 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class GamePlayManager : MonoBehaviour
 {
-    private static GamePlayManager _instance;
-    [SerializeField] Canvas pauseCanvas;
     [SerializeField] TextMeshProUGUI killCountText;
+    [SerializeField] IntVariable killObject;
     [SerializeField] TextMeshProUGUI finalScoreText;
+    [SerializeField] IntVariable scoreObject;
     [SerializeField] TextMeshProUGUI finalTimeText;
+    [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas gameOverCanvas;
     private SetTheCursor theCursor;
     PauseAction pause;
 
-    private int killCount;
-
-    public static GamePlayManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                Debug.Log("Game's broken");
-            }
-            return _instance;
-        }
-    }
 
     private void Awake()
     {
-        _instance = this;
         pause = new PauseAction();
 
         pause.Pause.PauseGame.started += _ => PauseGame();
@@ -84,24 +71,21 @@ public class GamePlayManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void UpdateKillCount()
-    {
-        killCount++;
-    }
-
     private void ShowGameOverScreen()
     {
+        int score, killCount;
+        score = scoreObject.Value;
+        killCount = killObject.Value;
         gameOverCanvas.enabled = true;
         Time.timeScale = 0;
         killCountText.text = "Enemies Killed: " + killCount.ToString();
-        finalScoreText.text = "Final Score: " + HUD.Instance.Score;
+        finalScoreText.text = "Final Score: " + score.ToString();
         finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.GameTime.text;
     }
 
     private void OnEnable()
     {
         pause.Enable();
-        PlayerDeath.gameOver += ShowGameOverScreen;
     }
 
     private void OnDisable()

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Zombie Inmate
   m_EditorClassIdentifier: 
   targetTag: Player
-  startingHealth: 20
   minimumAttackDistance: 1
   maximumAttackDistance: 0
   chaseDistance: 0.5
   attackCooldown: 1
-  attackType: {fileID: 11400000, guid: 44b5d9b6b1ce24c9cbf10b1f47f2d05e, type: 2}
+  speed: 1

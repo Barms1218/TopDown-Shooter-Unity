@@ -25,11 +25,10 @@ public class PlayerDeath : MonoBehaviour
 
     }
 
-    private IEnumerator End()
+    public IEnumerator End()
     {
         
         yield return new WaitForSeconds(2f);
-        gameOver?.Invoke();
         gameObject.SetActive(false);
 
     }

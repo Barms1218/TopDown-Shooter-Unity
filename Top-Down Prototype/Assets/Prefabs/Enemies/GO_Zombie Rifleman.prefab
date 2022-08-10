@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 3877590269110434435}
   - component: {fileID: 7852778782486491207}
   - component: {fileID: 7311279862615347311}
+  - component: {fileID: 8774404287756539345}
   m_Layer: 8
   m_Name: GO_Zombie Rifleman
   m_TagString: Enemy
@@ -130,8 +131,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01205492, y: 0.43198586}
-  m_Size: {x: 0.59198666, y: 0.89365864}
+  m_Offset: {x: -0.01205492, y: 0.50668824}
+  m_Size: {x: 0.59198666, y: 1.0430634}
   m_Direction: 0
 --- !u!114 &2197870145766887852
 MonoBehaviour:
@@ -146,7 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e1c1011c535d64ea593dcf6303586e88, type: 2}
-  attack: {fileID: 11400000, guid: 5ed6d228f11334c35b2001615a0f5631, type: 2}
 --- !u!114 &2142940768495354035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 300
+  scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
+  killCountObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
 --- !u!114 &3877590269110434435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +249,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 68334
+  m_InstanceId: 50500
 --- !u!114 &7311279862615347311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +265,18 @@ MonoBehaviour:
   gun: {fileID: 2662633390049074435}
   weaponHolder: {fileID: 7717030702000420873}
   targetTag: Player
+--- !u!114 &8774404287756539345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543103714409048337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5270326861657880261
 GameObject:
   m_ObjectHideFlags: 0

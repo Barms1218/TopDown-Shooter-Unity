@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e9ae605cfbc7f46e3bc467fb14a46ad4, type: 2}
-  attack: {fileID: 0}
 --- !u!114 &-5816319003111613719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 350
+  scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
+  killCountObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
 --- !u!114 &1768611672242997327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 68408
+  m_InstanceId: 31940
 --- !u!114 &5788513337548650172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486ddc62c430943cab58c15c1d9d202e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
   flipObject: {fileID: 8789274090338871355}
   transformName: Player
 --- !u!114 &845268545811951952

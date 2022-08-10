@@ -14,6 +14,7 @@ public abstract class Gun : MonoBehaviour
     protected bool reloading = false;
     protected WaitForSeconds reloadDelay;
     protected int currentAmmo;
+    protected int maxAmmo;
 
     #endregion
 
@@ -21,8 +22,8 @@ public abstract class Gun : MonoBehaviour
 
     public int MaxAmmo
     {
-        get => data.MaxAmmo;
-        set => data.MaxAmmo = value;
+        get => maxAmmo;
+        set => maxAmmo = value;
     }
     public float FireRate => data.FireRate;
     public int CurrentAmmo => currentAmmo;
@@ -34,7 +35,6 @@ public abstract class Gun : MonoBehaviour
 
     protected virtual void Awake()
     {
-        currentAmmo = data.MagazineSize;
         reloadDelay = new WaitForSeconds(data.ReloadSpeed);
     }
 
@@ -52,6 +52,7 @@ public abstract class Gun : MonoBehaviour
 
     private void OnEnable()
     {
+        maxAmmo = data.StartAmmo;
         currentAmmo = data.MagazineSize;
     }
 }

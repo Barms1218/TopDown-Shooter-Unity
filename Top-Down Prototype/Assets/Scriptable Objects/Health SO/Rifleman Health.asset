@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91cc2f37bbd77443ab25c87c8a872121, type: 3}
   m_Name: Rifleman Health
   m_EditorClassIdentifier: 
-  maxValue: 30
+  Value: 25

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Zombie Shotgunner
   m_EditorClassIdentifier: 
   targetTag: Player
-  startingHealth: 30
   minimumAttackDistance: 0
   maximumAttackDistance: 3.5
   chaseDistance: 3
   attackCooldown: 1
-  attackType: {fileID: 0}
+  speed: 2

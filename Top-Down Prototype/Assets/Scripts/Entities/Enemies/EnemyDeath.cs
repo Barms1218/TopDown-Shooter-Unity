@@ -8,8 +8,9 @@ public class EnemyDeath : MonoBehaviour
 {
     Health health;
     AIController _controller;
-    [SerializeField]
-    private int points;
+    [SerializeField] private int points;
+    [SerializeField] IntVariable scoreObject;
+    [SerializeField] IntVariable killCountObject;
     private WaitForSeconds dieSeconds;
     private float dieTime = 1f;
 
@@ -31,9 +32,8 @@ public class EnemyDeath : MonoBehaviour
     {
 
         yield return dieSeconds;
-
-        HUD.Instance.UpdatePointsText(points);
-        GamePlayManager.Instance.UpdateKillCount();
+        scoreObject.Value += points;
+        killCountObject.Value++;
         gameObject.SetActive(false);
     }
 

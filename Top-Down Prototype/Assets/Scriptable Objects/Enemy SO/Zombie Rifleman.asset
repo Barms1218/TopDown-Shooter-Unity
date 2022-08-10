@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Zombie Rifleman
   m_EditorClassIdentifier: 
   targetTag: Player
-  startingHealth: 25
   minimumAttackDistance: 3
   maximumAttackDistance: 6
   chaseDistance: 5
   attackCooldown: 0.5
-  attackType: {fileID: 0}
+  speed: 1

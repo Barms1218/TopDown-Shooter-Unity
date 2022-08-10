@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class InteractableWall : MonoBehaviour, IInteractable
 {
-    [SerializeField] Health health;
+    [SerializeField] IHaveHealth health;
 
     public void Interact()
     {

@@ -6,18 +6,17 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     #region Fields
-    
-    [SerializeField] int damage;
-    [SerializeField] float timeToLive = 0.5f;
-    [SerializeField] float elapsedTime;
-    [SerializeField] float speed;
-    [SerializeField] TrailRenderer trail;
+
+    [SerializeField] ProjectileData data;
+    float elapsedTime;
+
+    TrailRenderer trail;
 
     #endregion
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Awake()
     {
-        ProcessHit(collision.gameObject);
+        trail = GetComponent<TrailRenderer>();
     }
 
     private void Update()
@@ -29,24 +28,21 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ProcessHit(collision.gameObject);
+    }
+
     private void ProcessHit(GameObject hitObject)
     {
-        if (hitObject.TryGetComponent(out IDamageable damageable)
-            && !hitObject.CompareTag(gameObject.tag))
+        var damageable = hitObject.GetComponent<IDamageable>();
+        if (damageable != null && !hitObject.CompareTag(gameObject.tag))
         {
-            damageable.DealDamage(-damage);
+            damageable.DealDamage(-data.Damage);
             gameObject.SetActive(false);
 
             AudioManager.Play(AudioClipName.BulletHit);
         }
-        var bloodSplatter = BloodPool.SharedInstance.GetPooledObject();
-        if (bloodSplatter != null && hitObject.TryGetComponent(out Health health))
-        {
-            bloodSplatter.transform.SetPositionAndRotation(
-                transform.position, transform.rotation);
-            bloodSplatter.SetActive(true);
-        }
-
     }
 
     public virtual void MoveToTarget(Vector2 force)
@@ -56,12 +52,12 @@ public class Projectile : MonoBehaviour
         Quaternion target = Quaternion.Euler(0, 0, angle);
 
         transform.rotation = target;
-        rigidbody2D.AddRelativeForce(force * speed, ForceMode2D.Impulse);
+        rigidbody2D.AddRelativeForce(force * data.Speed, ForceMode2D.Impulse);
     }
 
     private void OnEnable()
     {
-        elapsedTime = timeToLive;
+        elapsedTime = data.TimeToLive;
     }
 
     private void OnDisable()

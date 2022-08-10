@@ -6,18 +6,20 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     [SerializeField] string targetTag;
-    [SerializeField] float startingHealth;
     [SerializeField] float minimumAttackDistance;
     [SerializeField] float maximumAttackDistance;
     [SerializeField] float chaseDistance;
     [SerializeField] float attackCooldown;
-    [SerializeField] AttackObject attackType;
+    [SerializeField] float speed;
 
     public string TargetTag => targetTag;
-    public float StartingHealth => startingHealth;
     public float MinAttackDistance => minimumAttackDistance;
     public float MaxAttackDistance => maximumAttackDistance;
     public float ChaseDistance => chaseDistance;
     public float AttackCooldown => attackCooldown;
-    public AttackObject AttackType => attackType;
+    public float Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
 }

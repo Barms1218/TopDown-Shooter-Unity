@@ -45,10 +45,10 @@ public class Shotgun : Gun
     {
         reloading = true;
 
-        while (currentAmmo < data.MagazineSize && !firing && data.MaxAmmo > 0)
+        while (currentAmmo < data.MagazineSize && !firing && maxAmmo > 0)
         {
             currentAmmo++;
-            data.MaxAmmo--;
+            maxAmmo--;
             UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
             AudioManager.Play(AudioClipName.ReloadSound);
             yield return reloadDelay;

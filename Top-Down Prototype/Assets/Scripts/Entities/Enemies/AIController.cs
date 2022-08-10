@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class AIController : MonoBehaviour
 {
     [SerializeField] EnemyData data;
-    [SerializeField] AttackObject attack;
+    IAttack attack;
     private Transform targetTransform;
     private Move enemyMove;
     private float distanceToTarget;
@@ -16,6 +16,7 @@ public class AIController : MonoBehaviour
     private void Awake()
     {
         enemyMove = GetComponent<Move>();
+        attack = GetComponent<IAttack>();
     }
 
     // Start is called before the first frame update
@@ -32,12 +33,12 @@ public class AIController : MonoBehaviour
             if (distanceToTarget > data.MinAttackDistance &&
                 distanceToTarget < data.MaxAttackDistance)
             {
-                 if (Time.time >= nextAttack && Time.timeScale > 0)
+                if (Time.time >= nextAttack && Time.timeScale > 0)
                 {
-                    attack.Attack(this);
+                    attack.Attack();
+                    //StartCoroutine(PauseMovement());
                     nextAttack = Time.time + data.AttackCooldown;
                 }
-
             }
         }
     }
@@ -45,9 +46,27 @@ public class AIController : MonoBehaviour
     private void FixedUpdate()
     {
         var moveInput = targetTransform.position - transform.position;
+        var speed = data.Speed;
         if (moveInput != null && distanceToTarget > data.ChaseDistance)
         {
-            enemyMove.MoveObject(moveInput.normalized);
+            enemyMove.MoveObject(moveInput.normalized, speed);
         }
+    }
+
+    private IEnumerator PauseMovement()
+    {
+        enemyMove.enabled = false;
+        yield return new WaitForSeconds(1f);
+        enemyMove.enabled = true;
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }
