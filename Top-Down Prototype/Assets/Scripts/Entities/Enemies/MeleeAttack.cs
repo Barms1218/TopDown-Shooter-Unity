@@ -26,7 +26,7 @@ public class MeleeAttack : MonoBehaviour, IAttack
     {
         Debug.Log("Attacking player from " + gameObject.name);
         damageable.DealDamage(-damage);
-        StartCoroutine(Stagger());
+        //StartCoroutine(Stagger());
     }
 
     private IEnumerator Stagger()

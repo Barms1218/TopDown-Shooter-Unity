@@ -53,16 +53,9 @@ public class AIController : MonoBehaviour
         }
     }
 
-    private IEnumerator PauseMovement()
-    {
-        enemyMove.enabled = false;
-        yield return new WaitForSeconds(1f);
-        enemyMove.enabled = true;
-    }
-
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Zombie Inmate
   m_EditorClassIdentifier: 
   targetTag: Player
-  minimumAttackDistance: 1
-  maximumAttackDistance: 0
+  minimumAttackDistance: 0
+  maximumAttackDistance: 1
   chaseDistance: 0.5
   attackCooldown: 1
   speed: 1
