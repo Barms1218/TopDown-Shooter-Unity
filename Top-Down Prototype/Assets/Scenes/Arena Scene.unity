@@ -218,10 +218,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Point (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401428, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -265,22 +261,6 @@ PrefabInstance:
     - target: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: callTimer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: minionSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: timeVariation
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe772a7552424c8e95525685974cb18, type: 3}
@@ -684,11 +664,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &200103873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3847233161207401428, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-  m_PrefabInstance: {fileID: 4239427820080657104}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &206981218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -879,10 +854,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Point (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401428, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -926,22 +897,6 @@ PrefabInstance:
     - target: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: callTimer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: minionSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: timeVariation
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe772a7552424c8e95525685974cb18, type: 3}
@@ -1481,11 +1436,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &328667071 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3847233161207401428, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-  m_PrefabInstance: {fileID: 10472418}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &347651642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1661,11 +1611,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &519768632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3847233161207401428, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-  m_PrefabInstance: {fileID: 226327886}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &524394466
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,7 +1959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 614743334}
   m_Layer: 0
-  m_Name: Pool Objects
+  m_Name: Pool Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2088,11 +2033,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minionObject: {fileID: 2579200449049318824, guid: 41c3128938fcc1f4cb81b61bf8d94319, type: 3}
   amountToPool: 15
---- !u!1 &632069824 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3847233161207401428, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-  m_PrefabInstance: {fileID: 1140635264}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &708036741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2733,7 +2673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minionObject: {fileID: 3543103714409048337, guid: 462fb06f2c7a1564583e58433b6f0a8a, type: 3}
-  amountToPool: 5
+  amountToPool: 3
 --- !u!1 &925951159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2963,42 +2903,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minionObject: {fileID: 2474475448183171314, guid: 66bb0e4ec0895594b89179a102eb6ba8, type: 3}
-  amountToPool: 3
+  amountToPool: 1
 --- !u!4 &1029425556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
   m_PrefabInstance: {fileID: 1140635264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1029425558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632069824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbde45137bd964fcba466dc6c31ad71f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeVariation: 6
-  callTimer: 30
-  firstSpawnTime: 30
---- !u!114 &1029425560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632069824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dde6724ab31444d1fb3cf42ec8512766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeVariation: 3
-  callTimer: 30
-  firstSpawnTime: 5
 --- !u!4 &1041636832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1766206646370160217, guid: c7443a265c2a546e5acdea63f64baebc, type: 3}
@@ -3009,36 +2919,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
   m_PrefabInstance: {fileID: 226327886}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1080722821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519768632}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbde45137bd964fcba466dc6c31ad71f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeVariation: 6
-  callTimer: 30
-  firstSpawnTime: 60
---- !u!114 &1080722823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519768632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84ead1e0f3c54025b6a7b4eb4b352ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeVariation: 0
-  callTimer: 0
-  firstSpawnTime: 15
 --- !u!4 &1092579919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2193327801191639782, guid: 34c266a7d8b024a5fb7bcfc79dde8f4a, type: 3}
@@ -3054,21 +2934,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
   m_PrefabInstance: {fileID: 4239427820080657104}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1101987301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200103873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbde45137bd964fcba466dc6c31ad71f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeVariation: 10
-  callTimer: 30
-  firstSpawnTime: 5
 --- !u!114 &1130737087 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 109958759835751098, guid: 3f670652539aa43068bf9aa99460e89d, type: 3}
@@ -8321,10 +8186,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Point (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401428, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8368,22 +8229,6 @@ PrefabInstance:
     - target: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: callTimer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: minionSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: timeVariation
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe772a7552424c8e95525685974cb18, type: 3}
@@ -10828,36 +10673,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
   m_PrefabInstance: {fileID: 10472418}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1395817147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328667071}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbde45137bd964fcba466dc6c31ad71f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeVariation: 6
-  callTimer: 30
-  firstSpawnTime: 15
---- !u!114 &1395817149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328667071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84ead1e0f3c54025b6a7b4eb4b352ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeVariation: 0
-  callTimer: 0
-  firstSpawnTime: 15
 --- !u!1 &1420132792
 GameObject:
   m_ObjectHideFlags: 0
@@ -11905,7 +11720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minionObject: {fileID: 8699948889711129075, guid: 439b3c9273670f84a9a35c0f3942b7ae, type: 3}
-  amountToPool: 4
+  amountToPool: 2
 --- !u!1001 &1641931820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13814,22 +13629,6 @@ PrefabInstance:
     - target: {fileID: 3847233161207401429, guid: bfe772a7552424c8e95525685974cb18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: callTimer
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: minionSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3847233161207401430, guid: bfe772a7552424c8e95525685974cb18, type: 3}
-      propertyPath: timeVariation
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe772a7552424c8e95525685974cb18, type: 3}

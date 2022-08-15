@@ -40,6 +40,7 @@ public class Health : MonoBehaviour
         else if (_health <= 0)
         {
             Die();
+            _animator.SetTrigger("Dead");
         }
     }
 

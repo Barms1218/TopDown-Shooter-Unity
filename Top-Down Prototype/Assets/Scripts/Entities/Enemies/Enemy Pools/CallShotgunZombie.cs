@@ -10,14 +10,17 @@ public class CallShotgunZombie : MonoBehaviour
     WaitForSeconds callInterval;
     WaitForSeconds firstSpawnCall;
 
-    private void Start()
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    private void Awake()
     {
         callInterval = new WaitForSeconds(callTimer);
-        firstSpawnCall = new WaitForSeconds(firstSpawnTime);
-        StartCoroutine(Call());
+        firstSpawnCall = new WaitForSeconds(firstSpawnTime);  
     }
 
-    private IEnumerator Call()
+    private IEnumerator Start()
     {
         yield return firstSpawnCall;
         while (true)
@@ -29,8 +32,7 @@ public class CallShotgunZombie : MonoBehaviour
                     transform.rotation);
                 shotGunner.SetActive(true);
             }
-            callTimer = Random.Range(callTimer - timeVariation,
-                callTimer + timeVariation);
+            callTimer = Random.Range(callTimer, callTimer + timeVariation);
 
             yield return callInterval;
         }

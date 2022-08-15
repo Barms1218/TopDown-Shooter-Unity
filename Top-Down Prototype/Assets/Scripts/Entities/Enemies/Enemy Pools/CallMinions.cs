@@ -9,13 +9,16 @@ public class CallMinions : MonoBehaviour
     WaitForSeconds callDelay;
     
 
-    private void Start()
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    private void Awake()
     {
-        callDelay = new WaitForSeconds(callTimer);
-        StartCoroutine(Call());
+        callDelay = new WaitForSeconds(callTimer);        
     }
 
-    private IEnumerator Call()
+    private IEnumerator Start()
     {
         while(true)
         {
@@ -26,8 +29,7 @@ public class CallMinions : MonoBehaviour
                     transform.rotation);
                 minion.SetActive(true);
             }
-            callTimer = Random.Range(callTimer - timeVariation,
-                callTimer + timeVariation);
+            callTimer = Random.Range(callTimer, callTimer + timeVariation);
             yield return callDelay;
         }
     }

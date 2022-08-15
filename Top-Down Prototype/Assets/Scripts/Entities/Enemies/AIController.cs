@@ -13,10 +13,13 @@ public class AIController : MonoBehaviour
     private float distanceToTarget;
     private float nextAttack;
 
+    private Collider2D _collider;
+
     private void Awake()
     {
         enemyMove = GetComponent<Move>();
         attack = GetComponent<IAttack>();
+        _collider = GetComponent<Collider2D>();
     }
 
     // Start is called before the first frame update
@@ -55,11 +58,11 @@ public class AIController : MonoBehaviour
 
     private void OnEnable()
     {
-
+        _collider.enabled = true;
     }
 
     private void OnDisable()
     {
-        
+        _collider.enabled = false;
     }
 }
