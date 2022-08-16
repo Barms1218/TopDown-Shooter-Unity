@@ -38,12 +38,13 @@ public class GamePlayManager : MonoBehaviour
             theCursor.ChangeCursor(theCursor.UICursor);
             pauseCanvas.enabled = true;
         }
-        else
-        {
-            Time.timeScale = 1f;
-            theCursor.ChangeCursor(theCursor.AimCursor);
-            pauseCanvas.enabled = false;
-        }
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        theCursor.ChangeCursor(theCursor.AimCursor);
+        pauseCanvas.enabled = false;
     }
 
     public void StartOver()
