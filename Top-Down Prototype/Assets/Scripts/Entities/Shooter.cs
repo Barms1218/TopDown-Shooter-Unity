@@ -61,7 +61,7 @@ public class Shooter : MonoBehaviour, IAttack
             UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
             yield return null;
         }
-        else
+        else if (gun.CurrentAmmo <= 0)
         {
             AudioManager.Play(AudioClipName.NoAmmo);
         }
