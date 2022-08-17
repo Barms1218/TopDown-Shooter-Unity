@@ -28,6 +28,7 @@ public abstract class Gun : MonoBehaviour
     public float FireRate => data.FireRate;
     public int CurrentAmmo => currentAmmo;
     public bool CanRapidFire => canRapidFire;
+    public int MagazineSize => data.MagazineSize;
 
     #endregion
 
@@ -49,8 +50,17 @@ public abstract class Gun : MonoBehaviour
 
     protected abstract IEnumerator StartReload();
 
-    private void OnEnable()
+    protected virtual void AddAmmo(Gun weapon, int amountToAdd)
     {
+        if (weapon == this)
+        {
+            maxAmmo += amountToAdd;
+        }
+    }
+
+    protected void OnEnable()
+    {
+        AmmoPickup.pickupEvent += AddAmmo;
         maxAmmo = data.StartAmmo;
         currentAmmo = data.MagazineSize;
     }

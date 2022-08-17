@@ -18,6 +18,7 @@ public class AmmoPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             AudioManager.Play(AudioClipName.Pickup);
+            Debug.Log("Invoking");
             pickupEvent?.Invoke(weaponType, _amount);
             Destroy(gameObject);
         }

@@ -97,7 +97,7 @@ public class WeaponHolder : MonoBehaviour
         newGun.transform.SetParent(transform, false);
         newGun.transform.SetPositionAndRotation(gunPrefab.transform.position, Quaternion.identity);
         gunPrefab = newGun.gameObject;
-
+        gunPrefab.GetComponent<Collider2D>().enabled = false;
         swapEvent?.Invoke(newGun);
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun);
     }
@@ -106,8 +106,7 @@ public class WeaponHolder : MonoBehaviour
     {
         foreach (Gun gun in weaponList)
         {
-            if (gun == weapon)
-                gun.MaxAmmo += amountToAdd;
+            gun.MaxAmmo += gun.MagazineSize;
         }
     }
 
