@@ -8,12 +8,19 @@ public class AmmoPickup : MonoBehaviour
     [SerializeField] protected int _amount;
     [SerializeField] protected Gun weaponType;
 
+    public static UnityAction<Gun, int> pickupEvent;
+
     public Gun WeaponType => weaponType;
     public int AmountToAdd => _amount;
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        AudioManager.Play(AudioClipName.Pickup);
-        Destroy(gameObject);
+        if (other.CompareTag("Player"))
+        {
+            AudioManager.Play(AudioClipName.Pickup);
+            pickupEvent?.Invoke(weaponType, _amount);
+            Destroy(gameObject);
+        }
+
     }
 }

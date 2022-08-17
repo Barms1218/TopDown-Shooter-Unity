@@ -8,6 +8,7 @@ public class WeaponHolder : MonoBehaviour
     GameObject gunPrefab;
     private List<Gun> weaponList = new();
     private Gun gun;
+    private int maxAmmo;
     public UnityEvent<Gun> swapEvent;
 
     public List<Gun> WeaponList => weaponList;
@@ -23,6 +24,7 @@ public class WeaponHolder : MonoBehaviour
         gun = GetComponentInChildren<Gun>();
         gunPrefab = gun.gameObject;
         weaponList.Add(gun);
+        maxAmmo = gun.MaxAmmo;
     }
 
     public void TryEquipWeaponOne()
@@ -80,6 +82,11 @@ public class WeaponHolder : MonoBehaviour
         {
             GetNewWeapon(weapon);
         }
+        //else if (pickupObject.TryGetComponent(out AmmoPickup pickup))
+        //{
+        //    AddAmmoToWeapon(pickup.WeaponType, pickup.AmountToAdd);
+        //}
+
     }
 
     public void GetNewWeapon(Gun newGun)
@@ -95,11 +102,22 @@ public class WeaponHolder : MonoBehaviour
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun);
     }
 
-    public void AddAmmoToWeapon(int amountToAdd, Gun weapon)
+    public void AddAmmoToWeapon(Gun weapon, int amountToAdd)
     {
-        if (weaponList.Contains(weapon))
+        foreach (Gun gun in weaponList)
         {
-            weapon.MaxAmmo += amountToAdd;
+            if (gun == weapon)
+                gun.MaxAmmo += amountToAdd;
         }
+    }
+
+    private void OnEnable()
+    {
+        AmmoPickup.pickupEvent += AddAmmoToWeapon;
+    }
+
+    private void OnDisable()
+    {
+        AmmoPickup.pickupEvent -= AddAmmoToWeapon;
     }
 }

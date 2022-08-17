@@ -14,7 +14,7 @@ public abstract class Gun : MonoBehaviour
     protected bool reloading = false;
     protected WaitForSeconds reloadDelay;
     protected int currentAmmo;
-    protected int maxAmmo;
+    [SerializeField] protected int maxAmmo;
 
     #endregion
 
@@ -28,7 +28,6 @@ public abstract class Gun : MonoBehaviour
     public float FireRate => data.FireRate;
     public int CurrentAmmo => currentAmmo;
     public bool CanRapidFire => canRapidFire;
-    public GameObject CurrentGun => data.Gun;
 
     #endregion
 
