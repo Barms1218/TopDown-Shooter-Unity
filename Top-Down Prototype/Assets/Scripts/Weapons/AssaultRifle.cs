@@ -5,12 +5,12 @@ using UnityEngine;
 public class AssaultRifle : Gun
 {
 
-    protected override void Awake()
+    protected override void Start()
     {
         reloadDelay = new WaitForSeconds(data.ReloadSpeed);    
     }
 
-    public override void Fire   (Vector2 direction)
+    public override void Fire(Vector2 direction)
     {
         if (!reloading)
         {

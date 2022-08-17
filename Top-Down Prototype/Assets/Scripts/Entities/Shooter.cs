@@ -31,11 +31,6 @@ public class Shooter : MonoBehaviour, IAttack
         gun = GetComponentInChildren<Gun>();
     }
 
-    private void Start()
-    {
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
-    }
-
     #region Public Methods
 
     public void Attack()

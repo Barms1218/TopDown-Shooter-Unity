@@ -13,7 +13,7 @@ public abstract class Gun : MonoBehaviour
     protected GameObject bullet;
     protected bool reloading = false;
     protected WaitForSeconds reloadDelay;
-    protected int currentAmmo;
+    [SerializeField] protected int currentAmmo;
     [SerializeField] protected int maxAmmo;
 
     #endregion
@@ -33,9 +33,11 @@ public abstract class Gun : MonoBehaviour
     #endregion
 
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         reloadDelay = new WaitForSeconds(data.ReloadSpeed);
+        maxAmmo = data.StartAmmo;
+        currentAmmo = data.MagazineSize;
     }
 
     public abstract void Fire(Vector2 direction);
@@ -50,18 +52,9 @@ public abstract class Gun : MonoBehaviour
 
     protected abstract IEnumerator StartReload();
 
-    protected virtual void AddAmmo(Gun weapon, int amountToAdd)
+    private void OnEnable()
     {
-        if (weapon == this)
-        {
-            maxAmmo += amountToAdd;
-        }
-    }
-
-    protected void OnEnable()
-    {
-        AmmoPickup.pickupEvent += AddAmmo;
-        maxAmmo = data.StartAmmo;
-        currentAmmo = data.MagazineSize;
+        //maxAmmo = data.StartAmmo;
+        //currentAmmo = data.MagazineSize;
     }
 }

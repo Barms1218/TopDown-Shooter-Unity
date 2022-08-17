@@ -25,6 +25,12 @@ public class WeaponHolder : MonoBehaviour
         gunPrefab = gun.gameObject;
         weaponList.Add(gun);
         maxAmmo = gun.MaxAmmo;
+
+    }
+
+    private void Start()
+    {
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
     }
 
     public void TryEquipWeaponOne()
@@ -80,12 +86,22 @@ public class WeaponHolder : MonoBehaviour
         var pickupObject = collision.gameObject;
         if (pickupObject.TryGetComponent(out Gun weapon))
         {
-            GetNewWeapon(weapon);
+            var gunObject = pickupObject.GetComponent<Gun>() as Gun;
+            GetNewWeapon(gunObject);
         }
-        //else if (pickupObject.TryGetComponent(out AmmoPickup pickup))
-        //{
-        //    AddAmmoToWeapon(pickup.WeaponType, pickup.AmountToAdd);
-        //}
+        else
+        {
+            PickupType pickup = pickupObject.GetComponent<Pickup>().pickupType;
+            if (pickup == PickupType.Ammo)
+            {
+                Debug.Log("I hit an ammo pickup");
+            }
+            else if (pickup == PickupType.Health)
+            {
+                Debug.Log("I have hit a health pickup");
+            }
+            Destroy(pickupObject);
+        }
 
     }
 
@@ -102,21 +118,22 @@ public class WeaponHolder : MonoBehaviour
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun);
     }
 
-    public void AddAmmoToWeapon(Gun weapon, int amountToAdd)
+    public void AddAmmoToWeapon()
     {
         foreach (Gun gun in weaponList)
         {
             gun.MaxAmmo += gun.MagazineSize;
         }
+        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
     }
 
-    private void OnEnable()
-    {
-        AmmoPickup.pickupEvent += AddAmmoToWeapon;
-    }
+    //private void OnEnable()
+    //{
+    //    AmmoPickup.pickupEvent += AddAmmoToWeapon;
+    //}
 
-    private void OnDisable()
-    {
-        AmmoPickup.pickupEvent -= AddAmmoToWeapon;
-    }
+    //private void OnDisable()
+    //{
+    //    AmmoPickup.pickupEvent -= AddAmmoToWeapon;
+    //}
 }

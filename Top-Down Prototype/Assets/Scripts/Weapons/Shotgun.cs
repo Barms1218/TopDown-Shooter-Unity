@@ -8,7 +8,7 @@ public class Shotgun : Gun
     private bool firing;
 
 
-    protected override void Awake()
+    protected override void Start()
     {
         reloadDelay = new WaitForSeconds(data.ReloadSpeed);
     }
