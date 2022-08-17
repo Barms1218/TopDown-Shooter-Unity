@@ -7,7 +7,7 @@ public class Shooter : MonoBehaviour, IAttack
 {
     #region Fields
 
-    private Gun gun;
+    private IShoot gun;
     WaitForSeconds timeBetweenShots;
     private float nextTriggerPull;
 
@@ -15,7 +15,7 @@ public class Shooter : MonoBehaviour, IAttack
 
     #region Properties
 
-    public Gun CurrentWeapon
+    public IShoot CurrentWeapon
     {
         set
         {
@@ -28,7 +28,7 @@ public class Shooter : MonoBehaviour, IAttack
 
     private void Awake()
     {
-        gun = GetComponentInChildren<Gun>();
+        gun = GetComponentInChildren<IShoot>();
     }
 
     #region Public Methods
@@ -40,29 +40,39 @@ public class Shooter : MonoBehaviour, IAttack
 
     public IEnumerator RapidFire()
     {
-        if (gun.CanRapidFire && gun.CurrentAmmo > 0 && Time.timeScale > 0)
+        if (!gun.Reloading)
         {
-            while (true && Time.timeScale > 0)
+            if (gun.CanRapidFire && gun.CurrentAmmo > 0 && Time.timeScale > 0)
+            {
+                while (true && Time.timeScale > 0)
+                {
+                    Attack();
+                    UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
+                    yield return timeBetweenShots;
+                }
+            }
+            else if (Time.time >= nextTriggerPull && gun.CurrentAmmo > 0 && Time.timeScale > 0)
             {
                 Attack();
+                nextTriggerPull = Time.time + gun.FireRate;
                 UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
-                yield return timeBetweenShots;
+                yield return null;
             }
-        }
-        else if (Time.time >= nextTriggerPull && gun.CurrentAmmo > 0 && Time.timeScale > 0)
-        {
-            Attack();
-            nextTriggerPull = Time.time + gun.FireRate;
-            UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
-            yield return null;
-        }
-        else if (gun.CurrentAmmo <= 0)
-        {
-            AudioManager.Play(AudioClipName.NoAmmo);
+            else if (gun.CurrentAmmo <= 0)
+            {
+                AudioManager.Play(AudioClipName.NoAmmo);
+            }            
         }
     }
 
-    public void Reload() => gun.Reload();
+    public void Reload()
+    {
+        if (!gun.Reloading)
+        {
+            StartCoroutine(gun.StartReload());
+        }
+    }
+
 
     #endregion
 }

@@ -2,22 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : Gun
+public class Shotgun : MonoBehaviour, IShoot
 {
     [SerializeField] int numProjectiles = 5;
+    [SerializeField] GunData data;
+    [SerializeField] Transform muzzleTransform;
     private bool firing;
+    private int currentAmmo;
+    private int maxAmmo;
+    private bool reloading = false;
+    private WaitForSeconds reloadDelay;
+    bool IShoot.CanRapidFire { get => false; }
 
+    public int CurrentAmmo => currentAmmo;
 
-    protected override void Start()
-    {
-        reloadDelay = new WaitForSeconds(data.ReloadSpeed);
+    public int MagazineSize => data.MagazineSize;
+
+    public float FireRate => data.FireRate;
+
+    public int MaxAmmo 
+    { 
+        get => maxAmmo;
+        set => maxAmmo = value; 
     }
 
-    public override void Fire(Vector2 direction)
+    public GameObject Gun => this.gameObject;
+
+    public bool Reloading => reloading;
+
+    void Start()
+    {
+        reloadDelay = new WaitForSeconds(data.ReloadSpeed);
+        maxAmmo = data.StartAmmo;
+        currentAmmo = data.MagazineSize;
+    }
+
+    public void Fire(Vector2 direction)
     {
         for (int i = 0; i < numProjectiles; i++)
         {
-            bullet = ShotgunPool.SharedInstance.GetPooledObject();
+            var bullet = ShotgunPool.SharedInstance.GetPooledObject();
             if (bullet != null)
             {
                 bullet.transform.SetPositionAndRotation(
@@ -35,13 +59,7 @@ public class Shotgun : Gun
         firing = true;
     }
 
-    public override void Reload()
-    {
-        firing = false;
-        base.Reload();
-    }
-
-    protected override IEnumerator StartReload()
+    IEnumerator IShoot.StartReload()
     {
         reloading = true;
 

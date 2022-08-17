@@ -2,19 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssaultRifle : Gun
+public class AssaultRifle : MonoBehaviour, IShoot
 {
+    #region Fields
+    [SerializeField] GunData data;
+    [SerializeField] Transform muzzleTransform;
+    private bool firing;
+    private int currentAmmo;
+    private int maxAmmo;
+    private bool reloading = false;
+    private WaitForSeconds reloadDelay;
 
-    protected override void Start()
+    #endregion
+
+    #region Properties
+
+    public bool Reloading => reloading;
+    public bool CanRapidFire => true;
+
+    public int CurrentAmmo => currentAmmo;
+
+    public int MagazineSize => data.MagazineSize;
+
+    public int MaxAmmo 
     {
-        reloadDelay = new WaitForSeconds(data.ReloadSpeed);    
+         get => maxAmmo; 
+         set => maxAmmo = value; 
     }
 
-    public override void Fire(Vector2 direction)
+    public float FireRate => data.FireRate;
+
+    public GameObject Gun => this.gameObject;
+
+    #endregion
+
+    void Start()
+    {
+        reloadDelay = new WaitForSeconds(data.ReloadSpeed);
+        maxAmmo = data.StartAmmo;
+        currentAmmo = data.MagazineSize;
+    }
+
+    public void Fire(Vector2 direction)
     {
         if (!reloading)
         {
-            bullet = RiflePool.SharedInstance.GetPooledObject();
+            var bullet = RiflePool.SharedInstance.GetPooledObject();
             if (bullet != null)
             {
                 bullet.transform.SetPositionAndRotation(
@@ -30,7 +63,7 @@ public class AssaultRifle : Gun
         }
     }
 
-    protected override IEnumerator StartReload()
+    IEnumerator IShoot.StartReload()
     {
         reloading = true;
         yield return reloadDelay;

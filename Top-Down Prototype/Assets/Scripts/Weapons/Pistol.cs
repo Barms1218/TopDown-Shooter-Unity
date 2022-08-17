@@ -2,14 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Gun
+public class Pistol : MonoBehaviour, IShoot
 {
+    #region Fields
 
-    public override void Fire(Vector2 direction)
+    [SerializeField] GunData data;
+    [SerializeField] Transform muzzleTransform;
+    private bool reloading = false;
+    private int currentAmmo;
+    private int maxAmmo;
+    private WaitForSeconds reloadDelay;
+
+    #endregion
+
+    #region Properties
+    
+    public bool Reloading => reloading;
+    public bool CanRapidFire => false;
+
+    public int CurrentAmmo => currentAmmo;
+
+    public int MagazineSize => data.MagazineSize;
+
+    public float FireRate => data.FireRate;
+
+    #endregion
+
+    public int MaxAmmo 
+    { 
+        get => maxAmmo; 
+        set => maxAmmo = value; 
+    }
+
+    public GameObject Gun => this.gameObject;
+
+    void Start()
+    {
+        reloadDelay = new WaitForSeconds(data.ReloadSpeed);
+        maxAmmo = data.StartAmmo;
+        currentAmmo = data.MagazineSize;
+    }
+
+    public void Fire(Vector2 direction)
     {
         if (!reloading)
         {
-            bullet = PistolPool.SharedInstance.GetPooledObject();
+           var  bullet = PistolPool.SharedInstance.GetPooledObject();
             if (bullet != null)
             {
                 bullet.transform.SetPositionAndRotation(
@@ -25,7 +63,7 @@ public class Pistol : Gun
         }
     }
 
-    protected override IEnumerator StartReload()
+    IEnumerator IShoot.StartReload()
     {
         reloading = true;
 
@@ -36,5 +74,4 @@ public class Pistol : Gun
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
         reloading = false;
     }
-
 }

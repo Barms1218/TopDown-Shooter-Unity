@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
-    [SerializeField] private Gun gun;
+    [SerializeField] private IShoot gun;
     [SerializeField] private Transform weaponHolder;
     [SerializeField] private string targetTag;
     private Transform targetTransform;
     private bool weaponFlipped = true;
 
 
-    public Gun Gun { get => gun; set => gun = value; }
+    public IShoot Gun { get => gun; set => gun = value; }
 
     // Start is called before the first frame update
     void Start()
     {
+        gun = GetComponentInChildren<IShoot>();
         targetTransform = GameObject.FindGameObjectWithTag(targetTag).transform;
-        gun.transform.SetParent(weaponHolder, false);
+        gun.Gun.transform.SetParent(weaponHolder, false);
     }
 
     private void Update()
     {
-        var _direction = targetTransform.position - gun.transform.position;
+        var _direction = targetTransform.position - gun.Gun.transform.position;
         float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
 
         if (targetTransform.position.x > transform.position.x && !weaponFlipped)
@@ -35,7 +36,7 @@ public class Aim : MonoBehaviour
         }
 
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward * Time.deltaTime);
-        gun.transform.rotation = rotation;
+        gun.Gun.transform.rotation = rotation;
     }
 
     private void FlipWeapon()

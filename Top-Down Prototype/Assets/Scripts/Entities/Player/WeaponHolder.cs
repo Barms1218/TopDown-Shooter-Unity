@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class WeaponHolder : MonoBehaviour
 {
     GameObject gunPrefab;
-    private List<Gun> weaponList = new();
-    private Gun gun;
+    private List<IShoot> weaponList = new();
+    private IShoot gun;
     private int maxAmmo;
-    public UnityEvent<Gun> swapEvent;
+    public UnityEvent<IShoot> swapEvent;
 
-    public List<Gun> WeaponList => weaponList;
-    public Gun CurrentWeapon { set => gun = value; }
+    public List<IShoot> WeaponList => weaponList;
+    public IShoot CurrentWeapon { set => gun = value; }
     public GameObject Gun
     {
         get => gunPrefab;
@@ -21,8 +21,8 @@ public class WeaponHolder : MonoBehaviour
 
     private void Awake()
     {
-        gun = GetComponentInChildren<Gun>();
-        gunPrefab = gun.gameObject;
+        gun = GetComponentInChildren<IShoot>();
+        gunPrefab = gun.Gun;
         weaponList.Add(gun);
         maxAmmo = gun.MaxAmmo;
 
@@ -74,7 +74,7 @@ public class WeaponHolder : MonoBehaviour
     void ChangeWeapon(int weaponIndex)
     {
         gunPrefab.SetActive(false);
-        gunPrefab = weaponList[weaponIndex].gameObject;
+        gunPrefab = weaponList[weaponIndex].Gun;
         gunPrefab.SetActive(true);
         gun = weaponList[weaponIndex];
         swapEvent?.Invoke(gun);
@@ -84,35 +84,35 @@ public class WeaponHolder : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var pickupObject = collision.gameObject;
-        if (pickupObject.TryGetComponent(out Gun weapon))
+        if (pickupObject.TryGetComponent(out IShoot weapon))
         {
-            var gunObject = pickupObject.GetComponent<Gun>() as Gun;
+            var gunObject = pickupObject.GetComponent<IShoot>() as IShoot;
             GetNewWeapon(gunObject);
         }
-        else
-        {
-            PickupType pickup = pickupObject.GetComponent<Pickup>().pickupType;
-            if (pickup == PickupType.Ammo)
-            {
-                Debug.Log("I hit an ammo pickup");
-            }
-            else if (pickup == PickupType.Health)
-            {
-                Debug.Log("I have hit a health pickup");
-            }
-            Destroy(pickupObject);
-        }
+        // else
+        // {
+        //     PickupType pickup = pickupObject.GetComponent<Pickup>().pickupType;
+        //     if (pickup == PickupType.Ammo)
+        //     {
+        //         Debug.Log("I hit an ammo pickup");
+        //     }
+        //     else if (pickup == PickupType.Health)
+        //     {
+        //         Debug.Log("I have hit a health pickup");
+        //     }
+        //     Destroy(pickupObject);
+        // }
 
     }
 
-    public void GetNewWeapon(Gun newGun)
+    public void GetNewWeapon(IShoot newGun)
     {
         AudioManager.Play(AudioClipName.GetGun);
         gunPrefab.SetActive(false);
         weaponList.Add(newGun);
-        newGun.transform.SetParent(transform, false);
-        newGun.transform.SetPositionAndRotation(gunPrefab.transform.position, Quaternion.identity);
-        gunPrefab = newGun.gameObject;
+        newGun.Gun.transform.SetParent(transform, false);
+        newGun.Gun.transform.SetPositionAndRotation(gunPrefab.transform.position, Quaternion.identity);
+        gunPrefab = newGun.Gun;
         gunPrefab.GetComponent<Collider2D>().enabled = false;
         swapEvent?.Invoke(newGun);
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun);
