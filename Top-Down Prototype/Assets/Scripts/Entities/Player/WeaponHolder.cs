@@ -92,10 +92,11 @@ public class WeaponHolder : MonoBehaviour
         }
         else if (pickupObject.TryGetComponent(out Pickup pickup))
         {
-            if (pickup.Consumeable == itemToPickUp)
+            var consumeable = pickup.Consumable;
+            if (consumeable.Contains(itemToPickUp))
             {
                 AddAmmoToWeapon();
-                Destroy(pickup);
+                Destroy(pickupObject);
             }
         }
 
@@ -117,11 +118,16 @@ public class WeaponHolder : MonoBehaviour
 
     public void AddAmmoToWeapon()
     {
-        foreach (Gun gun in weaponList)
+        AudioManager.Play(AudioClipName.Pickup);
+        foreach (IShoot gun in weaponList)
         {
             gun.MaxAmmo += gun.MagazineSize;
+            if (gun.Gun.activeInHierarchy)
+            {
+                UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
+            }
         }
-        UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
+
     }
 
     //private void OnEnable()

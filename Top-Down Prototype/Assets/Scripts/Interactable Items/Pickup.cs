@@ -5,5 +5,5 @@ using UnityEngine.Events;
 
 public class Pickup : MonoBehaviour
 {
-    public Item Consumeable;
+    public List<Item> Consumable = new();
 }

@@ -40,18 +40,19 @@ public class Shooter : MonoBehaviour, IAttack
 
     public IEnumerator RapidFire()
     {
-        if (!gun.Reloading)
+        if (!gun.Reloading && Time.timeScale > 0)
         {
-            if (gun.CanRapidFire && gun.CurrentAmmo > 0 && Time.timeScale > 0)
+            if (gun.CanRapidFire)
             {
-                while (true && Time.timeScale > 0)
+                while (true && gun.CurrentAmmo > 0)
                 {
                     Attack();
                     UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
                     yield return timeBetweenShots;
                 }
+                AudioManager.Play(AudioClipName.NoAmmo);
             }
-            else if (Time.time >= nextTriggerPull && gun.CurrentAmmo > 0 && Time.timeScale > 0)
+            else if (Time.time >= nextTriggerPull && gun.CurrentAmmo > 0)
             {
                 Attack();
                 nextTriggerPull = Time.time + gun.FireRate;
