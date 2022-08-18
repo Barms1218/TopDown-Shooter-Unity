@@ -12,5 +12,5 @@ public interface IShoot
     public float FireRate { get; }
     public bool Reloading { get; }
     public void Fire(Vector2 direction);
-    public IEnumerator StartReload();
+    public IEnumerator Reload();
 }

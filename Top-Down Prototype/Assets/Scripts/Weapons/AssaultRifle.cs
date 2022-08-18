@@ -9,7 +9,7 @@ public class AssaultRifle : MonoBehaviour, IShoot
     [SerializeField] Transform muzzleTransform;
     private bool firing;
     private int currentAmmo;
-    private int maxAmmo;
+    [SerializeField] private int maxAmmo;
     private bool reloading = false;
     private WaitForSeconds reloadDelay;
 
@@ -63,7 +63,7 @@ public class AssaultRifle : MonoBehaviour, IShoot
         }
     }
 
-    IEnumerator IShoot.StartReload()
+    IEnumerator IShoot.Reload()
     {
         reloading = true;
         yield return reloadDelay;

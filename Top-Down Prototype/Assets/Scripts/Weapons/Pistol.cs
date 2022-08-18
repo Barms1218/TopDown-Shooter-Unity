@@ -18,6 +18,7 @@ public class Pistol : MonoBehaviour, IShoot
     #region Properties
     
     public bool Reloading => reloading;
+
     public bool CanRapidFire => false;
 
     public int CurrentAmmo => currentAmmo;
@@ -63,7 +64,7 @@ public class Pistol : MonoBehaviour, IShoot
         }
     }
 
-    IEnumerator IShoot.StartReload()
+    IEnumerator IShoot.Reload()
     {
         reloading = true;
 

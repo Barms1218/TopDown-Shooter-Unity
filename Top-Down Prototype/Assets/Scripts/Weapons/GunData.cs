@@ -18,5 +18,5 @@ public class GunData : ScriptableObject
     public int StartAmmo => startAmmo;
     public int MagazineSize => magazineSize;
     public float ReloadSpeed => reloadSpeed;
-     public float Recoil => recoil;
+    public float Recoil => recoil;
 }

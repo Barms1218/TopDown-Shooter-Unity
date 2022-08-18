@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3847233161207401429}
   - component: {fileID: 3847233161207401430}
   - component: {fileID: 2783491829705319592}
-  - component: {fileID: 2789833555697935286}
+  - component: {fileID: 5094482687949642191}
   - component: {fileID: 6074923229997130936}
   m_Layer: 5
   m_Name: Spawn Point
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeVariation: 5
-  callTimer: 15
+  callTimer: 30
 --- !u!114 &2783491829705319592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,10 +61,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde6724ab31444d1fb3cf42ec8512766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeVariation: 3
+  timeVariation: 20
   callTimer: 60
   firstSpawnTime: 120
---- !u!114 &2789833555697935286
+--- !u!114 &5094482687949642191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,9 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbde45137bd964fcba466dc6c31ad71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeVariation: 15
-  callTimer: 60
-  firstSpawnTime: 60
+  timeVariation: 20
+  callTimer: 30
+  firstSpawnTime: 45
 --- !u!114 &6074923229997130936
 MonoBehaviour:
   m_ObjectHideFlags: 0

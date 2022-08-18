@@ -69,7 +69,7 @@ public class Shooter : MonoBehaviour, IAttack
     {
         if (!gun.Reloading)
         {
-            StartCoroutine(gun.StartReload());
+            StartCoroutine(gun.Reload());
         }
     }
 

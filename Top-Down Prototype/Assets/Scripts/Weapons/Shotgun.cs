@@ -59,7 +59,7 @@ public class Shotgun : MonoBehaviour, IShoot
         firing = true;
     }
 
-    IEnumerator IShoot.StartReload()
+    IEnumerator IShoot.Reload()
     {
         reloading = true;
 

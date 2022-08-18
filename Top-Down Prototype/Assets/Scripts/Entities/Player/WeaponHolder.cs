@@ -10,6 +10,7 @@ public class WeaponHolder : MonoBehaviour
     private IShoot gun;
     private int maxAmmo;
     public UnityEvent<IShoot> swapEvent;
+    public Item itemToPickUp;
 
     public List<IShoot> WeaponList => weaponList;
     public IShoot CurrentWeapon { set => gun = value; }
@@ -89,19 +90,14 @@ public class WeaponHolder : MonoBehaviour
             var gunObject = pickupObject.GetComponent<IShoot>() as IShoot;
             GetNewWeapon(gunObject);
         }
-        // else
-        // {
-        //     PickupType pickup = pickupObject.GetComponent<Pickup>().pickupType;
-        //     if (pickup == PickupType.Ammo)
-        //     {
-        //         Debug.Log("I hit an ammo pickup");
-        //     }
-        //     else if (pickup == PickupType.Health)
-        //     {
-        //         Debug.Log("I have hit a health pickup");
-        //     }
-        //     Destroy(pickupObject);
-        // }
+        else if (pickupObject.TryGetComponent(out Pickup pickup))
+        {
+            if (pickup.Consumeable == itemToPickUp)
+            {
+                AddAmmoToWeapon();
+                Destroy(pickup);
+            }
+        }
 
     }
 
@@ -111,7 +107,8 @@ public class WeaponHolder : MonoBehaviour
         gunPrefab.SetActive(false);
         weaponList.Add(newGun);
         newGun.Gun.transform.SetParent(transform, false);
-        newGun.Gun.transform.SetPositionAndRotation(gunPrefab.transform.position, Quaternion.identity);
+        newGun.Gun.transform.SetPositionAndRotation(
+            gunPrefab.transform.position, Quaternion.identity);
         gunPrefab = newGun.Gun;
         gunPrefab.GetComponent<Collider2D>().enabled = false;
         swapEvent?.Invoke(newGun);
