@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8793f55003054437da9cc35d0d3f4c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 2734695023450441189}
   weaponHolder: {fileID: 5340308381930829183}
   targetTag: Cursor
 --- !u!1 &5713588412911097777
@@ -499,6 +498,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ammoPickup: {fileID: 11400000, guid: 02263346c5875428d8324b5ca3f5cf4c, type: 2}
+  healthPickup: {fileID: 11400000, guid: 8e7c813c2adf14e718ac0010bbdb0a53, type: 2}
+  numPickups: {fileID: 11400000, guid: 66ddabf8614154e22b05dfb98c32c641, type: 2}
 --- !u!70 &8239745620444605824
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -722,17 +724,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c46e125ab903d804192922e885fbdd83, type: 3}
---- !u!114 &2734695023450441189 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4250514611349930945, guid: c46e125ab903d804192922e885fbdd83, type: 3}
-  m_PrefabInstance: {fileID: 2238089068302042660}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7334407005669316103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8846835937500090403, guid: c46e125ab903d804192922e885fbdd83, type: 3}

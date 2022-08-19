@@ -2,7 +2,7 @@
     "name": "Player",
     "maps": [
         {
-            "name": "PlayerControls",
+            "name": "Player",
             "id": "0ada8412-4bda-4ba0-ae08-7b2bb0192ddf",
             "actions": [
                 {
@@ -30,15 +30,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Tap",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Aim",
-                    "type": "Value",
-                    "id": "2fe74c6a-82d0-4722-b9f4-3ab4c733c595",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
                     "initialStateCheck": true
                 },
                 {
@@ -78,13 +69,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Pause Game",
+                    "name": "Use",
                     "type": "Button",
-                    "id": "029fe054-bd75-410c-99a1-8f67660869c2",
+                    "id": "68d04947-ee18-40fd-908f-0b7a2af51c28",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
-                    "initialStateCheck": true
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -200,28 +191,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9252868b-a72e-4d58-8cdf-6a04568927f0",
-                    "path": "<VirtualMouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d59fe62a-9ad2-4e78-af41-7377ee168c34",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "eb0371ef-f517-43a0-8fd3-15f974e28659",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -310,23 +279,12 @@
                 },
                 {
                     "name": "",
-                    "id": "c9c1d085-ce54-4782-8cc9-ed689b531b0a",
-                    "path": "<Keyboard>/escape",
+                    "id": "3c35683e-f8aa-47a4-b3a6-e2b0407c0d11",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "Pause Game",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "894f0d3b-d650-4bd0-9baf-a057ad721645",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Pause Game",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [SerializeField] FloatVariable health;
+    [SerializeField] IntVariable medkits;
+    private PlayerControls inputActions;
     private Animator _animator;
     private float _health;
     public UnityAction onDiedEvent;
@@ -19,7 +21,10 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
+        inputActions = new PlayerControls();
         _animator = GetComponentInChildren<Animator>();
+
+        inputActions.Player.Use.started += _ => UseMedkit();
     }
 
     public void ChangeHealth(int amount)
@@ -27,20 +32,39 @@ public class Health : MonoBehaviour
         if (_health > 0)
         {
             _health += amount;
-            _animator.SetTrigger("Hurt");
-
-            var bloodSplatter = BloodPool.SharedInstance.GetPooledObject();
-            if (bloodSplatter != null)
+            if (amount < 0)
             {
-                bloodSplatter.transform.SetPositionAndRotation(
-                    transform.position, transform.rotation);
-                bloodSplatter.SetActive(true);
+                _animator.SetTrigger("Hurt");
             }
+            else if (amount > 0)
+            {
+                if (_health > health.Value)
+                {
+                    _health = health.Value;
+                }
+            }
+
         }
         else if (_health <= 0)
         {
             Die();
             _animator.SetTrigger("Dead");
+        }
+
+        var bloodSplatter = BloodPool.SharedInstance.GetPooledObject();
+        if (bloodSplatter != null)
+        {
+            bloodSplatter.transform.SetPositionAndRotation(
+                transform.position, transform.rotation);
+            bloodSplatter.SetActive(true);
+        }
+    }
+
+    private void UseMedkit()
+    {
+        if (medkits.Value > 0)
+        {
+            ChangeHealth(25);
         }
     }
 

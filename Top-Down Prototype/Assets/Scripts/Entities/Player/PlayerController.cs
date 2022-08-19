@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     private static PlayerController playerInstance;
     [SerializeField] float playerSpeed;
-    private PlayerActions actions;
+    private PlayerControls inputActions;
     Shooter shooter;
     WeaponHolder holder;
     Move playerMove;
@@ -41,21 +41,21 @@ public class PlayerController : MonoBehaviour
         playerMove = GetComponent<Move>();
         playerInstance = this;
 
-        actions = new PlayerActions();
-        move = actions.PlayerControls.Movement;
+        inputActions = new PlayerControls();
+        move = inputActions.Player.Movement;
 
         // inputs for player weapon
-        actions.PlayerControls.Shoot.started += _ => StartFiring();
-        actions.PlayerControls.Shoot.canceled += _ => StopFiring();
-        actions.PlayerControls.Reload.started += _ => shooter.Reload();
+        inputActions.Player.Shoot.started += _ => StartFiring();
+        inputActions.Player.Shoot.canceled += _ => StopFiring();
+        inputActions.Player.Reload.started += _ => shooter.Reload();
 
         //Dash input
-        actions.PlayerControls.Dash.started += _ => Dash();
+        inputActions.Player.Dash.started += _ => Dash();
 
         // Inputs for weapon swap
-        actions.PlayerControls.EquipWeapon1.started += _ => holder.TryEquipWeaponOne();
-        actions.PlayerControls.EquipWeapon2.started += _ => holder.TryEquipWeaponTwo();
-        actions.PlayerControls.EquipWeapon3.started += _ => holder.TryEquipWeaponThree();
+        inputActions.Player.EquipWeapon1.started += _ => holder.TryEquipWeaponOne();
+        inputActions.Player.EquipWeapon2.started += _ => holder.TryEquipWeaponTwo();
+        inputActions.Player.EquipWeapon3.started += _ => holder.TryEquipWeaponThree();
     }
 
     private void FixedUpdate()
@@ -97,12 +97,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        actions.Enable();
+        inputActions.Enable();
     }
 
     private void OnDisable()
     {
-        actions.Disable();
+        inputActions.Disable();
     }
 
 }

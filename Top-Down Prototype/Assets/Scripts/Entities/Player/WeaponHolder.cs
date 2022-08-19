@@ -7,11 +7,14 @@ public class WeaponHolder : MonoBehaviour
 {
     GameObject gunPrefab;
     private List<IShoot> weaponList = new();
+    private Pickup[] healthPickups = new Pickup[3];
     private IShoot gun;
     private int maxAmmo;
     public UnityEvent<IShoot> swapEvent;
-    public Item itemToPickUp;
-
+    public Item ammoPickup;
+    public Item healthPickup;
+    [SerializeField]
+    private IntVariable numPickups;
     public List<IShoot> WeaponList => weaponList;
     public IShoot CurrentWeapon { set => gun = value; }
     public GameObject Gun
@@ -72,7 +75,7 @@ public class WeaponHolder : MonoBehaviour
         }
     }
 
-    void ChangeWeapon(int weaponIndex)
+    private void ChangeWeapon(int weaponIndex)
     {
         gunPrefab.SetActive(false);
         gunPrefab = weaponList[weaponIndex].Gun;
@@ -93,16 +96,24 @@ public class WeaponHolder : MonoBehaviour
         else if (pickupObject.TryGetComponent(out Pickup pickup))
         {
             var consumeable = pickup.Consumable;
-            if (consumeable.Contains(itemToPickUp))
+            if (consumeable.Contains(ammoPickup))
             {
                 AddAmmoToWeapon();
                 Destroy(pickupObject);
             }
+            else if (consumeable.Contains(healthPickup))
+            {
+                if (numPickups.Value < healthPickups.Length)
+                {
+                    healthPickups[numPickups.Value] = pickup;
+                    numPickups.Value++;
+                    Destroy(pickupObject);
+                }
+            }
         }
-
     }
 
-    public void GetNewWeapon(IShoot newGun)
+    private void GetNewWeapon(IShoot newGun)
     {
         AudioManager.Play(AudioClipName.GetGun);
         gunPrefab.SetActive(false);
@@ -116,7 +127,7 @@ public class WeaponHolder : MonoBehaviour
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(newGun);
     }
 
-    public void AddAmmoToWeapon()
+    private void AddAmmoToWeapon()
     {
         AudioManager.Play(AudioClipName.Pickup);
         foreach (IShoot gun in weaponList)
@@ -129,14 +140,4 @@ public class WeaponHolder : MonoBehaviour
         }
 
     }
-
-    //private void OnEnable()
-    //{
-    //    AmmoPickup.pickupEvent += AddAmmoToWeapon;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    AmmoPickup.pickupEvent -= AddAmmoToWeapon;
-    //}
 }

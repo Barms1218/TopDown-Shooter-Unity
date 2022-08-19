@@ -26,6 +26,7 @@ public class MeleeAttack : MonoBehaviour, IAttack
     {
         Debug.Log("Attacking player from " + gameObject.name);
         damageable.DealDamage(-damage);
+        AudioManager.Play(AudioClipName.MeleeAttack);
         //StartCoroutine(Stagger());
     }
 
