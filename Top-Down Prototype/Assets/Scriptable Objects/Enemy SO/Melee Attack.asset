@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8ec766de8b48942b996f2e397ea9ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 8174ca11fd34442dcaa167ca9d49a757, type: 3}
   m_Name: Melee Attack
   m_EditorClassIdentifier: 
-  attackStrength: 2
-  damage: 5
-  attackCooldown: 1
+  attackStrength: 0
+  damage: 0
+  attackCooldown: 0
+  meleeClip: {fileID: 0}

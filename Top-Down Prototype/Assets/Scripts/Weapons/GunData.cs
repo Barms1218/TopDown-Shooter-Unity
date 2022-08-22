@@ -12,6 +12,8 @@ public class GunData : ScriptableObject
     [SerializeField] float reloadSpeed;
     [SerializeField] int magazineSize;
     [SerializeField, Range(0, 1)] float recoil;
+    [SerializeField] AudioClipObject shootClip;
+    [SerializeField] AudioClipObject reloadClip;
 
     public GameObject Gun => gun;
     public float FireRate => fireRate;
@@ -19,4 +21,6 @@ public class GunData : ScriptableObject
     public int MagazineSize => magazineSize;
     public float ReloadSpeed => reloadSpeed;
     public float Recoil => recoil;
+    public AudioClipObject ShootClip => shootClip;
+    public AudioClipObject ReloadClip => reloadClip;
 }

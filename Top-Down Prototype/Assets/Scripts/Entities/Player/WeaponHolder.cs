@@ -11,10 +11,13 @@ public class WeaponHolder : MonoBehaviour
     private IShoot gun;
     private int maxAmmo;
     public UnityEvent<IShoot> swapEvent;
-    public Item ammoPickup;
-    public Item healthPickup;
-    [SerializeField]
-    private IntVariable numPickups;
+    [SerializeField] private Item ammoPickup;
+    [SerializeField] private Item healthPickup;
+    [SerializeField] private IntVariable numPickups;
+    [SerializeField] AudioClipObject pickUpGunSound;
+    [SerializeField] AudioClipObject pickUpItemSound;
+
+
     public List<IShoot> WeaponList => weaponList;
     public IShoot CurrentWeapon { set => gun = value; }
     public GameObject Gun
@@ -115,7 +118,7 @@ public class WeaponHolder : MonoBehaviour
 
     private void GetNewWeapon(IShoot newGun)
     {
-        AudioManager.Play(AudioClipName.GetGun);
+        AudioManager.Play(pickUpGunSound);
         gunPrefab.SetActive(false);
         weaponList.Add(newGun);
         newGun.Gun.transform.SetParent(transform, false);
@@ -129,7 +132,7 @@ public class WeaponHolder : MonoBehaviour
 
     private void AddAmmoToWeapon()
     {
-        AudioManager.Play(AudioClipName.Pickup);
+        AudioManager.Play(pickUpItemSound);
         foreach (IShoot gun in weaponList)
         {
             gun.MaxAmmo += gun.MagazineSize;

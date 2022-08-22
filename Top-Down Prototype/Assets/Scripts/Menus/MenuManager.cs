@@ -17,19 +17,19 @@ public class MenuManager : MonoBehaviour
 
                 // go to Difficulty Menu scene
                 SceneManager.LoadScene("DifficultyMenu");
-                AudioManager.Play(AudioClipName.MenuButton);
+                //AudioManager.Play(AudioClipName.MenuButton);
                 break;
             case MenuName.Help:
 
                 // go to Help Menu scene
                 SceneManager.LoadScene("HelpMenu");
-                AudioManager.Play(AudioClipName.MenuButton);
+                //AudioManager.Play(AudioClipName.MenuButton);
                 break;
             case MenuName.Main:
 
                 // go to Main Menu scene
                 SceneManager.LoadScene("MainMenu");
-                AudioManager.Play(AudioClipName.MenuButton);
+                //AudioManager.Play(AudioClipName.MenuButton);
                 break;
             case MenuName.Pause:
 

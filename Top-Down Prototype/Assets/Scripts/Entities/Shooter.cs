@@ -50,7 +50,6 @@ public class Shooter : MonoBehaviour, IAttack
                     UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
                     yield return timeBetweenShots;
                 }
-                AudioManager.Play(AudioClipName.NoAmmo);
             }
             else if (Time.time >= nextTriggerPull && gun.CurrentAmmo > 0)
             {
@@ -58,11 +57,7 @@ public class Shooter : MonoBehaviour, IAttack
                 nextTriggerPull = Time.time + gun.FireRate;
                 UpdateAmmoUI.Instance.UpdateWeaponAmmo(gun);
                 yield return null;
-            }
-            else if (gun.CurrentAmmo <= 0)
-            {
-                AudioManager.Play(AudioClipName.NoAmmo);
-            }            
+            }          
         }
     }
 

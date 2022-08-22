@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 2364778200745672311, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
   fireRate: 0.5
-  maxAmmo: 72
+  startAmmo: 0
   reloadSpeed: 0.5
   magazineSize: 24
-  currentAmmo: 24
   recoil: 0.727
+  shootClip: {fileID: 11400000, guid: fe0b959c28f7541d88d250705c223eb7, type: 2}
+  reloadClip: {fileID: 11400000, guid: 4bb7e82aa8b824ea3947bc2353001a62, type: 2}

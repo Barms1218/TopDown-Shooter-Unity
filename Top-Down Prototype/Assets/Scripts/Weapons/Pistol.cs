@@ -46,7 +46,7 @@ public class Pistol : MonoBehaviour, IShoot
 
     public void Fire(Vector2 direction)
     {
-        if (!reloading)
+        if (!reloading && currentAmmo > 0)
         {
            var  bullet = PistolPool.SharedInstance.GetPooledObject();
             if (bullet != null)
@@ -60,7 +60,7 @@ public class Pistol : MonoBehaviour, IShoot
             currentAmmo--;
             direction.y += Random.Range(-data.Recoil, data.Recoil);
             bulletScript.MoveToTarget(direction.normalized);
-            AudioManager.Play(AudioClipName.PistolShot);
+            AudioManager.Play(data.ShootClip);
         }
     }
 
@@ -71,7 +71,7 @@ public class Pistol : MonoBehaviour, IShoot
         yield return reloadDelay;
         currentAmmo = data.MagazineSize;
 
-        AudioManager.Play(AudioClipName.ReloadSound);
+        AudioManager.Play(data.ReloadClip);
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
         reloading = false;
     }

@@ -7,13 +7,16 @@ using UnityEngine;
 /// </summary>
 public class GameAudioSource : MonoBehaviour
 {
+
+    AudioSource audioSource;
+    public List<AudioClip> audioClips = new();
 	/// <summary>
 	/// Awake is called before Start
 	/// </summary>
 	void Awake()
     {
         // initialize audio manager
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.AddComponent<AudioSource>();
         AudioManager.Initialize(audioSource);
     }
 }

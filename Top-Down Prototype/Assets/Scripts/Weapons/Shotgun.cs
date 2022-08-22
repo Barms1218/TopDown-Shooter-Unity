@@ -55,7 +55,7 @@ public class Shotgun : MonoBehaviour, IShoot
             projectileScript.MoveToTarget(direction.normalized);
         }
         currentAmmo--;
-        AudioManager.Play(AudioClipName.ShotgunBlast);
+        AudioManager.Play(data.ShootClip);
         firing = true;
     }
 
@@ -68,7 +68,7 @@ public class Shotgun : MonoBehaviour, IShoot
             currentAmmo++;
             maxAmmo--;
             UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
-            AudioManager.Play(AudioClipName.ReloadSound);
+            AudioManager.Play(data.ReloadClip);
             yield return reloadDelay;
             reloading = false;
         }

@@ -159,7 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486ddc62c430943cab58c15c1d9d202e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
   flipObject: {fileID: 5270326861657880261}
   transformName: Player
 --- !u!114 &-6235309337624090876
@@ -175,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 11400000, guid: 874fc13c9ba1a4e8d9243aaa7ed6107d, type: 2}
+  medkits: {fileID: 0}
 --- !u!114 &308554320419807269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +205,7 @@ MonoBehaviour:
   points: 300
   scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
   killCountObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
+  deathSound: {fileID: 11400000, guid: a635cdef1395d4a83ac83fd7e9509597, type: 2}
 --- !u!114 &3877590269110434435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8793f55003054437da9cc35d0d3f4c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 2662633390049074435}
   weaponHolder: {fileID: 7717030702000420873}
   targetTag: Player
 --- !u!114 &8774404287756539345
@@ -448,14 +448,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2364778200745672305, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
   m_PrefabInstance: {fileID: 298068568110556017}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2662633390049074435 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2364778200745672306, guid: 0ef16184cdd674ed8b01528b8036e5a7, type: 3}
-  m_PrefabInstance: {fileID: 298068568110556017}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ada9ea896278594b9229d12bdb8f197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

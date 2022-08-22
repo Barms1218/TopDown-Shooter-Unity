@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GamePlayManager : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] TextMeshProUGUI killCountText;
     [SerializeField] IntVariable killObject;
     [SerializeField] TextMeshProUGUI finalScoreText;
@@ -28,6 +29,14 @@ public class GamePlayManager : MonoBehaviour
     {
         //AudioManager.Play(AudioClipName.Gameplay_Music);
         theCursor = GameObject.FindObjectOfType<SetTheCursor>();
+    }
+
+    void DisplayTime(float timeToDisplay)
+    {
+        timeToDisplay += 1;
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void PauseGame()

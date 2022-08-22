@@ -9,10 +9,11 @@ using UnityEngine.UI;
 /// </summary>
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] AudioClipObject menuMusic;
 
     private void Start()
     {
-        //AudioManager.Play(AudioClipName.Gameplay_Music);
+        AudioManager.Play(menuMusic);
     }
 
     #region Public methods
@@ -32,7 +33,7 @@ public class MainMenu : MonoBehaviour
 	public void ShowHelp()
     {
 		MenuManager.GoToMenu(MenuName.Help);
-		AudioManager.Play(AudioClipName.MenuButton);
+		//AudioManager.Play(AudioClipName.MenuButton);
 	}
 
 	/// <summary>

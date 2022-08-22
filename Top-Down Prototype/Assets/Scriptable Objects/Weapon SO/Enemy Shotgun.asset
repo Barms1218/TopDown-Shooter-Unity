@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12604e66c8f86df42986309dcde512db, type: 3}
   m_Name: Enemy Shotgun
   m_EditorClassIdentifier: 
-  gun: {fileID: 0}
-  fireRate: 0
-  startAmmo: 0
-  maxAmmo: 0
-  reloadSpeed: 0
-  magazineSize: 0
-  currentAmmo: 0
-  recoil: 0
+  gun: {fileID: 5204024822327154207, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
+  fireRate: 1
+  startAmmo: 20
+  reloadSpeed: 1
+  magazineSize: 5
+  recoil: 0.676
+  shootClip: {fileID: 11400000, guid: 60beb24b17efd4595958a976d320a4ed, type: 2}
+  reloadClip: {fileID: 11400000, guid: 4bb7e82aa8b824ea3947bc2353001a62, type: 2}

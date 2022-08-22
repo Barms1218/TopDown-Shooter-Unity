@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
             damageable.DealDamage(-data.Damage);
             gameObject.SetActive(false);
 
-            AudioManager.Play(AudioClipName.BulletHit);
+            AudioManager.Play(data.HitClip);
         }
     }
 

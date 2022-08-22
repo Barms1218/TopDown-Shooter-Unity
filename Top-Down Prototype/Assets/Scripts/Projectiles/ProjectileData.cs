@@ -8,6 +8,7 @@ public class ProjectileData : ScriptableObject
     [SerializeField] int damage;
     [SerializeField] float timeToLive;
     [SerializeField] float speed;
+    [SerializeField] AudioClipObject hitClip;
 
     public int Damage
     {
@@ -16,4 +17,5 @@ public class ProjectileData : ScriptableObject
     }
     public float TimeToLive => timeToLive;
     public float Speed => speed;
+    public AudioClipObject HitClip => hitClip;
 }

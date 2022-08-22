@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12604e66c8f86df42986309dcde512db, type: 3}
   m_Name: Enemy Pistol
   m_EditorClassIdentifier: 
-  gun: {fileID: 0}
+  gun: {fileID: 4452293294681815186, guid: cf852eefae727444e863d6af7f54d0e1, type: 3}
   fireRate: 1
   startAmmo: 60
-  maxAmmo: 60
   reloadSpeed: 0.5
   magazineSize: 12
-  currentAmmo: 12
   recoil: 0.457
+  shootClip: {fileID: 11400000, guid: 62d9e34d9c38f4c9caa8946df134f781, type: 2}
+  reloadClip: {fileID: 11400000, guid: 4bb7e82aa8b824ea3947bc2353001a62, type: 2}

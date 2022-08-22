@@ -59,7 +59,7 @@ public class AssaultRifle : MonoBehaviour, IShoot
             currentAmmo--;
             direction.y += Random.Range(-data.Recoil, data.Recoil);
             bulletScript.MoveToTarget(direction.normalized);
-            AudioManager.Play(AudioClipName.AR_Fire);
+            AudioManager.Play(data.ShootClip);
         }
     }
 
@@ -80,6 +80,6 @@ public class AssaultRifle : MonoBehaviour, IShoot
 
         UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);      
         reloading = false;
-        AudioManager.Play(AudioClipName.ReloadSound);
+        AudioManager.Play(data.ReloadClip);
     }
 }

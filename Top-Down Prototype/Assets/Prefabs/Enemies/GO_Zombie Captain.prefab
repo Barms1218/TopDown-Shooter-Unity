@@ -105,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486ddc62c430943cab58c15c1d9d202e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   flipObject: {fileID: 5760962458442664344}
   transformName: Player
 --- !u!114 &-4776191114838315682
@@ -121,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 11400000, guid: 6c87429fcbdc449d1b472c8eb9e76b3e, type: 2}
+  medkits: {fileID: 0}
 --- !u!114 &6236775548561513312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   points: 200
   scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
   killCountObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
+  deathSound: {fileID: 11400000, guid: a635cdef1395d4a83ac83fd7e9509597, type: 2}
 --- !u!114 &1356982498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8793f55003054437da9cc35d0d3f4c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 533922958477208585}
   weaponHolder: {fileID: 5768122300237971118}
   targetTag: Player
 --- !u!114 &7464971134713734651
@@ -408,17 +408,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf852eefae727444e863d6af7f54d0e1, type: 3}
---- !u!114 &533922958477208585 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9075637003023313775, guid: cf852eefae727444e863d6af7f54d0e1, type: 3}
-  m_PrefabInstance: {fileID: 8834870456276076390}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612824911addccf46b058697c472d6d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5139305327798337515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4452293294681815181, guid: cf852eefae727444e863d6af7f54d0e1, type: 3}

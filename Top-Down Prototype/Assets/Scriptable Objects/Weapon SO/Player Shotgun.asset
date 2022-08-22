@@ -15,8 +15,8 @@ MonoBehaviour:
   gun: {fileID: 5416292742939780387, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
   fireRate: 1
   startAmmo: 20
-  maxAmmo: 10
   reloadSpeed: 0.5
   magazineSize: 5
-  currentAmmo: 5
   recoil: 0.357
+  shootClip: {fileID: 11400000, guid: 60beb24b17efd4595958a976d320a4ed, type: 2}
+  reloadClip: {fileID: 11400000, guid: 4bb7e82aa8b824ea3947bc2353001a62, type: 2}

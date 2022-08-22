@@ -36,12 +36,9 @@ public class Health : MonoBehaviour
             {
                 _animator.SetTrigger("Hurt");
             }
-            else if (amount > 0)
+            else if (amount > 0 && _health + amount > health.Value)
             {
-                if (_health > health.Value)
-                {
-                    _health = health.Value;
-                }
+                _health = health.Value;
             }
 
         }
@@ -65,6 +62,7 @@ public class Health : MonoBehaviour
         if (medkits.Value > 0)
         {
             ChangeHealth(25);
+            medkits.Value--;
         }
     }
 

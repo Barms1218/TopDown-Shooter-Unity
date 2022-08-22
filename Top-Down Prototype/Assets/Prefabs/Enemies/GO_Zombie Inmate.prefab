@@ -103,7 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486ddc62c430943cab58c15c1d9d202e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   flipObject: {fileID: 8191513672832862777}
   transformName: Player
 --- !u!114 &5294084347439653064
@@ -134,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 11400000, guid: 8a908e27c52fe4b55b3e6f95d56e3e5b, type: 2}
+  medkits: {fileID: 0}
 --- !u!114 &847067256608029376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +149,7 @@ MonoBehaviour:
   points: 50
   scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
   killCountObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
+  deathSound: {fileID: 11400000, guid: a635cdef1395d4a83ac83fd7e9509597, type: 2}
 --- !u!114 &1912698520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,10 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8ec766de8b48942b996f2e397ea9ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackStrength: 2
-  damage: 5
-  attackCooldown: 1
-  targetTag: Player
+  meleeAttack: {fileID: 0}
 --- !u!1 &8191513672832862777
 GameObject:
   m_ObjectHideFlags: 0

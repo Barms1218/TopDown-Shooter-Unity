@@ -11,6 +11,7 @@ public class EnemyDeath : MonoBehaviour
     [SerializeField] private int points;
     [SerializeField] IntVariable scoreObject;
     [SerializeField] IntVariable killCountObject;
+    [SerializeField] AudioClipObject deathSound;
     private WaitForSeconds dieSeconds;
     private float dieTime = 1f;
 
@@ -25,7 +26,7 @@ public class EnemyDeath : MonoBehaviour
     {
         _controller.enabled = false;
         StartCoroutine(Die());
-        AudioManager.Play(AudioClipName.ZombieInmateDeath);
+        AudioManager.Play(deathSound);
     }
 
     private IEnumerator Die()
