@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 6673453120967635622}
   - component: {fileID: 5788513337548650172}
   - component: {fileID: 845268545811951952}
+  - component: {fileID: 7723349027645022647}
   m_Layer: 8
   m_Name: GO_Zombie Shotgunner
   m_TagString: Enemy
@@ -183,11 +184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625d3c46f13c22c46ab2782b0186e87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ammoDrop: {fileID: 5294540419740185303, guid: 8a3a9a3e9b6cf584f8662810cfc9dcce, type: 3}
+  _ammoDrop: {fileID: 785605495467004104, guid: bb4761fbcf8cb9c479e423d632bffc38, type: 3}
   weaponDrop: {fileID: 5416292742939780387, guid: 8719a28be1fe7174e86d6255e81fdef2, type: 3}
   minChance: 1
   maxChance: 32
-  health: {fileID: 0}
+  health: {fileID: -5816319003111613719}
 --- !u!95 &8699948889711128844
 Animator:
   serializedVersion: 4
@@ -235,7 +236,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 31940
+  m_InstanceId: -144026
 --- !u!114 &5788513337548650172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 3249086049930367050}
   targetTag: Player
+--- !u!114 &7723349027645022647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699948889711129075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8789274090338871355
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +423,10 @@ PrefabInstance:
     - target: {fileID: 5204024822327154207, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
       propertyPath: m_Name
       value: Shotgun Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5204024822327154207, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5340181779401697177, guid: ce252cf071aa046e588cd4a90ea54178, type: 3}

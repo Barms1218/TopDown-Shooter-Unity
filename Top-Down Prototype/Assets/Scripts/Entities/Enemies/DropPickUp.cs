@@ -9,7 +9,8 @@ public class DropPickUp : MonoBehaviour
     [SerializeField] private int minChance = 1;
     [SerializeField] private int maxChance = 32;
     [SerializeField] Health health;
-    [SerializeField] private static bool hasDroppedWeapon = false;
+    private static bool shotgunDropped = false;
+    private static bool rifleDropped = false;
 
     
     // Start is called before the first frame update
@@ -26,11 +27,15 @@ public class DropPickUp : MonoBehaviour
             var ammo = Instantiate(_ammoDrop, transform.position,
              Quaternion.identity);
         }
-
-        if (weaponDrop != null && !hasDroppedWeapon)
+        if (weaponDrop.TryGetComponent(out Shotgun shotgun) && !shotgunDropped)
         {
-            hasDroppedWeapon = true;
             Instantiate(weaponDrop, transform.position, transform.rotation);
+            shotgunDropped = true;
+        }
+        else if (weaponDrop.TryGetComponent(out AssaultRifle rifle) && !rifleDropped)
+        {
+            Instantiate(weaponDrop, transform.position, transform.rotation);
+            rifleDropped = true;
         }
     }
 }

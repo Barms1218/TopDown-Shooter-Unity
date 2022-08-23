@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8174ca11fd34442dcaa167ca9d49a757, type: 3}
+  m_Script: {fileID: 11500000, guid: 125c80570add046d3b7bcfa728241dc1, type: 3}
   m_Name: Melee Attack
   m_EditorClassIdentifier: 
-  attackStrength: 25
-  damage: 5
-  attackCooldown: 1
-  meleeClip: {fileID: 11400000, guid: 2bf7da33452d34d6e8678957eda9b01d, type: 2}
+  AudioClip: {fileID: 8300000, guid: d9bef56160594b343a295a1bdec12276, type: 3}

@@ -17,6 +17,6 @@ MonoBehaviour:
   startAmmo: 20
   reloadSpeed: 0.5
   magazineSize: 5
-  recoil: 0.357
+  recoil: 0.203
   shootClip: {fileID: 11400000, guid: 60beb24b17efd4595958a976d320a4ed, type: 2}
   reloadClip: {fileID: 11400000, guid: 4bb7e82aa8b824ea3947bc2353001a62, type: 2}

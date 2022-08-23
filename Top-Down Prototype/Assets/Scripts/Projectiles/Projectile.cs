@@ -49,9 +49,8 @@ public class Projectile : MonoBehaviour
     {
         var rigidbody2D = GetComponent<Rigidbody2D>();
         float angle = Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg;
-        Quaternion target = Quaternion.Euler(0, 0, angle);
 
-        transform.rotation = target;
+        //transform.rotation = Quaternion.Euler(0f, 0f, angle);
         rigidbody2D.AddRelativeForce(force * data.Speed, ForceMode2D.Impulse);
     }
 

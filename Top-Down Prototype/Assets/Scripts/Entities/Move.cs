@@ -43,7 +43,7 @@ public class Move : MonoBehaviour
     public void MoveObject(Vector2 moveInput, float speed)
     {
         rb2d.MovePosition(rb2d.position + speed * Time.deltaTime * moveInput);
-        animator.SetFloat("Move Magnitude", moveInput.magnitude);
+        //animator.SetFloat("Move Magnitude", moveInput.magnitude);
     }
 
     private void Flip()

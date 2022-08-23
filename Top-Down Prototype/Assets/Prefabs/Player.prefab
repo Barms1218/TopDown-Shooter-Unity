@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 11400000, guid: 89fdebc1e413044ed99a4e2c67260493, type: 2}
+  medkits: {fileID: 11400000, guid: 66ddabf8614154e22b05dfb98c32c641, type: 2}
 --- !u!114 &7753021285560868109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,6 +502,8 @@ MonoBehaviour:
   ammoPickup: {fileID: 11400000, guid: 02263346c5875428d8324b5ca3f5cf4c, type: 2}
   healthPickup: {fileID: 11400000, guid: 8e7c813c2adf14e718ac0010bbdb0a53, type: 2}
   numPickups: {fileID: 11400000, guid: 66ddabf8614154e22b05dfb98c32c641, type: 2}
+  pickUpGunSound: {fileID: 11400000, guid: 85148ee4f8e3b42a59e6586364ec0d71, type: 2}
+  pickUpItemSound: {fileID: 11400000, guid: cfe1581817cee49eea55c1c8d7401d83, type: 2}
 --- !u!70 &8239745620444605824
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -717,6 +720,10 @@ PrefabInstance:
     - target: {fileID: 8846835937500090428, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152360459488021427, guid: c46e125ab903d804192922e885fbdd83, type: 3}
+      propertyPath: m_ShadowIntensityEnabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9155176285726514725, guid: c46e125ab903d804192922e885fbdd83, type: 3}
       propertyPath: m_LocalPosition.x

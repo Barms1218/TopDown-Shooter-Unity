@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour, IShoot
 {
+    #region Fields
+
     [SerializeField] int numProjectiles = 5;
     [SerializeField] GunData data;
     [SerializeField] Transform muzzleTransform;
@@ -12,6 +14,11 @@ public class Shotgun : MonoBehaviour, IShoot
     private int maxAmmo;
     private bool reloading = false;
     private WaitForSeconds reloadDelay;
+
+    #endregion
+
+    #region Properties
+
     bool IShoot.CanRapidFire { get => false; }
 
     public int CurrentAmmo => currentAmmo;
@@ -29,6 +36,8 @@ public class Shotgun : MonoBehaviour, IShoot
     public GameObject Gun => this.gameObject;
 
     public bool Reloading => reloading;
+
+    #endregion
 
     void Start()
     {
@@ -62,15 +71,19 @@ public class Shotgun : MonoBehaviour, IShoot
     IEnumerator IShoot.Reload()
     {
         reloading = true;
-
-        while (currentAmmo < data.MagazineSize && !firing && maxAmmo > 0)
+        firing = false;
+        if (maxAmmo > 0)
         {
-            currentAmmo++;
-            maxAmmo--;
-            UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
-            AudioManager.Play(data.ReloadClip);
-            yield return reloadDelay;
-            reloading = false;
+            while (currentAmmo < data.MagazineSize && !firing)
+            {
+
+                currentAmmo++;
+                maxAmmo--;
+                UpdateAmmoUI.Instance.UpdateWeaponAmmo(this);
+                AudioManager.Play(data.ReloadClip);
+                yield return reloadDelay;
+                reloading = false;
+            }
         }
     }
 }
