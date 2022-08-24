@@ -51,7 +51,6 @@ GameObject:
   - component: {fileID: 8699948889711128844}
   - component: {fileID: 6673453120967635622}
   - component: {fileID: 5788513337548650172}
-  - component: {fileID: 845268545811951952}
   - component: {fileID: 7723349027645022647}
   m_Layer: 8
   m_Name: GO_Zombie Shotgunner
@@ -59,7 +58,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8699948889711129079
 Transform:
   m_ObjectHideFlags: 0
@@ -236,7 +235,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: -144026
+  m_InstanceId: -1624
 --- !u!114 &5788513337548650172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,20 +250,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flipObject: {fileID: 8789274090338871355}
   transformName: Player
---- !u!114 &845268545811951952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8699948889711129075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8793f55003054437da9cc35d0d3f4c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 3249086049930367050}
-  targetTag: Player
 --- !u!114 &7723349027645022647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponHolder: {fileID: 3249086049930367050}
+  targetTag: Player
 --- !u!1 &8789274090338871355
 GameObject:
   m_ObjectHideFlags: 0

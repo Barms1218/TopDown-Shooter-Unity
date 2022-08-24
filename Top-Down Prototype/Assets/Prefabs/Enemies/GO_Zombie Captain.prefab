@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 6236775548561513312}
   - component: {fileID: -8119643195282958802}
   - component: {fileID: 1356982498}
-  - component: {fileID: 5435720360568982246}
   - component: {fileID: 7464971134713734651}
   m_Layer: 8
   m_Name: GO_Zombie Captain
@@ -179,21 +178,7 @@ MonoBehaviour:
   - {x: -0.0007658005, y: -0.013768196, z: 0}
   m_ShapePathHash: -2016855217
   m_Mesh: {fileID: 0}
-  m_InstanceId: 50618
---- !u!114 &5435720360568982246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2474475448183171314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8793f55003054437da9cc35d0d3f4c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 5768122300237971118}
-  targetTag: Player
+  m_InstanceId: 58338
 --- !u!114 &7464971134713734651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponHolder: {fileID: 5768122300237971118}
+  targetTag: Player
 --- !u!1 &5760962458442664344
 GameObject:
   m_ObjectHideFlags: 0

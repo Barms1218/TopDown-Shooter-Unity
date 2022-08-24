@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 5713588412531873694}
   - component: {fileID: 7753021285560868109}
   - component: {fileID: 109958759835751098}
-  - component: {fileID: 4855202955557867881}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -160,18 +159,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd2598ed2018b2c4ba35157300c5bd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4855202955557867881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5713588412531873691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8793f55003054437da9cc35d0d3f4c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 5340308381930829183}
@@ -478,18 +465,6 @@ MonoBehaviour:
       - m_Target: {fileID: 109958759835751098}
         m_TargetAssemblyTypeName: PlayerShoot, Assembly-CSharp
         m_MethodName: set_CurrentWeapon
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4855202955557867881}
-        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
-        m_MethodName: set_Gun
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

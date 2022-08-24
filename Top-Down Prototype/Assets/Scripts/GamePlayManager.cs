@@ -13,6 +13,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] IntVariable scoreObject;
     [SerializeField] TextMeshProUGUI finalTimeText;
+    [SerializeField] Canvas[] canvases;
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas gameOverCanvas;
     private SetTheCursor theCursor;
@@ -53,7 +54,11 @@ public class GamePlayManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         theCursor.ChangeCursor(theCursor.AimCursor);
-        pauseCanvas.enabled = false;
+        foreach (Canvas canvas in canvases)
+        {
+            if (canvas.enabled)
+                canvas.enabled = false;
+        }
     }
 
     public void StartOver()

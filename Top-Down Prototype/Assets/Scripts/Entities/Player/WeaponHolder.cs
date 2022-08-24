@@ -11,6 +11,7 @@ public class WeaponHolder : MonoBehaviour
     private IShoot gun;
     private int maxAmmo;
     public UnityEvent<IShoot> swapEvent;
+    public UnityEvent rifleEvent;
     [SerializeField] private Item ammoPickup;
     [SerializeField] private Item healthPickup;
     [SerializeField] private IntVariable numPickups;
@@ -94,7 +95,15 @@ public class WeaponHolder : MonoBehaviour
         if (pickupObject.TryGetComponent(out IShoot weapon))
         {
             var gunObject = pickupObject.GetComponent<IShoot>() as IShoot;
-            GetNewWeapon(gunObject);
+            if (!weaponList.Contains(weapon))
+            {
+                GetNewWeapon(gunObject);
+                if (weapon.Gun.GetComponent<AssaultRifle>())
+                {
+                    Time.timeScale = 0f;
+                    rifleEvent?.Invoke();
+                }
+            }
         }
         else if (pickupObject.TryGetComponent(out Pickup pickup))
         {
