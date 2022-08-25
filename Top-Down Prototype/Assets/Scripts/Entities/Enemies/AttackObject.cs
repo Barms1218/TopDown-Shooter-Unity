@@ -11,7 +11,11 @@ public class AttackObject : ScriptableObject
     [SerializeField] private AudioClipObject meleeClip;
 
     public int AttackStrength => attackStrength;
-    public int Damage => damage;
+    public int Damage
+    {
+        get => damage;
+        set => damage = value;
+    }
     public float AttackCoolDown => attackCooldown;
     public AudioClipObject AttackSound => meleeClip;
 }
