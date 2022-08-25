@@ -11,7 +11,10 @@ public class WeaponHolder : MonoBehaviour
     private IShoot gun;
     private int maxAmmo;
     public UnityEvent<IShoot> swapEvent;
-    public UnityEvent rifleEvent;
+    public UnityEvent<Canvas> weaponPickupEvent;
+    public static UnityAction<Canvas> gotRifleEvent;
+    [SerializeField] private Canvas rifleCanvas;
+    [SerializeField] private Canvas shotgunCanvas;
     [SerializeField] private Item ammoPickup;
     [SerializeField] private Item healthPickup;
     [SerializeField] private IntVariable numPickups;
@@ -100,8 +103,11 @@ public class WeaponHolder : MonoBehaviour
                 GetNewWeapon(gunObject);
                 if (weapon.Gun.GetComponent<AssaultRifle>())
                 {
-                    Time.timeScale = 0f;
-                    rifleEvent?.Invoke();
+                    weaponPickupEvent?.Invoke(rifleCanvas);
+                }
+                else if(weapon.Gun.GetComponent<Shotgun>())
+                {
+                    weaponPickupEvent?.Invoke(shotgunCanvas);
                 }
             }
         }

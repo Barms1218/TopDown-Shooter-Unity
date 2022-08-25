@@ -13,7 +13,6 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] IntVariable scoreObject;
     [SerializeField] TextMeshProUGUI finalTimeText;
-    [SerializeField] Canvas[] canvases;
     [SerializeField] Canvas pauseCanvas;
     [SerializeField] Canvas gameOverCanvas;
     private SetTheCursor theCursor;
@@ -23,8 +22,8 @@ public class GamePlayManager : MonoBehaviour
     private void Awake()
     {
         pause = new PauseAction();
-
-        pause.Pause.PauseGame.started += _ => PauseGame();
+        
+        pause.Pause.PauseGame.started += _ => PauseGame(pauseCanvas);
     }
     private void Start()
     {
@@ -40,25 +39,22 @@ public class GamePlayManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void PauseGame()
+    public void PauseGame(Canvas canvas)
     {
         if (Time.timeScale > 0)
         {
+            Debug.Log(canvas.name);
             Time.timeScale = 0f;
             theCursor.ChangeCursor(theCursor.UICursor);
-            pauseCanvas.enabled = true;
+            canvas.enabled = true;
         }
     }
 
-    public void ResumeGame()
+    public void ResumeGame(Canvas canvas)
     {
         Time.timeScale = 1f;
         theCursor.ChangeCursor(theCursor.AimCursor);
-        foreach (Canvas canvas in canvases)
-        {
-            if (canvas.enabled)
-                canvas.enabled = false;
-        }
+        canvas.enabled = false; 
     }
 
     public void StartOver()
@@ -91,8 +87,7 @@ public class GamePlayManager : MonoBehaviour
         int score, killCount;
         score = scoreObject.Value;
         killCount = killObject.Value;
-        gameOverCanvas.enabled = true;
-        Time.timeScale = 0;
+        PauseGame(gameOverCanvas);
         killCountText.text = "Enemies Killed: " + killCount.ToString();
         finalScoreText.text = "Final Score: " + score.ToString();
         finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.GameTime.text;
