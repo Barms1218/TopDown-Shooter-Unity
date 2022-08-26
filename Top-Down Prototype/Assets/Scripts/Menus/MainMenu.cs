@@ -11,9 +11,13 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] AudioClipObject menuMusic;
 
-    private void Start()
+    private IEnumerator Start()
     {
-        AudioManager.Play(menuMusic);
+        while (true)
+        {
+            AudioManager.Play(menuMusic);
+            yield return new WaitForSeconds(330);
+        }
     }
 
     #region Public methods

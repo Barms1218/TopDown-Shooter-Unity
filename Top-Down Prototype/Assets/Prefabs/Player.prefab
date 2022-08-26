@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rapid-fire assault weapon capable of destroying armor quickly.
+  m_text: Rapid-fire assault weapon capable of destroying armor quickly from a distance.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f8ffbfb24eaa04db2ad5d1013314ff30, type: 2}
   m_sharedMaterial: {fileID: 7231248533049176879, guid: f8ffbfb24eaa04db2ad5d1013314ff30, type: 2}
@@ -479,8 +479,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Slow to fire but capable of hitting multiple enemies at once thanks to
-    projectile spread.
+  m_text: Slow to fire but capable of hitting multiple enemies at once and excellent
+    against enemies vulnerable at close range.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f8ffbfb24eaa04db2ad5d1013314ff30, type: 2}
   m_sharedMaterial: {fileID: 7231248533049176879, guid: f8ffbfb24eaa04db2ad5d1013314ff30, type: 2}
@@ -507,7 +507,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.7
+  m_fontSize: 53.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
