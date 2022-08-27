@@ -882,9 +882,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
   killCountText: {fileID: 1090160095}
-  killObject: {fileID: 0}
+  killObject: {fileID: 11400000, guid: f0c651bd490eb49ddbfc4e530d03b26e, type: 2}
   finalScoreText: {fileID: 20812399}
-  scoreObject: {fileID: 0}
+  scoreObject: {fileID: 11400000, guid: 3c671ca1c4d8e444398d63d5d02f649b, type: 2}
   finalTimeText: {fileID: 1833087698}
   pauseCanvas: {fileID: 1354406749}
   gameOverCanvas: {fileID: 7233420643208663245}

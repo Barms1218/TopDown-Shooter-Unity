@@ -66,7 +66,10 @@ public class GamePlayManager : MonoBehaviour
 
     public void QuitGame()
     {
-        pauseCanvas.enabled = false;
+        if (pauseCanvas.enabled)
+        {
+            pauseCanvas.enabled = false;
+        }
         ShowGameOverScreen();
     }
 
@@ -87,7 +90,7 @@ public class GamePlayManager : MonoBehaviour
         int score, killCount;
         score = scoreObject.Value;
         killCount = killObject.Value;
-        PauseGame(gameOverCanvas);
+        gameOverCanvas.enabled = true;
         killCountText.text = "Enemies Killed: " + killCount.ToString();
         finalScoreText.text = "Final Score: " + score.ToString();
         finalTimeText.text = "You Survived For: " + GamePlayTimer.Instance.GameTime.text;
